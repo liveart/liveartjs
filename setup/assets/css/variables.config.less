@@ -1,0 +1,19 @@
+/*	Change Canvas Size 	*/
+@canvasWidth: 587px;
+@canvasHeight: 543px;
+
+/*	Live Art main variables*/
+@logoHeight: 30px;
+@menuHeight: 496px;
+@topMenuHeight: 60px;
+@gap: 2px;
+@expandedMenuWidth: 230px;
+@collapsedMenuWidth: 60px;
+@smallFormWidth: 236px;
+@bottomMenuHeight: 76px;
+@maxQuantityMenuItems: 8;
+@panelHeight: max(@canvasHeight, @menuHeight);
+@translationAmount: ((@collapsedMenuWidth+@smallFormWidth+@gap)-@expandedMenuWidth)/2;
+@mainContainerWidth: (@collapsedMenuWidth+@smallFormWidth+@canvasWidth+2*@gap);
+@mainContainerHeight: (@logoHeight+@canvasHeight+@bottomMenuHeight+@gap);
+@alertMinHeight: 50px;

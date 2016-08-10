@@ -1,0 +1,48 @@
+﻿{
+    "colors": [
+    { "name": "Black", "value": "#000000" },
+	{ "name": "Dim Gray", "value": "#696969" },
+    { "name": "Gray", "value": "#808080" },
+	{ "name": "Silver", "value": "#C0C0C0" },
+	{ "name": "White", "value": "#FFFFFF" },
+
+    { "name": "Dark Red", "value": "#8B0000" },
+    { "name": "Red", "value": "#FF0000" },
+    { "name": "Coral Red", "value": "#FF5252" },
+    { "name": "Salmon", "value": "#FF7B7B" },
+    { "name": "Your Pink", "value": "#FFBABA" },
+
+    { "name": "Dark Green", "value": "#006400" },
+	{ "name": "Forest Green", "value": "#228B22" },
+    { "name": "Lite Green", "value": "#00AC00" },
+    { "name": "Lime", "value": "#00FF00" },
+    { "name": "Screamin' Green", "value": "#52FF52" },
+    
+    { "name": "Regal Blue", "value": "#003A6B" },
+    { "name": "Endeavour", "value": "#0058A1" },
+    { "name": "Mariner", "value": "#297BC0" },
+    { "name": "Havelock Blue", "value": "#539BD7" },
+    { "name": "Light Sky Blue", "value": "#85BDEC" },
+    
+	{ "name": "Orange Red", "value": "#E65100" },
+    { "name": "Dark Orange", "value": "#F57C00" },
+    { "name": "Orange", "value": "#FF9800" },
+    { "name": "Sandy Orange", "value": "#FFB74D" },
+    { "name": "Navajo White", "value": "#FFE0B2" },
+	
+    { "name": "Blue Indigo", "value": "#4A148C" },
+	{ "name": "Dark Violet", "value": "#7B1FA2" },
+    { "name": "Dark Orchid", "value": "#9C27B0" },
+    { "name": "Violet Orchid", "value": "#BA68C8" },
+    { "name": "Plum", "value": "#E1BEE7" }, 
+    
+    { "name": "Aqua Deep", "value": "#004D40" },
+    { "name": "Pine Green", "value": "#00796B" },
+    { "name": "Persian Green", "value": "#009688" },
+    { "name": "Fountain Green", "value": "#4DB6AC" },
+    { "name": "Aqua Island Light", "value": "#B2DFDB" }
+    ]
+}
+
+
+

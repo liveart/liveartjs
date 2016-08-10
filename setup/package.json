@@ -1,0 +1,25 @@
+{
+  "name": "liveartjs-release",
+  "version": "0.10.1",
+  "description": "LiveArt HTML5 Release setup",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-less": "^1.2.0"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+  },
+  "keywords": [
+    "liveart",
+    "html5"
+  ],
+  "author": "liveart",
+  "license": "ISC"
+}

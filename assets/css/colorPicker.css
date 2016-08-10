@@ -1,0 +1,239 @@
+div.colorPicker-picker {
+  height: 18px;
+  width: 18px;
+  padding: 0 !important;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #d7d7d7;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.1);
+  cursor: pointer;
+  line-height: 18px;
+  display: inline-block;
+}
+
+div.colorPicker-palette {
+  width: 144px;
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.15);
+  box-shadow: 0 1px 1px rgba(0,0,0,.15);
+  background-color: #ffffff;
+  padding: 3px;
+  z-index: 9999;
+}
+
+div.colorPicker-swatch {
+  height: 30px;
+  width: 30px;
+  border: 1px solid #d7d7d7;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+div.colorPicker-picker.transparent,
+div.colorPicker-swatch.transparent {
+  background-image: url(../../assets/img/transparent-cross-icon.png);
+  background-color: #ffffff;
+  background-position: center center;
+}
+
+div.colorPicker-swatch:hover,
+div.colorPicker-swatch.active {
+  height: 30px;
+  width: 30px;
+  border: 2px solid #000;
+}
+
+div.colorPicker-swatch.selected {
+  
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/img/check-icon-white-border.png);
+  
+  border: 2px solid #000;
+}
+
+div.colorPicker-swatch.selected.transparent {
+    background-image: url(../../assets/img/check-icon-white-border.png), url(../../assets/img/transparent-cross-icon.png);
+}
+
+div.colorPicker-palette {
+  max-height: 211px;
+  width: 180px;
+  
+}
+
+#product-color-picker-palette {
+    top: 140px !important;
+}
+
+
+/*
+Unavailable because of Pantones colors
+.multicolorArtworkPalette {
+    margin-top: 40px!important;
+}*/
+
+.scrolled-element {
+  width: 200px !important;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.picker-with-pantons {
+    position: absolute;
+    height: auto;
+    width: 196px;
+	z-index: 1050;
+    background: transparent; /* for old browsers (IE8) */
+    background: #ffffff;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.15);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.15);
+    box-shadow: 0 1px 1px rgba(0,0,0,.15);
+	box-sizing: border-box;
+	padding-bottom: 5px;
+}
+.picker-with-pantons.scrolled-element,.picker-with-pantons.multicolorArtworkPalette {
+  width: 196px !important;
+}
+
+.product-color-picker {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    background: #ffffff;
+	margin-top: 5px;
+	margin-left: -5px;
+}
+.product-color-picker div.colorPicker-palette {
+	max-height: 370px;
+	height: auto;
+}
+.multicolor-product div.colorPicker-palette {
+	max-height: 202px;
+}
+.picker-with-pantons div.colorPicker-palette {
+    width: 188px;
+    overflow-y: auto;
+	margin-left: 3px;
+	position: static;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+	border: none;
+	padding: 0px;
+	max-height: 202px;
+}
+.picker-with-pantons .nav > li {
+	z-index: 1040;
+}
+.picker-with-pantons .nav-tabs {
+	border: none;
+}
+.picker-with-pantons .nav {
+	padding: 5px 0px 9px 5px;
+	width: 100%;
+}
+.picker-with-pantons .nav > li > a {
+	padding: 0px 13px;
+	color: #999;
+	border: none;
+	border-radius: 2px;
+    line-height: 20px;
+    margin-right: 2px;
+}
+	.picker-with-pantons .nav > li > a:hover,
+	.picker-with-pantons .nav > li > a:focus {
+		background: none;
+	}
+	
+	.picker-with-pantons .nav > li > a span {
+		border-bottom: 1px dotted #ccc;
+		padding: 0px;
+	}
+
+.picker-with-pantons .nav > li.active > a,
+.picker-with-pantons .nav > li.active > a:hover,
+.picker-with-pantons .nav > li.active > a:focus {
+	background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    cursor: default;
+	border: none;
+}
+	.picker-with-pantons .nav > li.active > a span,
+	.picker-with-pantons .nav > li.active > a:hover span,
+	.picker-with-pantons .nav > li.active > a:focus span {
+		border: none;
+	}
+	
+.picker-with-pantons .search-box {
+	margin-left: 5px;
+	width: 186px;
+}
+	
+	
+	.picker-with-pantons .divider {
+		margin: 5px 0px 3px;
+	}
+
+/* apply on webkit-based browsers */ 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.picker-with-pantons {
+		width: 189px;
+	}
+	.picker-with-pantons div.colorPicker-palette {
+		width: 181px;
+	}
+    .scrolled-element {
+        width: 189px !important;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+	.picker-with-pantons .search-box {
+		width: 179px;
+	}
+}
+
+/*  Pantones container  */
+#global-pantones {
+    position: absolute;
+    z-index: 10000;
+    height: auto;
+    margin-top: 33px;
+}
+#global-pantones.product-color-picker {
+    margin-top: 38px;
+}
+#global-pantones.picker-with-pantons {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+	border: none;
+}
+.pantones-tab {
+    height: 238px;
+}
+#global-pantones .search-box .close {
+		right: 10px;
+		top: 2px;
+	}
+#global-pantones  .search-box .input-group {
+		margin: 0px;
+	}
+#global-pantones .pantones-container {
+    
+}
+
+	

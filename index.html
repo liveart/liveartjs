@@ -1,0 +1,1092 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>LiveArt HTML5</title>
+    <!-- Libs for general usage -->
+    <script type="text/javascript" src="lib/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">jQuery.noConflict();</script>
+    <script type="text/javascript" src="lib/knockout-2.2.1.js"></script>
+
+    <!-- polyfills -->
+    <script type="text/javascript">
+    // add es6-promise polyfill if required
+    if (typeof Promise === 'undefined') { document.write('<script src="lib/polyfill/es6-promise.min.js" type="text/javascript"><\/script>'); }
+    </script>
+
+    <!-- LiveArt UI resources -->
+    <!-- Twitter Bootstrap -->
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.js"></script>
+    <link type="text/css" href="assets/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <!-- noUiSlider -->
+    <script type="text/javascript" src="assets/js/jquery.nouislider.min.js"></script>
+    <link type="text/css" href="assets/css/jquery.nouislider.min.css" rel="stylesheet" />
+
+    <!-- Color Picker -->
+    <script type="text/javascript" src="assets/js/jquery.colorPicker.js"></script>
+    <link rel="stylesheet" href="assets/css/colorPicker.css" type="text/css" />
+    <!-- farbtastic color picker -->
+    <script type="text/javascript" src="assets/js/farbtastic.js"></script>
+    <link rel="stylesheet" href="assets/css/farbtastic.css" type="text/css" />
+    <!-- tooltipster -->
+    <script type="text/javascript" src="assets/js/jquery.tooltipster.min.js"></script>
+    <link type="text/css" href="assets/css/tooltipster.css" rel="stylesheet" />
+    <link type="text/css" href="assets/css/tooltipster-noir.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="assets/js/jquery.PrintArea.js"></script>
+
+    <!-- Customs styles and scripts -->
+    <link type="text/css" href="assets/css/style.css" rel="stylesheet" />
+    <link type="text/css" href="assets/css/style-responsive.css" rel="stylesheet" />
+
+    <!-- dynamic inline SVG DOM injection library -->
+    <script src="assets/js/svg-injector.min.js"></script>
+
+    <!-- beta feature: Social networks plugin -->
+    <script src="assets/js/hello.js"></script>
+
+    <!-- LiveArt Designer libs -->
+    <script type="text/javascript" src="lib/LALibs.js"></script>
+    <script type="text/javascript" src="LiveArtJS.js"></script>
+
+    <!-- jQuery File Upload -->
+    <script src="assets/js/jquery.ui.widget.js"></script>
+    <script src="assets/js/jquery.iframe-transport.js"></script>
+    <script src="assets/js/jquery.fileupload.js"></script>
+
+    <!-- LiveArt Designer Fonts -->
+    <link rel="stylesheet" href="fonts/fonts.css" type="text/css" />
+</head>
+<body>   
+    <div id="liveart-main-container">
+        <div id="liveart-header"></div>
+        <div id="liveart-init-preloader" data-bind="visible: !$root.status().completed">
+            <h5 data-bind="text: $root.status().message" class="text-center text-info"></h5>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" data-bind="style: { width: $root.percentCompleted() }"></div>
+            </div>
+        </div>
+        <div class="liveart-panel version-buildtime" hidden></div>  
+        <div id="liveart-content" data-bind="visible: $root.status().completed" style="display: none">
+            <div id="main-controls-container" class="liveart-panel-container">
+                <ul class="nav nav-stacked liveart-list-view" role="tablist" id="liveart-main-menu">
+                    <li id="select-product" class="liveart-dropdown" data-bind="visible: showProductSelector()">
+                        <a href="#select-product-form" aria-controls="select-product-form" role="tab" data-toggle="tab">
+                            <img src="assets/img/t-shirt.svg" class="inject-me" />
+                            <label>Select Product</label>
+                        </a>
+                    </li>                      
+                    <li id="change-colours" class="liveart-dropdown" data-bind="visible: !strictTemplate() && showChangeColor">
+                        <a href="#product-colors-form" aria-controls="product-colors-form" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+                            <label data-bind="if: !selectedProductVO().resizable()">Product Color</label>
+                            <label data-bind="if: selectedProductVO().resizable()">Product Color and Size</label>
+                        </a>
+                    </li>
+                    <li id="add-text" class="liveart-dropdown" data-bind="visible: !strictTemplate() || hasSelected()">
+                        <a href="#add-text-form" aria-controls="add-text-form" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+                            <label>Add Text</label>
+                        </a>
+                    </li>
+                    <li id="add-names" class="liveart-dropdown" data-bind="visible: $root.selectedProductVO().namesNumbersEnabled(), click: $root.removeMobileNamesNumbersTooltip">
+                        <a href="#add-names-form" aria-controls="add-names-form" role="tab" data-toggle="tab">
+                            <img src="assets/img/namesnumbers.svg" class="inject-me" />
+                            <label>Add Names and Numbers</label>
+                        </a>
+                    </li>
+                    <li id="add-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate(), click: $root.removeMobileAddedGraphicsTooltip">
+                        <a href="#add-graphics-form" aria-controls="add-graphics-form" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                            <label>Add Gallery Artwork</label>
+                        </a>
+                    </li>
+                    <li id="upload-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate(), click: $root.removeMobileUploadedGraphicsTooltip" >
+                        <a href="#upload-graphics-form" aria-controls="upload-graphics-form" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                            <label>Upload Artwork</label>
+                        </a>   
+                    </li>
+                    <li id="save-share-load" class="liveart-dropdown">
+                        <a href="#save-share-load-form" aria-controls="save-share-load-form" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            <label>Save & Share</label>
+                        </a>   
+                    </li>
+                    <li id="clear-design" class="liveart-dropdown" data-bind="click: clearDesign">
+                        <a>
+                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                            <label>Clear Design</label>
+                        </a>                            
+                    </li>
+                </ul>    
+                <div class="liveart-tabs-content tab-content">
+                    <!-- SELECT PRODUCT FORM starts -->
+                    <div role="tabpanel" id="select-product-form" class="tab-pane fade liveart-panel large-tab">
+                        <div class="liveart-dropdown-form-header">
+                            <span data-bind="text: productBreadcrumbsRender()"></span>
+                            <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                        </div>
+                        <div id="products-search" class="search-box">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                                <input type="text" class="form-control" placeholder="Search" data-bind="value: productsSearchQuery, valueUpdate: 'input'">
+                                <button class="close" aria-hidden="true" data-bind="visible: productsSearchQuery().length > 0, click: clearProductsSearch">&times;</button>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <a class="liveart-back-btn" data-bind="click: backProductsItem, visible: productSelectedCategories().length > 1"></a>
+                        <ul data-bind="foreach: currentProducts, css: { narrow: productSelectedCategories().length > 1 }" class="thumbnails liveart-categories-subcategories">
+                            <li class="thumbnail" data-bind="click: $root.selectProductItem, css: { category: isCategory(), product: isProduct(), active: $data.id() == $root.selectedProductVO().id() }">
+                                <a data-bind="css: { active: $data.id() == $root.selectedProductVO().id() }">
+                                    <div class="state"></div>
+                                    <span data-bind="text: name"></span>
+                                    <img src="" data-bind="attr: { src: thumbUrl, title: name }" alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- SELECT PRODUCT FORM ends -->
+
+                    <!-- SELECT PRODUCT COLOR AND SIZE starts -->
+                    <div role="tabpanel" id="product-colors-form" class="tab-pane fade liveart-panel small-tab">
+                            <div class="liveart-dropdown-form-header">
+                                <span class="liveart-form-header-title" data-bind="if: !selectedProductVO().resizable()">Product Color</span>    
+                                <span class="liveart-form-header-title" data-bind="if: selectedProductVO().resizable()">Product Color and Size</span>                                
+                                <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                            </div>
+                            <div class="column">
+                                <div data-bind="if: selectedProductVO().multicolor()">
+                                    <ul class="product-colorPickers-list" data-bind="foreach: { data: selectedProductColorVO().colorizeList, afterAdd: selectedProductColorVO().createColorPicker }">
+                                        <li>
+                                            <a class="liveart-color-picker-btn">
+                                                <span data-bind="text: name"></span>
+                                                <input type="text" class="liveart-color-picker dropup-color-picker" data-bind="colorPickerInit: {showPantones: !hidePantones() && $root.selectedProductVO().pantones().useForProduct(), colors: colors, container: true, isDropup: false, paletteClass: 'product-color-picker' + ($index()===0?'':' multicolor-product')}, colorPicker: value, productColorPalette: colors" />
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <ul class="product-colorPickers-list" data-bind="if: showProductColorPicker">
+                                    <li>
+                                        <a id="product-color-btn" class="liveart-color-picker-btn">
+                                            <span>Product Color</span>
+                                            <input id="product-color-picker" type="text" class="liveart-color-picker dropup-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, paletteClass: 'product-color-picker'}, colorPicker: selectedProductColorVO().hexValue, productColorPalette: selectedProductVO().colors" />
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div id="main-controls-product-dimensions" data-bind="visible: selectedProductVO().resizable()">
+                                    <label data-bind="visible: selectedProductVO().editableAreaSizes().length == 0">Change size</label>
+                                    <div id="product-dimensions-container"  data-bind="visible: selectedProductVO().editableAreaSizes().length == 0">
+                                        <div id="product-dimensions-inputs">
+                                            <div class="control-group">
+                                                <label class="control-label" for="productDimensionsWidth">Width</label>
+                                                <div class="controls input-group" data-placement="top">
+                                                    <input type="number" id="productDimensionsWidth" data-bind="value: selectedProductSizeVO().widthInput, valueUpdate: 'input'"
+                                                            onblur="controlsModel.selectedProductWidthInputBlur()" maxlength="5" min="1" class="form-control" placeholder="Width">
+                                                    <span class="input-group-addon" data-bind="text: unitLabel, visible: unitLabel().length > 0"></span>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label"  for="productDimensionsHeight">Height</label>
+                                                <div class="controls input-group" data-placement="top">
+                                                    <input type="number" id="productDimensionsHeight" data-bind="value: selectedProductSizeVO().heightInput, valueUpdate: 'input'"
+                                                            onblur="controlsModel.selectedProductHeightInputBlur()" maxlength="5" min="1" class="form-control" placeholder="Height">
+                                                    <span class="input-group-addon" data-bind="text: unitLabel, visible: unitLabel().length > 0"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="product-dimensions-swap-group" data-bind="visible: !editableAreaRestrictRotation()">
+                                            <button class="btn btn-default" type="button" data-bind="click: selectedProductDimensionsSwap"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></button>
+                                        </div>
+                                    </div>
+                                    <div data-bind="visible: selectedProductVO().editableAreaSizes().length > 0">
+                                        <label>Select Size</label>
+                                        <div class="btn-group btn-block">
+                                            <button class="btn btn-default col-xs-10" type="button" id="selectedProductSize" data-toggle="dropdown" aria-expanded="true" data-bind="text: selectedProductSizeVO().label"></button>
+                                            <button class="btn btn-default dropdown-toggle col-xs-2" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" id="sizes-list" role="menu" data-bind="foreach:  selectedProductVO().editableAreaSizes">
+                                                <li data-bind="css: { active: ($root.selectedProductSizeVO().width() === $data.width && $root.selectedProductSizeVO().height() === $data.height) }">
+                                                    <a data-bind="text: $data.label, click: $root.selectProductSize"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>                                    
+                            </div>
+                    </div>
+                    <!-- SELECT PRODUCT COLOR AND SIZE ends -->
+
+                    <!-- ADD TEXT FORM starts -->
+                    <div role="tabpanel" id="add-text-form" class="tab-pane fade liveart-panel small-tab">
+                            <div class="liveart-dropdown-form-header">
+                                <span class="liveart-form-header-title" data-bind="if: !strictTemplate()">Add/Edit Text</span>
+                                <span class="liveart-form-header-title" data-bind="if: strictTemplate()">Edit Text</span>
+                                <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                            </div>
+                            <div id="add-text-form-content">
+                                <!--div class="input-append" style="width: 100%;">
+                                    <input id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplate()" type="text" placeholder="Your text here">
+                                    <input id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplate()" type="text" placeholder="Your text here">
+                                    <button class="btn" id="add-text-btn" type="button" data-bind="click: addText, enable: selectedLetteringVO().text().length > 0, visible: !strictTemplate()">Add</button>
+                                </div>-->
+                                <textarea class="form-control" id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplate(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
+                                <textarea class="form-control" id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplate(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
+								<div class="container-scrollable">
+                                    <div class="column">
+                                        <div class="text-form-row">
+                                            <div id="text-align-group" class="btn-group" data-toggle="buttons" data-bind="radio: selectedLetteringVO().formatVO().textAlign">
+                                                <label id="text-align-left-btn" class="btn btn-default" data-bind="css: { disabled: !textAlignEnabled() }">
+                                                    <input type="radio" name="rb-text-align-group" value="left" data-bind="enable: textAlignEnabled()">
+                                                </label>
+                                                <label id="text-align-center-btn" class="btn btn-default" data-bind="css: { disabled: !textAlignEnabled() }">
+                                                    <input type="radio" name="rb-text-align-group" value="center" data-bind="enable: textAlignEnabled()">
+                                                </label>
+                                                <label id="text-align-right-btn" class="btn btn-default" data-bind="css: { disabled: !textAlignEnabled() }">
+                                                    <input type="radio" name="rb-text-align-group" value="right" data-bind="enable: textAlignEnabled()">
+                                                </label>
+                                            </div>
+                                            <button class="btn btn-primary col-xs-5" id="add-text-btn" type="button" data-bind="click: addText, enable: selectedLetteringVO().text().length > 0, visible: !strictTemplate()">Add</button>
+                                        </div>
+                                        <div class="divider"></div>
+                                        <h6>Font options</h6>
+                                        <div class="btn-group btn-block">
+                                            <button class="btn btn-default col-xs-10" type="button" id="font-btn" data-toggle="dropdown" aria-expanded="true" data-bind="text: selectedFont().name, style: { fontFamily: selectedFont().fontFamily }"></button>
+                                            <button class="btn btn-default dropdown-toggle col-xs-2" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu" id="font-list" data-bind="foreach: fonts">
+                                                <li data-bind="css: { active: $root.selectedLetteringVO().formatVO().fontFamily() === $data.fontFamily }">
+                                                    <a data-bind="text: $data.name, click: $root.selectFont, style: { fontFamily: $data.fontFamily }"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div id="text-font-options" class="text-form-row">
+                                            <button class="btn btn-default" type="button" id="bold-toggle-btn" data-bind="checkbox: selectedLetteringVO().formatVO().bold, enable: selectedFont().boldAllowed"><span>B</span></button>
+                                            <button class="btn btn-default" type="button" id="italic-toggle-btn" data-bind="checkbox: selectedLetteringVO().formatVO().italic, enable: selectedFont().italicAllowed"><span>I</span></button>
+                                            <div class="liveart-color-picker-group">
+                                                <input id="text-fill-color-picker" type="text" class="liveart-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, colors: colors}, colorPicker: selectedLetteringVO().formatVO().fillColor, productColorPalette: colors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                                <input id="text-stroke-color-picker" type="text" class="liveart-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, colors: strokeColors}, colorPicker: selectedLetteringVO().formatVO().strokeColor, productColorPalette: strokeColors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                            </div>
+                                        </div>
+                                        <h6 data-bind="visible: showStrokeAmountSlider()">Stroke Amount</h6>
+                                        <div id="text-stroke-width-slider" class="noUiSlider" data-bind="visible: showStrokeAmountSlider(), slider: selectedLetteringVO().formatVO().strokeWidth, rangeStart: 0.1, rangeEnd: 3, step: 0.1, decimals: 2"></div>
+                                        <div class="divider"></div>
+                                        <h6 data-bind="visible: showLetterSpacingSlider()">Letter Spacing</h6>
+                                        <div id="text-letter-spacing-slider" class="btn-block noUiSlider" data-bind="slider: selectedLetteringVO().formatVO().letterSpacing, rangeStart: 0, rangeEnd: 20, step: 1, visible: showLetterSpacingSlider()"></div>
+                                        <h6 data-bind="visible: showLineLeadingSlider()">Line Spacing</h6>
+                                        <div id="text-line-leading-slider" class="btn-block  noUiSlider" data-bind="slider: selectedLetteringVO().formatVO().lineLeading, rangeStart: 0, rangeEnd: 3, step: 0.05, decimals: 2, visible: showLineLeadingSlider()"></div>
+                                        <div class="divider"></div>
+                                    </div>
+                                    <div class="column">
+                                        <h6 data-bind="visible: showTextEffects()">Text Effects</h6>
+                                        <div id="text-effects-selector" data-bind="visible: showTextEffects()" class="dropup btn-group btn-block choose-effect-group">
+                                            <button class="btn btn-default col-xs-10" type="button" id="text-effects-btn" data-bind="text: selectedTextEffectVO().label()" data-toggle="dropdown"><span class="caret"></span></button>
+                                            <button class="btn btn-default dropdown-toggle col-xs-2" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" data-bind="foreach: textEffects" style="height: 150px; overflow-y: scroll;">
+                                                <li data-bind="css: { active: $root.selectedTextEffectVO().name() === $data.name }">
+                                                    <a data-bind="text: $data.label, click: $root.selectTextEffect"></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <h6 data-bind="visible: showEffectsSlider(), text: selectedTextEffectVO().paramName()"></h6>
+                                        <div id="text-effect-slider" class="btn-block noUiSlider" data-bind="visible: showEffectsSlider(), slider: selectedTextEffectVO().value, rangeStart: selectedTextEffectVO().min(), rangeEnd: selectedTextEffectVO().max(), step: selectedTextEffectVO().step(), decimals:2"></div>
+
+                                        <div class="divider" data-bind="visible: selectedProductSizeVO().notEmpty"></div>
+                                        <div id="text-form-size" data-bind="visible: selectedProductSizeVO().notEmpty">
+                                        <div class="text-form-size-group">
+                                            <h6 id="text-form-size-label">Size</h6>
+                                            <input id="text-height" class="form-control pull-right" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
+                                            <button class="btn btn-default lock-btn pull-right" type="button" data-bind="checkbox: selectedObjectPropertiesVO().lockScale"><span class="icon-lock"></span></button>
+                                            <input id="text-width" class="form-control pull-right" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />                                            
+                                        </div>
+                                        <!--<span class="control-label" data-bind="text: unitLabel"></span>-->
+                                        <button class="btn btn-default col-xs-5" id="text-form-size-apply-btn" type="button">Apply</button>
+                                    </div>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+                    <!-- ADD TEXT FORM ends -->
+
+                    <!-- ADD NAMES FORM starts -->
+                    <div role="tabpanel" id="add-names-form" class="tab-pane fade liveart-panel expandable-tab">
+                            <div class="main-part">
+                                <div class="liveart-dropdown-form-header">
+                                    <span class="liveart-form-header-title">Add/Edit Names</span>
+                                    <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                                </div>
+                                <div id="add-names-info" class="alert alert-success" style="display:none"></div>                          
+                                <div id="add-names-form-content">              
+                                    <button class="btn btn-default" id="add-names-btn" title="Add name" type="button" data-bind="click: addNameNumberObj.bind($data,'name')"><span></span><span>Add name</span></button>
+                                    <button class="btn btn-default" id="add-numbers-btn" title="Add number" type="button" data-bind="click: addNameNumberObj.bind($data,'number')"><span></span><span>Add number</span></button>
+                                        
+                                    <button class="btn btn-link liveart-expand-form-btn pull-right" type="button">
+                                        <span class="collapsed-data"><u>Edit Names/Numbers List</u></span>
+                                        <span class="expanded-data"><u>Close Names/Numbers List</u></span>
+                                    </button>                                        
+                                    <div class="container-scrollable" data-bind="visible: selectedIsText()">
+                                        <div class="column">
+                                            <div class="divider"></div>
+                                            <h6>Font options</h6>
+                                            <div class="btn-group btn-block">
+                                                <button class="btn btn-default col-xs-10" type="button" id="font-btn2" data-toggle="dropdown" aria-expanded="true" data-bind="text: selectedFont().name, style: { fontFamily: selectedFont().fontFamily }"></button>
+                                                <button class="btn btn-default dropdown-toggle col-xs-2" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" role="menu" id="font-list2" data-bind="foreach: fonts" style="height: 260px; overflow-y: scroll;">
+                                                    <li data-bind="css: { active: $root.selectedLetteringVO().formatVO().fontFamily() === $data.fontFamily }">
+                                                        <a data-bind="text: $data.name, click: $root.selectFont, style: { fontFamily: $data.fontFamily }"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="text-font-options2" class="text-form-row"> 
+                                                <button class="btn btn-default" type="button" id="bold-toggle-btn2" data-bind="checkbox: selectedLetteringVO().formatVO().bold, enable: selectedFont().boldAllowed"><span>B</span></button>
+                                                <button class="btn btn-default" type="button" id="italic-toggle-btn2" data-bind="checkbox: selectedLetteringVO().formatVO().italic, enable: selectedFont().italicAllowed"><span>I</span></button>                                                   
+                                                <div class="liveart-color-picker-group">
+                                                    <input id="text-fill-color-picker-3" type="text" class="liveart-color-picker" data-bind="colorPickerInit: { colors: colors, container: true, isDropup: false}, colorPicker: selectedLetteringVO().formatVO().fillColor, colorPalette: colors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                                    <input id="text-stroke-color-picker-3" type="text" class="liveart-color-picker" data-bind="colorPickerInit: { colors: strokeColors, container: true, isDropup: false}, colorPicker: selectedLetteringVO().formatVO().strokeColor, colorPalette: strokeColors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                                </div>
+                                            </div> 
+                                        </div>                                            
+                                    </div>
+                                 </div>
+                            </div>
+                            <div class="expanded-part">
+                                <div class="liveart-dropdown-form-header">
+                                    <span class="liveart-form-header-title">Names/Numbers List</span>
+                                    <a class="liveart-close-window-btn liveart-close-expanded-part-btn" data-bind="click: $root.removeMobileNamesNumbersTooltip"></a>
+                                </div>
+                                <div id="names-number-table-container">
+                                    <table id="names-number-table">
+                                        <thead data-bind="visible: namesNumbers().length > 0">
+                                            <tr>
+                                                <th></th>
+                                                <th>Names</th>
+                                                <th>Numbers</th>
+                                                <th data-bind="visible: $root.selectedProductVO().sizes().length > 1">Size</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="foreach: namesNumbers">
+                                            <tr>
+                                                <td data-bind="text: ($index() + 1) + '.'" class="bold"></td>
+                                                <td>
+                                                    <input type="text" data-bind="value: $data.name" class="form-control liveart-names-input" placeholder="Name" />
+                                                </td>
+                                                <td>
+                                                    <input type="text" data-bind="value: $data.number" class="form-control liveart-numbers-input" placeholder="00" />
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group liveart-names-numbers-size" data-bind="visible: $root.selectedProductVO().sizes().length > 1">
+                                                        <button class="btn btn-default" type="button" data-bind="text: $data.size"></button>
+                                                        <button class="btn btn-default dropdown-toggle" type="button" id="names-size-dropdown-btn" data-toggle="dropdown">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" id="names-sizes-list" data-bind="foreach: $root.selectedProductVO().sizes">
+                                                            <li data-bind="css: { active: $data == $parent.size() }">
+                                                                <a data-bind="text: $data, click: $parent.size"></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" data-bind="click: $parent.removeNameNumber" class="close">&times;</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div style="text-align: left;">
+                                    <button id="liveart-add-more-names-btn" class="btn btn-link" type="button" data-bind="click: addNameNumber">+ Add more names and/or numbers</button>
+                                </div>
+                            </div>
+                    </div>
+                    <!-- ADD NAMES FORM starts -->
+
+                    <!-- ADD GRAPHICS FORM starts -->
+                    <div role="tabpanel" id="add-graphics-form" data-bind="css: {'small-tab': selectedIsGraphics, 'large-tab': !selectedIsGraphics() }" class="tab-pane fade liveart-panel">
+                        <div class="liveart-dropdown-form-header">
+                            <span data-bind="text: graphicBreadcrumbsString, visible: !selectedIsGraphics()"></span>
+                            <span data-bind="visible: selectedIsGraphics">Edit Artwork</span>
+                            <a class="liveart-close-window-btn liveart-close-form-btn" data-bind="click: $root.removeMobileAddedGraphicsTooltip"></a>
+                        </div>
+
+                        <!-- ko ifnot: selectedIsGraphics -->
+                        <div id="graphics-search" class="search-box">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                                <input type="text" class="form-control" placeholder="Search" data-bind="value: graphicsSearchQuery, valueUpdate: 'input'">
+                                <button class="close" aria-hidden="true" data-bind="visible: graphicsSearchQuery().length > 0, click: clearGraphicsSearch">&times;</button>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <a class="liveart-back-btn" data-bind="visible: graphicSelectedSubcategory(), click: backGraphicItem"></a>
+                        <ul data-bind="foreach: currentGraphics, css: { narrow: graphicSelectedSubcategory }" class="thumbnails liveart-categories-subcategories">
+                            <li class="thumbnail" data-bind="click: $root.selectGraphicItem, css: { category: isCategory(), image: isImage() }">
+                                <a>
+                                    <div class="state"></div>
+                                    <span data-bind="text: name"></span>
+                                    <img src="" data-bind="attr: { src: thumb }" alt="" />
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- /ko -->
+
+                        <!-- ko if: selectedIsGraphics -->
+                        <div class="column">
+
+                            <div id="image-added-info" class="alert alert-success">
+                                Your artwork was successfuly added
+                            </div>        
+
+                            <ul class="list-unstyled" data-bind="if: isColorizableGraphics">
+                                <li>
+                                    <a class="liveart-color-picker-btn">
+                                        <span>Fill</span>
+                                        <input type="text" class="graphics-fill-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, colors: colors}, colorPicker: selectedGraphicsFormatVO().fillColor, productColorPalette: colors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="liveart-color-picker-btn">
+                                        <span>Stroke</span>
+                                        <input type="text" class="graphics-stroke-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, colors: strokeColors}, colorPicker: selectedGraphicsFormatVO().strokeColor, productColorPalette: strokeColors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                    </a>
+                                </li>
+                            </ul>
+                            <div data-bind="if: isMulticolorGraphics">
+                                <ul class="list-unstyled" data-bind="foreach: { data: selectedGraphicsFormatVO().complexColor().colorizeList, afterAdd: selectedGraphicsFormatVO().complexColor().createColorPicker }">
+                                    <li>
+                                        <a class="liveart-color-picker-btn">
+                                            <span data-bind="text: name" ></span>
+                                            <input type="text" class="liveart-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, paletteClass: 'multicolorArtworkPalette', colors: colors, showPantones: !hidePantones() && $root.selectedProductVO().pantones().useForDecoration() }, colorPicker: value, productColorPalette: colors" />
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <span id="liveart-image-is-not-colorizable" data-bind="visible: !isColorizableGraphics() && !isMulticolorGraphics()">
+                                Image is not colorizable
+                            </span>
+                            <button id="add-another-graphic" class="btn btn-primary btn-block" data-bind="click: addAnotherArtwork">
+                                Add Another Gallery Artwork
+                            </button>
+                        </div>
+                        <!-- /ko -->
+
+                    </div>
+                    <!-- ADD GRAPHICS FORM ends -->
+
+                    <!-- UPLOAD CUSTOM GRAPHICS FORM starts -->
+                    <div role="tabpanel" id="upload-graphics-form" class="tab-pane fade liveart-panel small-tab expandable-tab">
+                        <div class="main-part">
+                            <div class="liveart-dropdown-form-header">
+                                <span class="liveart-form-header-title">Upload Graphics</span>
+                                <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                            </div>
+                            <div class="column" id="upload-image-form-content">
+                                <div id="social-image-added-info" class="alert alert-success">
+                                    Your image was successfuly uploaded
+                                </div>  
+                                <div id="liveart-file-upload-container">
+                                    <button id="liveart-upload-image-browse-btn" type="button" class="btn btn-default btn-block btn-primary" data-loading-text="Uploading..." data-bind="click: showUploadConditions.bind($data, 'upload')">Browse for file...</button>
+                                </div>
+								<h6 class="text-center">or</h6>
+                                <form id="liveart-upload-upload-image-by-url">
+                                    <div class="input-group">
+                                        <input id="liveart-upload-graphics-url-input" type="text" class="form-control" placeholder="Paste Image URL" data-bind="value: customImageUrl, valueUpdate: 'input'">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" data-bind="click: showUploadConditions.bind($data, 'url'), enable: uploadFileURLIsValid">Add</button>
+                                        </span>
+                                    </div>
+                                </form>
+                                <!-- beta feature buttons -->
+								<h6 class="text-center">Connect to</h6>
+                                <button id="instagram-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showInstagramPhotos(), click: logInSocial.bind($data,'instagram'), css: {active: currentNetwork() == 'instagram'}"><span></span></button>
+                                <button id="flickr-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showFlickrPhotos(), click: logInSocial.bind($data,'flickr'), css: {active: currentNetwork() == 'flickr'}"><span></span></button>
+                                <button id="google-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showGooglePhotos(), click: logInSocial.bind($data,'google'), css: {active: currentNetwork() == 'google'}"><span></span></button>
+                                <button id="facebook-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showFacebookPhotos(), click: logInSocial.bind($data,'facebook'), css: {active: currentNetwork() == 'facebook'}"><span></span></button>
+                            </div>
+                        </div>
+                        <div class="expanded-part">
+                            <div class="liveart-dropdown-form-header">
+                                <span class="liveart-form-header-title" data-bind="if: currentNetwork() == 'instagram'">Your Instagram Photostream</span>
+                                <span class="liveart-form-header-title" data-bind="if: currentNetwork() == 'facebook'">Your Facebook Photostream</span>
+                                <span class="liveart-form-header-title" data-bind="if: currentNetwork() == 'flickr'">Your Flickr Photostream</span>
+                                <span class="liveart-form-header-title" data-bind="if: currentNetwork() == 'google'">Your Google Photostream</span>
+                                <!--<a class="liveart-close-window-btn liveart-close-expanded-part-btn" data-bind="visible: !$root.isCompact()"></a>
+                                <a class="liveart-close-window-btn liveart-close-form-btn" data-bind="visible: $root.isCompact()"></a>-->
+                                <a class="liveart-close-window-btn liveart-close-expanded-part-btn"></a>
+                            </div>
+                            <span id="liveart-social-photos-status"></span>
+                            <!--<a class="liveart-back-btn" style="display: none" data-bind="click: $root.backToSocialList"></a>-->
+                            <ul id="liveart-social-graphics-list" data-bind="foreach: photos" class="thumbnails liveart-categories-subcategories">
+                                <li class="thumbnail image">
+                                    <a data-bind="click: $root.showUploadConditions.bind($data, image())">
+                                        <div class="state"></div>
+                                        <img data-bind="attr: { src: thumb }" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                            <a id="social-photos-preloader">
+                                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                                Loading Photos...
+                            </a>
+                        </div>
+                    </div>                        
+                    <!-- UPLOAD CUSTOM GRAPHICS FORM ends -->
+
+                    <!-- SAVE/SHARE/LOAD FORM starts -->
+                    <div role="tabpanel" id="save-share-load-form" class="tab-pane fade liveart-panel small-tab">
+                            <div class="liveart-dropdown-form-header">
+                                <span class="liveart-form-header-title">Save & Share</span>
+                                <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                            </div>
+                            <div class="column">
+                                    <button id="share-design-btn" type="button" class="btn btn-default btn-block" onclick="onShareDesign()">Share your design</button>
+                                    <button id="save-design-btn" type="button" class="btn btn-default btn-block" onclick="onSaveDesign()">Save for later</button>
+                                    <button id="load-design-btn" type="button" class="btn btn-default btn-block" onclick="onLoadDesign()">Load</button>
+                                    <button id="print-design-btn" class="btn btn-default btn-block" data-bind="click: print"><span class="glyphicon glyphicon-print" aria-hidden="true"></span>Print</button>
+                            </div>
+                    </div>                        
+                    <!-- SAVE/SHARE/LOAD FORM ends -->
+
+                    <!-- GET QUOTE FORM starts -->
+                    <div id="quote-popup" role="tabpanel" class="tab-pane fade liveart-panel large-tab">
+                        <div class="liveart-dropdown-form-header">
+                            <span class="liveart-form-header-title">Get a Quote</span>
+                            <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                        </div>
+                        <div id="order-options-container">
+                            <div id="product-info-panel" class="row">
+                                <div class="col-sm-9">
+                                    <h5 id="liveart-product-name" data-bind="text: selectedProductVO().name"></h5>
+                                    <div id="product-info-inner">
+                                        <h6 data-bind="visible: $root.selectedProductVO().data().price">$<span data-bind="text: selectedProductVO().data().price"></span> for each</h6>
+                                        <h6 data-bind="visible: $root.selectedProductVO().data().material">Material: <span data-bind="text: selectedProductVO().data().material"></span></h6>
+                                        <h6 data-bind="html: selectedProductVO().description" class="description height-restriction"></h6>
+                                        <h6 data-bind="visible: $root.showProductColorPicker">Color: <span data-bind="    text: selectedProductColorVO().name"></span></h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <table class="gray order-colors" data-bind="foreach: $root.designInfo().colors">
+                                        <tr>
+                                            <td data-bind="text: $data.location"></td>
+                                            <td data-bind="text: $root.colorsCount($data.count)"></td>
+                                        </tr>
+                                    </table>
+                                    <div class="divider"></div>
+                                    <div class="gray"><span data-bind="text: objectsCount()"></span></div>
+                                </div>
+                            </div>
+                            <div class="divider"></div>
+                            <div data-bind="visible: $root.selectedProductVO().sizes().length > 0">
+                                <h5>Sizes and quantities</h5>
+                                <br />
+                                <ul id="product-sizes-list" class="list-unstyled" data-bind="foreach: quantities">
+                                    <li>
+                                        <span class="quantity-label" data-bind="value: size, text: size"></span>
+                                        <span>
+                                            <button class="btn btn-default btn-round" type="button" data-bind="click: $parent.decreaseQuantity"><span class="glyphicon glyphicon-minus"></span></button>
+                                            <input data-bind="value: quantity, valueUpdate: 'input'" maxlength="3" />
+                                            <button class="btn btn-default btn-round" type="button" data-bind="click: $parent.increaseQuantity"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="product-quantity" data-bind="visible: $root.selectedProductVO().sizes().length == 0">
+                                <h5 class="quantity-label">Quantity:</h5>
+                                <span data-bind="foreach: quantities">
+                                    <button class="btn btn-default btn-round" type="button" data-bind="click: $parent.decreaseQuantity"><span class="glyphicon glyphicon-minus"></span></button>
+                                    <input data-bind="value: quantity, valueUpdate: 'input'" maxlength="3" />
+                                    <button class="btn btn-default btn-round" type="button" data-bind="click: $parent.increaseQuantity"><span class="glyphicon glyphicon-plus"></span></button>
+                                </span>
+                            </div>
+                            <div class="divider"></div>
+                            <div>
+                                <div class="column" id="product-sizes-panel">
+                                    <div>
+                                        <table class="order-price height-restriction" data-bind="if:$root.designInfo().prices && $root.designInfo().prices.length>0">
+                                            <tbody data-bind="foreach: $root.designInfo().prices">
+                                                <tr>
+                                                    <td class="gray" data-bind="text: $data.label"></td>
+                                                    <td class="order-price" data-bind="text: $data.price, css: { bold: $data.isTotal }"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div id="place-order-wrapper" data-toggle="tooltip" data-html="true">
+                                            <a id="place-order-btn" class="btn btn-primary btn-block" onclick="onPlaceOrder()" data-loading-text="Placing order...">Place Order</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GET QUOTE FORM ends -->               
+                </div>
+            </div>
+            <div id="canvas-container" class="dynamic-height">
+                <div id="alert-container"><!-- Alerts goes here. This should be one line without spaces --></div>
+                <!-- LiveArtJS core goes here -->
+            </div>
+            <div style="" id="zoom-container" class="" data-bind="visible: zoomEnabled">
+                <h6 style="">Zoom: <span data-bind="text: (zoom() + '%')">100%</span></h6>     
+                <button class="btn btn-default" data-bind="click: zoomOut, enable: (zoom() > minZoom())"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                <button class="btn btn-default" data-bind="click: zoomIn, enable: (zoom() < maxZoom())"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+            </div>           
+            <div id="preview-controls-container" class="liveart-panel-container">
+                <!-- Product side swictch -->
+                <div id="product-sides-switch-container" data-bind="visible: selectedProductVO().locations().length > 1">
+                    <div class="centered-pills-container">
+                        <ul class="nav nav-pills" data-bind="foreach: selectedProductVO().locations">
+                            <li data-bind="css: { active: $data.name == $root.selectedProductLocation() }">
+                                <a data-bind="click: $root.selectProductLocation">
+                                    <span data-bind="text: $data.name"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Product side swictch end -->
+
+
+                <!--                <div class="navbar liveart-button-bar">
+                                    <div class="navbar-inner">-->
+                <ul class="nav nav-pills liveart-button-bar">
+                    <!--<li id="layers" class="dropup">
+                      <a id="layers-btn" class="dropdown-toggle" data-toggle="dropdown">Layers</a>
+                      <ul id="layers-list" class="dropdown-menu">
+                          <li>
+                              <a class="liveart-text-layer">
+                                  <span>Keep Calm And Carry On</span>
+                              </a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                              <a class="liveart-text-layer">
+                                  <span>Yes, We Can</span>
+                              </a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                              <a class="liveart-image-layer">
+                                  <img src="assets/img/layer-numbers-2-icon.png" alt="">
+                                  <span>#15 — Right Sleeve</span>
+                              </a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                              <a class="liveart-image-layer">
+                                  <img src="assets/img/layer-crown-icon.png" alt="">
+                                  <span>Crown</span>
+                              </a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                              <a class="liveart-image-layer">
+                                  <img src="assets/img/layer-numbers-icon.png" alt="">
+                                  <span>Phil James — Back</span>
+                              </a>
+                          </li>
+                          <li class="divider"></li>
+                          <li>
+                              <a class="liveart-image-layer">
+                                  <img src="assets/img/layer-dude-icon.png" alt="">
+                                  <span>My_portrait.jpg</span>
+                              </a>
+                          </li>
+                      </ul>
+                    </li>
+                    -->
+                    <!--<li id="clear-design" data-bind="visible: !strictTemplate()"><a id="clear-design-btn" data-bind="    click: clearDesign"><span>Clear Design</span></a></li>-->
+                    <li id="undo" data-bind="visible: isUndoActive"><a id="undo-btn" data-bind="click: undo"><span>Undo</span></a></li>
+                    <li id="redo" data-bind="visible: isRedoActive"><a id="redo-btn" data-bind="click: redo"><span>Redo</span></a></li>
+                    <li id="" class="dropup" data-bind="visible: hasSelected() && !strictTemplate()">
+                        <a id="object-operations" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Tools</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="objectOperations">
+                            <li id="copy" role="presentation"><a id="copy-btn" data-bind="click: copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span>Copy</a></li>
+                            <li id="paste" role="presentation"><a id="paste-btn" data-bind="click: paste"><span class="glyphicon glyphicon-paste" aria-hidden="true"></span>Paste</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation" class="dropdown-header">Align</li>
+                            <li id="align-left" role="presentation"><a id="align-left-btn" data-bind="click: align.bind($data, 'left')">Left</a></li>
+                            <li id="align-center" role="presentation"><a id="align-center-btn" data-bind="click: align.bind($data, 'hcenter')">Center</a></li>
+                            <li id="align-right" role="presentation"><a id="align-right-btn" data-bind="click: align.bind($data, 'right')">Right</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation" class="dropdown-header">Arrange</li>
+                            <li id="overlap-toward" role="presentation"><a id="overlap-toward-btn" data-bind="click: arrange.bind($data, 'front')">Above</a></li>
+                            <li id="overlap-backward" role="presentation"><a id="overlap-backward-btn" data-bind="click: arrange.bind($data, 'back')">Under</a></li>
+                            <li id="flip-dropdown-divider" role="presentation" class="divider"></li>
+                            <li id="flip-dropdown-header" role="presentation" class="dropdown-header">Flip</li>
+                            <li id="horizontal-flip" role="presentation"><a id="horizontal-flip-btn" data-bind="click: flip.bind($data, 'horizontal')">Horizontal</a></li>
+                            <li id="vertical-flip" role="presentation"><a id="vertical-flip-btn" data-bind="click: flip.bind($data, 'vertical')">Vetical</a></li>
+                        </ul>
+                    </li>
+                    <!-- <li id="copy"><a id="copy-btn" data-bind="click: copy">Copy</a></li>
+                    <li id="paste"><a id="paste-btn" data-bind="click: paste">Paste</a></li>
+                    <li id="flip" class="dropup">
+                        <a id="flip-btn" class="dropdown-toggle" data-toggle="dropdown">Flip</a>
+                        <ul id="flip-list" class="dropdown-menu">
+                            <li id="horizontal-flip"><a id="horizontal-flip-btn" data-bind="click: flip.bind($data, 'horizontal')"></a></li>
+                            <li id="vertical-flip"><a id="vertical-flip-btn" data-bind="click: flip.bind($data, 'vertical')"></a></li>
+                        </ul>
+                    </li>
+                    <li id="align" class="dropup" data-bind="visible: hasSelected() && !strictTemplate()">
+                        <a id="align-btn" class="dropdown-toggle" data-toggle="dropdown">Align</a>
+                        <ul id="align-list" class="dropdown-menu">
+                            <li id="align-left"><a id="align-left-btn" data-bind="click: align.bind($data, 'left')"></a></li>
+                            <li id="align-center"><a id="align-center-btn" data-bind="click: align.bind($data, 'hcenter')"></a></li>
+                            <li id="align-right"><a id="align-right-btn" data-bind="click: align.bind($data, 'right')"></a></li>
+                        </ul>
+                    </li>
+                    <li id="overlap" class="dropup" data-bind="visible: hasSelected()">
+                        <a id="overlap-btn" class="dropdown-toggle" data-toggle="dropdown">Arrange</a>
+                        <ul id="overlap-list" class="dropdown-menu">
+                            <li id="overlap-toward"><a id="overlap-toward-btn" data-bind="click: arrange.bind($data, 'front')"></a></li>
+                            <li id="overlap-backward"><a id="overlap-backward-btn" data-bind="click: arrange.bind($data, 'back')"></a></li>
+                        </ul>
+                    </li>-->
+                    <!--<li id="text-stroke" data-bind="visible: selectedIsText()">
+                        <a id="text-stroke-btn" class="liveart-color-picker-btn">
+                            <span>Fill</span>
+                            <input id="text-fill-color-picker-2" type="text" class="liveart-color-picker" data-bind="colorPicker: selectedLetteringVO().formatVO().fillColor, colorPalette: colors" />
+                        </a>
+                    </li>
+                    <li id="text-fill" data-bind="visible: selectedIsText()">
+                        <a id="text-fill-btn" class="liveart-color-picker-btn">
+                            <span>Stroke</span>
+                            <input id="text-stroke-color-picker-2" type="text" class="liveart-color-picker" data-bind="colorPicker: selectedLetteringVO().formatVO().strokeColor, colorPalette: strokeColors" />
+                        </a>
+                    </li>-->        
+                    
+                    <li id="get-quote-btn" data-bind="click: proceedQuote" class="pull-right">
+                        <a href="#quote-popup" aria-controls="quote-popup" role="tab" data-toggle="tab">
+                            <span>Proceed to Quote</span> 
+                            <span class="glyphicon glyphicon-share-alt text-success" aria-hidden="true"></span>
+                        </a>
+                    </li>
+                    
+                    <!--
+                    <li id="lock-proportions">
+                        <button class="btn" type="button" id="lock-proportions-btn" data-bind="checkbox: lockProportions"><span>Lock Proportions</span></button>
+                    </li>-->
+                </ul>
+                <!--</div>
+                </div>-->
+                <!-- <div id="preview-controls-content" class="liveart-panel">
+                    </div> -->
+            </div>
+
+            
+        </div>
+    </div>
+
+    <!-- pop-ups section -->
+    <!-- Alert popup -->
+    <div id="liveart-alert-popup" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <p id="liveart-alert-message">Message</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default btn-inverse" data-dismiss="modal">Ok</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Alert popup end -->
+    <!-- Authorization popup -->
+    <div id="liveart-authorization-popup" class="modal fade" role="dialog" aria-labelledby="liveart-authorization-popup-title" aria-hidden="true" onkeypress="onAuthDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-authorization-popup-title">Load Saved Designs</h3>
+                    <p>Please enter your email below, then click "Load Designs" to see list of all your saved designs.</p>
+                </div>
+                <div class="modal-body">
+                    <label>Email</label>
+                    <input id="liveart-authorization-email-input" type="text" class="form-control" data-bind="value: userEmail, valueUpdate: 'input'" placeholder="myemail@domain.com">
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" onclick="onAuthDialogSubmit()" data-bind="css: { disabled: !emailIsValid() }">Load Designs</a>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Authorization popup end -->
+    <!-- Change user popup -->
+    <div id="liveart-change-user-popup" class="modal fade" role="dialog" aria-labelledby="liveart-authorization-popup-title" aria-hidden="true" onkeypress="onAuthDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-change-user-popup-title">Change user email</h3>
+                    <p>Please enter your email below, then click "Log in" to switch on your account.</p>
+                </div>
+                <div class="modal-body">
+                    <label>Email</label>
+                    <input id="liveart-change-user-email-input" type="text" class="form-control" data-bind="value: userEmail, valueUpdate: 'input'" placeholder="myemail@domain.com">
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" onclick="onChangeUserDialogSubmit()" data-bind="css: { disabled: !emailIsValid() }">Log in</a>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Change user popup end -->
+    <!-- Save design popup -->
+    <div id="liveart-save-design-popup" class="modal fade" role="dialog" aria-labelledby="liveart-save-design-popup-title" aria-hidden="true" onkeypress="onSaveDesignDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-save-design-popup-title">Save Design</h3>
+                    <p>Please name your design below and click "Save Design". You can always access it later by entering just email.</p>
+                </div>
+                <div class="modal-body">
+                    <label>Name Your Design Below</label>
+                    <input id="liveart-save-design-name-input" type="text" class="form-control" placeholder="My Design" data-bind="value: designName, valueUpdate: 'input'">
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" onclick="onSaveDesignDialogSubmit()" data-bind="css: { disabled: !designNameIsValid() }">Save Design</a>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Save design popup end -->
+    <!-- Auth and save design popup -->
+    <div id="liveart-auth-and-save-dialog" class="modal fade" role="dialog" aria-labelledby="liveart-auth-and-save-dialog-title" aria-hidden="true" onkeypress="onAuthAndSaveDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-auth-and-save-dialog-title">Save Your Design</h3>
+                    <p>Please name your design and leave your email to save design. You can always access it later by entering just email.</p>
+                </div>
+                <div class="modal-body">
+                    <label>Name Your Design Below</label>
+                    <input id="liveart-auth-and-save-name-input" type="text" class="form-control" placeholder="My Design" data-bind="value: designName, valueUpdate: 'input'">
+                    <label>Email</label>
+                    <input id="liveart-auth-and-save-email-input" type="text" class="form-control" placeholder="myemail@domain.com" data-bind="value: userEmail, valueUpdate: 'input'">
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" onclick="onAuthAndSaveDialogSubmit()" data-bind="css: { disabled: !emailIsValid() || !designNameIsValid() }">Save Design</a>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Auth and save design popup end -->
+    <!-- Designs list popup -->
+    <div id="liveart-designs-list-popup" class="modal fade" role="dialog" aria-labelledby="liveart-designs-list-popup-title" aria-hidden="true" onkeypress="onLoadDesignDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-designs-list-popup-title">Load Design</h3>
+                    <p>Pick design below and click "Load" to load your design.</p>
+                </div>
+                <div class="modal-body">
+                    <table class="table" data-bind="visible: $root.designsList().length > 0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Last change</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="foreach: $root.designsList">
+                            <tr data-bind="css: { active: $data == $root.selectedDesign() }, click: $root.onDesignSelected" >
+                                <td data-bind="text: $data.title"></td>
+                                <td data-bind="text: $data.date"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-center" data-bind="visible: $root.designsList().length == 0">No designs available.</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" onclick="onLoadDesignDialogSubmit()" data-bind="css: { disabled: $root.designsList().length == 0 }">Load</a>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a class="btn btn-default" onclick="changeUser()">Change user</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Designs list popup end-->
+    <!-- Share link popup -->
+    <div id="liveart-share-link-popup" class="modal fade" role="dialog" aria-labelledby="liveart-share-link-popup-title" aria-hidden="true" onkeypress="onSaveDesignDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-share-link-popup-title">Share link</h3>
+                    <!--<p>The URL of your design is below, simply copy it to save your design or send to a friend.</p>-->
+                </div>
+                <div class="modal-body">
+                    <label>The URL of your design is below, simply copy it to save your design or send to a friend.</label>
+                    <div id="liveart-share-link-input" class="form-control" data-bind="text: shareLink()"></div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default" data-dismiss="modal">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Share link popup end -->
+    <!-- Upload conditions popup -->
+    <div id="liveart-upload-conditions-popup" class="modal fade" role="dialog" aria-labelledby="liveart-upload-conditions-popup-title" aria-hidden="true">
+        <!--<div class="modal-header">
+            <a class="close" data-dismiss="modal">&times;</a>
+            <h3>Share link</h3>
+        </div>-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-upload-conditions-popup-title">Uploading photos and Images</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="upload-conditions">
+                        <div class="upload-conditions-text">
+                            Please note that in order to use a design (photo, image, text, brand or saying) you must have full rights to use this design. By uploading or saving a design you agree that:
+                            <br />
+                            <br />
+                            <ol>
+                                <li>You hold the rights to commercially reproduce this design.</li>
+                                <li>You also release us from any claims made as a result of any copyright infringement.</li>
+                                <li>You understand that infringement of copyright is illegal. If you have any doubt as to the legal ownership of a design you should check with the rightful owner that you are able to use the design before uploading.</li>
+                                <li>You understand that we act under your instructions and is not obligated in any way to check or confirm the legal use of reproducing any designs.</li>
+                            </ol>
+                            <br />
+                            <b>Graphics Information</b>
+                            <br />
+                            <br />
+                            In the designer you can upload designs in jpeg, gif, png and svg format. All images will need to have a minimum of 150 dpi.
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" data-bind="checked: userAcceptsConditions">
+                                I understand and accept these conditions of copyright.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-inverse" data-bind="css: { 'disabled': !userAcceptsConditions() }, click: addCustomImage">OK</button>
+                    <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Upload conditions popup end -->
+    <!-- Color count popup -->
+    <div id="liveart-color-count-popup" class="modal fade" role="dialog" aria-labelledby="colors-number-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <!--<div id="colors-number">
+                        <h6 id="colors-number-label">Please indicate the number of colors in your uploaded image:</h6>
+                        <div id="colors-numeric-stepper">
+                            <button class="btn btn-default btn-round" type="button" data-bind="click: imageColorCount().decreaseQuantity, disable: imageColorCount().processColors"><span class="glyphicon glyphicon-minus"></span></button>
+                            <input class="form-control" type="text" data-bind="value: imageColorCount().colorCount, disable: imageColorCount().processColors" maxlength="1" />
+                            <button class="btn btn-default btn-round" type="button" data-bind="click: imageColorCount().increaseQuantity, disable: imageColorCount().processColors"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                    </div>-->
+                    <p>
+                        Please choose the colors in your uploaded file below. This will ensure accurate pricing and better service. Thank you!
+                    </p>
+                    <div class="liveart-colorPicker-multi" data-bind="foreach: colors, css: { disable: imageColorCount().processColors }">
+	                    <div class="colorPicker-swatch" data-bind="css: { active: $root.imageColorCount().colorsList().indexOf($data.value) > -1, transparent: $data.value === 'none' }, style: { backgroundColor: $data.value }, click: $root.imageColorCount().selectPrintedColors"></div>	
+	                </div>
+                    <div id="liveart-color-count-popup-alert" class="alert alert-warning" role="alert" data-bind="visible: imageColorCount().showAlert">
+                      You have reached the maximum number of colors — <span data-bind="text: imageColorCount().MAX_COLORS"></span>.
+                    </div>
+                    <div id="liveart-color-count-popup-process-colors">
+                        <input id="liveart-color-count-popup-process-colors-cb" type="checkbox" data-bind="checked: imageColorCount().processColors">
+                        <label for="liveart-color-count-popup-process-colors-cb">My uploaded image is a photograph or has too many colors to count or<br /> includes a color gradient.</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a id="color-count-submit" class="btn btn-inverse" onclick="onColorCountDialogSubmit()">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Color count popup end -->
+
+    <!-- DPU exceeded confirm popup -->
+    <div id="liveart-confirm-dpu-exceeded-popup" class="modal fade" role="dialog" onkeypress="onAuthDialogSubmit(event)" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        <div class="modal-header">
+            <a class="close" data-dismiss="modal" onclick="onCancelDPUExceeded()">&times;</a>
+            <!--<h3>DPU</h3>-->
+        </div>
+        <div class="modal-body">
+            <label>One or more of the raster images is of insufficient quality to be printed this large and still meet our suggested minimum print quality standards (150 dpi). You may choose to use your image(s) as is, but we recommend that you either reduce the size of the raster image(s), (by using the re-size tool anchored to the bottom right corner of your image), or delete the image(s) and add other, higher resolution images. If you'd like to use your image(s) as is, please confirm below and click "OK". To either reduce the size of the raster image(s), or to delete the image(s) and add other, higher resolution images, please click "Cancel".</label>
+            <label for="dpu-exceed-confirmed">
+                <input id="dpu-exceed-confirmed" type="checkbox" onchange="updateConfirmDPUExceeded()">
+                Please use all raster image(s) as is.
+            </label>
+        </div>
+        <div class="modal-footer">
+            <a id="dpu-exceeded-confirm" disabled class="btn btn-inverse" onclick="onConfirmDPUExceeded()">OK</a>
+            <a class="btn" data-dismiss="modal" onclick="onCancelDPUExceeded()">Cancel</a>
+        </div>
+             </div>
+        </div>
+    </div>
+    <!-- DPU exceeded confirm popup end -->
+
+    <!-- DPU exceeded popup -->
+    <div id="dpu-exceeded-popup" data-bind="visible: $root.selectedObjectDPUExceeded" style="display:none">
+        This image is of insufficient quality to be printed this large and still meet our suggested print quality standards (<tspan data-bind="text: minDPU"></tspan>
+        dpi). You may choose to use this image as is, but we recommend that you reduce the size of this image in your design, (by clicking and dragging its lower right corner until this message disappears), or delete this image and upload another, higher resolution image.
+    </div>
+    <!-- DPU exceeded popup end -->
+
+    <!-- Bootstrap progress bar for graphics uploading -->
+    <div id="liveart-upload-bar" class="modal fade" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+     <div class="modal-dialog">
+       <div class="modal-content">
+         <h6 class="text-center">Uploading your image...</h6>
+         <div class="modal-body uploading">
+           <div class="progress progress-popup progress-striped active">
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+           </div>
+         </div>
+       </div>
+     </div>
+    </div>
+    <!-- end Bootstrap progress bar for graphics uploading -->
+
+    <!-- Bootstrap progress bar for graphics uploading -->
+    <div id="liveart-load-design-bar" class="modal fade" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h6 class="text-center">Loading your design...</h6>
+                <div class="modal-body uploading">
+                    <div class="progress progress-popup progress-striped active">
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Bootstrap progress bar for graphics uploading -->
+    
+
+
+    <script type="text/javascript" src="assets/js/liveart-ui-components.js" defer="defer"></script>
+    <script type="text/javascript" src="LA.js" defer="defer"></script>
+    <script type="text/javascript" src="LA.config.js" defer="defer"></script>
+
+</body>
+</html>

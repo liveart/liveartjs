@@ -1,0 +1,10 @@
+.tooltipster-noir {
+	border-radius: 0px; 
+	border: 2px solid #000;
+	background: #fff;
+}
+.tooltipster-noir .tooltipster-content {
+	font-size: 12px;
+	line-height: 14px;
+	padding: 6px 8px;
+}

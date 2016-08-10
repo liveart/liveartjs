@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'College';
+    src: url('COLLEGE-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'College';
+    src: url('COLLEGEB-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+
+}
+
