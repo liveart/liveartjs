@@ -504,7 +504,7 @@
                                     </div>
                                 </form>
                                 <!-- beta feature buttons -->
-								<h6 class="text-center">Connect to</h6>
+								<h6 class="text-center" data-bind="visible: (showInstagramPhotos()||showFlickrPhotos()||showGooglePhotos()||showFacebookPhotos())">Connect to</h6>
                                 <button id="instagram-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showInstagramPhotos(), click: logInSocial.bind($data,'instagram'), css: {active: currentNetwork() == 'instagram'}"><span></span></button>
                                 <button id="flickr-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showFlickrPhotos(), click: logInSocial.bind($data,'flickr'), css: {active: currentNetwork() == 'flickr'}"><span></span></button>
                                 <button id="google-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showGooglePhotos(), click: logInSocial.bind($data,'google'), css: {active: currentNetwork() == 'google'}"><span></span></button>
