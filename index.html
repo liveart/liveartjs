@@ -299,10 +299,10 @@
                                         <div class="divider" data-bind="visible: selectedProductSizeVO().notEmpty"></div>
                                         <div id="text-form-size" data-bind="visible: selectedProductSizeVO().notEmpty">
                                         <div class="text-form-size-group">
-                                            <h6 id="text-form-size-label">Size</h6>
-                                            <input id="text-height" class="form-control pull-right" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
-                                            <button class="btn btn-default lock-btn pull-right" type="button" data-bind="checkbox: selectedObjectPropertiesVO().lockScale"><span class="icon-lock"></span></button>
-                                            <input id="text-width" class="form-control pull-right" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />                                            
+                                            <h6 id="text-form-size-label" data-bind="text: 'Size, ' + unitLabel()">Size</h6>
+                                            <input id="text-width" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />                                            
+                                            <button class="btn btn-default lock-btn" type="button" data-bind="checkbox: selectedObjectPropertiesVO().lockScale"><span class="icon-lock"></span></button>
+                                            <input id="text-height" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
                                         </div>
                                         <!--<span class="control-label" data-bind="text: unitLabel"></span>-->
                                         <button class="btn btn-default col-xs-5" id="text-form-size-apply-btn" type="button">Apply</button>
