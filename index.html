@@ -58,7 +58,8 @@
     <!-- LiveArt Designer Fonts -->
     <link rel="stylesheet" href="fonts/fonts.css" type="text/css" />
 </head>
-<body>   
+<body>
+<div id="liveart-isolate-container">   
     <div id="liveart-main-container">
         <div id="liveart-header"></div>
         <div id="liveart-init-preloader" data-bind="visible: !$root.status().completed">
@@ -73,50 +74,50 @@
                 <ul class="nav nav-stacked liveart-list-view" role="tablist" id="liveart-main-menu">
                     <li id="select-product" class="liveart-dropdown" data-bind="visible: showProductSelector()">
                         <a href="#select-product-form" aria-controls="select-product-form" role="tab" data-toggle="tab">
-                            <img src="assets/img/t-shirt.svg" class="inject-me" />
+                            <img src="assets/img/select-product-icon.svg" class="inject-me" />
                             <label>Select Product</label>
                         </a>
                     </li>                      
                     <li id="change-colours" class="liveart-dropdown" data-bind="visible: !strictTemplate() && showChangeColor">
                         <a href="#product-colors-form" aria-controls="product-colors-form" role="tab" data-toggle="tab">
-                            <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+                            <img src="assets/img/product-color-icon.svg" class="inject-me" />
                             <label data-bind="if: !selectedProductVO().resizable()">Product Color</label>
                             <label data-bind="if: selectedProductVO().resizable()">Product Color and Size</label>
                         </a>
                     </li>
                     <li id="add-text" class="liveart-dropdown" data-bind="visible: !strictTemplate() || hasSelected()">
                         <a href="#add-text-form" aria-controls="add-text-form" role="tab" data-toggle="tab">
-                            <span class="glyphicon glyphicon-font" aria-hidden="true"></span>
+                            <img src="assets/img/add-text-icon.svg" class="inject-me" />
                             <label>Add Text</label>
                         </a>
                     </li>
-                    <li id="add-names" class="liveart-dropdown" data-bind="visible: $root.selectedProductVO().namesNumbersEnabled(), click: $root.removeMobileNamesNumbersTooltip">
+                    <li id="add-names" class="liveart-dropdown" data-bind="visible: $root.selectedProductVO().namesNumbersEnabled()">
                         <a href="#add-names-form" aria-controls="add-names-form" role="tab" data-toggle="tab">
-                            <img src="assets/img/namesnumbers.svg" class="inject-me" />
+                            <img src="assets/img/names-numbers-icon.svg" class="inject-me" />
                             <label>Add Names and Numbers</label>
                         </a>
                     </li>
-                    <li id="add-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate(), click: $root.removeMobileAddedGraphicsTooltip">
+                    <li id="add-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate()">
                         <a href="#add-graphics-form" aria-controls="add-graphics-form" role="tab" data-toggle="tab">
-                            <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                            <img src="assets/img/add-image-icon.svg" class="inject-me" />
                             <label>Add Gallery Artwork</label>
                         </a>
                     </li>
-                    <li id="upload-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate(), click: $root.removeMobileUploadedGraphicsTooltip" >
+                    <li id="upload-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate()" >
                         <a href="#upload-graphics-form" aria-controls="upload-graphics-form" role="tab" data-toggle="tab">
-                            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                            <img src="assets/img/upload-artwork-icon.svg" class="inject-me" />
                             <label>Upload Artwork</label>
                         </a>   
                     </li>
                     <li id="save-share-load" class="liveart-dropdown">
                         <a href="#save-share-load-form" aria-controls="save-share-load-form" role="tab" data-toggle="tab">
-                            <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                            <img src="assets/img/share-design-icon.svg" class="inject-me" />
                             <label>Save & Share</label>
                         </a>   
                     </li>
                     <li id="clear-design" class="liveart-dropdown" data-bind="click: clearDesign">
                         <a>
-                            <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                            <img src="assets/img/clear-design-icon.svg" class="inject-me" />
                             <label>Clear Design</label>
                         </a>                            
                     </li>
@@ -125,6 +126,7 @@
                     <!-- SELECT PRODUCT FORM starts -->
                     <div role="tabpanel" id="select-product-form" class="tab-pane fade liveart-panel large-tab">
                         <div class="liveart-dropdown-form-header">
+							<a class="liveart-back-btn" data-bind="click: backProductsItem, visible: productSelectedCategories().length > 1"></a>
                             <span data-bind="text: productBreadcrumbsRender()"></span>
                             <a class="liveart-close-window-btn liveart-close-form-btn"></a>
                         </div>
@@ -136,7 +138,6 @@
                             </div>
                         </div>
                         <div class="divider"></div>
-                        <a class="liveart-back-btn" data-bind="click: backProductsItem, visible: productSelectedCategories().length > 1"></a>
                         <ul data-bind="foreach: currentProducts, css: { narrow: productSelectedCategories().length > 1 }" class="thumbnails liveart-categories-subcategories">
                             <li class="thumbnail" data-bind="click: $root.selectProductItem, css: { category: isCategory(), product: isProduct(), active: $data.id() == $root.selectedProductVO().id() }">
                                 <a data-bind="css: { active: $data.id() == $root.selectedProductVO().id() }">
@@ -234,7 +235,7 @@
                                 </div>-->
                                 <textarea class="form-control" id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplate(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
                                 <textarea class="form-control" id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplate(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
-								<div class="container-scrollable">
+                                <div class="container-scrollable">
                                     <div class="column">
                                         <div class="text-form-row">
                                             <div id="text-align-group" class="btn-group" data-toggle="buttons" data-bind="radio: selectedLetteringVO().formatVO().textAlign">
@@ -299,8 +300,8 @@
                                         <div class="divider" data-bind="visible: selectedProductSizeVO().notEmpty"></div>
                                         <div id="text-form-size" data-bind="visible: selectedProductSizeVO().notEmpty">
                                         <div class="text-form-size-group">
-                                            <h6 id="text-form-size-label" data-bind="text: 'Size, ' + unitLabel()">Size</h6>
-                                            <input id="text-width" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />                                            
+                                            <h6 id="text-form-size-label">Size, <span data-bind="text: unitLabel()"></span></h6>
+                                            <input id="text-width" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />           
                                             <button class="btn btn-default lock-btn" type="button" data-bind="checkbox: selectedObjectPropertiesVO().lockScale"><span class="icon-lock"></span></button>
                                             <input id="text-height" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
                                         </div>
@@ -308,7 +309,7 @@
                                         <button class="btn btn-default col-xs-5" id="text-form-size-apply-btn" type="button">Apply</button>
                                     </div>
                                 </div>
-							</div>
+                            </div>
                         </div>
                     </div>
                     <!-- ADD TEXT FORM ends -->
@@ -320,8 +321,8 @@
                                     <span class="liveart-form-header-title">Add/Edit Names</span>
                                     <a class="liveart-close-window-btn liveart-close-form-btn"></a>
                                 </div>
-                                <div id="add-names-info" class="alert alert-success" style="display:none"></div>                          
-                                <div id="add-names-form-content">              
+                                <div id="add-names-info" class="alert alert-success" style="display:none"></div>                                      
+                                <div id="add-names-form-content">                                        
                                     <button class="btn btn-default" id="add-names-btn" title="Add name" type="button" data-bind="click: addNameNumberObj.bind($data,'name')"><span></span><span>Add name</span></button>
                                     <button class="btn btn-default" id="add-numbers-btn" title="Add number" type="button" data-bind="click: addNameNumberObj.bind($data,'number')"><span></span><span>Add number</span></button>
                                         
@@ -354,7 +355,7 @@
                                             </div> 
                                         </div>                                            
                                     </div>
-                                 </div>
+                                    </div>
                             </div>
                             <div class="expanded-part">
                                 <div class="liveart-dropdown-form-header">
@@ -410,6 +411,7 @@
                     <!-- ADD GRAPHICS FORM starts -->
                     <div role="tabpanel" id="add-graphics-form" data-bind="css: {'small-tab': selectedIsGraphics, 'large-tab': !selectedIsGraphics() }" class="tab-pane fade liveart-panel">
                         <div class="liveart-dropdown-form-header">
+							<a class="liveart-back-btn" data-bind="visible: graphicSelectedSubcategory(), click: backGraphicItem"></a>
                             <span data-bind="text: graphicBreadcrumbsString, visible: !selectedIsGraphics()"></span>
                             <span data-bind="visible: selectedIsGraphics">Edit Artwork</span>
                             <a class="liveart-close-window-btn liveart-close-form-btn" data-bind="click: $root.removeMobileAddedGraphicsTooltip"></a>
@@ -424,7 +426,6 @@
                             </div>
                         </div>
                         <div class="divider"></div>
-                        <a class="liveart-back-btn" data-bind="visible: graphicSelectedSubcategory(), click: backGraphicItem"></a>
                         <ul data-bind="foreach: currentGraphics, css: { narrow: graphicSelectedSubcategory }" class="thumbnails liveart-categories-subcategories">
                             <li class="thumbnail" data-bind="click: $root.selectGraphicItem, css: { category: isCategory(), image: isImage() }">
                                 <a>
@@ -447,13 +448,13 @@
                                 <li>
                                     <a class="liveart-color-picker-btn">
                                         <span>Fill</span>
-                                        <input type="text" class="graphics-fill-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, colors: colors}, colorPicker: selectedGraphicsFormatVO().fillColor, productColorPalette: colors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                        <input type="text" class="graphics-fill-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, paletteClass: 'artworkPalette', colors: colors}, colorPicker: selectedGraphicsFormatVO().fillColor, productColorPalette: colors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
                                     </a>
                                 </li>
                                 <li>
                                     <a class="liveart-color-picker-btn">
                                         <span>Stroke</span>
-                                        <input type="text" class="graphics-stroke-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, colors: strokeColors}, colorPicker: selectedGraphicsFormatVO().strokeColor, productColorPalette: strokeColors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
+                                        <input type="text" class="graphics-stroke-color-picker" data-bind="colorPickerInit: { container: true, isDropup: false, paletteClass: 'artworkPalette', colors: strokeColors}, colorPicker: selectedGraphicsFormatVO().strokeColor, productColorPalette: strokeColors, showPantones: $root.selectedProductVO().pantones().useForDecoration" />
                                     </a>
                                 </li>
                             </ul>
@@ -494,8 +495,8 @@
                                 <div id="liveart-file-upload-container">
                                     <button id="liveart-upload-image-browse-btn" type="button" class="btn btn-default btn-block btn-primary" data-loading-text="Uploading..." data-bind="click: showUploadConditions.bind($data, 'upload')">Browse for file...</button>
                                 </div>
-								<h6 class="text-center">or</h6>
                                 <form id="liveart-upload-upload-image-by-url">
+									<h6 class="text-center">or</h6>
                                     <div class="input-group">
                                         <input id="liveart-upload-graphics-url-input" type="text" class="form-control" placeholder="Paste Image URL" data-bind="value: customImageUrl, valueUpdate: 'input'">
                                         <span class="input-group-btn">
@@ -504,7 +505,7 @@
                                     </div>
                                 </form>
                                 <!-- beta feature buttons -->
-								<h6 class="text-center" data-bind="visible: (showInstagramPhotos()||showFlickrPhotos()||showGooglePhotos()||showFacebookPhotos())">Connect to</h6>
+								<h6 class="text-center" data-bind="visible: showSocialNetworksPhotos()">Connect to</h6>
                                 <button id="instagram-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showInstagramPhotos(), click: logInSocial.bind($data,'instagram'), css: {active: currentNetwork() == 'instagram'}"><span></span></button>
                                 <button id="flickr-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showFlickrPhotos(), click: logInSocial.bind($data,'flickr'), css: {active: currentNetwork() == 'flickr'}"><span></span></button>
                                 <button id="google-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showGooglePhotos(), click: logInSocial.bind($data,'google'), css: {active: currentNetwork() == 'google'}"><span></span></button>
@@ -632,10 +633,9 @@
                 <div id="alert-container"><!-- Alerts goes here. This should be one line without spaces --></div>
                 <!-- LiveArtJS core goes here -->
             </div>
-            <div style="" id="zoom-container" class="" data-bind="visible: zoomEnabled">
-                <h6 style="">Zoom: <span data-bind="text: (zoom() + '%')">100%</span></h6>     
-                <button class="btn btn-default" data-bind="click: zoomOut, enable: (zoom() > minZoom())"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+            <div id="zoom-container" data-bind="visible: zoomEnabled">
                 <button class="btn btn-default" data-bind="click: zoomIn, enable: (zoom() < maxZoom())"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+				<button class="btn btn-default" data-bind="click: zoomOut, enable: (zoom() > minZoom())"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
             </div>           
             <div id="preview-controls-container" class="liveart-panel-container">
                 <!-- Product side swictch -->
@@ -702,10 +702,10 @@
                     </li>
                     -->
                     <!--<li id="clear-design" data-bind="visible: !strictTemplate()"><a id="clear-design-btn" data-bind="    click: clearDesign"><span>Clear Design</span></a></li>-->
-                    <li id="undo" data-bind="visible: isUndoActive"><a id="undo-btn" data-bind="click: undo"><span>Undo</span></a></li>
-                    <li id="redo" data-bind="visible: isRedoActive"><a id="redo-btn" data-bind="click: redo"><span>Redo</span></a></li>
-                    <li id="" class="dropup" data-bind="visible: hasSelected() && !strictTemplate()">
-                        <a id="object-operations" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Tools</a>
+                    <li id="undo" data-bind="css: {enabled: isUndoActive}"><a id="undo-btn" data-bind="click: undo"><img src="assets/img/undo-icon.svg" class="inject-me" /><span>Undo</span></a></li>
+                    <li id="redo" data-bind="css: {enabled: isRedoActive}"><a id="redo-btn" data-bind="click: redo"><span>Redo</span><img src="assets/img/redo-icon.svg" class="inject-me" /></a></li>
+                    <li id="tools" class="dropup" data-bind="css: {enabled: hasSelected() && !strictTemplate()}">
+                        <a id="object-operations" class="dropdown-toggle" data-toggle="dropdown" data-bind="css: {disabled: !hasSelected() || strictTemplate()}"><img src="assets/img/tools-icon.svg" class="inject-me" /><span>Tools</span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="objectOperations">
                             <li id="copy" role="presentation"><a id="copy-btn" data-bind="click: copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span>Copy</a></li>
                             <li id="paste" role="presentation"><a id="paste-btn" data-bind="click: paste"><span class="glyphicon glyphicon-paste" aria-hidden="true"></span>Paste</a></li>
@@ -764,7 +764,7 @@
                     <li id="get-quote-btn" data-bind="click: proceedQuote" class="pull-right">
                         <a href="#quote-popup" aria-controls="quote-popup" role="tab" data-toggle="tab">
                             <span>Proceed to Quote</span> 
-                            <span class="glyphicon glyphicon-share-alt text-success" aria-hidden="true"></span>
+                            <img src="assets/img/proceed-quote-icon.svg" class="inject-me" />
                         </a>
                     </li>
                     
@@ -809,11 +809,16 @@
                     <p>Please enter your email below, then click "Load Designs" to see list of all your saved designs.</p>
                 </div>
                 <div class="modal-body">
-                    <label>Email</label>
-                    <input id="liveart-authorization-email-input" type="text" class="form-control" data-bind="value: userEmail, valueUpdate: 'input'" placeholder="myemail@domain.com">
+                    <div class="email-controls">
+                        <label>Email</label>
+                        <input id="liveart-authorization-email-input" type="text" class="form-control" data-bind="value: userEmail, valueUpdate: 'input'" placeholder="myemail@domain.com">
+                        <span class="validation-error">
+                            <span class="help-block error-text"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-inverse" onclick="onAuthDialogSubmit()" data-bind="css: { disabled: !emailIsValid() }">Load Designs</a>
+                    <a class="btn btn-inverse" onclick="onAuthDialogSubmit()">Load Designs</a>
                     <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                 </div>
             </div>
@@ -830,11 +835,16 @@
                     <p>Please enter your email below, then click "Log in" to switch on your account.</p>
                 </div>
                 <div class="modal-body">
-                    <label>Email</label>
-                    <input id="liveart-change-user-email-input" type="text" class="form-control" data-bind="value: userEmail, valueUpdate: 'input'" placeholder="myemail@domain.com">
+                    <div class="email-controls">
+                        <label>Email</label>
+                        <input id="liveart-change-user-email-input" type="text" class="form-control" data-bind="value: userEmail, valueUpdate: 'input'" placeholder="myemail@domain.com">
+                        <span class="validation-error">
+                            <span class="help-block error-text"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-inverse" onclick="onChangeUserDialogSubmit()" data-bind="css: { disabled: !emailIsValid() }">Log in</a>
+                    <a class="btn btn-inverse" onclick="onChangeUserDialogSubmit()">Log in</a>
                     <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                 </div>
             </div>
@@ -851,11 +861,16 @@
                     <p>Please name your design below and click "Save Design". You can always access it later by entering just email.</p>
                 </div>
                 <div class="modal-body">
-                    <label>Name Your Design Below</label>
-                    <input id="liveart-save-design-name-input" type="text" class="form-control" placeholder="My Design" data-bind="value: designName, valueUpdate: 'input'">
+                    <div class="design-name-controls">
+                        <label>Name Your Design Below</label>
+                        <input id="liveart-save-design-name-input" type="text" class="form-control" placeholder="My Design" data-bind="value: designName, valueUpdate: 'input'">
+                        <span class="validation-error">
+                            <span class="help-block error-text"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-inverse" onclick="onSaveDesignDialogSubmit()" data-bind="css: { disabled: !designNameIsValid() }">Save Design</a>
+                    <a class="btn btn-inverse" onclick="onSaveDesignDialogSubmit()">Save Design</a>
                     <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                 </div>
             </div>
@@ -872,13 +887,23 @@
                     <p>Please name your design and leave your email to save design. You can always access it later by entering just email.</p>
                 </div>
                 <div class="modal-body">
-                    <label>Name Your Design Below</label>
-                    <input id="liveart-auth-and-save-name-input" type="text" class="form-control" placeholder="My Design" data-bind="value: designName, valueUpdate: 'input'">
-                    <label>Email</label>
-                    <input id="liveart-auth-and-save-email-input" type="text" class="form-control" placeholder="myemail@domain.com" data-bind="value: userEmail, valueUpdate: 'input'">
+                    <div class="design-name-controls">
+                        <label>Name Your Design Below</label>
+                        <input id="liveart-auth-and-save-name-input" type="text" class="form-control" placeholder="My Design" data-bind="value: designName, valueUpdate: 'input'">
+                        <span class="validation-error">
+                            <span class="help-block error-text"></span>
+                        </span>
+                    </div>
+                    <div class="email-controls">
+                        <label>Email</label>
+                        <input id="liveart-auth-and-save-email-input" type="text" class="form-control" placeholder="myemail@domain.com" data-bind="value: userEmail, valueUpdate: 'input'">
+                        <span class="validation-error">
+                            <span class="help-block error-text"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-inverse" onclick="onAuthAndSaveDialogSubmit()" data-bind="css: { disabled: !emailIsValid() || !designNameIsValid() }">Save Design</a>
+                    <a class="btn btn-inverse" onclick="onAuthAndSaveDialogSubmit()">Save Design</a>
                     <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                 </div>
             </div>
@@ -930,8 +955,23 @@
                     <!--<p>The URL of your design is below, simply copy it to save your design or send to a friend.</p>-->
                 </div>
                 <div class="modal-body">
-                    <label>The URL of your design is below, simply copy it to save your design or send to a friend.</label>
-                    <div id="liveart-share-link-input" class="form-control" data-bind="text: shareLink()"></div>
+                    <div class="alert alert-success">
+                        The link to your design was coppied to clip board.
+                    </div>
+                    <div class="alert alert-danger">
+                        Sorry, but we can not copy the URL.
+                    </div>
+                    <label class="copy-label">The URL of your design is below, simply copy it to save your design or send to a friend.</label>
+                                        
+                    <div class="input-group">
+                        <input id="liveart-share-link-input" type="text" readonly class="form-control" data-bind="value: shareLink()" placeholder="Some path">
+                        <span class="input-group-btn" data-bind="visible: document.queryCommandSupported('copy')">
+                            <button class="btn btn-default" type="button" id="copy-button" data-placement="button" onclick="copyShareLink()">
+                                Copy to Clipboard
+                            </button>
+                        </span>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-default" data-dismiss="modal">OK</a>
@@ -1066,8 +1106,8 @@
      </div>
     </div>
     <!-- end Bootstrap progress bar for graphics uploading -->
-
-    <!-- Bootstrap progress bar for graphics uploading -->
+	
+     <!-- Bootstrap progress bar for graphics uploading -->
     <div id="liveart-load-design-bar" class="modal fade" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -1081,12 +1121,14 @@
         </div>
     </div>
     <!-- end Bootstrap progress bar for graphics uploading -->
-    
+   
 
 
     <script type="text/javascript" src="assets/js/liveart-ui-components.js" defer="defer"></script>
     <script type="text/javascript" src="LA.js" defer="defer"></script>
     <script type="text/javascript" src="LA.config.js" defer="defer"></script>
 
+
+</div>
 </body>
 </html>

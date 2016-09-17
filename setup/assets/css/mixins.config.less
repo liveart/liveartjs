@@ -1,0 +1,49 @@
+.border-radius(@radius: 2px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+.border-radius(@tl;@tr;@br;@bl){
+  -webkit-border-radius: @tl @tr @br @bl;
+     -moz-border-radius: @tl @tr @br @bl;
+          border-radius: @tl @tr @br @bl;
+}
+.box-shadow(@x: 0; @y: 0; @blur: 1px; @color: #000) {
+  -webkit-box-shadow: @arguments;
+     -moz-box-shadow: @arguments;
+          box-shadow: @arguments;
+}
+.box-shadow-inset(@x: 0; @y: 0; @blur: 1px; @color: #000) {
+  -webkit-box-shadow: @arguments inset;
+     -moz-box-shadow: @arguments inset;
+          box-shadow: @arguments inset;
+}
+.no-box-shadow {
+  -webkit-box-shadow: none;
+     -moz-box-shadow: none;
+          box-shadow: none;
+}
+.background-top-bottom-gradient(@color1: #fff; @color2: #e6e6e6){
+	background-image: -moz-linear-gradient(top, @color1, @color2);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@color1), to(@color2));
+	background-image: -webkit-linear-gradient(top, @color1, @color2);
+	background-image: -o-linear-gradient(top, @color1, @color2);
+	background-image: linear-gradient(to bottom, @color1, @color2);
+}
+.transition-transform(@duration: 0.5s;@timing-func: ease){
+    transition: all @duration;
+    -moz-transition: all @duration @timing-func, -moz-transform @duration; /* Firefox */
+    -webkit-transition: all @duration @timing-func, -webkit-transform @duration; /* Safari and Chrome */
+    -o-transition: all @duration @timing-func, -o-transform @duration; /* Opera */
+}
+.transition(@duration: 0.2s;@timing-func: ease-in-out) {
+    -webkit-transition: all @duration @timing-func;
+    -moz-transition: all @duration @timing-func;
+    -o-transition: all @duration @timing-func;
+    transition: all @duration @timing-func;
+}
+.height-max-content {
+    height: intrinsic;           /* Safari/WebKit uses a non-standard name */
+    height: -moz-max-content;    /* Firefox/Gecko */
+    height: -webkit-max-content; /* Chrome */
+}

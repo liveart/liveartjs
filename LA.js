@@ -83,7 +83,9 @@ var laTranslation = {
         "FLICKR": "Flickr",
         "GOOGLE": "Google",
 
-        "CLEAR_DESIGN_CONFIRMATION": "Are you sure to clear design?"
+        "CLEAR_DESIGN_CONFIRMATION": "Are you sure to clear design?",
+        "INVALID_EMAIL_FORMAT": "Invalid email format",
+        "INVALID_DESIGN_NAME": "Invalid design name"
         /*
         * UI TRANSLATION ENDS HERE
         */
@@ -865,7 +867,7 @@ function LAControlsModel() {
 
     //hack to force preload all fonts
     self.preloadFonts = function () {
-        var container = jQuery('<div id="liveart-fonts-preloader-container"></div>').appendTo('body');
+        var container = jQuery('<div id="liveart-fonts-preloader-container"></div>').appendTo('#liveart-isolate-container');
         var fonts = self.fonts();
         var style;
         for (var i = 0; i < fonts.length; i++) {
@@ -2631,16 +2633,11 @@ function LAControlsModel() {
      * USER'S EMAIL BEGINS HERE
     */
     self.userEmail = ko.observable();
-    self.emailIsValid = ko.computed(function () {
-        var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        return filter.test(self.userEmail());
-    });
     /**
      * USER'S EMAIL ENDS HERE
     */
 
     self.designName = ko.observable("");
-    self.designNameIsValid = ko.computed(function () {return self.designName()!="";});
 
 
     /**
@@ -2767,11 +2764,15 @@ function LAControlsModel() {
     * UNDO/REDO BEGINS HERE
     */
     self.undo = function () {
-        userInteract({ undo: true });
+		if (self.isUndoActive()) {
+			userInteract({ undo: true });
+		}
     }
 
     self.redo = function () {
-        userInteract({ redo: true });
+		if (self.isRedoActive()) {
+			userInteract({ redo: true });
+		}
     }
 
     self.isUndoActive = ko.observable(false);
@@ -2804,6 +2805,9 @@ function LAControlsModel() {
     self.showGooglePhotos = ko.computed(function () {
         return self.googleClientID() !== "" && self.authorizedRedirectUrl() !== "";
     });
+	self.showSocialNetworksPhotos = ko.computed(function(){
+		return self.showInstagramPhotos()||self.showFacebookPhotos()||self.showFlickrPhotos()||self.showGooglePhotos();
+	});
 
     /**
     * Client ID's from social networks ENDS HERE
@@ -3515,29 +3519,67 @@ jQuery('.modal').on('hidden.bs.modal', function () { // handle all modal dialog 
     });
 });
 
-
-function showAuthDialog() {
-    jQuery("#liveart-authorization-popup").modal("show");
+/** Validatin block starts here */
+function isEmailValid(email) {
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return filter.test(email);
 }
 
+function isDesignNameValid(name) {
+    return name && name != "";
+}
+
+function showValidationError($container, text) {
+    $container.addClass("has-error");
+    $container.find(".error-text").text(text);
+    $container.find(".validation-error").show();
+}
+
+function clearValidationErrors($container) {
+    if (!$container) return;
+    $container.find(".has-error").removeClass("has-error");
+    $container.find(".validation-error").hide();
+}
+/** Validatin block ends here */
+
+function showAuthDialog() {
+    var $container = jQuery("#liveart-authorization-popup");
+    clearValidationErrors($container);
+    $container.modal("show");
+}
 
 function onAuthDialogSubmit(event) {
     if (event == null || event.keyCode == 13) {
-        controlsModel.userEmail(jQuery("#liveart-authorization-email-input").val());
-        userInteract({
-            authorize: controlsModel.userEmail()
-        });
-        jQuery("#liveart-authorization-popup").modal("hide");
+        var email = jQuery("#liveart-authorization-email-input").val();
+        if (isEmailValid(email)) {
+            controlsModel.userEmail(email);
+            userInteract({
+                authorize: controlsModel.userEmail()
+            });
+            jQuery("#liveart-authorization-popup").modal("hide");
+        } else {
+            var $emailContainer = jQuery("#liveart-authorization-popup .email-controls");
+            var text = laTranslation.translateUI("INVALID_EMAIL_FORMAT");
+            showValidationError($emailContainer, text);
+            jQuery("#liveart-authorization-email-input").focus();
+        }
     }
 }
 
 function onChangeUserDialogSubmit() {
     var email = jQuery("#liveart-change-user-email-input").val();
-    userInteract({
-        authorize: email
-    });
-    jQuery("#liveart-change-user-popup").modal("hide");
-    onLoadDesign();
+    if (isEmailValid(email)) {
+        userInteract({
+            authorize: email
+        });
+        jQuery("#liveart-change-user-popup").modal("hide");
+        onLoadDesign();
+    } else {
+        var $emailContainer = jQuery("#liveart-change-user-popup .email-controls");
+        var text = laTranslation.translateUI("INVALID_EMAIL_FORMAT");
+        showValidationError($emailContainer, text);
+        jQuery("#liveart-change-user-email-input").focus();
+    }
 }
 
 function showDPUExceededDialog() {
@@ -3571,34 +3613,84 @@ function onCancelDPUExceeded() {
 }
 
 function showAuthAndSaveDialog() {
-    jQuery("#liveart-auth-and-save-dialog").modal("show");
+    var $container = jQuery("#liveart-auth-and-save-dialog");
+    clearValidationErrors($container);
+    $container.modal("show");
 }
+/*
+ if (isEmailValid(email)) {
+        userInteract({
+            authorize: email
+        });
+        jQuery("#liveart-change-user-popup").modal("hide");
+        onLoadDesign();
+    } else {
+        var $emailContainer = jQuery("#liveart-change-user-popup .email-controls");
+        var text = laTranslation.translateUI("INVALID_EMAIL_FORMAT");
+        showValidationError($emailContainer, text);
+        jQuery("#liveart-change-user-email-input").focus();
+    }
+*/
 
 function onAuthAndSaveDialogSubmit(event) {
+    clearValidationErrors(jQuery("#liveart-auth-and-save-dialog"));
     if (event == null || event.keyCode == 13) {
         var email = jQuery("#liveart-auth-and-save-email-input").val();
         var name = jQuery("#liveart-auth-and-save-name-input").val();
+
+        if (!isDesignNameValid(name)) {
+            var $designNameContainer = jQuery("#liveart-auth-and-save-dialog .design-name-controls");
+            var text = laTranslation.translateUI("INVALID_DESIGN_NAME");
+            showValidationError($designNameContainer, text);
+            jQuery("#liveart-auth-and-save-name-input").focus();
+            return;
+        }
+
+        if (!isEmailValid(email)) {
+            var $emailContainer = jQuery("#liveart-auth-and-save-dialog .email-controls");
+            var text = laTranslation.translateUI("INVALID_EMAIL_FORMAT");
+            showValidationError($emailContainer, text);
+            jQuery("#liveart-auth-and-save-email-input").focus();
+            return;
+        }
 
         userInteract({
             authorize: email,
             saveDesign: name
         }); // if auth will be async - we need callback here
-      
+
         jQuery("#liveart-auth-and-save-dialog").modal("hide");
+        if (controlsModel.isCompact()) {
+            liveartUI.closeActiveTab()
+        }
     }
 }
 
 function showSaveDesignDialog() {
-    jQuery("#liveart-save-design-popup").modal("show");
+    var $container = jQuery("#liveart-save-design-popup");
+    clearValidationErrors($container);
+    $container.modal("show");
 }
 
 function onSaveDesignDialogSubmit(event) {
     if (event == null || event.keyCode == 13) {
         var name = jQuery("#liveart-save-design-name-input").val();
+
+        if (!isDesignNameValid(name)) {
+            var $designNameContainer = jQuery("#liveart-save-design-popup .design-name-controls");
+            var text = laTranslation.translateUI("INVALID_DESIGN_NAME");
+            showValidationError($designNameContainer, text);
+            jQuery("#liveart-save-design-name-input").focus();
+            return;
+        }
+
         userInteract({
             saveDesign: name
         });
         jQuery("#liveart-save-design-popup").modal("hide");
+        if (controlsModel.isCompact()) {
+            liveartUI.closeActiveTab()
+        }
     }
 }
 
@@ -3699,11 +3791,26 @@ function onShareDesign() {
         shareDesign: ""
     });
 }
-
+function copyShareLink() {
+    jQuery("#liveart-share-link-popup .alert").hide();
+    try {
+        var input = document.querySelector('#liveart-share-link-input');
+        input.setSelectionRange(0, input.value.length + 1);
+        var success = document.execCommand('copy');
+        if (success) {
+            jQuery("#liveart-share-link-popup .alert-success").show();
+        } else {
+            jQuery("#liveart-share-link-popup .alert-danger").show();
+        }
+    } catch (err) {
+        jQuery("#liveart-share-link-popup .alert-danger").show();
+    }
+}
 function showShareLink() {
+    jQuery("#liveart-share-link-popup .alert").hide();
+    // jQuery("#liveart-share-link-popup .copy-label").hide();
     jQuery("#liveart-share-link-popup").modal("show");
 }
-
 
 function onSaveDesign() {
     jQuery("#quote-popup").modal("hide");
@@ -3721,7 +3828,9 @@ function onLoadDesign() {
 
 function changeUser() {
     jQuery("#liveart-designs-list-popup").modal("hide");
-    jQuery("#liveart-change-user-popup").modal("show");
+    var $container = jQuery("#liveart-change-user-popup");
+    clearValidationErrors($container);
+    $container.modal("show");
 }
 
 
@@ -3763,6 +3872,9 @@ jQuery(document).click(function (event) {
         jQuery(".version-buildtime").hide();
     };
 });
+
+// Setting up default container for color pickers
+jQuery.fn.colorPicker.defaults.container = jQuery("#liveart-isolate-container");
 
 /**
  * MODAL POPUP WINDOWS AND BUTTONS EVENTS END HERE

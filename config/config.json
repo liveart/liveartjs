@@ -1,54 +1,55 @@
 ﻿{
-    "productsList": {
-        "url": "config/products.json"
-    },
-    "defaultProductId": "11",
-    "fonts": {
-      "url": "config/fonts.json"
-    },
-    "colors": {
-      "url": "config/colors.json",
-      "pantones_url": "config/pantones.json"
-    },
-    "graphicsList": {
-        "url": "config/graphics.json"
-    },
-	  "social": {
-        "url": "config/social.json"
-    },
-    "options": {
-        "deleteOnDoubleClick": false,
-        "includeProductInDesign": true,
-        "includePrintingAreaInDesign": true,
-		"includeMaskInDesign": true,
-        "fontsCSSUrl": "../../fonts/fonts.css",
-        "zoomEnabled": true,
-        "minZoom": 50,
-        "maxZoom": 150,
-        "checkeredBackground": true,
-        "unit": "in",
-        "unit2": "ft",
-        "unitConversionMult": 12,
-        "showProductSelector": true,
-        "checkTextFXThrottle": 400,
-		    "minDPU": 45,
-        "showUploadedColorsDialog": true,
-        "fitProductImage" :  false
-    },
-    "textEffects": {
-        "config": "config/textEffects.json",
-		"url": "http://hive.liveartdesigner.com/mmjs/services/getTextZ.php"
-    },
-    "defaultNameObjectText": "NAMES HERE",
-    "defaultNumberObjectText": "00",
-    "assetsUrl": "assets/",
-    "galleryBaseUrl": "",
-    "getQuoteUrl": "services/getQuote.php",
-    "getDesignsUrl": "services/getDesigns.php?email=${email}",
-    "saveDesignUrl": "services/saveDesign.php",
-    "loadDesignUrl": "services/loadDesign.php?design_id=${design_id}",
-    "redirectUrl": "services/order.php?design_id=${design_id}",
-    "uploadImageUrl": "services/uploadImage.php",
-    "shareLinkUrl": "index.html?design_id=${design_id}",
-    "redirectWindow": "parent"
+  "productsList": {
+    "url": "config/products.json"
+  },
+  "defaultProductId": "11",
+  "fonts": {
+    "url": "config/fonts.json"
+  },
+  "colors": {
+    "url": "config/colors.json",
+    "pantones_url": "config/pantones.json"
+  },
+  "graphicsList": {
+    "url": "config/graphics.json"
+  },
+  "social": {
+    "url": "config/social.json"
+  },
+  "options": {
+    "deleteOnDoubleClick": false,
+    "includeProductInDesign": true,
+    "includePrintingAreaInDesign": true,
+    "includeMaskInDesign": true,
+    "fontsCSSUrl": "../../fonts/fonts.css",
+    "zoomEnabled": true,
+    "minZoom": 50,
+    "maxZoom": 150,
+    "checkeredBackground": true,
+    "unit": "in",
+    "unit2": "ft",
+    "unitConversionMult": 12,
+    "showProductSelector": true,
+    "checkTextFXThrottle": 400,
+    "minDPU": 45,
+    "showUploadedColorsDialog": true,
+    "fitProductImage": false,
+    "enableSnapGuides": true
+  },
+  "textEffects": {
+    "config": "config/textEffects.json",
+    "url": "http://hive.liveartdesigner.com/mmjs/services/getTextZ.php"
+  },
+  "defaultNameObjectText": "NAMES HERE",
+  "defaultNumberObjectText": "00",
+  "assetsUrl": "assets/",
+  "galleryBaseUrl": "",
+  "getQuoteUrl": "services/getQuote.php",
+  "getDesignsUrl": "services/getDesigns.php?email=${email}",
+  "saveDesignUrl": "services/saveDesign.php",
+  "loadDesignUrl": "services/loadDesign.php?design_id=${design_id}",
+  "redirectUrl": "services/order.php?design_id=${design_id}",
+  "uploadImageUrl": "services/uploadImage.php",
+  "shareLinkUrl": "index.html?design_id=${design_id}",
+  "redirectWindow": "parent"
 }

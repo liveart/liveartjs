@@ -61,6 +61,9 @@
             if (!jQuery.fn.colorPicker.customPaletteClasses) jQuery.fn.colorPicker.customPaletteClasses = {};
             if (opts && opts.paletteClass) jQuery.fn.colorPicker.customPaletteClasses[paletteId] = opts.paletteClass;
 
+            var oldPalette = jQuery('#' + paletteId);
+            if (oldPalette) oldPalette.remove();
+
             /**
              * Build a color palette.
             **/
@@ -273,7 +276,8 @@
                 pantonesInfo[paletteId] = { showPantones: showPantones, drawn: false };
             }
             newPalette.attr('id', paletteId);
-            jQuery("body").append(newPalette);
+            var container = jQuery.fn.colorPicker.defaults.container || jQuery('body');
+            container.append(newPalette);
             if (colors.length > maxColorsNumber) {
                 newPalette.addClass("scrolled-element");
             }
@@ -595,7 +599,8 @@
                     '</div>' +
                     '<div class="divider"></div>' +
                 '</div>');
-            globalPantones.appendTo('body');
+            var container = jQuery.fn.colorPicker.defaults.container || jQuery('body');
+            globalPantones.appendTo(container);
             globalPantones.hide();
 
             var newPantones = getPantomsHTML(jQuery.fn.colorPicker.defaults.pantones, null);
@@ -673,7 +678,7 @@
             if (pantonesInfo[paletteId] && pantonesInfo[paletteId].showPantones == showPantones) return;
 
             var oldPalette = jQuery('#' + paletteId);
-            if (oldPalette.length != 0) oldPalette.remove();
+            if (oldPalette) oldPalette.remove();
             jQuery.fn.colorPicker.createPalette(paletteId, pickerColors[paletteId], undefined, undefined, showPantones);
         }
     });
@@ -706,7 +711,9 @@
 
         // If we want to simply add more colors to the default set, use addColors.
         addColors: [],
-        pantones: []
+        pantones: [],
+        /** JQuery element where a new color pickers will be put */
+        container: jQuery("body")
     };
 
 })(jQuery);

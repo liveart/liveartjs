@@ -49,6 +49,7 @@
 			$url = $_POST['fileurl'];
 			$name = basename($url);
 			$ext = pathinfo($name, PATHINFO_EXTENSION);
+			$ext = strtolower($ext);
 			$name = date("Ymd-His")."_".uniqid().".".$ext;	
 			
 			$upload = file_put_contents($relative_path.$name, file_get_contents($url));
@@ -70,7 +71,7 @@
 	};
 	
 	function is_image($filename){
-		$ext = pathinfo($filename, PATHINFO_EXTENSION);
+		$ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 		return in_array($ext , array("jpg", "jpeg", "svg", "gif", "bmp", "png"));
 	}
 ?>

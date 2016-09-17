@@ -10,6 +10,12 @@
  * @license MIT: You are free to use and modify this code for any use, on the condition that this copyright notice remains.
  */
 
+/** 
+ * INFO!!! This file was changed by Andrii Dobrianskyi
+ * Changelog: 
+ *      Was added target="_top" attribute to iframe. https://extranet.newtonideas.com/web2.aspx/LAJS/TASK768
+ */
+
 // Can't use strict with arguments.callee
 //"use strict";
 
@@ -2554,13 +2560,19 @@ hello.utils.extend( hello.utils, {
 
 		// Build the iframe window
 		var win;
-		try{
-			// IE7 hack, only lets us define the name here, not later.
-			win = doc.createElement('<iframe name="'+callbackID+'">');
-		}
-		catch(e){
-			win = doc.createElement('iframe');
-		}
+
+	    /*
+         * This code fragment was changed by Andrii Dobrianskyi in task https://extranet.newtonideas.com/web2.aspx/LAJS/TASK768 
+        */ 
+	    try {
+	        // IE7 hack, only lets us define the name here, not later.
+	        win = doc.createElement('<iframe name="' + callbackID + '" target="_top">');
+	    }
+	    catch (e) {
+	        win = doc.createElement('iframe');
+	        win.setAttribute("target", "top");
+	    }
+        // Code fragment end.
 
 		win.name = callbackID;
 		win.id = callbackID;

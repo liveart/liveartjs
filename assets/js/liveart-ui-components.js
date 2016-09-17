@@ -29,8 +29,7 @@ var liveartUI = {
     hideExpandedWindow: function () {
         jQuery('#main-controls-container .liveart-tabs-content > .expanded').removeClass('expanded');
     },
-
-    showExpandedWindow: function(formId){
+    showExpandedWindow: function (formId) {
         jQuery("#" + formId + '.tab-pane.expandable-tab').addClass('expanded');
     },
 
@@ -374,102 +373,6 @@ jQuery(function () {
         liveartUI.showTextForm();
         liveartUI.resetFocusToTextTab = false;
     });
-
-
-    /* Hack: Select share link on click under Safari  
-     * http://www.bearpanther.com/2013/05/27/easy-text-selection-in-mobile-safari/
-     *
-     */
-
-    var area = document.querySelector("#liveart-share-link-input")
-    // create a listener for click, could also use touchstart, touchend, etc.
-    area.addEventListener("click", select);
-    // remove contentEditable when an element loses focus
-    area.addEventListener("blur", reset);
-    // callback to event listener
-    function select(evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        // a textNode is required to set a selection on mobile safari
-        // nodeType values:  https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType
-        if (evt.target.firstChild.nodeType !== 3) {
-            console.log("Unable to select text, firstChild is not a textNode.");
-            return;
-        }
-        var el = evt.target;
-        // for this to work on mobile safari, contentEditable needs to be true
-        if (!isEditable(el)) {
-            el.setAttribute("contentEditable", true);
-        }
-        // current selection
-        var sel = window.getSelection();
-        // create a range:  
-        // https://developer.mozilla.org/en-US/docs/Web/API/document.createRange
-        var range = document.createRange();
-        // use firstChild as range expects a textNode, not an elementNode
-        range.setStart(el.firstChild, 0);
-        range.setEnd(el.firstChild, el.innerHTML.length);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
-
-    function reset(evt) {
-        if (isEditable(evt.target)) {
-            evt.target.removeAttribute("contentEditable");
-        }
-    }
-
-    function isEditable(el) {
-        return editable = el.getAttribute("contentEditable");
-    }
-
-    /* Hack: Select share link on click under Safari  
-     * http://www.bearpanther.com/2013/05/27/easy-text-selection-in-mobile-safari/
-     *
-     */
-
-    var area = document.querySelector("#liveart-share-link-input")
-    // create a listener for click, could also use touchstart, touchend, etc.
-    area.addEventListener("click", select);
-    // remove contentEditable when an element loses focus
-    area.addEventListener("blur", reset);
-    // callback to event listener
-    function select(evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        // a textNode is required to set a selection on mobile safari
-        // nodeType values:  https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType
-        if (evt.target.firstChild.nodeType !== 3) {
-            console.log("Unable to select text, firstChild is not a textNode.");
-            return;
-        }
-        var el = evt.target;
-        // for this to work on mobile safari, contentEditable needs to be true
-        if (!isEditable(el)) {
-            el.setAttribute("contentEditable", true);
-        }
-        // current selection
-        var sel = window.getSelection();
-        // create a range:  
-        // https://developer.mozilla.org/en-US/docs/Web/API/document.createRange
-        var range = document.createRange();
-        // use firstChild as range expects a textNode, not an elementNode
-        range.setStart(el.firstChild, 0);
-        range.setEnd(el.firstChild, el.innerHTML.length);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
-
-    function reset(evt) {
-        if (isEditable(evt.target)) {
-            evt.target.removeAttribute("contentEditable");
-        }
-    }
-
-    function isEditable(el) {
-        return editable = el.getAttribute("contentEditable");
-    }
-
 });
 
 /* Alert */

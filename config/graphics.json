@@ -289,10 +289,12 @@
     {
       "id": "r2",
       "name": "Icons",
+	  "thumb": "gallery/LineCons/PNG/like.png",
       "categories": [
         {
           "id": "3",
           "name": "Icons by linecons",
+		  "thumb": "gallery/LineCons/PNG/fire.png",
           "graphicsList": [
             {
               "id": "301",
@@ -731,6 +733,7 @@
         {
           "id": "5",
           "name": "Animal icons",
+		  "thumb": "gallery/Icons/animals/svg/butterfly.svg",
           "graphicsList": [
             {
               "id": "501",
@@ -836,6 +839,7 @@
         {
           "id": "6",
           "name": "Arrows",
+		  "thumb": "gallery/Icons/arrows/svg/up.svg",
           "graphicsList": [
             {
               "id": "61",
@@ -896,6 +900,7 @@
         {
           "id": "7",
           "name": "Business icons",
+		  "thumb": "gallery/Icons/business/svg/ascendant.svg",
           "graphicsList": [
             {
               "id": "701",
@@ -1028,6 +1033,7 @@
         {
           "id": "8",
           "name": "Emotions icons",
+		  "thumb": "gallery/Icons/emotions/svg/emoticons3.svg",
           "graphicsList": [
             {
               "id": "801",
@@ -1259,6 +1265,7 @@
         {
           "id": "9",
           "name": "Logistics icons",
+		  "thumb": "gallery/Icons/logistics/png/delivery.png",
           "graphicsList": [
             {
               "id": "901",
@@ -1436,6 +1443,7 @@
         {
           "id": "10",
           "name": "Music icons",
+		  "thumb": "gallery/Icons/music/png/dj.png",
           "graphicsList": [
             {
               "id": "1001",
@@ -1496,6 +1504,7 @@
         {
           "id": "11",
           "name": "Sport icons",
+		  "thumb": "gallery/Icons/sports/png/swimming.png",
           "graphicsList": [
             {
               "id": "1101",
@@ -1583,6 +1592,7 @@
         {
           "id": "12",
           "name": "Transport icons",
+		  "thumb": "gallery/Icons/transport/svg/sedan.svg",
           "graphicsList": [
             {
               "id": "1201",
@@ -1661,6 +1671,7 @@
         {
           "id": "13",
           "name": "Travel icons",
+		  "thumb": "gallery/Icons/travel/svg/photo.svg",
           "graphicsList": [
             {
               "id": "1301",

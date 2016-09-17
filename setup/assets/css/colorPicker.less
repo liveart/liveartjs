@@ -1,0 +1,216 @@
+@import 'mixins.config.less';
+
+#liveart-isolate-container {
+	
+	div.colorPicker-picker {
+		height: 18px;
+		width: 18px;
+		padding: 0 !important;
+		.border-radius;
+		border: 1px solid #d7d7d7;
+		.box-shadow-inset(0px;1px;1px;rgba(0,0,0,.1));
+		cursor: pointer;
+		line-height: 18px;
+		display: inline-block;
+	}
+
+	div.colorPicker-palette {
+		position: absolute;
+		border: 1px solid #ccc;
+		border-radius: 2px;
+		.border-radius;
+		.box-shadow(0;1px;1px;rgba(0,0,0,.15));
+		background-color: #ffffff;
+		padding: 3px;
+		z-index: 9999;
+		max-height: 211px;
+		width: 180px ;
+	}
+
+	div.colorPicker-swatch {
+		height: 30px;
+		width: 30px;
+		border: 1px solid #d7d7d7;
+		margin: 2px;
+		float: left;
+		cursor: pointer;
+		line-height: 30px;
+		background-position: center center;
+		background-repeat: no-repeat;
+		box-sizing: border-box;
+		
+		&:hover,
+		&.active {
+			border: 2px solid #000;
+		}
+		&.selected {
+			background-position: center center;
+			background-repeat: no-repeat;
+			background-image: url(../../assets/img/check-icon-white-border.png);
+			border: 2px solid #000;
+			
+			&.transparent {
+				background-image: url(../../assets/img/check-icon-white-border.png), url(../../assets/img/transparent-cross-icon.png);
+			}
+		}
+	}
+
+	div.colorPicker-picker.transparent,
+	div.colorPicker-swatch.transparent {
+		background-image: url(../../assets/img/transparent-cross-icon.png);
+		background-color: #ffffff;
+		background-position: center center;
+	}
+
+
+	#product-color-picker-palette {
+		top: 140px !important;
+	}
+
+	.scrolled-element {
+		width: 200px !important;
+		overflow: hidden;
+		overflow-y: auto;
+	}
+
+	.product-color-picker {
+		.no-box-shadow;
+		background: #ffffff;
+		margin-top: 5px;
+		margin-left: -5px;
+		
+		div.colorPicker-palette {
+			max-height: 370px;
+			height: auto;
+		}
+	}
+
+	.multicolor-product div.colorPicker-palette {
+		max-height: 202px;
+	}
+	.picker-with-pantons {
+		position: absolute;
+		height: auto;
+		width: 196px;
+		z-index: 1050;
+		background: transparent; /* for old browsers (IE8) */
+		background: #ffffff;
+		.box-shadow(0;1px;1px;rgba(0,0,0,.15));
+		box-sizing: border-box;
+		padding-bottom: 5px;
+		
+		&.scrolled-element {
+			width: 196px !important;
+		}
+		div.colorPicker-palette {
+			width: 188px;
+			overflow-y: auto;
+			margin-left: 3px;
+			position: static;
+			.no-box-shadow;
+			border: none;
+			padding: 0px;
+			max-height: 202px;
+		}
+		.nav-tabs {
+			border: none;
+		}
+		.nav {
+			padding: 5px 0px 9px 5px;
+			width: 100%;
+			
+			> li {
+				z-index: 1040;
+				
+				> a {
+					padding: 0px 13px;
+					color: #999;
+					border: none;
+					border-radius: 2px;
+					line-height: 20px;
+					margin-right: 2px;
+					
+					&:hover,
+					&:focus {
+						background: none;
+					}
+					span {
+						border-bottom: 1px dotted #ccc;
+						padding: 0px;
+					}
+				}
+				&.active > a {
+					&, &:hover, &:focus {
+						background-color: #333;
+						color: #fff;
+						font-weight: bold;
+						cursor: default;
+						border: none;
+						
+						span {
+							border: none;
+						}
+					}
+				}
+			}
+		}
+		.search-box {
+			margin-left: 5px;
+			width: 186px;
+		}
+		.divider {
+			margin: 5px 0px 3px;
+		}
+		&.product-color-picker,
+		&.artworkPalette,
+		&.multicolorArtworkPalette {
+			.no-box-shadow;
+		}
+	}
+		
+	/* apply on webkit-based browsers */ 
+	@media screen and (-webkit-min-device-pixel-ratio:0) {
+		.picker-with-pantons {
+			width: 189px;
+			
+			div.colorPicker-palette {
+				width: 181px;
+			}
+			.search-box {
+				width: 179px;
+			}
+		}
+		.scrolled-element {
+			width: 189px !important;
+			overflow: hidden;
+			overflow-y: auto;
+		}
+	}
+	/*  Pantones container  */
+	#global-pantones {
+		position: absolute;
+		z-index: 10000;
+		height: auto;
+		margin-top: 33px;
+		
+		&.product-color-picker {
+			margin-top: 38px;
+		}
+		&.picker-with-pantons {
+			.no-box-shadow;
+			border: none;
+		}
+		.search-box {
+			.close {
+				right: 10px;
+				top: 2px;
+			}
+			.input-group {
+				margin: 0px;
+			}
+		}
+	}
+	.pantones-tab {
+		height: 238px;
+	}
+}
