@@ -47,3 +47,10 @@
     height: -moz-max-content;    /* Firefox/Gecko */
     height: -webkit-max-content; /* Chrome */
 }
+.transform-translate(@x: -50%; @y: -50%) {
+	-webkit-transform: translate(@x,@y);
+	-moz-transform: translate(@x,@y);
+	-ms-transform: translate(@x,@y);
+	-o-transform: translate(@x,@y);
+	transform: translate(@x,@y);
+}

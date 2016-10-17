@@ -86,7 +86,9 @@ var liveartUI = {
     fileUploadByUrl: function (scriptUrl) {
         var modal = jQuery('#liveart-upload-bar'),
             bar = modal.find('.progress-bar');
-        var fileurl = jQuery('#liveart-upload-graphics-url-input').val();
+        // encodeURIComponent - should be present because file url may contains special characters. 
+        // Example: facebook URL https://pathToimage?oh=44a290be459d5ab0aa556615568270ca&oe=5877BA96 will be splited on 2 arguments
+        var fileurl = encodeURIComponent(jQuery('#liveart-upload-graphics-url-input').val());
         jQuery.ajax({
             dataType: 'json',
             type: 'POST',
@@ -97,8 +99,8 @@ var liveartUI = {
                 if (!data.error) {
                     userInteract({ uploadGraphics: data.url });
                 } else {
-                    liveartUI.addAlert(data.result.error.message, "error");
-                    alert(data.error.message);
+                    liveartUI.addAlert(data.error.message || data.error, "error");
+                    alert(data.error.message || data.error);
                 };
             },
             beforeSend: function (data) {

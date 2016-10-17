@@ -1425,7 +1425,7 @@
                   "name": "Front",
                   "image": "products/stationary/a4.svg",
                   "editableArea": [
-                    100.886,
+                    101,
                     0,
                     485,
                     543
@@ -1434,15 +1434,15 @@
                     8.5,
                     11
                   ],
-                  "clipRect": [ 100.886, 0, 485, 543 ]
+                  "clipRect": [ 101, 0, 485, 543 ]
                 },
                 {
                   "name": "Back",
                   "image": "products/stationary/a4.svg",
                   "editableArea": [
-                    100.886,
+                    101,
                     0,
-                    459.115,
+                    485,
                     543
                   ],
                   "editableAreaUnits": [

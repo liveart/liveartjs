@@ -526,7 +526,7 @@
                             <!--<a class="liveart-back-btn" style="display: none" data-bind="click: $root.backToSocialList"></a>-->
                             <ul id="liveart-social-graphics-list" data-bind="foreach: photos" class="thumbnails liveart-categories-subcategories">
                                 <li class="thumbnail image">
-                                    <a data-bind="click: $root.showUploadConditions.bind($data, image())">
+                                    <a data-bind="click: $root.socialShowUploadConditions.bind($data, image())">
                                         <div class="state"></div>
                                         <img data-bind="attr: { src: thumb }" alt="">
                                     </a>
@@ -609,6 +609,7 @@
                             <div class="divider"></div>
                             <div>
                                 <div class="column" id="product-sizes-panel">
+									<textarea placeholder="Order notes" data-bind="value: designNotes, valueUpdate: 'input'"></textarea>
                                     <div>
                                         <table class="order-price height-restriction" data-bind="if:$root.designInfo().prices && $root.designInfo().prices.length>0">
                                             <tbody data-bind="foreach: $root.designInfo().prices">
@@ -956,7 +957,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-success">
-                        The link to your design was coppied to clip board.
+                        The link to your design was copied to clipboard.
                     </div>
                     <div class="alert alert-danger">
                         Sorry, but we can not copy the URL.

@@ -1995,6 +1995,10 @@ function LAControlsModel() {
     function updateGraphicsColorize() {
         userInteract({ selectedGraphicsColorize: self.selectedGraphicsFormatVO().complexColor().toColorizeList() });
     }
+    self.socialShowUploadConditions = function (image) {
+        self.customImageUrl(image);
+        self.showUploadConditions("social");
+    }
 
     self.showUploadConditions = function (type) {
         if (type == 'url' && self.customImageUrl().length == 0) return;
@@ -2016,6 +2020,9 @@ function LAControlsModel() {
                 self.addImageByUrl();
             } else if (type == 'upload') {
                 self.uploadImage();
+            } else if (type == 'social') {
+                self.addImageByUrl();
+                self.customImageUrl("");
             } else {
                 self.addPhoto(type);
             }
@@ -2123,7 +2130,7 @@ function LAControlsModel() {
     }
 
     self.paginationFacebookPhotos = function () {
-        hello("facebook").api(self.paginationPath(), { limit: self.paginationLimit(), "fields": "picture,thumb" }, function (response) {
+        hello("facebook").api(self.paginationPath(), { limit: self.paginationLimit(), "fields": "images" }, function (response) {
             if (response.error) {
                 self.responseSocialError(response);
                 return false;
@@ -2142,7 +2149,11 @@ function LAControlsModel() {
             if (response.paging) {
                 self.photosPreloader.fadeIn(self.fadeDelay);
                 for (var i = 0; i < response.data.length; i++) {
-                    self.photosFacebook.push(new PhotosVO(response.data[i].thumbnail, response.data[i].picture));
+                    if (response.data[i].images && response.data[i].images.length > 0) {
+                        var source = response.data[i].images[0].source;
+                        var thumbnail = response.data[i].images[response.data[i].images.length - 1].source;
+                        self.photosFacebook.push(new PhotosVO(thumbnail, source));
+                    }
                 }
                 self.photos(self.photosFacebook());
                 self.photosPreloader.fadeOut(self.fadeDelay);

@@ -403,10 +403,6 @@ body, html {
 			max-width: (@canvasWidth+@expandedMenuWidth+2*@translationAmount+@gap);
 		}
 
-	#order-options-container {
-		margin-left: 20px;
-		margin-right: 20px;
-	}
 
 	/*	4. LiveArtForms Menu	*/
 
@@ -1252,8 +1248,12 @@ body, html {
 				
 				/*  cell image  */
 				> img {
-					width: 110px;
-					height: 110px;
+					max-width: 110px;
+					max-height: 110px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					.transform-translate;
 					
 					&[src$='svg'] {
 						padding: 20px;
@@ -1282,6 +1282,7 @@ body, html {
 					position: absolute;
 					border: 5px solid transparent;
 					background-color: transparent;
+					z-index: 10;
 				}
 				
 			}
@@ -1309,6 +1310,7 @@ body, html {
 						padding: 5px 10px;
 						font-weight:bold;
 						background-color: white;
+						z-index: 9;
 						.transition;
 					}
 				}
@@ -1719,6 +1721,8 @@ body, html {
 		color: #000;
 		font-size: 11px;
 		margin-top: 20px;
+		margin-left: 20px;
+		margin-right: 20px;
 		
 		.liveart-panel {
 			margin-bottom: 2px;
@@ -1752,6 +1756,14 @@ body, html {
 		.btn-link {
 			font-size: 11px;
 			padding: 0;
+		}
+		textarea {
+			border: 1px solid #dcdcdc;
+			margin: 10px auto;
+			width: 250px;
+			resize: vertical;
+			display: block;
+			min-height: 50px;
 		}
 		table,
 		tbody {
@@ -1893,9 +1905,7 @@ body, html {
 		height: 32px;
 		width: 60%;
 		line-height: 20px;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 15px;
+		margin: 15px auto;
 	}
 	#product-sizes-panel .tooltip-inner {
 		max-width: 200px !important;
