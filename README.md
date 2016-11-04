@@ -22,11 +22,23 @@ This particular package also does include sample PHP backend endpoints, containe
 - Any sort of Linux or Windows.
 - Static files configuration for JSON and WOFF files. Failing to configure this step may result in malfunctioning designer.
 - PHP enabled for correct design save and processing;
-- ImageMagick and Inkscape installed on the server for image and output processing.
+- ImageMagick and Inkscape (v0.91) installed on the server for image and output processing.
+- scripts should have permission to write files into folders `/files` and `/files/uploads` (for sample save design, upload image, and make order)
 
 ========================
 
 ## CHANGELOG
+### 0.10.20 RELEASE NOTES
+Fixes:
+- product.editableAreaSizes has higher priority than product.location.editableAreaUnits
+- UI fixes
+
+uploadImage.php:
+- added support of jpeg orientation (an exif data), including any SVG software (e.g. AI)
+
+saveDesign.php sample:
+- implemented design resaving with the same id and title
+
 ### 0.10.19 RELEASE NOTES
 Updates: 
 - correct flip

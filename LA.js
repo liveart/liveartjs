@@ -861,8 +861,18 @@ function LAControlsModel() {
         return self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor();
     });
 
-    self.showChangeColor = ko.computed(function () {
-        return (self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor()) || self.selectedProductVO().multicolor();
+    self.showChangeSizeAndColorTab = ko.computed(function () {
+        // Show Because of Size logic:
+        let becauseOfEditableAreaSizes = self.selectedProductVO().editableAreaSizes().length > 1;
+        let becauseOfSizesInput = self.selectedProductVO().editableAreaSizes().length == 0 && self.selectedProductVO().resizable();
+        let becauseOfSizes = becauseOfEditableAreaSizes || becauseOfSizesInput;
+
+        // Show Because of Color logic:
+        let becauseOfRaster = self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor();
+        let becauseOfMulticolor = self.selectedProductVO().multicolor() && self.selectedProductColorVO().colorizeList().length > 0;
+        let becauseOfColors = becauseOfRaster || becauseOfMulticolor;
+        
+        return becauseOfSizes || becauseOfColors;
     });
 
     //hack to force preload all fonts
@@ -2049,6 +2059,7 @@ function LAControlsModel() {
     self.addImageByUrl = function () {
         if (self.customImageUrl().length > 0) {
             liveartUI.fileUploadByUrl(self.uploadImageUrl());
+            liveartUI.hideExpandedWindow();
         }
     }
 

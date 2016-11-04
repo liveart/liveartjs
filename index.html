@@ -78,7 +78,7 @@
                             <label>Select Product</label>
                         </a>
                     </li>                      
-                    <li id="change-colours" class="liveart-dropdown" data-bind="visible: !strictTemplate() && showChangeColor">
+                    <li id="change-colours" class="liveart-dropdown" data-bind="visible: !strictTemplate() && showChangeSizeAndColorTab">
                         <a href="#product-colors-form" aria-controls="product-colors-form" role="tab" data-toggle="tab">
                             <img src="assets/img/product-color-icon.svg" class="inject-me" />
                             <label data-bind="if: !selectedProductVO().resizable()">Product Color</label>
@@ -201,7 +201,7 @@
                                             <button class="btn btn-default" type="button" data-bind="click: selectedProductDimensionsSwap"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span></button>
                                         </div>
                                     </div>
-                                    <div data-bind="visible: selectedProductVO().editableAreaSizes().length > 0">
+                                    <div data-bind="visible: selectedProductVO().editableAreaSizes().length > 1">
                                         <label>Select Size</label>
                                         <div class="btn-group btn-block">
                                             <button class="btn btn-default col-xs-10" type="button" id="selectedProductSize" data-toggle="dropdown" aria-expanded="true" data-bind="text: selectedProductSizeVO().label"></button>
@@ -609,7 +609,7 @@
                             <div class="divider"></div>
                             <div>
                                 <div class="column" id="product-sizes-panel">
-									<textarea placeholder="Order notes" data-bind="value: designNotes, valueUpdate: 'input'"></textarea>
+									<textarea placeholder="Enter order notes" data-bind="value: designNotes, valueUpdate: 'input'"></textarea>
                                     <div>
                                         <table class="order-price height-restriction" data-bind="if:$root.designInfo().prices && $root.designInfo().prices.length>0">
                                             <tbody data-bind="foreach: $root.designInfo().prices">
@@ -657,51 +657,6 @@
                 <!--                <div class="navbar liveart-button-bar">
                                     <div class="navbar-inner">-->
                 <ul class="nav nav-pills liveart-button-bar">
-                    <!--<li id="layers" class="dropup">
-                      <a id="layers-btn" class="dropdown-toggle" data-toggle="dropdown">Layers</a>
-                      <ul id="layers-list" class="dropdown-menu">
-                          <li>
-                              <a class="liveart-text-layer">
-                                  <span>Keep Calm And Carry On</span>
-                              </a>
-                          </li>
-                          <li class="divider"></li>
-                          <li>
-                              <a class="liveart-text-layer">
-                                  <span>Yes, We Can</span>
-                              </a>
-                          </li>
-                          <li class="divider"></li>
-                          <li>
-                              <a class="liveart-image-layer">
-                                  <img src="assets/img/layer-numbers-2-icon.png" alt="">
-                                  <span>#15 — Right Sleeve</span>
-                              </a>
-                          </li>
-                          <li class="divider"></li>
-                          <li>
-                              <a class="liveart-image-layer">
-                                  <img src="assets/img/layer-crown-icon.png" alt="">
-                                  <span>Crown</span>
-                              </a>
-                          </li>
-                          <li class="divider"></li>
-                          <li>
-                              <a class="liveart-image-layer">
-                                  <img src="assets/img/layer-numbers-icon.png" alt="">
-                                  <span>Phil James — Back</span>
-                              </a>
-                          </li>
-                          <li class="divider"></li>
-                          <li>
-                              <a class="liveart-image-layer">
-                                  <img src="assets/img/layer-dude-icon.png" alt="">
-                                  <span>My_portrait.jpg</span>
-                              </a>
-                          </li>
-                      </ul>
-                    </li>
-                    -->
                     <!--<li id="clear-design" data-bind="visible: !strictTemplate()"><a id="clear-design-btn" data-bind="    click: clearDesign"><span>Clear Design</span></a></li>-->
                     <li id="undo" data-bind="css: {enabled: isUndoActive}"><a id="undo-btn" data-bind="click: undo"><img src="assets/img/undo-icon.svg" class="inject-me" /><span>Undo</span></a></li>
                     <li id="redo" data-bind="css: {enabled: isRedoActive}"><a id="redo-btn" data-bind="click: redo"><span>Redo</span><img src="assets/img/redo-icon.svg" class="inject-me" /></a></li>
@@ -957,7 +912,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-success">
-                        The link to your design was copied to clipboard.
+                        The link to your design was copied.
                     </div>
                     <div class="alert alert-danger">
                         Sorry, but we can not copy the URL.
@@ -966,16 +921,14 @@
                                         
                     <div class="input-group">
                         <input id="liveart-share-link-input" type="text" readonly class="form-control" data-bind="value: shareLink()" placeholder="Some path">
-                        <span class="input-group-btn" data-bind="visible: document.queryCommandSupported('copy')">
-                            <button class="btn btn-default" type="button" id="copy-button" data-placement="button" onclick="copyShareLink()">
-                                Copy to Clipboard
-                            </button>
-                        </span>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-default" data-dismiss="modal">OK</a>
+					<button class="btn btn-inverse" type="button" id="copy-button" data-placement="button" onclick="copyShareLink()" data-bind="visible: document.queryCommandSupported('copy')">
+						Copy
+					</button>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                 </div>
             </div>
         </div>

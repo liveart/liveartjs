@@ -25,9 +25,12 @@ if (isset($_FILES["image"])) {
 			//Strip orientation information for JPEG
 			if(function_exists("exif_imagetype")){
 				if(exif_imagetype($relative_path.$name) == IMAGETYPE_JPEG){
-					$img = imagecreatefromjpeg ($relative_path.$name);
+                    // MTLW/TASK32
+					image_fix_orientation($relative_path.$name);
+                    // Previous solution
+                    /*$img = imagecreatefromjpeg ($relative_path.$name);
 					imagejpeg ($img, $relative_path.$name, 100);
-					imagedestroy ($img);
+					imagedestroy ($img);*/
 				}
 			}
 
@@ -79,4 +82,27 @@ function is_image($filename){
 	$ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 	return in_array($ext , array("jpg", "jpeg", "svg", "gif", "bmp", "png"));
 }
+
+function image_fix_orientation($filename) {
+    $exif = exif_read_data($filename);
+    if (!empty($exif['Orientation'])) {
+        $image = imagecreatefromjpeg($filename);
+        switch ($exif['Orientation']) {
+            case 3:
+                $image = imagerotate($image, 180, 0);
+                break;
+
+            case 6:
+                $image = imagerotate($image, -90, 0);
+                break;
+
+            case 8:
+                $image = imagerotate($image, 90, 0);
+                break;
+        }
+
+        imagejpeg($image, $filename, 90);
+    }
+}
 ?>
+
