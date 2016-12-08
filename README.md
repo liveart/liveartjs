@@ -28,6 +28,10 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.22 RELEASE NOTES
+Updates:
+- added `mainBackgroundColor` option to .less configuration vars
+
 ### 0.10.21 RELEASE NOTES
 Fixes:
 - saveDesign request `location.editableArea` value is always sent (even if `options.includePrintingAreaInDesign == false` in config file)

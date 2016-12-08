@@ -45,7 +45,7 @@
 @maxQuantityMenuItems: 8;
 
 body, html {
-    background-color: #e0e0e0;
+    background-color: @mainBackgroundColor;
     margin: 0;
     padding: 0;
 }
@@ -64,7 +64,7 @@ body, html {
 	
 	/*	1. General styles	*/
 	
-    background-color: #e0e0e0;
+    background-color: @mainBackgroundColor;
     margin: 0;
     padding: 0;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -531,7 +531,7 @@ body, html {
 			position: absolute;
 			top: 0px;
 			height: auto;
-			border: 2px solid #e0e0e0;
+			border: 2px solid @mainBackgroundColor;
 			border-top: none;
 			.no-box-shadow;
 			
@@ -1370,7 +1370,7 @@ body, html {
 			background-image: none;
 			margin-left: 0px;
 			width: 100px;
-			border-right: 1px solid #e0e0e0;
+			border-right: 1px solid @mainBackgroundColor;
 			
 			> a {
                 text-shadow: none;
@@ -1409,7 +1409,7 @@ body, html {
 				}
             }
 			&:first-child {
-				border-left: 2px solid #e0e0e0;
+				border-left: 2px solid @mainBackgroundColor;
 				> a {
 					.border-radius(2px;0px;0px;2px);
 				}
@@ -1548,7 +1548,7 @@ body, html {
 			}
 			&#get-quote-btn {
 				width: 190px;
-				border-left: 1px solid #e0e0e0;
+				border-left: 1px solid @mainBackgroundColor;
 				
 				> a {
 					text-align: right;
@@ -1611,7 +1611,7 @@ body, html {
 		.box-shadow-inset(0px;-1px;5px;#eaeaea);
 		margin-left: @expandedMenuWidth;
 		.transition-transform;
-		border-left: 2px solid #e0e0e0;
+		border-left: 2px solid @mainBackgroundColor;
 		
 		.centered-pills-container {
 			line-height: 0;
