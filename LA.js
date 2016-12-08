@@ -30,6 +30,12 @@ var laTranslation = {
         QUOTE_INVALID_RESPONSE_ERROR_MESSAGE: "Failed to load quote! Response is invalid.",
         WRONG_PRODUCT_ID_ERROR_MESSAGE: "Wrong product ID: %id%.",
         ORDER_PLACED_SUCCESSFULLY_MESSAGE: "Order placed successfully!",
+        DESIGN_LOADED_MESSAGE: "Design '%title%' loaded successfully!",
+        DESIGN_WITHOUT_TITLE_LOADED_MESSAGE: "Design loaded successfully!",
+        SAVING_DESIGN_MESSAGE: "Saving design...",
+        SHARING_DESIGN_MESSAGE: "Sharing design...",
+        LOADING_YOUR_DESIGN_MESSAGE: "Loading your design...",
+        PLACING_ORDER_MESSAGE: "Placing order...",
 
         // Configuration loading messages
         LOADING_COLORS_MESSAGE: "Loading colors...",
@@ -40,6 +46,9 @@ var laTranslation = {
         LOADING_SOCIAL_MESSAGE: "Loading social configuration...",
         LOADING_DESIGN_MESSAGE: "Loading design...",
         LOADING_MESSAGE: "Loading...",
+        LOADED_MESSAGE: "Loaded",
+        LOADING_CONFIGURATION_MESSAGE: "Loading configuration...",
+
         /*
         * CORE TRANSLATION ENDS HERE
         */
@@ -257,6 +266,7 @@ var GraphicsCategoryVO = function (obj) {
     if (isNullOrUndefined(obj.thumb)) obj.thumb = '';
     if (isNullOrUndefined(obj.graphics)) obj.graphics = [];
     if (isNullOrUndefined(obj.categories)) obj.categories = [];
+    if (isNullOrUndefined(obj.isCategory)) obj.isCategory = false;
 
     var self = this;
     self.id = ko.observable(obj.id);
@@ -264,6 +274,7 @@ var GraphicsCategoryVO = function (obj) {
     self.name = ko.observable(obj.name);
     self.description = ko.observable(obj.description);
     self.thumb = ko.observable(obj.thumb);
+    self.isCategory = ko.observable(obj.isCategory);
 
     var mappedGraphics = ko.utils.arrayMap(obj.graphics, function (item) {
         return new GraphicsCategoryVO(item);
@@ -283,11 +294,11 @@ var GraphicsCategoryVO = function (obj) {
     });
 
     self.isImage = ko.computed(function () {
-        return self.categories().length == 0 && self.graphics().length == 0;
+        return !self.isCategory();
     });
 
     self.isCategory = ko.computed(function () {
-        return !self.isImage();
+        return self.isCategory();
     });
 }
 
@@ -871,7 +882,8 @@ function LAControlsModel() {
         let becauseOfRaster = self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor();
         let becauseOfMulticolor = self.selectedProductVO().multicolor() && self.selectedProductColorVO().colorizeList().length > 0;
         let becauseOfColors = becauseOfRaster || becauseOfMulticolor;
-        
+        // TODO: not so good solution
+        setTimeout(updateMainMenuCount, 100);
         return becauseOfSizes || becauseOfColors;
     });
 
@@ -2841,12 +2853,42 @@ function LAControlsModel() {
 
     self.showLoadDesignPreloader = ko.observable(false);
     self.showLoadDesignPreloader.subscribe(function (value) {
+        var status = { showPreloader: false, text: laTranslation.translateUI("LOADING_YOUR_DESIGN_MESSAGE") };
         if (value && self.status().completed) {
-            jQuery("#liveart-load-design-bar").modal('show');
-        } else {
-            jQuery("#liveart-load-design-bar").modal('hide');
+            status.showPreloader = true;
+        }
+        self.preloaderStatus(status);
+    });
+
+    self.showPlaceOrderPreloader = ko.observable(false);
+    self.showPlaceOrderPreloader.subscribe(function (value) {
+        var status = { showPreloader: false, text: laTranslation.translateUI("PLACING_ORDER_MESSAGE") };
+        if (value && self.status().completed) {
+            status.showPreloader = true;
+        }
+        self.preloaderStatus(status);
+    });
+
+    self.preloaderStatus = ko.observable({});
+    self.preloaderStatus.subscribe(function (value) {
+        if (value) {
+            if (value.showPreloader) {
+                jQuery("#liveart-preloader").modal('show');
+
+                var textValue = laTranslation.translateUI("LOADING_MESSAGE");
+                if (value.text) {
+                    textValue = value.text;
+                } 
+                var $text = jQuery("#liveart-preloader").find(".preloader-text");
+                if ($text && $text.length) {
+                    $text[0].innerHTML  = textValue;
+                }
+            } else {
+                jQuery("#liveart-preloader").modal('hide');
+            }
         }
     });
+
     /**
      * UPDATE VIEW MODEL BEGINS HERE
      */
@@ -3022,6 +3064,10 @@ function LAControlsModel() {
             self.showLoadDesignPreloader(model.showLoadDesignPreloader);
             validate(invalidateList, 'showLoadDesignPreloader');
         }
+        if (isInvalid(invalidateList, 'showPlaceOrderPreloader')) {
+            self.showPlaceOrderPreloader(model.showPlaceOrderPreloader);
+            validate(invalidateList, 'showPlaceOrderPreloader');
+        }
         
         if (isInvalid(invalidateList, 'showDPUExceededDialog') && model.showDPUExceededDialog) {
             showDPUExceededDialog();
@@ -3159,6 +3205,17 @@ function LAControlsModel() {
             laTranslation.update(model.dictionary);
             validate(invalidateList, 'dictionary');
         }
+
+        if (isInvalid(invalidateList, 'currentDesign')) {
+            setCurrentDesign(model.currentDesign);
+            validate(invalidateList, 'currentDesign');
+        }
+
+        if (isInvalid(invalidateList, 'preloaderStatus')) {
+            self.preloaderStatus(model.preloaderStatus);
+            validate(invalidateList, 'preloaderStatus');
+        }
+        
 
         self.suppressUpdate = false;
     }
@@ -3805,8 +3862,6 @@ function updateMainMenuCount() {
     elem.addClass(newClass);
 }
 
-
-
 function onShareDesign() {
     jQuery("#quote-popup").modal("hide");
     userInteract({
@@ -3816,8 +3871,7 @@ function onShareDesign() {
 function copyShareLink() {
     jQuery("#liveart-share-link-popup .alert").hide();
     try {
-        var input = document.querySelector('#liveart-share-link-input');
-        input.setSelectionRange(0, input.value.length + 1);
+        jQuery("#liveart-share-link-input").select();
         var success = document.execCommand('copy');
         if (success) {
             jQuery("#liveart-share-link-popup .alert-success").show();
@@ -3846,6 +3900,15 @@ function onLoadDesign() {
     userInteract({
         loadDesign: ""
     });
+}
+
+function setCurrentDesign(design) {
+    var title = "";
+    if (design && design.title) {
+        title = design.title;
+    }
+    jQuery("#liveart-auth-and-save-name-input").val(title);
+    jQuery("#liveart-save-design-name-input").val(title);
 }
 
 function changeUser() {

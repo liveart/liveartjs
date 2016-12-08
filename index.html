@@ -274,7 +274,7 @@
                                         </div>
                                         <h6 data-bind="visible: showStrokeAmountSlider()">Stroke Amount</h6>
                                         <div id="text-stroke-width-slider" class="noUiSlider" data-bind="visible: showStrokeAmountSlider(), slider: selectedLetteringVO().formatVO().strokeWidth, rangeStart: 0.1, rangeEnd: 3, step: 0.1, decimals: 2"></div>
-                                        <div class="divider"></div>
+                                        <div class="divider" data-bind="visible: (showLetterSpacingSlider()||showLineLeadingSlider())"></div>
                                         <h6 data-bind="visible: showLetterSpacingSlider()">Letter Spacing</h6>
                                         <div id="text-letter-spacing-slider" class="btn-block noUiSlider" data-bind="slider: selectedLetteringVO().formatVO().letterSpacing, rangeStart: 0, rangeEnd: 20, step: 1, visible: showLetterSpacingSlider()"></div>
                                         <h6 data-bind="visible: showLineLeadingSlider()">Line Spacing</h6>
@@ -298,7 +298,7 @@
                                         <div id="text-effect-slider" class="btn-block noUiSlider" data-bind="visible: showEffectsSlider(), slider: selectedTextEffectVO().value, rangeStart: selectedTextEffectVO().min(), rangeEnd: selectedTextEffectVO().max(), step: selectedTextEffectVO().step(), decimals:2"></div>
 
                                         <div class="divider" data-bind="visible: selectedProductSizeVO().notEmpty"></div>
-                                        <div id="text-form-size" data-bind="visible: selectedProductSizeVO().notEmpty">
+                                        <div id="text-form-size" data-bind="visible: selectedProductSizeVO().notEmpty" class="clearfix">
                                         <div class="text-form-size-group">
                                             <h6 id="text-form-size-label">Size, <span data-bind="text: unitLabel()"></span></h6>
                                             <input id="text-width" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />           
@@ -926,7 +926,7 @@
                 </div>
                 <div class="modal-footer">
 					<button class="btn btn-inverse" type="button" id="copy-button" data-placement="button" onclick="copyShareLink()" data-bind="visible: document.queryCommandSupported('copy')">
-						Copy
+						Copy URL
 					</button>
                     <a class="btn btn-default" data-dismiss="modal">Cancel</a>
                 </div>
@@ -1060,12 +1060,12 @@
      </div>
     </div>
     <!-- end Bootstrap progress bar for graphics uploading -->
-	
-     <!-- Bootstrap progress bar for graphics uploading -->
-    <div id="liveart-load-design-bar" class="modal fade" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+
+    <!-- Bootstrap progress bar -->
+    <div id="liveart-preloader" class="modal fade" aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog">
             <div class="modal-content">
-                <h6 class="text-center">Loading your design...</h6>
+                <h6 class="text-center preloader-text text-info">Loading...</h6>
                 <div class="modal-body uploading">
                     <div class="progress progress-popup progress-striped active">
                         <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" style="width:100%"></div>
@@ -1074,9 +1074,7 @@
             </div>
         </div>
     </div>
-    <!-- end Bootstrap progress bar for graphics uploading -->
-   
-
+    <!-- end Bootstrap progress bar -->
 
     <script type="text/javascript" src="assets/js/liveart-ui-components.js" defer="defer"></script>
     <script type="text/javascript" src="LA.js" defer="defer"></script>

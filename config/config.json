@@ -21,7 +21,7 @@
     "includeProductInDesign": true,
     "includePrintingAreaInDesign": true,
     "includeMaskInDesign": true,
-    "fontsCSSUrl": "../../fonts/fonts.css",
+    "fontsCSSUrl": "http://hive.liveartdesigner.com/~quiller/LAJS/fonts/fonts.css",
     "zoomEnabled": true,
     "minZoom": 50,
     "maxZoom": 150,

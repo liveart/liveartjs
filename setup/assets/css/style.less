@@ -37,6 +37,7 @@
  *       - Saved designs popup
  *       - Upload conditions popup
  *       - Upload Color Count Modal
+ *  8. Canvas
  *
 */
 @import 'variables.config.less';
@@ -386,11 +387,11 @@ body, html {
 		.transition-transform(0.4s;ease-out);
 	}
 		.collapsed #liveart-content #canvas-container {
-			margin-left: @expandedMenuWidth+@gap+@translationAmount*2;
+			margin-left: @expandedMenuWidth+@translationAmount*2;
 		}
 
 	#preview-controls-container {
-		top: @panelHeight+@gap;
+		top: @panelHeight;
 		max-width: (@canvasWidth+@expandedMenuWidth+@gap);
 		width: 100%;
 		text-align: center;
@@ -524,11 +525,15 @@ body, html {
 	/* LiveArt Forms */
 	.liveart-tabs-content {
 		> .tab-pane {
-			left: @collapsedMenuWidth+@gap;
+			left: @collapsedMenuWidth;
 			min-width: @smallFormWidth;
-			height: @panelHeight;
+			min-height: @panelHeight;
 			position: absolute;
 			top: 0px;
+			height: auto;
+			border: 2px solid #e0e0e0;
+			border-top: none;
+			.no-box-shadow;
 			
 			&.small-tab {
 				width: @smallFormWidth;
@@ -542,7 +547,8 @@ body, html {
 				> .main-part {
 					float: left;
 					height: 100%;
-					width: @smallFormWidth;
+					width: @smallFormWidth - 2*@gap;
+					min-height: @panelHeight - @gap;
 				}
 				> .expanded-part {
 					float: left;
@@ -550,6 +556,7 @@ body, html {
 					width: @canvasWidth+@gap;
 					display: none;
 					border-left: 2px solid #ebebeb;
+					min-height: @panelHeight - @gap;
 				}
 				.expanded-data {
 					display: none;
@@ -1213,7 +1220,7 @@ body, html {
 	ul.liveart-categories-subcategories {
 		margin: 10px 10px 0;
 		padding: 0;
-		height: (@panelHeight - 103);
+		height: (@panelHeight - 106);
 		overflow-y: auto;
 		overflow-x: hidden;
 		
@@ -1592,7 +1599,7 @@ body, html {
 	}
 	
 		.collapsed ul.liveart-button-bar {
-			margin-left: (@collapsedMenuWidth+@smallFormWidth+@gap);
+			margin-left: (@collapsedMenuWidth+@smallFormWidth - @gap);
 		}
 	
 	/*	5.2 Product Sides Switch	*/
@@ -1659,7 +1666,7 @@ body, html {
 
 	}
 		.collapsed #product-sides-switch-container{
-			margin-left:(@collapsedMenuWidth+@smallFormWidth+@gap);
+			margin-left:(@collapsedMenuWidth+@smallFormWidth - @gap);
 		}
 	
 	/*	5.3 Zoom	*/
@@ -2160,5 +2167,9 @@ body, html {
 }
 
 
-
-
+/* 8. Canvas styles */
+#lettering-tools-canvas,
+#lettering-tools-svg {
+    position: absolute;
+    left: -1000px;
+}

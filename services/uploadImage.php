@@ -25,7 +25,6 @@ if (isset($_FILES["image"])) {
 			//Strip orientation information for JPEG
 			if(function_exists("exif_imagetype")){
 				if(exif_imagetype($relative_path.$name) == IMAGETYPE_JPEG){
-                    // MTLW/TASK32
 					image_fix_orientation($relative_path.$name);
                     // Previous solution
                     /*$img = imagecreatefromjpeg ($relative_path.$name);

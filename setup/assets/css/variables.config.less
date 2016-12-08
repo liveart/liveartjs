@@ -9,11 +9,11 @@
 @gap: 2px;
 @expandedMenuWidth: 230px;
 @collapsedMenuWidth: 60px;
-@smallFormWidth: 236px;
+@smallFormWidth: 240px;
 @bottomMenuHeight: 76px;
 @quotePanelNarrow: false;
-@panelHeight: max(@canvasHeight, @menuHeight);
-@translationAmount: ((@collapsedMenuWidth+@smallFormWidth+@gap)-@expandedMenuWidth)/2;
-@mainContainerWidth: (@collapsedMenuWidth+@smallFormWidth+@canvasWidth+2*@gap);
+@panelHeight: max(@canvasHeight+@gap, @menuHeight);
+@translationAmount: ((@collapsedMenuWidth+@smallFormWidth)-@expandedMenuWidth)/2;
+@mainContainerWidth: (@collapsedMenuWidth+@smallFormWidth+@canvasWidth);
 @mainContainerHeight: (@logoHeight+@canvasHeight+@bottomMenuHeight+@gap);
 @alertMinHeight: 50px;

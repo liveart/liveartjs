@@ -28,9 +28,25 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.21 RELEASE NOTES
+Fixes:
+- saveDesign request `location.editableArea` value is always sent (even if `options.includePrintingAreaInDesign == false` in config file)
+
+saveDesign.php
+- added "ordered" possible value for request attribute data.type. It can be saved|shared|ordered
+- added data.design - Object - `{title?: string, type: string (saved|shared|ordered)}` attribute to reqeust
+
+loadDesign.php
+- added data.design - Object - optional(may be skipped for previously saved designs) - `{title?: string, type: string (saved|shared|ordered)}` attribute to response
+
+UI changes:
+- added preloaders for save\share design, get designs list and print
+- translation changes:
+	- added new keys: `PLACING_ORDER_MESSAGE`, `LOADING_YOUR_DESIGN_MESSAGE`, `SAVING_DESIGN_MESSAGE`, `SHARING_DESIGN_MESSAGE`
+
 ### 0.10.20 RELEASE NOTES
 Fixes:
-- product.editableAreaSizes has higher priority than product.location.editableAreaUnits
+- `product.editableAreaSizes` has higher priority than product.location.editableAreaUnits
 - UI fixes
 
 uploadImage.php:

@@ -162,11 +162,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -176,11 +178,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -190,11 +194,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -204,11 +210,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -218,11 +226,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -232,11 +242,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -246,11 +258,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -260,11 +274,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -274,11 +290,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -288,11 +306,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 },
@@ -302,11 +322,13 @@
                   "location": [
                     {
                       "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_front.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                     },
                     {
                       "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_back.jpg"
+                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                     }
                   ]
                 }
