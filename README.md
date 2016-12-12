@@ -37,11 +37,11 @@ Fixes:
 - saveDesign request `location.editableArea` value is always sent (even if `options.includePrintingAreaInDesign == false` in config file)
 
 saveDesign.php
-- added "ordered" possible value for request attribute data.type. It can be saved|shared|ordered
-- added data.design - Object - `{title?: string, type: string (saved|shared|ordered)}` attribute to reqeust
+- added "ordered" possible value for request attribute `data.type`. It can be `saved|shared|ordered`
+- added `data.design` - Object - `{title?: string, type: string (saved|shared|ordered)}` attribute to reqeust
 
 loadDesign.php
-- added data.design - Object - optional(may be skipped for previously saved designs) - `{title?: string, type: string (saved|shared|ordered)}` attribute to response
+- added `data.design` - Object - optional(may be skipped for previously saved designs) - `{title?: string, type: string (saved|shared|ordered)}` attribute to response
 
 UI changes:
 - added preloaders for save\share design, get designs list and print
@@ -72,10 +72,10 @@ Social Networks:
 - output changed max output photo size to 1375x1375 
 
 getQuote changes:
-- added: product.location.object.isUploaded (boolean) - added only for images.
+- added: `product.location.object.isUploaded` (boolean) - added only for images.
 
-uploadImage changes:
--changed request param: fileurl - strign encoded with encodeURIComponent function. example of decoding: urldecode($_POST['fileurl']) 
+**uploadImage changes**:
+- changed request param: `fileurl` - string encoded with `encodeURIComponent()` function.<br/>example of decoding: `urldecode($_POST['fileurl'])` 
 
 ### 0.10.18 RELEASE NOTES
 - reverted 'Promise' polyfill
