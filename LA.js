@@ -874,14 +874,14 @@ function LAControlsModel() {
 
     self.showChangeSizeAndColorTab = ko.computed(function () {
         // Show Because of Size logic:
-        let becauseOfEditableAreaSizes = self.selectedProductVO().editableAreaSizes().length > 1;
-        let becauseOfSizesInput = self.selectedProductVO().editableAreaSizes().length == 0 && self.selectedProductVO().resizable();
-        let becauseOfSizes = becauseOfEditableAreaSizes || becauseOfSizesInput;
+        var becauseOfEditableAreaSizes = self.selectedProductVO().editableAreaSizes().length > 1;
+        var becauseOfSizesInput = self.selectedProductVO().editableAreaSizes().length == 0 && self.selectedProductVO().resizable();
+        var becauseOfSizes = becauseOfEditableAreaSizes || becauseOfSizesInput;
 
         // Show Because of Color logic:
-        let becauseOfRaster = self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor();
-        let becauseOfMulticolor = self.selectedProductVO().multicolor() && self.selectedProductColorVO().colorizeList().length > 0;
-        let becauseOfColors = becauseOfRaster || becauseOfMulticolor;
+        var becauseOfRaster = self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor();
+        var becauseOfMulticolor = self.selectedProductVO().multicolor() && self.selectedProductColorVO().colorizeList().length > 0;
+        var becauseOfColors = becauseOfRaster || becauseOfMulticolor;
         // TODO: not so good solution
         setTimeout(updateMainMenuCount, 100);
         return becauseOfSizes || becauseOfColors;
