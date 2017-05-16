@@ -28,6 +28,11 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.23 RELEASE NOTES
+Fixes:
+- issue with designer loading on mobile
+- issue with Snap Lines in FF
+
 ### 0.10.22 RELEASE NOTES
 Updates:
 - added `mainBackgroundColor` option to .less configuration vars
