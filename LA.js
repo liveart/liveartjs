@@ -22,6 +22,13 @@ var laTranslation = {
         FAIL_TO_LOAD_PRODUCT_MASK_MESSAGE: "Failed to load product mask '%url%'.",
         FAIL_TO_LOAD_PRODUCT_GRAPHIC_MESSAGE: "Failed to load graphic '%url%'.",
         FAIL_TO_LOAD_FONT_MESSAGE: "Error loading font: %fontFamily%.",
+        FAIL_TO_LOAD_DESIGN: "Failed to load design",
+        FAIL_TO_LOAD_DESIGN_TEMPLATE: "Failed to load design template",
+        FAIL_TO_LOAD_DESIGN_LIST: "Failed to load designs list",
+        FAIL_TO_SAVE_DESIGN: "Failed to save design",
+        FAIL_TO_SHARE_DESIGN: "Failed to share design",
+        FAIL_TO_PLACE_ORDER: "Failed to order design",
+        FAIL_TO_OPEN_PRINT_POPUP: "Failed to open print pop-up. Please ensure pop-ups are always allowed for this site.<br/>Note: Cancel page reload (if browser requires such)",
         NO_FONT_INFO_MESSAGE: "No font info: \n%fontFamily%",
         NO_FONT_VECTOR_INFO_MESSAGE: "No font vector info: \n%fontFamily%",
         REGISTERING_FONT_ERROR_MESSAGE: "Error registering font: \n%fontFamily%",
@@ -139,6 +146,7 @@ var LetteringVO = function (textString, formatVO) {
     self.isNumbers = ko.observable(false);
     self.formatVO = ko.observable(formatVO);
     self.transformation = ko.observable({});
+    self.isDefaultText = ko.observable(false);
 
     self.toObject = function () {
         var obj = {};
@@ -201,6 +209,14 @@ var LetteringVO = function (textString, formatVO) {
         self.isNumbers(!isNullOrUndefined(obj['numberObj']));
         if (!isNullOrUndefined(obj['transformation'])) {
             self.transformation(obj['transformation']);
+        }
+        if (!isNullOrUndefined(obj['isDefaultText'])) {
+            self.isDefaultText(obj['isDefaultText']);
+        } else {
+            self.isDefaultText(false);
+        }
+        if (self.isDefaultText()) {
+            self.text("");
         }
     };
 }
@@ -836,6 +852,8 @@ function LAControlsModel() {
         return jQuery(window).width() < 900;
     };
 
+    self.MAX_SEARCH_RESULTS_LENGTH = 994;
+
     /**
      * PRODUCT BEGINS HERE
      */
@@ -1183,35 +1201,38 @@ function LAControlsModel() {
         self.productSelectedCategories.pop();
     };
 
+    self.searchFinished = ko.observable(true);
+
     //search
     self.productsSearchQuery = ko.observable("");
     self.productsSearchResult = ko.observableArray();
 
     self.productSearchPartFinished = function (query) {
         self.productsSearchResult.notifySubscribers();
-        return query == self.productsSearchQuery().toLowerCase();
+        liveartUI.updateLazyLoadContainer();
+        return query == self.productsSearchQuery().toLowerCase() && self.productsSearchResult().length < self.MAX_SEARCH_RESULTS_LENGTH;
     }
     self.productItemProcessor = function (query, productItem) {
         if (productItem && query == self.productsSearchQuery().toLowerCase()) {
             //query match condition
             var words = query.split(" ");
-            var match = true;
+            var match = true;i
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
                 if (word.length) {
                     match = match && productItem.name.toLowerCase().indexOf(word) > -1;
                 }
             }
-            if (match) {
+            if (match && self.productsSearchResult().length < self.MAX_SEARCH_RESULTS_LENGTH) {
                 self.productsSearchResult().push(new ProductCategoryVO(productItem));
             }
-
         }
     }
     self.productsSearchQuery.subscribe(function (query) {
         self.productsSearchResult([]);
         self.productSelectedCategories([self.productRootCategory()]);
-        self.search(query, self.productList, 100, self.productItemProcessor, self.productSearchPartFinished);
+        if (query && query.length)
+            self.search(query, self.productList, 100, self.productItemProcessor, self.productSearchPartFinished);
     });
     self.clearProductsSearch = function () {
         self.productsSearchQuery("");
@@ -1246,6 +1267,23 @@ function LAControlsModel() {
 
         return result;
     });
+
+
+    self.showProductsWasNotFound = ko.computed(function () {
+        var isSearch = self.productsSearchQuery().length > 0;
+        var isEmpty = self.currentProducts().length == 0;
+        return isSearch && isEmpty && self.searchFinished();
+    })
+
+    self.showSpecifyProductsQuery = ko.computed(function () {
+        var isSearch = self.productsSearchQuery().length > 0;
+        var isMax = self.currentProducts().length >= self.MAX_SEARCH_RESULTS_LENGTH;
+        return isSearch && isMax;
+    })
+
+    self.showProductSearchPreloader = ko.computed(function () {
+        return !self.searchFinished() && self.currentProducts().length === 0;
+    })
 
     /**
      * PRODUCT CATEGORY ENDS HERE
@@ -1613,21 +1651,25 @@ function LAControlsModel() {
                     match = localMatch && match;
                 }
             }
-            if (match) {
+            if (match && self.searchGraphicsResult().length < self.MAX_SEARCH_RESULTS_LENGTH) {
                 self.searchGraphicsResult().push(new GraphicsCategoryVO(graphicItem));
             }
         }
     }
     self.graphicSearchPartFinished = function(query){
         self.searchGraphicsResult.notifySubscribers();
-        return query == self.graphicsSearchQuery().toLowerCase();
+        liveartUI.updateLazyLoadContainer();
+        return query == self.graphicsSearchQuery().toLowerCase() && self.searchGraphicsResult().length < self.MAX_SEARCH_RESULTS_LENGTH;
     }
 
     self.graphicsSearchQuery.subscribe(function (query) {
         self.searchGraphicsResult([]);
         self.graphicCatalogBreadcrumbs([self.graphicRootCategory()]);
-        self.search(query, self.graphicsList, 100, self.graphicsItemProcessor, self.graphicSearchPartFinished);
+        if (query !== "") {
+            self.search(query, self.graphicsList, 100, self.graphicsItemProcessor, self.graphicSearchPartFinished);
+        }
     });
+
 
     self.clearGraphicsSearch = function () {
         self.graphicsSearchQuery("");
@@ -1661,6 +1703,22 @@ function LAControlsModel() {
         return result;
     });
 
+    self.showGraphicsWasNotFound = ko.computed(function () {
+        var isSearch = self.graphicsSearchQuery().length > 0;
+        var isEmpty = self.currentGraphics().length == 0;
+        return isSearch && isEmpty && self.searchFinished();
+    })
+
+    self.showSpecifyGraphicsQuery = ko.computed(function () {
+        var isSearch = self.graphicsSearchQuery().length > 0;
+        var isMax = self.currentGraphics().length >= self.MAX_SEARCH_RESULTS_LENGTH;
+        return isSearch && isMax;
+    })
+
+    self.showGraphicSearchPreloader = ko.computed(function () {
+        return !self.searchFinished() && self.currentGraphics().length === 0;
+    })
+
     /**
      * GRAPHICS CATEGORY ENDS HERE
      */
@@ -1678,6 +1736,7 @@ function LAControlsModel() {
     * curPosition - number - default = 0. Position of the first element for a new iteartion
     */
     self.search = function (query, items, step, itemProcessor, onPartFinish, curPosition) {
+        self.searchFinished(false);
         query = query.toLowerCase();
         if (!curPosition) curPosition = 0;
         var lastPosition = Math.min(items.length, curPosition + step);
@@ -1692,6 +1751,8 @@ function LAControlsModel() {
             var shouldContinue = onPartFinish(query);
             if (shouldContinue && lastPosition != items.length) {
                 self.search(query, items, step, itemProcessor, onPartFinish, lastPosition);
+            } else {
+                self.searchFinished(true);
             }
         }, 1);
     }
@@ -2481,6 +2542,7 @@ function LAControlsModel() {
             if (self.showTextEffects) {
                 self.resetTextEffect(null);
             }
+            liveartUI.updateLazyLoadContainer();
         } else {
             // hiding color picker on another object selecting. LAJS/TASK740 fix
             if (self.selectedObjectPropertiesVO().id() != selectedObject.id) {
@@ -2510,6 +2572,13 @@ function LAControlsModel() {
         self.selectedObjectPropertiesVO().fromObject(selectedObject);
 
         self.suppressTextUpdate = false;
+
+        setTimeout(function () {
+            var evt = document.createEvent("Event");
+            evt.initEvent("liveart-object-selected", true, false);
+            evt.value = selectedObject;
+            document.dispatchEvent(evt);
+        }, 200);
     }
 
     /**
@@ -2546,8 +2615,23 @@ function LAControlsModel() {
     self.percentCompleted = ko.computed(function () {
         return self.status().percentCompleted + "%";
     });
+    self.lvieartInited = ko.observable(false);
+    self.lvieartInited.subscribe(function (value) {
+        if (value) {
+            // TODO: move to another place
+            // waiting for preloading fonts
+            setTimeout(function () {
+                var evt = document.createEvent("Event");
+                evt.initEvent("liveart-inited", true, false);
+                document.dispatchEvent(evt);
+            }, 1000);
+        }
+    });
 
     self.status.subscribe(function (value) {
+        if (value && value.percentCompleted) {
+            self.lvieartInited(value.percentCompleted == 100);
+        }
         if (value.imageUploading) {
             jQuery("#liveart-upload-image-browse-btn").button("loading");
         } else {
@@ -2889,6 +2973,22 @@ function LAControlsModel() {
         }
     });
 
+
+    /**
+     * TOOLS BUTTON LOGIC STARTS HERE
+     */
+
+    self.isEnabledToolsButton = ko.computed(function () {
+        return !self.strictTemplate();
+    });
+    self.disableObjectToolsAction = ko.computed(function () {
+        return !self.hasSelected();
+    })
+
+    /**
+     * TOOLS BUTTON LOGIC ENDS HERE
+     */
+
     /**
      * UPDATE VIEW MODEL BEGINS HERE
      */
@@ -3023,6 +3123,8 @@ function LAControlsModel() {
             var namesNumbers = jQuery.map(model.namesNumbers, function (item) {
                 return new NameNumberVO(item.name, item.numberText, item.size, updateNamesNumbers);
             });
+            // Resetting names numbers
+            self.namesNumbers([]);
             self.namesNumbers(namesNumbers);
         }
 
@@ -3214,6 +3316,13 @@ function LAControlsModel() {
         if (isInvalid(invalidateList, 'preloaderStatus')) {
             self.preloaderStatus(model.preloaderStatus);
             validate(invalidateList, 'preloaderStatus');
+        }
+
+        if (isInvalid(invalidateList, 'placeOrderFailed')) {
+            if (model.placeOrderFailed) {
+                onPlaceOrderFail();
+                validate(invalidateList, 'placeOrderFailed');
+            }
         }
         
 
@@ -3565,6 +3674,13 @@ ko.bindingHandlers.radio = {
         }
     }
 };
+
+// force Lazy Images updating
+ko.bindingHandlers.updateLazyLoadContainer = {
+    update: function (element, valueAccessor) {
+        liveartUI.updateLazyLoadContainer(element, true);
+    }
+}
 
 
 liveartUI.validationError = function (element, message) {
@@ -3920,9 +4036,11 @@ function changeUser() {
 
 
 function onPlaceOrder() {
+    //TODO: more strict check
     if (jQuery("#place-order-btn").hasClass("disabled")) {
         return false;
     }
+    //TODO: move/wrap to some API
     jQuery("#place-order-btn").button("loading");
     userInteract({
         placeOrder: true
@@ -3934,7 +4052,16 @@ function placeOrderHandler(id) {
         var serverUrl = "services/order.php?design_id=${design_id}";
         window.location.assign(controlsModel.redirectUrl().replace("${design_id}", id));
     }
+    //TODO: move/wrap to some API
     jQuery("#place-order-btn").button("reset");
+}
+
+function onPlaceOrderFail() {
+    //TODO: move/wrap to some API
+    jQuery("#place-order-btn").button("reset");
+
+    jQuery("#get-quote-btn").removeClass("active");
+    liveartUI.closeActiveTab();
 }
 
 window.onbeforeunload = function () {

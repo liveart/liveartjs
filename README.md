@@ -28,6 +28,45 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.24 RELEASE NOTES
+Updates:
+- print window match custom canvas dimensions
+- Bootstrap is updated to the v3.3.7
+- LiveArt logo text is editable 
+- More accurate object snapping on canvas
+- Added lazy loading for product and graphics galleries:
+  - limit thumbs requests only to visible items
+
+Fixes:
+- centering the screen after double click on object
+- fixed jumps during slow pan dragging
+- fixed whitespace preserving in Safari, Chrome, IE
+- fixed 'Order' button state after unsuccessful save design
+- correct work of config.options.fontsCSSUrl for relative path 
+- replace "_" to "-x5f-" for class names in `<style>` node content in `<svg>` (needed for correct Illustrator parsing)
+
+API changes:
+- `config.getDesignsUrl` request service:
+  - added token `${product_id}` replacement with respective data
+
+UI changes:
+- Translation changes - added keys:
+  - FAIL_TO_OPEN_PRINT_POPUP
+  - FAIL_TO_LOAD_DESIGN
+  - FAIL_TO_LOAD_DESIGN_TEMPLATE
+  - FAIL_TO_LOAD_DESIGN_LIST
+  - FAIL_TO_SAVE_DESIGN
+  - FAIL_TO_SHARE_DESIGN
+  - FAIL_TO_PLACE_ORDER
+- Added preventing of <text> node content text-selection on canvas
+- Added size change for images on "Edit Artwork" form
+
+Deprecated:
+- raster text effects. To enable back:
+  - in `config/config.json` node `textEffects`: rename property `url_deprecated` to `url`
+  - provide actual url to `services/getTextZ.php`
+  - replace file `config/textEffects.json` content with the `config/textEffects.deprecated.json`
+
 ### 0.10.23 RELEASE NOTES
 Fixes:
 - issue with designer loading on mobile

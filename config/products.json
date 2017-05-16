@@ -51,7 +51,7 @@
                     485
                   ],
                   "editableAreaUnits": [ 4.8, 8.6 ],
-                  "clipRect": [ 170, 75, 410, 485 ]
+                  "clipRect": [ 170, 55, 410, 485 ]
                 }
               ],
               "colorizableElements": [
@@ -654,7 +654,7 @@
                     431,
                     340
                   ],
-                  "clipRect": [ 144, 37, 431, 340 ]
+                  "clipRect": [ 144, 45, 431, 340 ]
                 },
                 {
                   "name": "Right Sleeve",
@@ -665,7 +665,7 @@
                     431,
                     340
                   ],
-                  "clipRect": [ 144, 37, 431, 340 ]
+                  "clipRect": [ 144, 45, 431, 340 ]
                 }
               ],
               "colorizableElements": [

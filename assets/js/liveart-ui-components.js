@@ -235,6 +235,14 @@ var liveartUI = {
                 }
             }
         }
+    },
+
+    
+    // This funciton is overrided below
+    // Element - DOM container with img.lazy-load
+    // force - if true - updating images without delay
+    updateLazyLoadContainer: function (element, force) {
+
     }
 }
 /*
@@ -375,6 +383,102 @@ jQuery(function () {
         liveartUI.showTextForm();
         liveartUI.resetFocusToTextTab = false;
     });
+
+
+
+    /* Hack: Select share link on click under Safari  
+     * http://www.bearpanther.com/2013/05/27/easy-text-selection-in-mobile-safari/
+     *
+     */
+
+    /*var area = document.querySelector("#liveart-share-link-input")
+    // create a listener for click, could also use touchstart, touchend, etc.
+    area.addEventListener("click", select);
+    // remove contentEditable when an element loses focus
+    area.addEventListener("blur", reset);
+    // callback to event listener
+    function select(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        // a textNode is required to set a selection on mobile safari
+        // nodeType values:  https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType
+        if (evt.target.firstChild.nodeType !== 3) {
+            console.log("Unable to select text, firstChild is not a textNode.");
+            return;
+        }
+        var el = evt.target;
+        // for this to work on mobile safari, contentEditable needs to be true
+        if (!isEditable(el)) {
+            el.setAttribute("contentEditable", true);
+        }
+        // current selection
+        var sel = window.getSelection();
+        // create a range:  
+        // https://developer.mozilla.org/en-US/docs/Web/API/document.createRange
+        var range = document.createRange();
+        // use firstChild as range expects a textNode, not an elementNode
+        range.setStart(el.firstChild, 0);
+        range.setEnd(el.firstChild, el.innerHTML.length);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+
+    function reset(evt) {
+        if (isEditable(evt.target)) {
+            evt.target.removeAttribute("contentEditable");
+        }
+    }
+
+    function isEditable(el) {
+        return editable = el.getAttribute("contentEditable");
+    }
+
+    /* Hack: Select share link on click under Safari  
+     * http://www.bearpanther.com/2013/05/27/easy-text-selection-in-mobile-safari/
+     *
+     */
+
+    /*var area = document.querySelector("#liveart-share-link-input")
+    // create a listener for click, could also use touchstart, touchend, etc.
+    area.addEventListener("click", select);
+    // remove contentEditable when an element loses focus
+    area.addEventListener("blur", reset);
+    // callback to event listener
+    function select(evt) {
+        evt.preventDefault();
+        evt.stopPropagation();
+        // a textNode is required to set a selection on mobile safari
+        // nodeType values:  https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType
+        if (evt.target.firstChild.nodeType !== 3) {
+            console.log("Unable to select text, firstChild is not a textNode.");
+            return;
+        }
+        var el = evt.target;
+        // for this to work on mobile safari, contentEditable needs to be true
+        if (!isEditable(el)) {
+            el.setAttribute("contentEditable", true);
+        }
+        // current selection
+        var sel = window.getSelection();
+        // create a range:  
+        // https://developer.mozilla.org/en-US/docs/Web/API/document.createRange
+        var range = document.createRange();
+        // use firstChild as range expects a textNode, not an elementNode
+        range.setStart(el.firstChild, 0);
+        range.setEnd(el.firstChild, el.innerHTML.length);
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+
+    function reset(evt) {
+        if (isEditable(evt.target)) {
+            evt.target.removeAttribute("contentEditable");
+        }
+    }
+
+    function isEditable(el) {
+        return editable = el.getAttribute("contentEditable");
+    }*/
 });
 
 /* Alert */
@@ -401,3 +505,152 @@ jQuery(function () {
         return true;
     });
 });
+
+
+
+/* lazyload.js logic (c) Lorenzo Giuliani
+ * MIT License (http://www.opensource.org/licenses/mit-license.html)
+ *
+ * expects a list of:  
+ * `<img data-src="blank.gif" width="600" height="400" class="lazy-load">`
+ */
+/*
+ * Modified by Andrii Dobrianskii
+ * 1. adding lazy-preloading to 'state' element
+ */
+
+!function (window) {
+    var $q = function (q, res) {
+        if (document.querySelectorAll) {
+            res = document.querySelectorAll(q);
+        } else {
+            var d = document
+              , a = d.styleSheets[0] || d.createStyleSheet();
+            a.addRule(q, 'f:b');
+            for (var l = d.all, b = 0, c = [], f = l.length; b < f; b++)
+                l[b].currentStyle.f && c.push(l[b]);
+
+            a.removeRule(0);
+            res = c;
+        }
+        return res;
+    },
+     _addEventListener = function (evt, fn, container) {
+         window.addEventListener
+                  ? container.addEventListener(evt, fn, false)
+                  : (window.attachEvent)
+                      ? container.attachEvent('on' + evt, fn)
+                      : container['on' + evt] = fn;
+     }
+      , addEventListener = function (evt, fn) {
+          _addEventListener(evt, fn, window);
+          // Modified by Andrii Dobrianskiy. The images can be in different containers
+          var lazyContainers = $q('.lazy-load-container');
+          for (var i = 0; i < lazyContainers.length; i++) {
+              var container = lazyContainers[i];
+              _addEventListener(evt, fn, container);
+          }
+
+      }
+      , _has = function (obj, key) {
+          return Object.prototype.hasOwnProperty.call(obj, key);
+      }
+    ;
+
+    function loadImage(el, fn) {
+        var img = new Image()
+          , src = el.getAttribute('data-src');
+        img.onload = function () {
+            if (!!el.parent)
+                el.parent.replaceChild(img, el)
+            else {
+                el.src = src;
+            }
+
+            jQuery(el).parent().find(".state").removeClass("lazy-load-uploading");
+            jQuery(el).show();
+
+            fn ? fn() : null;
+        }
+        img.onerror = function () {
+            var state = jQuery(el).parent().find(".state");
+            state.removeClass("lazy-load-uploading");
+            state.addClass("failed-to-load");
+        }
+        if (src) {
+            img.src = src;
+        } else if(img.onerror) {
+            img.onerror();
+        }
+        // Modified by Andri Dobrianskyi
+        // Do not show preloader for cached images
+        var checkPreloadedImage = function (img, el) {
+            if (!img.complete) {
+                jQuery(el).hide();
+                jQuery(el).parent().find(".state").addClass("lazy-load-uploading");
+            }
+        }
+        setTimeout(checkPreloadedImage.bind(null, img, el), 50);
+    }
+
+    function elementInViewport(el) {
+        var rect = el.getBoundingClientRect()
+
+        return (
+           rect.top >= 0
+        && rect.left >= 0
+        && rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        )
+    }
+
+    var images = new Array()
+      , query = $q('img.lazy-load')
+      , processScroll = function () {
+          for (var i = 0; i < images.length; i++) {
+              if (elementInViewport(images[i])) {
+                  loadImage(images[i], function () {
+                      images.splice(i, i);
+                  });
+              }
+          };
+      }
+    ;
+    var timeout;
+    var elements = [];
+    var delay = 300;
+
+    liveartUI.updateLazyLoadContainer = function (element, force) {
+        if (element && elements.indexOf(element) === -1) {
+            elements.push(element);
+            _addEventListener('scroll', onScroll, element);
+        }
+        onScroll(force);
+    }
+    function onScroll(force) {
+        if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        var update = function () {
+            images = new Array();
+            for (var i = 0; i < elements.length; i++) {
+                query = jQuery(elements[i]).find("img.lazy-load");
+                // Array.prototype.slice.call is not callable under our lovely IE8 
+                for (var j = 0; j < query.length; j++) {
+                    images.push(query[j]);
+                };
+            }
+            processScroll();
+        }
+        if (force) {
+            update();
+        } else {
+            timeout = setTimeout(function () {
+                update();
+            }, delay);
+        }
+    }
+
+    _addEventListener('scroll', onScroll, window);
+    //addEventListener('scroll', liveartUI.preloadLazyLoadImages);
+}(this)

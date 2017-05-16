@@ -206,6 +206,7 @@
 			$svg = $xml->asXML();
 		}
 
+
 		//4. write files
 		$filename = "design_".$locname.".svg";
         $filename_units = "design_".$locname."_units.svg";
@@ -220,7 +221,14 @@
 			array_push($files_to_zip, $filename);
             
 			if(isset($svg_units)) {
-				$svg_units->save($filename_full_units);
+				$svg_unitsStr = $svg_units->saveXML();
+                // Illustrator changes (replacing '_' with '-x5f-'
+                $svg_unitsStr = replaceUnderscore($svg_unitsStr);
+
+                $f = fopen($filename_full_units, "w");
+			    fwrite($f, $svg_unitsStr);
+			    fclose($f);
+
 				array_push($files_to_zip, $filename_units);
 			}
 			//exec("convert ".$filename_full." ".$design_folder_path.$fname_png); //ImageMagic
@@ -260,4 +268,37 @@
 	echo '<div/>';
 
 	echo ('</body></html>');	
+
+    /** 
+    *  This fixes issue with black color fill in illustrator
+    * 
+    * replace "_" to "-x5f-" in class-fill pairs like
+    * `<style> .top_right {fill:#F04C4B;} ... </style>` ... `<SVGNode ... class="top_right" ... >`
+    * to 
+    * `<style> .top-x5f-right {fill:#F04C4B;} ... </style>` ... `<SVGNode ... class="top-x5f-right" ... >`
+    *
+    * @param svg string
+    * @return svg string
+    */
+    function replaceUnderscore($svg) {
+        // 1. Match content of all <style> nodes.
+        preg_match_all ('/<style(.*?)>(.*?)<\/style>/is', $svg, $matches);
+        $matches = $matches[2];
+        for($i = 0; $i < count($matches); $i++){
+            $srt = $matches[$i];
+            // 2. Match class names
+            $srt = preg_replace('/{(.*?)}/', '', $srt);
+            preg_match_all ('/\.(.*?)[\s|.|#]/is', $srt, $classes);
+            $classes = $classes[1];
+            for($j = 0; $j < count($classes); $j++) {
+                $class = $classes[$j];
+                // 3. Replace underscore symbol
+                if(strpos($class, '_') !== false){
+                    $newClassName = str_replace("_", "-x5f-", $class);
+                    $svg = str_replace($class, $newClassName, $svg);
+                }
+            }
+        }
+        return $svg;
+    }
 ?>

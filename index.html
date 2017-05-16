@@ -61,7 +61,7 @@
 <body>
 <div id="liveart-isolate-container">   
     <div id="liveart-main-container">
-        <div id="liveart-header"></div>
+        <div id="liveart-header"><strong>LIVEART</strong><span>HTML5</span></div>
         <div id="liveart-init-preloader" data-bind="visible: !$root.status().completed">
             <h5 data-bind="text: $root.status().message" class="text-center text-info"></h5>
             <div class="progress">
@@ -138,14 +138,26 @@
                             </div>
                         </div>
                         <div class="divider"></div>
-                        <ul data-bind="foreach: currentProducts, css: { narrow: productSelectedCategories().length > 1 }" class="thumbnails liveart-categories-subcategories">
+                        <ul id="product-list" data-bind="updateLazyLoadContainer: currentProducts, css: { narrow: productSelectedCategories().length > 1 }" class="thumbnails liveart-categories-subcategories">
+                            <!-- ko foreach: currentProducts -->
                             <li class="thumbnail" data-bind="click: $root.selectProductItem, css: { category: isCategory(), product: isProduct(), active: $data.id() == $root.selectedProductVO().id() }">
                                 <a data-bind="css: { active: $data.id() == $root.selectedProductVO().id() }">
                                     <div class="state"></div>
                                     <span data-bind="text: name"></span>
-                                    <img src="" data-bind="attr: { src: thumbUrl, title: name }" alt="">
+                                    <img data-bind="if: thumbUrl, attr: { 'data-src': thumbUrl, title: name }" alt="" class="lazy-load" />
                                 </a>
+                            </li>                            
+                            <!-- /ko -->
+                            <div class="search-preloader" data-bind="visible: showProductSearchPreloader">
+                            </div>
+
+                            <li class="inform-message" data-bind="visible: showProductsWasNotFound">
+                                <span>Nothing was found</span>
                             </li>
+                            <li class="inform-message" data-bind="visible: showSpecifyProductsQuery">
+                                <span>Search limit results reached, please clarify query further</span>
+                            </li>
+
                         </ul>
                     </div>
                     <!-- SELECT PRODUCT FORM ends -->
@@ -288,7 +300,7 @@
                                             <button class="btn btn-default dropdown-toggle col-xs-2" type="button" data-toggle="dropdown" aria-expanded="false">
                                                 <span class="caret"></span>
                                             </button>
-                                            <ul class="dropdown-menu" data-bind="foreach: textEffects" style="height: 150px; overflow-y: scroll;">
+                                            <ul class="dropdown-menu" data-bind="foreach: textEffects">
                                                 <li data-bind="css: { active: $root.selectedTextEffectVO().name() === $data.name }">
                                                     <a data-bind="text: $data.label, click: $root.selectTextEffect"></a>
                                                 </li>
@@ -306,7 +318,7 @@
                                             <input id="text-height" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
                                         </div>
                                         <!--<span class="control-label" data-bind="text: unitLabel"></span>-->
-                                        <button class="btn btn-default col-xs-5" id="text-form-size-apply-btn" type="button">Apply</button>
+                                        <!--<button class="btn btn-default col-xs-5" id="text-form-size-apply-btn" type="button">Apply</button>-->
                                     </div>
                                 </div>
                             </div>
@@ -426,16 +438,26 @@
                             </div>
                         </div>
                         <div class="divider"></div>
-                        <ul data-bind="foreach: currentGraphics, css: { narrow: graphicSelectedSubcategory }" class="thumbnails liveart-categories-subcategories">
+                        <ul data-bind="updateLazyLoadContainer: currentGraphics, css: { narrow: graphicSelectedSubcategory }" class="thumbnails liveart-categories-subcategories">
+                            <!-- ko foreach: currentGraphics -->
                             <li class="thumbnail" data-bind="click: $root.selectGraphicItem, css: { category: isCategory(), image: isImage() }">
                                 <a>
                                     <div class="state"></div>
                                     <span data-bind="text: name"></span>
-                                    <img src="" data-bind="attr: { src: thumb }" alt="" />
+                                    <img data-bind="if: thumb, attr: { 'data-src': thumb}" alt="" class="lazy-load" />
                                 </a>
+                            </li>
+                            <!-- /ko -->
+                            <li class="inform-message" data-bind="visible: showGraphicsWasNotFound">
+                                <span>Nothing was found</span>
+                            </li>
+                            <li class="inform-message" data-bind="visible: showSpecifyGraphicsQuery">
+                                <span>Search limit results reached, please clarify query further</span>
                             </li>
                         </ul>
                         <!-- /ko -->
+                        <div class="search-preloader" data-bind="visible: showGraphicSearchPreloader">
+                        </div>
 
                         <!-- ko if: selectedIsGraphics -->
                         <div class="column">
@@ -472,6 +494,15 @@
                             <span id="liveart-image-is-not-colorizable" data-bind="visible: !isColorizableGraphics() && !isMulticolorGraphics()">
                                 Image is not colorizable
                             </span>
+                            <div class="divider" data-bind="visible: selectedProductSizeVO().notEmpty"></div>
+                            <div id="graphic-form-size" data-bind="visible: selectedProductSizeVO().notEmpty" class="clearfix">
+                                <div class="graphic-form-size-group">
+                                    <h6 id="graphic-form-size-label">Size, <span data-bind="text: unitLabel()"></span></h6>
+                                    <input id="graphic-width" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().width, event: { keypress: selectedObjectPropertiesVO().updateWidth}" />
+                                    <button class="btn btn-default lock-btn" type="button" data-bind="checkbox: selectedObjectPropertiesVO().lockScale"><span class="icon-lock"></span></button>
+                                    <input id="graphic-height" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
+                                </div>
+                            </div>
                             <button id="add-another-graphic" class="btn btn-primary btn-block" data-bind="click: addAnotherArtwork">
                                 Add Another Gallery Artwork
                             </button>
@@ -660,24 +691,24 @@
                     <!--<li id="clear-design" data-bind="visible: !strictTemplate()"><a id="clear-design-btn" data-bind="    click: clearDesign"><span>Clear Design</span></a></li>-->
                     <li id="undo" data-bind="css: {enabled: isUndoActive}"><a id="undo-btn" data-bind="click: undo"><img src="assets/img/undo-icon.svg" class="inject-me" /><span>Undo</span></a></li>
                     <li id="redo" data-bind="css: {enabled: isRedoActive}"><a id="redo-btn" data-bind="click: redo"><span>Redo</span><img src="assets/img/redo-icon.svg" class="inject-me" /></a></li>
-                    <li id="tools" class="dropup" data-bind="css: {enabled: hasSelected() && !strictTemplate()}">
-                        <a id="object-operations" class="dropdown-toggle" data-toggle="dropdown" data-bind="css: {disabled: !hasSelected() || strictTemplate()}"><img src="assets/img/tools-icon.svg" class="inject-me" /><span>Tools</span></a>
+                    <li id="tools" class="dropup" data-bind="css: {enabled: isEnabledToolsButton}">
+                        <a id="object-operations" class="dropdown-toggle" data-toggle="dropdown" data-bind="css: {disabled: !isEnabledToolsButton()}"><img src="assets/img/tools-icon.svg" class="inject-me" /><span>Tools</span></a>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="objectOperations">
-                            <li id="copy" role="presentation"><a id="copy-btn" data-bind="click: copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span>Copy</a></li>
-                            <li id="paste" role="presentation"><a id="paste-btn" data-bind="click: paste"><span class="glyphicon glyphicon-paste" aria-hidden="true"></span>Paste</a></li>
+                            <li role="presentation" class="dropdown-header" data-bind="css: {'disabled-menu': disableObjectToolsAction}">Align</li>
+                            <li id="align-left" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="align-left-btn" data-bind="click: align.bind($data, 'left')">Left</a></li>
+                            <li id="align-center" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="align-center-btn" data-bind="click: align.bind($data, 'hcenter')">Center</a></li>
+                            <li id="align-right" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="align-right-btn" data-bind="click: align.bind($data, 'right')">Right</a></li>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation" class="dropdown-header">Align</li>
-                            <li id="align-left" role="presentation"><a id="align-left-btn" data-bind="click: align.bind($data, 'left')">Left</a></li>
-                            <li id="align-center" role="presentation"><a id="align-center-btn" data-bind="click: align.bind($data, 'hcenter')">Center</a></li>
-                            <li id="align-right" role="presentation"><a id="align-right-btn" data-bind="click: align.bind($data, 'right')">Right</a></li>
-                            <li role="presentation" class="divider"></li>
-                            <li role="presentation" class="dropdown-header">Arrange</li>
-                            <li id="overlap-toward" role="presentation"><a id="overlap-toward-btn" data-bind="click: arrange.bind($data, 'front')">Above</a></li>
-                            <li id="overlap-backward" role="presentation"><a id="overlap-backward-btn" data-bind="click: arrange.bind($data, 'back')">Under</a></li>
+                            <li role="presentation" class="dropdown-header" data-bind="css: {'disabled-menu': disableObjectToolsAction}">Arrange</li>
+                            <li id="overlap-toward" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="overlap-toward-btn" data-bind="click: arrange.bind($data, 'front')">Above</a></li>
+                            <li id="overlap-backward" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="overlap-backward-btn" data-bind="click: arrange.bind($data, 'back')">Under</a></li>
                             <li id="flip-dropdown-divider" role="presentation" class="divider"></li>
-                            <li id="flip-dropdown-header" role="presentation" class="dropdown-header">Flip</li>
-                            <li id="horizontal-flip" role="presentation"><a id="horizontal-flip-btn" data-bind="click: flip.bind($data, 'horizontal')">Horizontal</a></li>
-                            <li id="vertical-flip" role="presentation"><a id="vertical-flip-btn" data-bind="click: flip.bind($data, 'vertical')">Vertical</a></li>
+                            <li id="flip-dropdown-header" role="presentation" class="dropdown-header"  data-bind="css: {'disabled-menu': disableObjectToolsAction}">Flip</li>
+                            <li id="horizontal-flip" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="horizontal-flip-btn" data-bind="click: flip.bind($data, 'horizontal')">Horizontal</a></li>
+                            <li id="vertical-flip" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="vertical-flip-btn" data-bind="click: flip.bind($data, 'vertical')">Vertical</a></li>
+                            <li role="presentation" class="divider" data-bind="css: {'disabled-menu': disableObjectToolsAction}"></li>
+                            <li id="copy" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="copy-btn" data-bind="click: copy"><span class="glyphicon glyphicon-copy" aria-hidden="true"></span>Copy</a></li>
+                            <li id="paste" role="presentation"><a id="paste-btn" data-bind="click: paste"><span class="glyphicon glyphicon-paste" aria-hidden="true"></span>Paste</a></li>
                         </ul>
                     </li>
                     <!-- <li id="copy"><a id="copy-btn" data-bind="click: copy">Copy</a></li>
@@ -1075,7 +1106,6 @@
         </div>
     </div>
     <!-- end Bootstrap progress bar -->
-
     <script type="text/javascript" src="assets/js/liveart-ui-components.js" defer="defer"></script>
     <script type="text/javascript" src="LA.js" defer="defer"></script>
     <script type="text/javascript" src="LA.config.js" defer="defer"></script>

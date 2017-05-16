@@ -1,6 +1,6 @@
 /*
  *	LiveArt styles 
- * 	dependence: Twitter Bootstrap v3.2.0
+ * 	dependence: Twitter Bootstrap v3.3.7
  *
  *	Contents:
  *	1. General
@@ -43,6 +43,23 @@
 @import 'variables.config.less';
 @import 'mixins.config.less';
 @maxQuantityMenuItems: 8;
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/montserrat-light-webfont.woff') format('woff'),
+         url('../fonts/montserrat-light-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Bold-webfont.woff') format('woff'),
+         url('../fonts/Montserrat-Bold-webfont.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
 
 body, html {
     background-color: @mainBackgroundColor;
@@ -278,6 +295,15 @@ body, html {
 		height: auto;
 	}
 
+   svg text {
+      -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+         -khtml-user-select: none; /* Konqueror HTML */
+           -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome and Opera */
+    }
 	/*	2. LiveArt App Page	*/
 	#liveart-main-container {
 		width: @mainContainerWidth;
@@ -294,12 +320,20 @@ body, html {
 	#liveart-header {
 		height: @logoHeight;
 		width: 100%;
-		background: url(../../assets/img/LA-logo.svg) no-repeat @translationAmount+@gap center;
-		background-size: 197px 19px;
 		.transition-transform;
+		font-family: 'Montserrat';
+		font-size: 24px;
+		color: #212121;
+		padding-left: @translationAmount;
+		text-transform: uppercase;
+		
+		span {
+			font-weight: normal;
+			font-size: 24px;
+		}
 	}
 		.collapsed #liveart-header {
-			background-position: @gap center;
+			padding-left: 0px;
 		}
 
 	#liveart-fonts-preloader-container {
@@ -398,6 +432,10 @@ body, html {
 		left: @translationAmount;
 		.transition-transform;
 		background: #ffffff;
+        .disabled-menu {
+            opacity: 0.5;
+            pointer-events: none;
+        }
 	}
 		.collapsed #liveart-content #preview-controls-container {
 			left: 0;
@@ -582,6 +620,88 @@ body, html {
 				width: 100%;
 				float: left;
 			}
+			
+			#text-form-size,
+			#graphic-form-size{
+				line-height: 27px;
+				
+				input {
+					&[type=text] {
+						width: 86px;
+						float: left;
+					}
+					&#text-width:before{
+						content: "A?";
+					}
+					&[type=checkbox] {
+						margin: 0 5px;
+					}
+				}
+				label {
+				   display: inline;
+				   margin-left: 50px;
+				}
+				button {
+					vertical-align: top;
+					display: block; 
+				}
+				span.control-label {
+					display: block;
+					float: left;
+					margin-left: 7px;
+				}
+			}
+			
+			.text-form-size-group,
+			.graphic-form-size-group {
+				width: 100%;
+				
+				#text-width,
+				#graphic-width {
+					.border-radius(2px;0px;0px;2px);
+				}
+				#text-height,
+				#graphic-height {
+					.border-radius(0px;2px;2px;0px);
+				}
+				.lock-btn {
+					border-right: none;
+					border-left: none;
+				}
+
+			}
+			#text-form-size-apply-btn,
+			#graphics-form-size-apply-btn{
+				padding-left: 5px;
+				padding-right: 5px;
+				margin-top: 10px;
+			}
+
+			.btn.lock-btn {
+				width: 24px;
+				height: 28px;
+				padding: 2px 2px;
+				margin: 0px;
+				vertical-align: middle !important;
+				float: left;
+				
+				.icon-lock {
+					display: inline-block;
+					width: 14px;
+					height: 14px;
+					margin-top: 1px;
+					line-height: 14px;
+					vertical-align: text-top;
+					background-image: url("../img/glyphicons-lock.png");
+					background-position: -14px 0px;
+					background-repeat: no-repeat;
+				}
+				&.active .icon-lock {
+					background-position: 0px 0px;
+				}
+
+			}
+			
 		}
 		 /*  4.2.1 Change Product Color Form   */
 		> #product-colors-form {
@@ -857,83 +977,13 @@ body, html {
 			.noUiSlider {
 				margin-top: 10px;
 			}
-			#text-form-size {
-				line-height: 27px;
-				
-				input {
-					&[type=text] {
-						width: 43%;
-						float: left;
-					}
-					&#text-width:before{
-						content: "A?";
-					}
-					&[type=checkbox] {
-						margin: 0 5px;
-					}
-				}
-				label {
-				   display: inline;
-				   margin-left: 50px;
-				}
-				button {
-					vertical-align: top;
-					display: block; 
-				}
-				.btn.lock-btn {
-					width: 24px;
-					height: 28px;
-					padding: 2px 2px;
-					margin: 0px;
-					vertical-align: middle !important;
-					float: left;
-					
-					.icon-lock {
-						display: inline-block;
-						width: 14px;
-						height: 14px;
-						margin-top: 1px;
-						line-height: 14px;
-						vertical-align: text-top;
-						background-image: url("../img/glyphicons-lock.png");
-						background-position: -14px 0px;
-						background-repeat: no-repeat;
-					}
-					&.active .icon-lock {
-						background-position: 0px 0px;
-					}
-
-				}
-				span.control-label {
-					display: block;
-					float: left;
-					margin-left: 7px;
-				}
-			}
 			#text-form-size-label-seperator2 {
 				font-size: 125%;
 			}
-			.text-form-size-group {
-				float: left;
-				
-				#text-width {
-					.border-radius(2px;0px;0px;2px);
-				}
-				#text-height {
-					.border-radius(0px;2px;2px;0px);
-				}
-				.lock-btn {
-					border-right: none;
-					border-left: none;
-				}
-
+			#text-effects-selector>ul.dropdown-menu {
+				max-height: 150px; 
+				overflow-y: auto;
 			}
-			#text-form-size-apply-btn {
-				padding-left: 5px;
-				padding-right: 5px;
-				margin-top: 10px;
-			}
-
 		}
 		
 		/*  4.4 Names Numbers Form  */
@@ -1034,6 +1084,15 @@ body, html {
 			}
 			#image-added-info {
 				display: none;
+			}
+			h6 {
+				color: #333;
+				font-size: 12px;
+				font-weight: normal;
+				margin: 3px 0;
+			}
+			#graphic-form-size {
+				margin-bottom: 16px;
 			}
 		}
 
@@ -1196,8 +1255,8 @@ body, html {
 		
 		.close {
             position: absolute;
-            right: 30px;
-            line-height: 28px;
+            right: 10px;
+            line-height: 29px;
             z-index: 2;
         }
     }
@@ -1223,7 +1282,7 @@ body, html {
 		height: (@panelHeight - 106);
 		overflow-y: auto;
 		overflow-x: hidden;
-		
+		padding-bottom: 2px;
 		> li {
 			margin: 0;
 			margin-right: -1px;
@@ -1290,8 +1349,19 @@ body, html {
 					border: 5px solid transparent;
 					background-color: transparent;
 					z-index: 10;
+                    
+                    &.lazy-load-uploading {
+                        display: block!important;
+                        z-index: 100;
+                        background-image: url("../img/tracker/image_preloader.svg");
+                        background-repeat:no-repeat;
+                        background-position: center;
+                        background-size: 70px;
+                    }
+                    &.failed-to-load {
+
+                    }
 				}
-				
 			}
 			&:hover a > div.state,
 			&.active a > div.state {
@@ -1329,9 +1399,38 @@ body, html {
 					.transition;
 				}
 			}
+            &.inform-message {
+                display: block;
+                width: 100%;
+                height: auto;
+                font-size: 20px;
+                text-align: center;
 
+                -webkit-user-select: none; /* Chrome/Safari */        
+                -moz-user-select: none; /* Firefox */
+                -ms-user-select: none; /* IE10+ */
+
+                /* Rules below not implemented in browsers yet */
+                -o-user-select: none;
+                user-select: none;
+                &:hover {
+                    cursor: default;
+                }
+			}
 		}
 	}
+
+    .search-preloader {
+        position: absolute;
+        top:0;
+        left:0;
+        background-image: url("../img/tracker/image_preloader.svg");
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: 20%;
+        background-repeat: no-repeat;
+    }
 	   /*  end of 4.1.4.1 cell renderer   */
 	/* 	end of 4.1.4 Catalog with categories and subcategories */
 
@@ -1416,7 +1515,7 @@ body, html {
 			}
 			&.dropup {
 				a .glyphicon {
-					padding: 0 5px 0 0;
+					padding: 0 14px 0 0;
 				}
 				> .dropdown-menu {
 					.border-radius(1px);
@@ -1487,6 +1586,10 @@ body, html {
 						}
 						&#overlap-backward > a#overlap-backward-btn {
 							background-image: url(../../assets/img/overlap-backward-icon.png);
+						}
+						&#copy > a,
+						&#paste > a {
+							padding-left: 14px;
 						}
 					}
 					> .divider {

@@ -21,7 +21,7 @@
     "includeProductInDesign": true,
     "includePrintingAreaInDesign": true,
     "includeMaskInDesign": true,
-    "fontsCSSUrl": "http://hive.liveartdesigner.com/~quiller/LAJS/fonts/fonts.css",
+    "fontsCSSUrl": "fonts/fonts.css",
     "zoomEnabled": true,
     "minZoom": 50,
     "maxZoom": 150,
@@ -38,14 +38,14 @@
   },
   "textEffects": {
     "config": "config/textEffects.json",
-    "url": "http://hive.liveartdesigner.com/mmjs/services/getTextZ.php"
+    "url_deprecated": "http://hive.liveartdesigner.com/mmjs/services/getTextZv4.php"
   },
   "defaultNameObjectText": "NAMES HERE",
   "defaultNumberObjectText": "00",
   "assetsUrl": "assets/",
   "galleryBaseUrl": "",
   "getQuoteUrl": "services/getQuote.php",
-  "getDesignsUrl": "services/getDesigns.php?email=${email}",
+  "getDesignsUrl": "services/getDesigns.php?email=${email}&product_id=${product_id}",
   "saveDesignUrl": "services/saveDesign.php",
   "loadDesignUrl": "services/loadDesign.php?design_id=${design_id}",
   "redirectUrl": "services/order.php?design_id=${design_id}",

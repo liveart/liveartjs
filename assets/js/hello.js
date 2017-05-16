@@ -11,9 +11,8 @@
  */
 
 /** 
- * INFO!!! This file was changed by Andrii Dobrianskyi
- * Changelog: 
- *      Was added target="_top" attribute to iframe. https://extranet.newtonideas.com/web2.aspx/LAJS/TASK768
+ * LiveArt updates:
+ *      Was added target="_top" attribute to iframe LAJS/TASK768 msg#8
  */
 
 // Can't use strict with arguments.callee
@@ -2562,7 +2561,7 @@ hello.utils.extend( hello.utils, {
 		var win;
 
 	    /*
-         * This code fragment was changed by Andrii Dobrianskyi in task https://extranet.newtonideas.com/web2.aspx/LAJS/TASK768 
+         * This code fragment was changed by LiveArt team in LAJS/TASK768 
         */ 
 	    try {
 	        // IE7 hack, only lets us define the name here, not later.
