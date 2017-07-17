@@ -172,7 +172,7 @@
                             <div class="column">
                                 <div data-bind="if: selectedProductVO().multicolor()">
                                     <ul class="product-colorPickers-list" data-bind="foreach: { data: selectedProductColorVO().colorizeList, afterAdd: selectedProductColorVO().createColorPicker }">
-                                        <li>
+                                        <li data-bind="visible: isVisible">
                                             <a class="liveart-color-picker-btn">
                                                 <span data-bind="text: name"></span>
                                                 <input type="text" class="liveart-color-picker dropup-color-picker" data-bind="colorPickerInit: {showPantones: !hidePantones() && $root.selectedProductVO().pantones().useForProduct(), colors: colors, container: true, isDropup: false, paletteClass: 'product-color-picker' + ($index()===0?'':' multicolor-product')}, colorPicker: value, productColorPalette: colors" />
@@ -296,13 +296,19 @@
                                     <div class="column">
                                         <h6 data-bind="visible: showTextEffects()">Text Effects</h6>
                                         <div id="text-effects-selector" data-bind="visible: showTextEffects()" class="dropup btn-group btn-block choose-effect-group">
-                                            <button class="btn btn-default col-xs-10" type="button" id="text-effects-btn" data-bind="text: selectedTextEffectVO().label()" data-toggle="dropdown"><span class="caret"></span></button>
+                                            <button class="btn btn-default col-xs-10" type="button" id="text-effects-btn" data-toggle="dropdown" >
+                                                <span data-bind="css: selectedTextEffectVO().cssClass(), visible: $root.showTextEffectImages"></span>
+                                                <span data-bind="text: selectedTextEffectVO().label(), css: {'text-effect-center': !$root.showTextEffectImages()}"></span>
+                                            </button>
                                             <button class="btn btn-default dropdown-toggle col-xs-2" type="button" data-toggle="dropdown" aria-expanded="false">
                                                 <span class="caret"></span>
                                             </button>
-                                            <ul class="dropdown-menu" data-bind="foreach: textEffects">
+                                            <ul class="dropdown-menu" data-bind="foreach: {data: textEffects, afterAdd: updateTextEffectsIconsVisibility}">
                                                 <li data-bind="css: { active: $root.selectedTextEffectVO().name() === $data.name }">
-                                                    <a data-bind="text: $data.label, click: $root.selectTextEffect"></a>
+                                                    <a data-bind="click: $root.selectTextEffect">
+                                                    <span data-bind="css: $data.cssClass()" class="la-text-effect-config-icon"></span>
+                                                    <span data-bind="visible: $root.showTextEffectImages" class="la-text-effect-icon-holder"></span>
+                                                    <span data-bind="text: $data.label"></span></a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -526,15 +532,7 @@
                                 <div id="liveart-file-upload-container">
                                     <button id="liveart-upload-image-browse-btn" type="button" class="btn btn-default btn-block btn-primary" data-loading-text="Uploading..." data-bind="click: showUploadConditions.bind($data, 'upload')">Browse for file...</button>
                                 </div>
-                                <form id="liveart-upload-upload-image-by-url">
-									<h6 class="text-center">or</h6>
-                                    <div class="input-group">
-                                        <input id="liveart-upload-graphics-url-input" type="text" class="form-control" placeholder="Paste Image URL" data-bind="value: customImageUrl, valueUpdate: 'input'">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" data-bind="click: showUploadConditions.bind($data, 'url'), enable: uploadFileURLIsValid">Add</button>
-                                        </span>
-                                    </div>
-                                </form>
+                                <h6 class="text-center" data-bind="visible: showSocialNetworksPhotos()">or</h6>
                                 <!-- beta feature buttons -->
 								<h6 class="text-center" data-bind="visible: showSocialNetworksPhotos()">Connect to</h6>
                                 <button id="instagram-btn" class="btn btn-default btn-block btn-social-acc" data-bind="visible: showInstagramPhotos(), click: logInSocial.bind($data,'instagram'), css: {active: currentNetwork() == 'instagram'}"><span></span></button>

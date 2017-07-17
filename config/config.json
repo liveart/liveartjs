@@ -34,7 +34,8 @@
     "minDPU": 45,
     "showUploadedColorsDialog": true,
     "fitProductImage": false,
-    "enableSnapGuides": true
+    "enableSnapGuides": true,
+    "showSuitableProductColorize": true
   },
   "textEffects": {
     "config": "config/textEffects.json",

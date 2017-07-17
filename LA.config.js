@@ -2,23 +2,19 @@
  * LIVEART INITALIZATION BEGINS HERE
  */
 
-//Use this to receive liveArt debug info to console
-//liveArt.debug();
-
 var laOptions = {
     dimensions: [587, 543]
 };
-laOptions.defaultDesignId = decodeURI((RegExp("design_id" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
-laOptions.defaultProductId = decodeURI((RegExp("product_id" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
-laOptions.defaultGraphicId = decodeURI((RegExp("graphic_id" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
 
-var configFile = decodeURI((RegExp("config" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
-if(configFile && configFile != "null") {
-	configFile = decodeURIComponent(configFile);
-} else {
-	configFile = null;
-}
+laOptions.defaultDesignId = getQueryParam("design_id");
+laOptions.defaultProductId = getQueryParam("product_id");
+laOptions.defaultGraphicId = getQueryParam("graphic_id");
+laOptions.defaultProductAttributes = {};
 
+laOptions.defaultProductAttributes.sizeUnits = getQueryParam("pa_size_units", "json");
+laOptions.defaultProductAttributes.quantities = getQueryParam("pa_quantities", "json");
+
+var configFile = getQueryParam("config") || "config/config.json";
 
 //You can provide placeOrderHandler here
 //optional custom handler for place order
@@ -29,8 +25,36 @@ laOptions.translation = laTranslation.dictionary;
 
 //Initing liveArt
 //controlsUpdateHandler() defined in LA.js
-liveArt.init(document.getElementById('canvas-container'), configFile || "config/config.json", controlsUpdateHandler, laOptions);
+liveArt.init(document.getElementById('canvas-container'), configFile, controlsUpdateHandler, laOptions);
 
 /**
  * LIVEART INITALIZATION ENDS HERE
  */
+
+function getQueryParam(param, type) {
+    var val = decodeURI((RegExp(param + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+    if (val === "null")
+        return null;
+    if (type) {
+        if (type === "number") {
+            var valN = Number(val);
+            if (!isNaN(valN))
+                return valN;
+            else
+                return null;
+        }
+        if (type === "boolean") {
+            return val.toLowerCase() === "true";
+        }
+
+        if (type === "json") {
+            try {
+                return JSON.parse(decodeURIComponent(val));
+            } catch (e) {
+                console.warn("Unexpected string in " + param);
+            }
+        }
+    }
+
+    return val;
+}

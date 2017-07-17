@@ -44,7 +44,7 @@ if (isset($_FILES["image"])) {
 	echo json_encode($response);
 };
 
-//upload by url
+// upload by url — deprecated
 if (isset($_POST['fileurl'])) {
 	$response = array("url"=>"","error"=>false,"msg"=>"");
 	$url = urldecode($_POST['fileurl']);

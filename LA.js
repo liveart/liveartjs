@@ -101,7 +101,8 @@ var laTranslation = {
 
         "CLEAR_DESIGN_CONFIRMATION": "Are you sure to clear design?",
         "INVALID_EMAIL_FORMAT": "Invalid email format",
-        "INVALID_DESIGN_NAME": "Invalid design name"
+        "INVALID_DESIGN_NAME": "Invalid design name",
+        "NO_EFFECT_WARNING": "Selected object has deprecated text effect. It will be removed on object change."
         /*
         * UI TRANSLATION ENDS HERE
         */
@@ -252,7 +253,7 @@ var TextFormatVO = function (fontFamily, fillColor, bold, italic, stroke, stroke
     });*///.extend({ throttle: 100 });
 }
 
-var TextEffectVO = function (name, label, value, paramName, min, max, step, inverted) {
+var TextEffectVO = function (name, label, value, paramName, min, max, step, inverted, cssClass) {
     if (isNullOrUndefined(name)) name = 'none';
     if (isNullOrUndefined(label)) label = 'None';
     if (isNullOrUndefined(value)) value = 0;
@@ -261,6 +262,7 @@ var TextEffectVO = function (name, label, value, paramName, min, max, step, inve
     if (isNullOrUndefined(max)) max = 1;
     if (isNullOrUndefined(step)) step = 0.05;
     if (isNullOrUndefined(inverted)) inverted = false;
+    if (isNullOrUndefined(cssClass)) cssClass = "la-text-effect-none";
 
     var self = this;
     self.name = ko.observable(name);
@@ -271,6 +273,7 @@ var TextEffectVO = function (name, label, value, paramName, min, max, step, inve
     self.max = ko.observable(max);
     self.step = ko.observable(step);
     self.inverted = ko.observable(inverted);
+    self.cssClass = ko.observable(cssClass);
 }
 
 var GraphicsCategoryVO = function (obj) {
@@ -590,7 +593,6 @@ var ComplexColorVO = function (updateHandler, hexValue, name, colorizeList) {
 
     self.fromObject = function (obj) {
         if (isNullOrUndefined(obj)) return;
-
         self.suppressUpdate = true;
         if (!isNullOrUndefined(obj['name'])) {
             self.name(obj['name']);
@@ -669,11 +671,12 @@ var RestrictionsVO = function (root, minQuantity) { // for future refactoring, n
     self.minQuantity = ko.observable(minQuantity);
 }
 
-var ColorizeElementVO = function (updateHandler, value, name, colors, id) {
+var ColorizeElementVO = function (updateHandler, value, name, colors, id, availableLocations) {
     if (isNullOrUndefined(id)) id = '';
     if (isNullOrUndefined(value)) value = '#000000';
     if (isNullOrUndefined(name)) name = 'Black';
     if (isNullOrUndefined(colors)) colors = [];
+    if (isNullOrUndefined(availableLocations)) availableLocations = [];
 
     var self = this;
     self.id = ko.observable(id);
@@ -683,11 +686,19 @@ var ColorizeElementVO = function (updateHandler, value, name, colors, id) {
     self.colors = ko.observableArray(colors);
     self.updateHandler = updateHandler;
     self.suppressUpdate = false;
+    self.availableLocations = ko.observable(availableLocations)
 
     self.value.subscribe(function (newValue) {
         if (self.updateHandler && !self.suppressUpdate)
             updateHandler();
     });
+
+    self.isVisible = ko.computed(function () {
+        if (!controlsModel) return true;
+        var showBecauseConfig = !controlsModel.showSutableColorize();
+        var showBecauseAvailable = self.availableLocations().indexOf(controlsModel.selectedProductLocation()) > -1;
+        return showBecauseConfig || showBecauseAvailable;
+    })
 
     self.fromObject = function (obj) {
         if (isNullOrUndefined(obj)) return;
@@ -710,6 +721,10 @@ var ColorizeElementVO = function (updateHandler, value, name, colors, id) {
         } else {
             self.hidePantones(false);
         }
+        if (!isNullOrUndefined(obj['availableLocations'])) {
+            self.availableLocations(obj['availableLocations']);
+        }
+
         self.suppressUpdate = false;
     }
 }
@@ -1601,7 +1616,6 @@ function LAControlsModel() {
         self.extractGraphics(self.graphicRootCategory());
     });
 
-   
     //handlers - click on categories/graphics
     self.selectGraphicItem = function (categoryItem) {
         if (categoryItem.isImage()) {
@@ -1911,10 +1925,12 @@ function LAControlsModel() {
             self.selectedTextEffectVO().max(Math.abs(effect.max()));
             self.selectedTextEffectVO().step(effect.step());
             self.selectedTextEffectVO().value(Math.abs(effect.min()).toFixed(2));
+            self.selectedTextEffectVO().cssClass(effect.cssClass());
         } else {
             self.selectedTextEffectVO().name("none");
             self.selectedTextEffectVO().label("None");
             self.selectedTextEffectVO().value("0");
+            self.selectedTextEffectVO().cssClass("la-text-effect-none");
             self.skipUpdateToUi = true;
             self.selectedLetteringVO().formatVO().textEffect("none");
             self.selectedLetteringVO().formatVO().textEffectValue("0");
@@ -1963,6 +1979,7 @@ function LAControlsModel() {
                     self.selectedTextEffectVO().min(Math.abs(effect.min()));
                     self.selectedTextEffectVO().max(Math.abs(effect.max()));
                     self.selectedTextEffectVO().step(effect.step());
+                    self.selectedTextEffectVO().cssClass(effect.cssClass());
                     //self.selectedTextEffectVO().value(Math.abs(effect.value()));
                 }
             }
@@ -1989,7 +2006,9 @@ function LAControlsModel() {
                 self.selectedTextEffectVO().min(Math.abs(effect.min()));
                 self.selectedTextEffectVO().max(Math.abs(effect.max()));
                 self.selectedTextEffectVO().step(effect.step());
-                self.selectedTextEffectVO().value(Math.abs(effect.min()));
+                self.selectedTextEffectVO().cssClass(effect.cssClass());
+                var defaultValue = self.selectedTextEffectVO().min() + Math.abs((self.selectedTextEffectVO().max() - self.selectedTextEffectVO().min()) * 0.5);
+                self.selectedTextEffectVO().value(defaultValue);
                 break;
             }
         }
@@ -2029,6 +2048,7 @@ function LAControlsModel() {
     self.textAlignEnabled = ko.computed(function () {
         return self.selectedTextEffectVO().name() == "none" || self.selectedTextEffectVO().name() == "arcUp" || self.selectedTextEffectVO().name() == "arcDown";
     });
+
 
     /**
      * TEXT EFFECT END 
@@ -2084,7 +2104,7 @@ function LAControlsModel() {
     }
 
     self.showUploadConditions = function (type) {
-        if (type == 'url' && self.customImageUrl().length == 0) return;
+        if (type == 'url' && self.customImageUrl().length == 0) return; // upload by url — deprecated
 
         self.customImageType(type);
         jQuery("#liveart-upload-conditions-popup").modal("show");
@@ -2099,7 +2119,7 @@ function LAControlsModel() {
         if (self.userAcceptsConditions()) {
             jQuery("#liveart-upload-conditions-popup").modal("hide");
             var type = self.customImageType();
-            if (type == 'url') {
+            if (type == 'url') { // upload by url — deprecated
                 self.addImageByUrl();
             } else if (type == 'upload') {
                 self.uploadImage();
@@ -2129,14 +2149,14 @@ function LAControlsModel() {
 
     self.customImageUrl = ko.observable("");
 
-    self.addImageByUrl = function () {
+    self.addImageByUrl = function () { // upload by url — deprecated
         if (self.customImageUrl().length > 0) {
             liveartUI.fileUploadByUrl(self.uploadImageUrl());
             liveartUI.hideExpandedWindow();
         }
     }
 
-    self.uploadFileURLIsValid = ko.computed(function () {
+    self.uploadFileURLIsValid = ko.computed(function () { // upload by url — deprecated
         var patt = new RegExp("https?://.+");
         var a = self.customImageUrl();
         return patt.test(self.customImageUrl());
@@ -2580,7 +2600,6 @@ function LAControlsModel() {
             document.dispatchEvent(evt);
         }, 200);
     }
-
     /**
      * SELECTED OBJECT ENDS HERE
      */
@@ -2989,6 +3008,31 @@ function LAControlsModel() {
      * TOOLS BUTTON LOGIC ENDS HERE
      */
 
+    self.showSutableColorize = ko.observable(false);
+
+
+    self.showTextEffectImages = ko.observable(true);
+    self.updateTextEffectsIconsVisibility = function () {
+        var effects = controlsModel.textEffects();
+        var show = jQuery("#text-effects-selector ul.dropdown-menu li a .effect-injected").length > 1;
+        self.showTextEffectImages(show);
+    }
+
+    
+
+    self.selectedLetteringVO().formatVO().textEffect.subscribe(function (value) {
+        var exists = false;
+        for (var i = 0; i < self.textEffects().length ; i++) {
+            if (self.textEffects()[i].name() === value) {
+                exists = true;
+            }
+        }
+        if (!exists) {
+            var msg = laTranslation.translateUI("NO_EFFECT_WARNING");
+            self.addAlert(msg, "warning");
+        }
+    });
+
     /**
      * UPDATE VIEW MODEL BEGINS HERE
      */
@@ -3108,6 +3152,15 @@ function LAControlsModel() {
             validate(invalidateList, 'selectedObj');
         }
 
+        // parse added object
+        if (isInvalid(invalidateList, 'addedObj')) {
+            var evt = document.createEvent("Event");
+            evt.initEvent("liveart-object-added", true, false);
+            evt.value = model.addedObj;
+            document.dispatchEvent(evt);
+            validate(invalidateList, 'addedObj');
+        }
+
         // Order
         if (isInvalid(invalidateList, 'quantities')) {
             validate(invalidateList, 'quantities');
@@ -3219,10 +3272,12 @@ function LAControlsModel() {
         // fill textEffects
         if (isInvalid(invalidateList, 'textEffects')) {
             var textEffects = jQuery.map(model.textEffects, function (item) {
-                return new TextEffectVO(item.name, item.label, item.value, item.paramName, item.min, item.max, item.step);
+                return new TextEffectVO(item.name, item.label, item.value, item.paramName, item.min, item.max, item.step, false, item.laEffectCssClass);
             });
             self.textEffects(textEffects);
             self.textEffects.unshift(new TextEffectVO("none", "None", 0));
+            liveartUI.renderTextEffectsImages();
+            self.updateTextEffectsIconsVisibility();
             validate(invalidateList, 'textEffects');
         }
 
@@ -3323,6 +3378,11 @@ function LAControlsModel() {
                 onPlaceOrderFail();
                 validate(invalidateList, 'placeOrderFailed');
             }
+        }
+
+        if (isInvalid(invalidateList, 'showSutableColorize')) {
+            self.showSutableColorize(model.showSutableColorize);
+            validate(invalidateList, 'showSutableColorize');
         }
         
 

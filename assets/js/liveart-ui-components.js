@@ -83,7 +83,7 @@ var liveartUI = {
 
     /* File Upload by URL function */
 
-    fileUploadByUrl: function (scriptUrl) {
+    fileUploadByUrl: function (scriptUrl) { // upload by url — deprecated
         var modal = jQuery('#liveart-upload-bar'),
             bar = modal.find('.progress-bar');
         // encodeURIComponent - should be present because file url may contains special characters. 
@@ -243,6 +243,21 @@ var liveartUI = {
     // force - if true - updating images without delay
     updateLazyLoadContainer: function (element, force) {
 
+    },
+
+    renderTextEffectsImages: function () {
+        var $effectsLinks = jQuery("#text-effects-selector ul.dropdown-menu li a:not(.effect-injected)");
+        var bgUrl = "";
+        $effectsLinks.each(function (idx, obj) {
+            bgUrl = jQuery(this).find("span:first-child").css('background-image').replace(/(url\(|\)|'|")/gi, '');
+            if (bgUrl != "none") {
+                var $configHolder = jQuery(this).find("span.la-text-effect-config-icon");
+                $configHolder.addClass("effect-injected").hide();
+                var $span = jQuery(this).find("span.la-text-effect-icon-holder")
+                $span.html("<img src='" + bgUrl + "' class='inject-me'>");
+            }
+        });
+        SVGInjector(document.querySelectorAll('#text-effects-selector ul.dropdown-menu li a img.inject-me'));
     }
 }
 /*
@@ -383,102 +398,6 @@ jQuery(function () {
         liveartUI.showTextForm();
         liveartUI.resetFocusToTextTab = false;
     });
-
-
-
-    /* Hack: Select share link on click under Safari  
-     * http://www.bearpanther.com/2013/05/27/easy-text-selection-in-mobile-safari/
-     *
-     */
-
-    /*var area = document.querySelector("#liveart-share-link-input")
-    // create a listener for click, could also use touchstart, touchend, etc.
-    area.addEventListener("click", select);
-    // remove contentEditable when an element loses focus
-    area.addEventListener("blur", reset);
-    // callback to event listener
-    function select(evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        // a textNode is required to set a selection on mobile safari
-        // nodeType values:  https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType
-        if (evt.target.firstChild.nodeType !== 3) {
-            console.log("Unable to select text, firstChild is not a textNode.");
-            return;
-        }
-        var el = evt.target;
-        // for this to work on mobile safari, contentEditable needs to be true
-        if (!isEditable(el)) {
-            el.setAttribute("contentEditable", true);
-        }
-        // current selection
-        var sel = window.getSelection();
-        // create a range:  
-        // https://developer.mozilla.org/en-US/docs/Web/API/document.createRange
-        var range = document.createRange();
-        // use firstChild as range expects a textNode, not an elementNode
-        range.setStart(el.firstChild, 0);
-        range.setEnd(el.firstChild, el.innerHTML.length);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
-
-    function reset(evt) {
-        if (isEditable(evt.target)) {
-            evt.target.removeAttribute("contentEditable");
-        }
-    }
-
-    function isEditable(el) {
-        return editable = el.getAttribute("contentEditable");
-    }
-
-    /* Hack: Select share link on click under Safari  
-     * http://www.bearpanther.com/2013/05/27/easy-text-selection-in-mobile-safari/
-     *
-     */
-
-    /*var area = document.querySelector("#liveart-share-link-input")
-    // create a listener for click, could also use touchstart, touchend, etc.
-    area.addEventListener("click", select);
-    // remove contentEditable when an element loses focus
-    area.addEventListener("blur", reset);
-    // callback to event listener
-    function select(evt) {
-        evt.preventDefault();
-        evt.stopPropagation();
-        // a textNode is required to set a selection on mobile safari
-        // nodeType values:  https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType
-        if (evt.target.firstChild.nodeType !== 3) {
-            console.log("Unable to select text, firstChild is not a textNode.");
-            return;
-        }
-        var el = evt.target;
-        // for this to work on mobile safari, contentEditable needs to be true
-        if (!isEditable(el)) {
-            el.setAttribute("contentEditable", true);
-        }
-        // current selection
-        var sel = window.getSelection();
-        // create a range:  
-        // https://developer.mozilla.org/en-US/docs/Web/API/document.createRange
-        var range = document.createRange();
-        // use firstChild as range expects a textNode, not an elementNode
-        range.setStart(el.firstChild, 0);
-        range.setEnd(el.firstChild, el.innerHTML.length);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
-
-    function reset(evt) {
-        if (isEditable(evt.target)) {
-            evt.target.removeAttribute("contentEditable");
-        }
-    }
-
-    function isEditable(el) {
-        return editable = el.getAttribute("contentEditable");
-    }*/
 });
 
 /* Alert */
@@ -618,6 +537,7 @@ jQuery(function () {
     var timeout;
     var elements = [];
     var delay = 300;
+    var lastTimeoutRequest = 0;
 
     liveartUI.updateLazyLoadContainer = function (element, force) {
         if (element && elements.indexOf(element) === -1) {
@@ -641,10 +561,15 @@ jQuery(function () {
                 };
             }
             processScroll();
+            timeout = null;
+            lastTimeoutRequest = 0;
         }
-        if (force) {
+        if (force || (new Date().getTime() - lastTimeoutRequest) > delay) {
             update();
         } else {
+            if (!lastTimeoutRequest) {
+                lastTimeoutRequest = new Date().getTime();
+            }
             timeout = setTimeout(function () {
                 update();
             }, delay);

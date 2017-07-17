@@ -43,6 +43,7 @@
 @import 'variables.config.less';
 @import 'mixins.config.less';
 @maxQuantityMenuItems: 8;
+@import 'text-effects.config.less';
 
 @font-face {
     font-family: 'Montserrat';
@@ -980,9 +981,21 @@ body, html {
 			#text-form-size-label-seperator2 {
 				font-size: 125%;
 			}
-			#text-effects-selector>ul.dropdown-menu {
-				max-height: 150px; 
-				overflow-y: auto;
+			#text-effects-selector{
+                .text-effect-center {
+                    text-align: center;
+                    width: 100%;
+                }
+                >ul.dropdown-menu {
+				    max-height: 150px; 
+				    overflow-y: auto;
+
+                    > li a {
+                        span {
+                            font-size: 12px;
+                        }
+                    }
+			    }   
 			}
 		}
 		
@@ -1101,7 +1114,7 @@ body, html {
 			padding: 15px 22px 10px 22px;
 			margin: 0px;
 			
-			#liveart-upload-upload-image-by-url {
+			#liveart-upload-upload-image-by-url { // upload by url — deprecated
 				margin-bottom: 0px;
 			}
 			#liveart-file-upload-container {

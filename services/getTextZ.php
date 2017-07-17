@@ -1,4 +1,5 @@
 <?php
+		//PLEASE NOTE! Raster effects were deprecated in 0.10.24 RELEASE
         //comment these if no log is required
         ini_set('display_errors',1);
         error_reporting(E_ERROR | E_WARNING | E_PARSE);

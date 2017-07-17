@@ -28,6 +28,34 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.25 RELEASE NOTES
+Deprecated:
+- Upload image by URL. To enable back:
+  - use previous upload image tab html content
+
+Updates:
+- Updated logic for lazy loading on graphic/product search
+- Added new vector text effects
+- Added icons for vector text effects (with deprecated effects support)
+- Changed default text effect value from min value to the middle of the [min, max] range
+
+Fixes:
+- Fixed \<svg\> element id loosing in MS Edge browser
+
+API changes:
+- `config.options.showSuitableProductColorize` - enable showing suitable color picker for multicolor product (default value - false)
+- `GET var` configuration changes 
+  - added possibility to set up default product size
+  - added possibility to set up default quantities
+  - added possibility to set up main config URL
+
+UI changes:
+- translation changes:
+  - added new keys: NO_EFFECT_WARNING
+
+Migration notes
+- Text Effects: https://liveart.uservoice.com/knowledgebase/articles/1188664
+
 ### 0.10.24 RELEASE NOTES
 Updates:
 - print window match custom canvas dimensions
