@@ -28,6 +28,10 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.26 RELEASE NOTES
+Fixes:
+- Fixed snapping to the center approximation
+
 ### 0.10.25 RELEASE NOTES
 Deprecated:
 - Upload image by URL. To enable back:
