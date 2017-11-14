@@ -1,5 +1,5 @@
 # LiveArt HTML5 Trial Package
-Trial version of the LiveArt HTML5 Product designer - http://www.developflash.com/html5-product-designer
+Trial version of the LiveArt HTML5 Product designer - https://www.liveartdesigner.com/html5-product-designer
 
 LiveArt HTML5 is an HTML-based product designer with clean MVVM model, based on the following core technologies:
 0. TypeScript;
