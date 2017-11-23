@@ -2219,6 +2219,7 @@ function LAControlsModel() {
         var mappedData = ko.utils.arrayMap(rootCategories, function (item) {
             return new TemplatesCategoryVO(item);
         });
+        self.templateRootCategory().templates([]);
         self.templateRootCategory().categories(mappedData);
         self.templateCatalogBreadcrumbs([self.templateRootCategory()]);
     };
@@ -2228,6 +2229,7 @@ function LAControlsModel() {
         var mappedData = ko.utils.arrayMap(templates, function (item) {
             return new TemplatesCategoryVO(item);
         });
+        self.templateRootCategory().categories([]);
         self.templateRootCategory().templates(mappedData);
         self.templateCatalogBreadcrumbs([self.templateRootCategory()]);
     };
@@ -3370,6 +3372,7 @@ function LAControlsModel() {
                     }
                 } else {
                     jQuery("#liveart-preloader").modal('hide');
+                    var liveArtResponsive;
                     if (liveArtResponsive && liveArtResponsive.resize)
                         liveArtResponsive.resize();
                 }

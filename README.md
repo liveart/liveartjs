@@ -28,6 +28,11 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.28 RELEASE NOTES
+Fixes:
+- Fixed error in console ("ReferenceError: liveArtResponsive")
+- Fixed incorrect template list displaying on product change
+
 ### 0.10.27 RELEASE NOTES
 Deprecated:
 - deprecated `categories[].thumbUrl` and `products[].thumbUrl`, in `productCategoriesList`
