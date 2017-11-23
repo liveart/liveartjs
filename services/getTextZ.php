@@ -1,8 +1,13 @@
 <?php
-		//PLEASE NOTE! Raster effects were deprecated in 0.10.24 RELEASE
+        //PLEASE NOTE! Raster effects were deprecated in 0.10.24 RELEASE
+
         //comment these if no log is required
         ini_set('display_errors',1);
         error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
+        require_once('configs.php');
+        use Liveart\Configs as Configs;
+	    $lajsFolder = Configs::$LAJS_FOLDER_PATH;
 
         //build font index to identify which font is required
         //for certain family/style/weight combination
@@ -26,7 +31,7 @@
                 return $fonts;
         }
 
-        $temp_file = "../files/text".time().".png";
+        $temp_file = $lajsFolder . "files/text".time().".png";
         $params = array();
         $isSlant = false;
         // text
@@ -145,7 +150,7 @@
         }
 
         $t = exec($line);
-        //error_log("EXEC:".$line, 3, "../files/.log");
+        //error_log("EXEC:".$line, 3, $lajsFolder . "files/.log");
 
         if (isset($_GET["debug"])) {
                 echo $line;

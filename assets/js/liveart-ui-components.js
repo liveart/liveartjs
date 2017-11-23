@@ -18,7 +18,11 @@ var liveartUI = {
     productDimensionsHeight: null,
     zoomSlider: null,
     resetFocusToTextTab: true,
+    alertFadeOutTime: 5000,
 
+    isTextTabActive: function() {
+      return liveartUI.activeTab !== null && liveartUI.activeTab.length && liveartUI.activeTab[0].getAttribute("href") === "#add-text-form";
+    },
     closeActiveTab: function (leaveExpanded) {
         jQuery('#main-controls-container #liveart-main-menu .active').removeClass('active');
         jQuery('#main-controls-container #liveart-main-menu .open').removeClass('open');
@@ -141,7 +145,7 @@ var liveartUI = {
         }
         var container = jQuery(this.alertTargets[target]);
         var element = jQuery('<div class="alert ' + this.alertLevels[level] + ' alert-dismissible" role="alert"></div>');
-        var close = jQuery('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+        var close = jQuery('<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" class="glyphicon glyphicon-remove"></span></button>');
         element.append(close);
         element.on("closed.bs.alert", function (target) {
             onAlertContainerChange(target);
@@ -150,6 +154,12 @@ var liveartUI = {
         element.append(jQuery('<span> ' + text + '</span>'));
         container.append(element);
         onAlertContainerChange(this.alertTargets[target]);
+
+        var processFadeOut = function (elem) {
+            elem.fadeOut('slow');
+        }.bind(null, element);
+
+        setTimeout(processFadeOut, this.alertFadeOutTime);
     },
 
     setFocusToTextTab: function () {
@@ -158,11 +168,11 @@ var liveartUI = {
             if (jQuery("#add-text-input").is(':visible')) {
                 setTimeout(function () {
                     jQuery("#add-text-input").focus();
-                }, 0);
+                }, 200);
             } else if (jQuery("#edit-text-input").is(':visible')) {
                 setTimeout(function () {
                     jQuery("#edit-text-input").focus();
-                }, 0);
+                }, 200);
             }
         }
     },
@@ -222,14 +232,18 @@ var liveartUI = {
             if (menuItem.precondition && !menuItem.precondition()) return;
             var selectors = menuItem.selectors;
             if (selectors && selectors.menu && selectors.form) {
-                jQuery('#liveart-main-container').addClass('collapsed');
+                if(!jQuery('li' + selectors.menu).hasClass("open")) {
+                    var a = jQuery('li' + selectors.menu + ' > a');
+                    a.click();
+                }
+                /*jQuery('#liveart-main-container').addClass('collapsed');
                 jQuery("#liveart-main-menu > li:not(" + selectors.menu + ")").removeClass("open active");
                 jQuery("#liveart-main-menu " + selectors.menu).addClass("open active");
 
                 jQuery(".liveart-tabs-content.tab-content > div:not(" + selectors.form + ")").removeClass("active");
                 jQuery(selectors.form).addClass("active in");
                 this.activeTab = jQuery('li' + selectors.menu + ' > a');
-
+*/
                 if (menuItem.callback) {
                     menuItem.callback();
                 }
@@ -237,7 +251,6 @@ var liveartUI = {
         }
     },
 
-    
     // This funciton is overrided below
     // Element - DOM container with img.lazy-load
     // force - if true - updating images without delay
@@ -306,8 +319,11 @@ jQuery(function () {
             liveartUI.activeTab.parent().removeClass('open');
 			jQuery('#liveart-main-container').removeClass('collapsed');
             if (liveartUI.activeTab.parent().hasClass('active')) {
-                var id = jQuery(e.currentTarget).attr('href').replace('#', '');
-                jQuery('.liveart-tabs-content > #' + id).removeClass('active');
+                var href = jQuery(e.currentTarget).attr('href') || "";
+                if(href){
+                    var id = href.replace('#', '');
+                    jQuery('.liveart-tabs-content > #' + id).removeClass('active');
+                }
             }
         } else {
             var href = jQuery(e.currentTarget).attr('href');

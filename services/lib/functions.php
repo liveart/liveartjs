@@ -1,10 +1,5 @@
 <?php
 session_start();
-$rec = new Request();
-function _request($name) {
-	global $rec;
-	Return $rec->Value($name);
-}
 
 function get_raw_post_data(){
 	return ($GLOBALS["HTTP_RAW_POST_DATA"])?$GLOBALS["HTTP_RAW_POST_DATA"]:$HTTP_RAW_POST_DATA;

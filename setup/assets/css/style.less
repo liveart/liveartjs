@@ -37,12 +37,13 @@
  *       - Saved designs popup
  *       - Upload conditions popup
  *       - Upload Color Count Modal
- *  8. Canvas
+ *       - Preloader
+ *  8.Admin mode
+ *  9. Canvas
  *
 */
 @import 'variables.config.less';
 @import 'mixins.config.less';
-@maxQuantityMenuItems: 8;
 @import 'text-effects.config.less';
 
 @font-face {
@@ -314,7 +315,7 @@ body, html {
 
 	#liveart-content {
 		width: 100%;
-		height: 100%;
+		height: calc(~"100% -"@logoHeight);
 		position: relative;
 	}
 
@@ -388,6 +389,10 @@ body, html {
 			&:not(:first-child) {
 				margin-top: @gap/2;
 			}
+
+            .close > span {
+                font-size: 16px;
+            }
 		}
 		&:empty {
 			display: none;
@@ -651,6 +656,9 @@ body, html {
 					float: left;
 					margin-left: 7px;
 				}
+			}
+			#replace-graphic{
+				margin-top: 15px;
 			}
 			
 			.text-form-size-group,
@@ -1085,7 +1093,9 @@ body, html {
 		> #add-graphics-form .column {
 			padding: 20px;
 			ul > li {
-				padding-top: 10px;
+				&:not(:first-child) {
+					padding-top: 10px;
+				}
 			}
 			div.colorPicker-picker {
 				float: right;
@@ -1094,9 +1104,6 @@ body, html {
 			}
 			a.liveart-color-picker-btn > span {
 				line-height: 27px;
-			}
-			#image-added-info {
-				display: none;
 			}
 			h6 {
 				color: #333;
@@ -1662,24 +1669,27 @@ body, html {
 					}
 				}
 			}
-			&#get-quote-btn {
+			&#get-quote-btn,
+            &#save-template-btn {
 				width: 190px;
 				border-left: 1px solid @mainBackgroundColor;
 				
 				> a {
 					text-align: right;
-					color: #0ea510;
+                    color: #ffffff;
 					padding-right: 16px;
 					cursor: pointer;
+                    background-color: #0ea510;
 					
 					> svg {
-						fill: #0ea510;
+                        fill: #ffffff;
 					}
 					> span {
 						margin-left: 0px;
 						right: 54px;
 						white-space: nowrap;
 						font-size: 14px;
+                        font-weight: bold;
 					}
 					&:focus,
 					&:hover {
@@ -2092,21 +2102,20 @@ body, html {
 	
 	/* all popups*/
 	/*  DPI warning   */
-	#dpu-exceeded-popup {
-		position: absolute;
-		pointer-events: none;
-		background-color: rgba(255, 255, 2255, 0.8);
-		user-select: none;
-		left: 50%;
-		margin-left: -110px;
-		top: 10px;
-		width: 500px;
-		z-index: 99;
-		border: red;
-		border-style: solid;
-		padding: 3px;
+	#dpu-exceeded-popup{
+		cursor: pointer;
 	}
-	
+	.menu-warning-badge {
+		padding-top: 3px;
+		padding-right: 7px;
+		padding-bottom: 3px;
+		padding-left: 7px !important;
+		background-color: red;
+		position: absolute;
+		margin-left: -15px;
+		margin-top: -5px;
+	}
+
 	/* Shared designs popup */
 	#liveart-share-link-popup {
         #liveart-share-link-input {
@@ -2147,7 +2156,7 @@ body, html {
 		}
 		.upload-conditions-text {
 			border: #ddd;
-			max-height: 350px;
+			max-height: 40vh;
 			overflow: auto;
 			margin-bottom: 15px;
 			padding-right: 15px;
@@ -2278,12 +2287,59 @@ body, html {
 			   z-index: 9999;
 		}
 	/* Show version and buildtime window end*/
+    
+    /* Preloader window start*/
+    #liveart-preload-bar{
+        .uploading .progress {
+            margin-bottom: 0px !important;
+            margin-top: 15px;
+        }
+        .modal-dialog {
+            position: absolute;
+            top: 25%;
+            left: 0;
+            right: 0;
+            width: 50%;
+            height: 10%;
+            margin: auto;
+        }
+        .preloader-text {
+            font-size: 20px;
+            color: #FFF;
+        }
+        .preloader-image-container {
+            margin: auto;
+            display: block;
+            width: 150px;
+        }
+    }
+    /* Preloader window end*/
 
 	/* 7. Modal end*/
+
+
+    /* 8.Admin mode start*/
+    #edit-constraints-box {
+        input {
+            width: 60%;
+            margin-left: 27px;
+        }
+    }
+    ul#constraints-list{
+        margin: 20px;
+        padding: 0;
+        li {
+            list-style: none;
+        }
+        .offsetleft {
+            margin-left: 15px;
+        }
+    }
+    /* 8.Admin mode end*/
 }
 
 
-/* 8. Canvas styles */
+/* 9. Canvas styles */
 #lettering-tools-canvas,
 #lettering-tools-svg {
     position: absolute;

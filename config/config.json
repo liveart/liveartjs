@@ -33,8 +33,10 @@
     "checkTextFXThrottle": 400,
     "minDPU": 45,
     "showUploadedColorsDialog": true,
-    "fitProductImage": false,
+    "fitProductImage": true,
+    "fitEditableArea": true,
     "enableSnapGuides": true,
+    "hideDesignIdeas": false,
     "showSuitableProductColorize": true
   },
   "textEffects": {
@@ -48,9 +50,11 @@
   "getQuoteUrl": "services/getQuote.php",
   "getDesignsUrl": "services/getDesigns.php?email=${email}&product_id=${product_id}",
   "saveDesignUrl": "services/saveDesign.php",
+  "saveTemplateUrl": "services/saveTemplate.php",
   "loadDesignUrl": "services/loadDesign.php?design_id=${design_id}",
   "redirectUrl": "services/order.php?design_id=${design_id}",
   "uploadImageUrl": "services/uploadImage.php",
   "shareLinkUrl": "index.html?design_id=${design_id}",
+  "getTemplatesUrl": "services/getTemplates.php?product_id=${product_id}",
   "redirectWindow": "parent"
 }

@@ -37,10 +37,13 @@ var laTranslation = {
         QUOTE_INVALID_RESPONSE_ERROR_MESSAGE: "Failed to load quote! Response is invalid.",
         WRONG_PRODUCT_ID_ERROR_MESSAGE: "Wrong product ID: %id%.",
         ORDER_PLACED_SUCCESSFULLY_MESSAGE: "Order placed successfully!",
+        TEMPLATE_SAVED_MESSAGE: "Template '%title%' saved successfully!",
+        FAIL_TO_SAVE_TEMPLATE_MESSAGE: "Failed to save template!",
         DESIGN_LOADED_MESSAGE: "Design '%title%' loaded successfully!",
         DESIGN_WITHOUT_TITLE_LOADED_MESSAGE: "Design loaded successfully!",
         SAVING_DESIGN_MESSAGE: "Saving design...",
         SHARING_DESIGN_MESSAGE: "Sharing design...",
+        SAVING_TEMPLATE_MESSAGE: "Saving Design Idea...",
         LOADING_YOUR_DESIGN_MESSAGE: "Loading your design...",
         PLACING_ORDER_MESSAGE: "Placing order...",
 
@@ -102,7 +105,8 @@ var laTranslation = {
         "CLEAR_DESIGN_CONFIRMATION": "Are you sure to clear design?",
         "INVALID_EMAIL_FORMAT": "Invalid email format",
         "INVALID_DESIGN_NAME": "Invalid design name",
-        "NO_EFFECT_WARNING": "Selected object has deprecated text effect. It will be removed on object change."
+        "NO_EFFECT_WARNING": "Selected object has deprecated text effect. It will be removed on object change.",
+        "DESIGN_WILL_BE_CLEARED": "Your design could be cleared. Please confirm to proceed."
         /*
         * UI TRANSLATION ENDS HERE
         */
@@ -371,6 +375,49 @@ var GraphicsFormatVO = function (updateHandler, colorize, fillColor, strokeColor
     }
 }
 
+var TemplatesCategoryVO = function (obj) {
+    if (isNullOrUndefined(obj)) obj = {};
+    if (isNullOrUndefined(obj.id)) obj.id = 'template-item-' + (new Date().getTime());
+    if (isNullOrUndefined(obj.parendId)) obj.parendId = '';
+    if (isNullOrUndefined(obj.name)) obj.name = '';
+    if (isNullOrUndefined(obj.description)) obj.description = '';
+    if (isNullOrUndefined(obj.thumb)) obj.thumb = '';
+    if (isNullOrUndefined(obj.templates)) obj.templates = [];
+    if (isNullOrUndefined(obj.categories)) obj.categories = [];
+
+    var self = this;
+    self.id = ko.observable(obj.id);
+    self.parendId = ko.observable(obj.parendId);
+    self.name = ko.observable(obj.name);
+    self.description = ko.observable(obj.description);
+    self.thumb = ko.observable(obj.thumb);
+
+    var mappedTemplates = ko.utils.arrayMap(obj.templates, function (item) {
+        return new TemplatesCategoryVO(item);
+    });
+    self.templates = ko.observable(mappedTemplates);
+
+    var mappedCategories = ko.utils.arrayMap(obj.categories, function (item) {
+        return new TemplatesCategoryVO(item);
+    });
+    self.categories = ko.observable(mappedCategories);
+
+    self.children = ko.computed(function () {
+        if (self.categories().length > 0) {
+            return self.categories();
+        }
+        return self.templates();
+    });
+
+    self.isTemplate = ko.computed(function () {
+        return self.categories().length == 0 && self.templates().length == 0;
+    });
+
+    self.isCategory = ko.computed(function () {
+        return !self.isTemplate();
+    });
+}
+
 var PhotosVO = function (thumb, image) {
     var self = this;
     self.thumb = thumb;
@@ -440,7 +487,8 @@ var ObjectPropertiesVO = function (width, height, lockScale, id) {
     };
 }
 
-var ProductVO = function (id, categoryId, name, description, data, colors, locations, sizes, multicolor, namesNumbersEnabled, resizable, editableAreaSizes, minQuantity, pantones) {
+var ProductVO = function (id, categoryId, name, description, data, colors, locations, sizes, multicolor, namesNumbersEnabled, resizable,
+    editableAreaSizes, minQuantity, pantones, thumbUrl) {
     if (isNullOrUndefined(id)) id = 'product-' + (new Date().getTime());
     if (isNullOrUndefined(categoryId)) categoryId = 'product-category-' + (new Date().getTime());
     if (isNullOrUndefined(name)) name = '';
@@ -457,7 +505,8 @@ var ProductVO = function (id, categoryId, name, description, data, colors, locat
     if (isNullOrUndefined(pantones)) pantones = {};
     if (isNullOrUndefined(pantones.useForDecoration)) pantones.useForDecoration = false;
     if (isNullOrUndefined(pantones.useForDecoration)) pantones.useForProduct = false;
-
+    if (isNullOrUndefined(thumbUrl)) thumbUrl = "";
+         
     var self = this;
     self.id = ko.observable(id);
     self.name = ko.observable(name);
@@ -475,6 +524,7 @@ var ProductVO = function (id, categoryId, name, description, data, colors, locat
     self.pantones = ko.observable({});
     self.pantones().useForDecoration = ko.observable(pantones.useForDecoration);
     self.pantones().useForProduct = ko.observable(pantones.useForProduct);
+    self.thumbUrl = ko.observable(thumbUrl);
 
     self.fromObject = function (obj) {
         if (isNullOrUndefined(obj)) return;
@@ -532,6 +582,10 @@ var ProductVO = function (id, categoryId, name, description, data, colors, locat
         self.pantones().useForDecoration(pantones.useForDecoration);
         self.pantones().useForProduct(pantones.useForProduct);
 
+        if (!isNullOrUndefined(obj['thumbUrl'])) {
+            self.thumbUrl(obj['thumbUrl']);
+        }
+
         if (!isNullOrUndefined(obj['id'])) {    //Put it last to not interfere with lib settings
             self.id(obj['id']);
         }
@@ -540,17 +594,17 @@ var ProductVO = function (id, categoryId, name, description, data, colors, locat
 
 var ProductCategoryVO = function (obj) {
     if (isNullOrUndefined(obj)) obj = {};
-    if (isNullOrUndefined(obj.id)) id = 'product-category-' + (new Date().getTime());
-    if (isNullOrUndefined(obj.name)) name = '';
-    if (isNullOrUndefined(obj.thumbUrl)) thumbUrl = '';
-    if (isNullOrUndefined(obj.products)) products = [];
+    if (isNullOrUndefined(obj.id)) obj.id = 'product-category-' + (new Date().getTime());
+    if (isNullOrUndefined(obj.name)) obj.name = '';
+    if (isNullOrUndefined(obj.thumb)) obj.thumb = '';
+    if (isNullOrUndefined(obj.products)) obj.products = [];
     if (isNullOrUndefined(obj.categories)) obj.categories = [];
     if (isNullOrUndefined(obj.obj)) obj.obj = null;
 
     var self = this;
     self.id = ko.observable(obj.id);
     self.name = ko.observable(obj.name);
-    self.thumbUrl = ko.observable(obj.thumbUrl);
+    self.thumb = ko.observable(obj.thumb);
     self.obj = ko.observable(obj);
 
     var mappedProducts = ko.utils.arrayMap(obj.products, function (item) {
@@ -877,12 +931,19 @@ function LAControlsModel() {
 
     // selected product value object
     self.selectedProductVO = ko.observable(new ProductVO());
+    self.isTemplate  = ko.observable(false);
 
     self.selectProduct = function (product) {
-        if (product.id != self.selectedProductVO().id()) {
-            self.selectedProductVO().fromObject(product);
-        }
         liveartUI.closeActiveTab();
+        if (product.id != self.selectedProductVO().id()) {
+            var apply = true;
+            if(self.shouldClearOnProductChange(product.id)){
+                apply = confirm(laTranslation.translateUI("DESIGN_WILL_BE_CLEARED"));
+            }
+            if(apply) {
+                self.selectedProductVO().fromObject(product);
+            }
+        }
     };
 
     self.selectedProductVO().id.subscribe(function (id) {
@@ -903,6 +964,11 @@ function LAControlsModel() {
 
     self.showProductColorPicker = ko.computed(function () {
         return self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor();
+    });
+
+
+    self.showChangeColor = ko.computed(function () {
+        return (self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor()) || self.selectedProductVO().multicolor();
     });
 
     self.showChangeSizeAndColorTab = ko.computed(function () {
@@ -1104,6 +1170,7 @@ function LAControlsModel() {
     self.selectedProductLocation = ko.observable();
 
     self.selectProductLocation = function (location) {
+        liveartUI.closeActiveTab();
         self.selectedProductLocation(location.name);
     }
 
@@ -1568,9 +1635,8 @@ function LAControlsModel() {
      */
 
     /**
-  * GRAPHICS CATEGORY BEGINS HERE
-  */
-   
+      * GRAPHICS CATEGORY BEGINS HERE
+      */
     // tree if graphics categories
     self.graphicRootCategory = ko.observable(new GraphicsCategoryVO({ id: 'root' }));
 
@@ -1616,11 +1682,15 @@ function LAControlsModel() {
         self.extractGraphics(self.graphicRootCategory());
     });
 
+
+    self.showImageAddedInfo = ko.observable(false);
     //handlers - click on categories/graphics
     self.selectGraphicItem = function (categoryItem) {
         if (categoryItem.isImage()) {
             if (categoryItem.id()) {
-                jQuery("#image-added-info").show();
+                if(self.isCompact()){
+                    self.showImageAddedInfo(true);
+                }
                 userInteract({ addGraphics: categoryItem.id() });
             }
             return;
@@ -1629,8 +1699,8 @@ function LAControlsModel() {
     };
 
     self.removeMobileAddedGraphicsTooltip = function () {
-        jQuery("#image-added-info").hide();
-    }
+        self.showImageAddedInfo(false);
+    };
 
     //handlers - back button
     self.backGraphicItem = function () {
@@ -1792,6 +1862,15 @@ function LAControlsModel() {
     // return true if selected object is graphics
     self.selectedIsGraphics = ko.computed(function () { return self.selectedObjectType() == 'graphics'; });
 
+    self.replaceRequired = ko.observable(false);
+
+    self.showGallery = ko.computed(function () {
+        if((self.selectedIsGraphics() && self.replaceRequired()) || !self.selectedIsGraphics())
+            return true;
+        else
+            return false;
+    });
+
     self.selectedObjectPropertiesVO = ko.observable(new ObjectPropertiesVO());
 
     self.selectedObjectPropertiesVO().width.subscribe(function (value) {
@@ -1816,6 +1895,65 @@ function LAControlsModel() {
 
     self.selectedObjectDPUExceeded = ko.observable(false);
 
+    self.editArtworkTitle = ko.computed(function () {
+        if(self.replaceRequired())
+            return 'Replace Artwork';
+        else
+            return 'Edit Artwork';
+    });
+
+
+    /**
+     * TEMPLATES OBJECT BEGINS HERE
+     */
+
+    self.selectedObjectConstrained = ko.observable(false);
+
+    self.selectedObjectConstrained.subscribe(function (value) {
+        userInteract({ setConstained: self.selectedObjectConstrained() });
+        if (!value && self.selectedObjectFixedPosition()) {
+            self.selectedObjectFixedPosition(false);
+        }
+    });
+
+    self.showObjectConstraints = ko.observable(false);
+
+    self.showObjectConstraints.subscribe(function (value) {
+        userInteract({ showObjectConstraints: self.showObjectConstraints() });
+    });
+
+    self.selectedObjectConstraintString = ko.observable("");
+
+    self.selectedObjectRequired = ko.observable(false);
+
+    self.selectedObjectRequired.subscribe(function (value) {
+        userInteract({ setRequired: self.selectedObjectRequired() });
+        if (!value) {
+            self.selectedObjectFixedPosition(false);
+        }
+    });
+
+    self.selectedObjectFixedPosition = ko.observable(false);
+
+    self.selectedObjectFixedPosition.subscribe(function (value) {
+        userInteract({ setFixedPosition: self.selectedObjectFixedPosition() });
+
+        if (value && !self.selectedObjectConstrained()) {
+            self.selectedObjectConstrained(true);
+        }
+        if (value && !self.selectedObjectRequired()) {
+            self.selectedObjectRequired(true);
+        }
+    });
+
+    self.artworkTabTitle = ko.computed(function(){
+        if(self.selectedObjectRequired() && self.selectedIsGraphics())
+            return 'Edit Gallery Artwork';
+        else
+            return 'Add Gallery Artwork';
+    });
+
+
     /**
      * LETTERING OBJECT BEGINS HERE
      */
@@ -1825,10 +1963,12 @@ function LAControlsModel() {
 
     // public function that forces LiveArt to add new text
     self.addText = function () {
-        if (self.isCompact()) {
-            liveartUI.closeActiveTab();
+        var text = self.selectedLetteringVO().toObject();
+        if(self.selectedIsText()){
+            text.text = "";
         }
-        userInteract({ addText: self.selectedLetteringVO().toObject() });
+        // resetting text value
+        userInteract({ addText: text });
     };
 
     self.selectedLetteringVO().text.subscribe(function (value) {
@@ -2055,9 +2195,181 @@ function LAControlsModel() {
      */
 
     /**
-     * GRAPHICS OBJECT BEGINS HERE
+     * TEMPLATES LIST START
+     */
+    
+
+    // tree of templates categories
+    self.templateRootCategory = ko.observable(new TemplatesCategoryVO({ id: 'root' }));
+
+    // list of template categories
+    self.templateCatalogBreadcrumbs = ko.observableArray();
+
+    //selected template category
+    self.templateCurrentCategory = ko.computed(function () {
+        if (!self.templateCatalogBreadcrumbs() || self.templateCatalogBreadcrumbs().length < 1)
+            return new TemplatesCategoryVO();
+
+        var lastCatIdx = self.templateCatalogBreadcrumbs().length - 1;
+        return self.templateCatalogBreadcrumbs()[lastCatIdx];
+    });
+
+    //initialisation of template categories
+    self.templateCatalogLoaded = function (rootCategories) {
+        var mappedData = ko.utils.arrayMap(rootCategories, function (item) {
+            return new TemplatesCategoryVO(item);
+        });
+        self.templateRootCategory().categories(mappedData);
+        self.templateCatalogBreadcrumbs([self.templateRootCategory()]);
+    };
+
+    //initialisation of template categories
+    self.templateListLoaded = function (templates) {
+        var mappedData = ko.utils.arrayMap(templates, function (item) {
+            return new TemplatesCategoryVO(item);
+        });
+        self.templateRootCategory().templates(mappedData);
+        self.templateCatalogBreadcrumbs([self.templateRootCategory()]);
+    };
+
+    // list of all Templates items. Uses for searching
+    self.templatesList = [];
+
+    self.extractTemplates = function (category) {
+        var categories = category.categories();
+        for (var i = 0; i < categories.length; i++) {
+            var cat = categories[i];
+            self.extractTemplates(cat);
+        }
+        var templates = category.templates();
+        if (templates) {
+            for (var g = 0; g < templates.length; g++) {
+                self.templatesList.push(templates[g]);
+            }
+        }
+    }
+    self.templateRootCategory().categories.subscribe(function (categories) {
+        self.templatesList = [];
+        self.extractTemplates(self.templateRootCategory());
+    });
+
+    self.templateRootCategory().templates.subscribe(function (templates) {
+        self.templatesList = [];
+        self.extractTemplates(self.templateRootCategory());
+    });
+
+    //handlers - click on categories/templates
+    self.selectTemplateItem = function (categoryItem) {
+        if (categoryItem.isTemplate()) {
+            if (categoryItem.id()) {
+                liveartUI.closeActiveTab()
+                userInteract({
+                    loadTemplate: categoryItem.id()
+                });
+
+            }
+            return;
+        }
+        self.templateCatalogBreadcrumbs.push(categoryItem);
+    };
+    /*
+    self.removeMobileAddedGraphicsTooltip = function () {
+        jQuery("#image-added-info").hide();
+    }*/
+
+    //handlers - back button
+    self.backTemplateItem = function () {
+        if (!self.templateCatalogBreadcrumbs() || self.templateCatalogBreadcrumbs().length < 1)
+            return;
+
+        self.templateCatalogBreadcrumbs.pop();
+    };
+
+    //back button visibility
+    self.templateSelectedSubcategory = ko.computed(function () {
+        if (!self.templateCatalogBreadcrumbs() || self.templateCatalogBreadcrumbs().length < 1)
+            return true;
+
+        return self.templateCatalogBreadcrumbs().length > 1;
+    });
+
+    //Search
+    self.templatesSearchQuery = ko.observable("");
+    self.searchTemplatesResult = ko.observableArray();
+
+
+    self.templatesItemProcessor = function (query, templateItem) {
+        if (templateItem && query == self.templatesSearchQuery().toLowerCase()) {
+            //query match condition
+            var words = query.split(" ");
+            var match = true;
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+                if (word.length) {
+                    var localMatch = templateItem.name.toLowerCase().indexOf(word) > -1 || templateItem.description.toLowerCase().indexOf(word) > -1;
+                    match = localMatch && match;
+                }
+            }
+            if (match) {
+                for(var i = 0; i < self.searchTemplatesResult().length; i++){
+                    if(self.searchTemplatesResult()[i].id() === templateItem.id){
+                        return;
+                    }
+                }
+                self.searchTemplatesResult().push(new TemplatesCategoryVO(templateItem));
+            }
+        }
+    }
+    self.templateSearchPartFinished = function (query) {
+        self.searchTemplatesResult.notifySubscribers();
+        return query == self.templatesSearchQuery().toLowerCase();
+    }
+
+    self.templatesSearchQuery.subscribe(function (query) {
+        self.searchTemplatesResult([]);
+        self.templateCatalogBreadcrumbs([self.templateRootCategory()]);
+        self.search(query, self.templatesList, 100, self.templatesItemProcessor, self.templateSearchPartFinished);
+    });
+
+    self.clearTemplatesSearch = function () {
+        self.templatesSearchQuery("");
+    }
+
+    //breadcrumbs to string
+    self.templateBreadcrumbsString = ko.computed(function () {
+        var str = laTranslation.translateUI("ALL_CATEGORIES");
+        ko.utils.arrayForEach(self.templateCatalogBreadcrumbs(), function (item) {
+            if (item.id() != 'root')
+                str += " / " + item.name();
+        });
+
+        if (self.templatesSearchQuery().length > 0)
+            str = laTranslation.translateUI("SEARCH");
+        return str;
+    });
+
+    //Current templates - selected category or search result
+    self.currentTemplates = ko.computed(function () {
+        var query = self.templatesSearchQuery().toLowerCase();
+        var searchRes = self.searchTemplatesResult();
+        var result = [];
+
+        if (query.length > 0) {
+            result = searchRes;
+        } else {
+            result = self.templateCurrentCategory().children();
+        }
+
+        return result;
+    });
+
+    /**
+     * TEMPLATES LIST END
      */
 
+    /**
+     * GRAPHICS OBJECT BEGINS HERE
+     */
     // selected graphics format value object
     self.selectedGraphicsFormatVO = ko.observable(new GraphicsFormatVO(updateGraphicsColorize));
 
@@ -2085,7 +2397,14 @@ function LAControlsModel() {
     self.addAnotherArtwork = function () {
         userInteract({ deselectObject: true });
         liveartUI.showGraphicsForm();
-    }
+    };
+
+    self.replaceArtwork = function () {
+        if(self.selectedIsGraphics)
+            self.replaceRequired(true);
+        liveartUI.showGraphicsForm();
+        liveartUI.updateLazyLoadContainer();
+    };
 
     // private function that informs LiveArt about change in graphics (fill, stroke, etc.)
     function updateGraphics() {
@@ -2101,6 +2420,7 @@ function LAControlsModel() {
     self.socialShowUploadConditions = function (image) {
         self.customImageUrl(image);
         self.showUploadConditions("social");
+        userInteract({ deselectObject: true });
     }
 
     self.showUploadConditions = function (type) {
@@ -2108,9 +2428,35 @@ function LAControlsModel() {
 
         self.customImageType(type);
         jQuery("#liveart-upload-conditions-popup").modal("show");
+        userInteract({ deselectObject: true });
     }
 
+    self.showUploadTab = function () {
+        if(self.showSocialNetworksPhotos())
+            self.removeMobileUploadedGraphicsTooltip();
+        else{
+            liveartUI.closeActiveTab();
+            self.showUploadConditions('upload');
+        }
+    };
+    self.uploadButtonAttrs = function () {
+        if(self.showSocialNetworksPhotos())
+            return {
+                "href": "#upload-graphics-form",
+                "aria-controls": "upload-graphics-form",
+                "role": "tab",
+                "data-toggle": "tab"
+            };
+        else
+            return {};
+    };
+
     self.strictTemplate = ko.observable(false);
+    //strictTemplate UI restriction available only for users
+    self.strictTemplateMode = ko.computed(function () {
+        return self.strictTemplate() && !self.adminMode();
+    });
+
 
     self.customImageType = ko.observable('');
 
@@ -2142,6 +2488,8 @@ function LAControlsModel() {
         if (self.isCompact()) {
             liveartUI.closeActiveTab();
         }
+        if(self.selectedObjectRequired)
+            self.replaceRequired(true);
         userInteract({
             uploadGraphics: url
         });
@@ -2354,8 +2702,8 @@ function LAControlsModel() {
         });
     }
     jQuery('#upload-graphics-form > .expanded-part .liveart-close-expanded-part-btn').click(function (e) {
-        jQuery(e.currentTarget).parents('.tab-pane').toggleClass('expanded');
-        self.currentNetwork(null);
+      //  jQuery(e.currentTarget).parents('.tab-pane').toggleClass('expanded');
+   //     self.currentNetwork(null);
     });
 
     // binding scroll to load next photos
@@ -2550,8 +2898,17 @@ function LAControlsModel() {
     function parseObjectAttributes(selectedObject) {
         self.suppressTextUpdate = true;
         if (selectedObject == null) {
-            if (self.selectedObjectType() == "graphics") {
-                liveartUI.closeActiveTab();
+            if(!self.adminMode()) {
+                if(liveartUI.isTextTabActive()){
+                    // TODO: replace this hell. Fixing text tab blinking on "Add New" click
+                    setTimeout(function(){
+                        if(self.selectedObjectType() === 'none')
+                            liveartUI.closeActiveTab();
+                    }, 300);
+                } else {
+                    liveartUI.closeActiveTab();
+                }
+
             }
 
             self.selectedObjectType('none');
@@ -2564,6 +2921,13 @@ function LAControlsModel() {
             }
             liveartUI.updateLazyLoadContainer();
         } else {
+            // ADMIN MODE: 
+            self.selectedObjectConstrained(selectedObject.constrained);
+            self.showObjectConstraints(selectedObject.showConstraints);
+            self.selectedObjectConstraintString(selectedObject.constraintString);
+            self.selectedObjectRequired(selectedObject.required);
+            self.selectedObjectFixedPosition(selectedObject.fitConstraints);
+
             // hiding color picker on another object selecting. LAJS/TASK740 fix
             if (self.selectedObjectPropertiesVO().id() != selectedObject.id) {
                 jQuery.fn.colorPicker.hidePalette();
@@ -2574,17 +2938,19 @@ function LAControlsModel() {
                 self.selectedLetteringVO().fromObject(selectedObject);
                 self.setTextEffect();
                 self.selectedObjectDPUExceeded(false);
-                openTextForm();
+                if (!self.adminMode()) { openTextForm(); }
             } else {
                 self.selectedObjectType('graphics');
                 self.selectedGraphicsFormatVO().fromObject(selectedObject);
                 self.selectedObjectDPUExceeded(selectedObject.dpuExceeded);
                 
                 if (self.selectedObjectPropertiesVO().id() != selectedObject.id) {
-                    if (selectedObject.sourceId && selectedObject.sourceId != "") {
-                        openGraphicsForm();
-                    } else {
-                        openUploadGraphicsForm();
+                    if (!self.adminMode()) {
+                        if (selectedObject.sourceId && selectedObject.sourceId != "") {
+                            openGraphicsForm();
+                        } else if(self.showSocialNetworksPhotos()){
+                            openUploadGraphicsForm();
+                        }
                     }
                 } 
             }
@@ -2592,6 +2958,8 @@ function LAControlsModel() {
         self.selectedObjectPropertiesVO().fromObject(selectedObject);
 
         self.suppressTextUpdate = false;
+
+        self.replaceRequired(false);
 
         setTimeout(function () {
             var evt = document.createEvent("Event");
@@ -2690,10 +3058,7 @@ function LAControlsModel() {
 
             // clean name/numbers
             self.removeAllNameNumbers();
-
-            userInteract({
-                clearDesign: true
-            });
+            userInteract({ clearDesign: true });
         }
     }
 
@@ -2776,7 +3141,11 @@ function LAControlsModel() {
 
     self.designName = ko.observable("");
 
-
+    /*
+    * Design Idea is a saved template by admin with some restrictions which user can load from the list
+    */
+    self.designIdeaName = ko.observable("");
+    self.designIdeaNameIsValid = ko.computed(function () { return self.designIdeaName() != ""; });
     /**
      * DESIGN INFO BEGINS HERE
      */
@@ -2849,7 +3218,7 @@ function LAControlsModel() {
     self.dpuExceedConfirmed = ko.observable(false);
 
     self.imageColorCount = ko.observable(new ImageColorCountVO());
-
+    self.hideDesignIdeas = ko.observable(false);
     /**
      * MODAL OPTIONS END HERE
      */
@@ -2963,6 +3332,13 @@ function LAControlsModel() {
         self.preloaderStatus(status);
     });
 
+    /**
+    * ADMIN MODE
+    */
+    self.adminMode = ko.observable(false);
+    // complex art admin mode (CAAM)
+    self.caaMode = ko.observable(false);
+
     self.showPlaceOrderPreloader = ko.observable(false);
     self.showPlaceOrderPreloader.subscribe(function (value) {
         var status = { showPreloader: false, text: laTranslation.translateUI("PLACING_ORDER_MESSAGE") };
@@ -2973,23 +3349,33 @@ function LAControlsModel() {
     });
 
     self.preloaderStatus = ko.observable({});
+    var preloaderTimeot;
     self.preloaderStatus.subscribe(function (value) {
-        if (value) {
-            if (value.showPreloader) {
-                jQuery("#liveart-preloader").modal('show');
-
-                var textValue = laTranslation.translateUI("LOADING_MESSAGE");
-                if (value.text) {
-                    textValue = value.text;
-                } 
-                var $text = jQuery("#liveart-preloader").find(".preloader-text");
-                if ($text && $text.length) {
-                    $text[0].innerHTML  = textValue;
-                }
-            } else {
-                jQuery("#liveart-preloader").modal('hide');
-            }
+        if(preloaderTimeot){
+            clearTimeout(preloaderTimeot)
         }
+        preloaderTimeot = setTimeout(function(){
+            value = self.preloaderStatus();
+            if (value) {
+                if (value.showPreloader) {
+                    jQuery("#liveart-preloader").modal('show');
+
+                    var textValue = laTranslation.translateUI("LOADING_MESSAGE");
+                    if (value.text) {
+                        textValue = value.text;
+                    }
+                    var $text = jQuery("#liveart-preloader").find(".preloader-text");
+                    if ($text && $text.length) {
+                        $text[0].innerHTML  = textValue;
+                    }
+                } else {
+                    jQuery("#liveart-preloader").modal('hide');
+                    if (liveArtResponsive && liveArtResponsive.resize)
+                        liveArtResponsive.resize();
+                }
+            }
+        }, 100);
+
     });
 
 
@@ -2998,7 +3384,7 @@ function LAControlsModel() {
      */
 
     self.isEnabledToolsButton = ko.computed(function () {
-        return !self.strictTemplate();
+        return !self.strictTemplateMode();
     });
     self.disableObjectToolsAction = ko.computed(function () {
         return !self.hasSelected();
@@ -3032,6 +3418,12 @@ function LAControlsModel() {
             self.addAlert(msg, "warning");
         }
     });
+
+
+    // This function will be overwritten from core
+    self.shouldClearOnProductChange  = function() {return false;};
+
+    self.addingNewText = ko.observable(false);
 
     /**
      * UPDATE VIEW MODEL BEGINS HERE
@@ -3281,6 +3673,17 @@ function LAControlsModel() {
             validate(invalidateList, 'textEffects');
         }
 
+        // fill templates categories list
+        if (isInvalid(invalidateList, 'templatesCategories')) {
+            self.templateCatalogLoaded(model.templatesCategories);
+            validate(invalidateList, 'templatesCategories');
+        }
+        // fill templates list
+        if (isInvalid(invalidateList, 'templatesList')) {
+            self.templateListLoaded(model.templatesList);
+            validate(invalidateList, 'templatesList');
+        }
+
         if (isInvalid(invalidateList, 'showProductSelector')) {
             self.showProductSelector(model.showProductSelector);
             validate(invalidateList, 'showProductSelector');
@@ -3289,7 +3692,7 @@ function LAControlsModel() {
         if (isInvalid(invalidateList, 'objDClicked') && model.objDClicked) {
             var a = self.selectedObjectType();
             if (self.selectedObjectType() === 'text') {
-                openTextForm();
+                liveartUI.showTextForm();
             }
             validate(invalidateList, 'objDClicked');
         }
@@ -3363,6 +3766,28 @@ function LAControlsModel() {
             validate(invalidateList, 'dictionary');
         }
 
+        if (isInvalid(invalidateList, 'isTemplate')) {
+            self.isTemplate(model.isTemplate);
+            updateMainMenuCount();
+            validate(invalidateList, 'isTemplate');
+        }
+
+        if (isInvalid(invalidateList, 'showPreloader')) {
+            liveartUI.showPreloader();
+            validate(invalidateList, 'showPreloader');
+        }
+
+        if (isInvalid(invalidateList, 'hidePreloader')) {
+            liveartUI.hidePreloader();
+            validate(invalidateList, 'hidePreloader');
+        }
+
+        if (isInvalid(invalidateList, 'hideDesignIdeas')) {
+            self.hideDesignIdeas(model.hideDesignIdeas);
+            updateMainMenuCount();
+            validate(invalidateList, 'hideDesignIdeas');
+        }
+
         if (isInvalid(invalidateList, 'currentDesign')) {
             setCurrentDesign(model.currentDesign);
             validate(invalidateList, 'currentDesign');
@@ -3384,7 +3809,15 @@ function LAControlsModel() {
             self.showSutableColorize(model.showSutableColorize);
             validate(invalidateList, 'showSutableColorize');
         }
-        
+
+        if (isInvalid(invalidateList, 'shouldClearOnProductChange')) {
+            self.shouldClearOnProductChange  = model.shouldClearOnProductChange;
+            validate(invalidateList, 'shouldClearOnProductChange');
+        }
+        if (isInvalid(invalidateList, 'caaMode')) {
+            self.caaMode(model.caaMode);
+            validate(invalidateList, 'caaMode');
+        }
 
         self.suppressUpdate = false;
     }
@@ -3774,6 +4207,19 @@ jQuery('.modal').on('hidden.bs.modal', function () { // handle all modal dialog 
     });
 });
 
+jQuery('a[href=\'#add-graphics-form\']').on('shown.bs.tab', function () {
+    controlsModel.replaceRequired(false);
+});
+jQuery('a[href=\'#add-text-form\']').on('shown.bs.tab', function () {
+    if(!controlsModel.selectedIsText()){
+        controlsModel.addText();
+        controlsModel.addingNewText(true);
+    } else {
+        controlsModel.addingNewText(false);
+    }
+});
+
+
 /** Validatin block starts here */
 function isEmailValid(email) {
     var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -4116,6 +4562,19 @@ function placeOrderHandler(id) {
     jQuery("#place-order-btn").button("reset");
 }
 
+function onSaveDesignIdea() {
+    jQuery("#liveart-save-template-popup").modal("show");
+}
+function onSaveDesignIdeaDialogSubmit(event) {
+    if ((event == null || event.keyCode == 13) && controlsModel.designIdeaNameIsValid()) {
+        var name = controlsModel.designIdeaName();
+        userInteract({
+            saveTemplate: name
+        });
+
+        jQuery("#liveart-save-template-popup").modal("hide");
+    }
+}
 function onPlaceOrderFail() {
     //TODO: move/wrap to some API
     jQuery("#place-order-btn").button("reset");
@@ -4147,6 +4606,10 @@ jQuery(document).click(function (event) {
 
 // Setting up default container for color pickers
 jQuery.fn.colorPicker.defaults.container = jQuery("#liveart-isolate-container");
+
+function onDPUexceeded(event) {
+    jQuery("#dpu-exceeded-info-popup").modal("show");
+}
 
 /**
  * MODAL POPUP WINDOWS AND BUTTONS EVENTS END HERE

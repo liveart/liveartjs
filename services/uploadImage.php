@@ -2,8 +2,12 @@
 error_reporting(E_ERROR | E_PARSE | E_WARNING);
 header("Access-Control-Allow-Origin: *");
 
-$absolute_path = "files/uploads/";
-$relative_path = "../files/uploads/";
+require_once('configs.php');
+use Liveart\Configs as Configs;
+$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+
+$absolute_path = Configs::$UPLOAD_RELATIVE_PATH;
+$relative_path = $lajsFolder . Configs::$UPLOAD_RELATIVE_PATH;
 if (!is_dir($relative_path)) {
 	mkdir($relative_path, 777, true);
 }
@@ -44,7 +48,7 @@ if (isset($_FILES["image"])) {
 	echo json_encode($response);
 };
 
-// upload by url — deprecated
+// upload by url - deprecated
 if (isset($_POST['fileurl'])) {
 	$response = array("url"=>"","error"=>false,"msg"=>"");
 	$url = urldecode($_POST['fileurl']);

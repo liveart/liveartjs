@@ -6,6 +6,8 @@
 */
 	error_reporting(E_ERROR | E_PARSE);
 	header('Access-Control-Allow-Origin: *');
+    require_once('configs.php');
+    use Liveart\Configs as Configs;
 	
 	// get and process data
     if(strtolower($_SERVER['CONTENT_TYPE'])=="application/json;charset=utf-8"){
@@ -19,7 +21,7 @@
 	$json = json_decode($rawJsonStr);
 
 	// pure hard-code, you'd probably store the products data in DB
-	$products = json_decode(file_get_contents("../config/products.json"));
+	$products = json_decode(file_get_contents(Configs::$LAJS_FOLDER_PATH . "/config/products.json"));
 	// get the data
 	
 	$price = 20; // some default price

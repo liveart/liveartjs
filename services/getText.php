@@ -1,10 +1,13 @@
-<?php
+<?
+    require_once('configs.php');
+    use Liveart\Configs as Configs;
+	$lajsFolder = Configs::$LAJS_FOLDER_PATH;
 
 	//ini_set('display_errors',1);
 	//error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 	// TODO get fonts from config
 	// TODO implement correct temp text file storage
-	$temp_file = "../files/text".time().".png";
+	$temp_file = $lajsFolder . "files/text".time().".png";
 
 	// TODO implement correct storage flush if required
 	// if (file_exists($temp_file)) { unlink($temp_file); }
@@ -15,7 +18,7 @@
 		$fx = $_GET["fx"];
 	}
 	array_push($params, "-e ".$fx);
-	array_push($params, '-f "../fonts/Ubuntu/Ubuntu-R.ttf"');
+	array_push($params, '-f "' . $lajsFolder .'fonts/Ubuntu/Ubuntu-R.ttf"');
 	if (empty($_GET["p"])) {
 		if (empty ($_GET["s"])) { 
 			$size = "400x"; 
@@ -35,10 +38,10 @@
 	array_push($params, '-x 0');
 	$line = './texteffect '.implode(" ", $params).' '.$temp_file;
 
-	//$line = './texteffect -t "'.$_GET["t"].'" -e arch-top -f "../fonts/Ubuntu/Ubuntu-R.ttf" -p "'.$_GET["p"].'" -c black -b transparent -x 0 '.$temp_file;
+	//$line = './texteffect -t "'.$_GET["t"].'" -e arch-top -f "' . $lajsFolder . 'fonts/Ubuntu/Ubuntu-R.ttf" -p "'.$_GET["p"].'" -c black -b transparent -x 0 '.$temp_file;
 
 	$t = exec($line);
-	//error_log("EXEC:".$line, 3, "../files/.log");
+	//error_log("EXEC:".$line, 3, $lajsFolder . "files/.log");
 
 	if (isset($_GET["debug"])) {
 		echo $line;

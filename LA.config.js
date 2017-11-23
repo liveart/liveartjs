@@ -6,8 +6,15 @@ var laOptions = {
     dimensions: [587, 543]
 };
 
+
+//Enabling Admin mode
+var isAdmin = getQueryParam("admin", "boolean") || false;
+laOptions.adminMode = isAdmin;
+controlsModel.adminMode(isAdmin);
+
 laOptions.defaultDesignId = getQueryParam("design_id");
 laOptions.defaultProductId = getQueryParam("product_id");
+controlsModel.caaMode(isAdmin && typeof laOptions.defaultProductId !== "string" && typeof laOptions.defaultDesignId !== "string");
 laOptions.defaultGraphicId = getQueryParam("graphic_id");
 laOptions.defaultProductAttributes = {};
 
@@ -30,6 +37,12 @@ liveArt.init(document.getElementById('canvas-container'), configFile, controlsUp
 /**
  * LIVEART INITALIZATION ENDS HERE
  */
+
+// liveart-template-saved event will be triggered on save template
+document.addEventListener("liveart-template-saved", function(event){
+    // event.value - saveTemplate response data
+});
+
 
 function getQueryParam(param, type) {
     var val = decodeURI((RegExp(param + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);

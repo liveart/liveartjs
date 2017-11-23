@@ -28,6 +28,36 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.27 RELEASE NOTES
+Deprecated:
+- deprecated `categories[].thumbUrl` and `products[].thumbUrl`, in `productCategoriesList`
+  - use `thumb` instead
+
+API changes:
+- added `config.options.fitEditableArea`; default value - false
+    - if false: process *product.location.editableArea* and *product.location.clipRect* in coordinate system of canvas
+    - if true (recommended): process *product.location.editableArea* and *product.location.clipRect* in coordinate system of product image
+- added `categories[].thumb` and `products[].thumb` in `productCategoriesList` (uniform attr)
+
+Features:
+- Added Design Ideas (Templates). Read more: https://liveart.uservoice.com/knowledgebase/articles/1814230-templates
+
+Fixes:
+- Fixed mouse click detection
+- Added viewBox parsing for uploaded .svg images 
+
+Updates:
+- Refactored PHP services (divided into modules, easy to integrate, added config.php with settings)
+  - Note: API is preserved
+
+UI Updates:
+- Fixed upload pop-up cropping on mobiles
+- Fixed shifted object position on drag/resize/rotate
+- Moved DPU warning to Add/Edit graphics tab
+- Other small changes to increase UX
+- translation changes (Added keys):
+    - SAVING_TEMPLATE_MESSAGE
+
 ### 0.10.26 RELEASE NOTES
 Fixes:
 - Fixed snapping to the center approximation

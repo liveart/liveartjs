@@ -3,12 +3,12 @@
     {
       "id": "r1",
       "name": "Clothing",
-      "thumbUrl": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
+      "thumb": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
       "categories": [
         {
           "id": "1",
           "name": "Apparel",
-          "thumbUrl": "products/cool-t-shirt/thumbs/apparel_cat.jpg",
+          "thumb": "products/cool-t-shirt/thumbs/apparel_cat.jpg",
           "products": [
             {
               "id": "11",
@@ -21,9 +21,14 @@
               },
               "pantones": {
                 "useForDecoration": true,
-                "useForProduct":  true
+                "useForProduct": true
               },
-              "thumbUrl": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
+              "restrictions": {
+                "enableLettering": false,
+                "enableGraphics": false,
+                "enableColorizing": false
+              },
+              "thumb": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
               "namesNumbersEnabled": true,
               "multicolor": true,
               "minQuantity": 5,
@@ -115,7 +120,7 @@
             {
               "id": "11a",
               "categoryId": "1",
-              "name": "Cool Tee 1",
+              "name": "Cool Tee",
               "description": "A perfect sample tee, raster images",
               "data": {
                 "price": "29"
@@ -123,7 +128,238 @@
               "pantones": {
                 "useForDecoration": true
               },
-              "thumbUrl": "products/cool-t-shirt/thumbs/t-shirt-yellow.png",
+              "thumb": "products/cool-t-shirt/thumbs/t-shirt-yellow.png",
+              "minQuantity": 7,
+              "locations": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg",
+                  "editableArea": [
+                    175,
+                    70,
+                    420,
+                    520
+                  ],
+                  "editableAreaUnits": [
+                    5,
+                    10
+                  ]
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg",
+                  "editableArea": [
+                    175,
+                    50,
+                    420,
+                    500
+                  ],
+                  "editableAreaUnits": [
+                    49,
+                    90
+                  ]
+                }
+              ],
+              "colors": [
+                {
+                  "name": "Aero",
+                  "value": "#9cb8d0",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "White",
+                  "value": "#FFF",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Alizarin",
+                  "value": "#d76366",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Aqua",
+                  "value": "#529993",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Cherry",
+                  "value": "#704b52",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Forest Green",
+                  "value": "#529a51",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Gray",
+                  "value": "#8d8d8d",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Indigo",
+                  "value": "#815ac7",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Olive",
+                  "value": "#a4ab5e",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Yellow",
+                  "value": "#d98c46",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pink",
+                  "value": "#dd7ca5",
+                  "location": [
+                    {
+                      "name": "Front",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_front.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                    },
+                    {
+                      "name": "Back",
+                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_back.jpg",
+                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                    }
+                  ]
+                }
+              ],
+              "sizes": [
+                "XS",
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "11t",
+              "categoryId": "1",
+              "name": "Cool Tee Templates",
+              "description": "A perfect sample tee, raster images, templates",
+              "data": {
+                "price": "29"
+              },
+              "pantones": {
+                "useForDecoration": true
+              },
+              "thumb": "products/cool-t-shirt/thumbs/t-shirt-templates.png",
               "minQuantity": 7,
               "locations": [
                 {
@@ -351,7 +587,7 @@
               "multicolor": true,
               "minQuantity": 3,
               "minDPU": 1,
-              "thumbUrl": "products/cap/thumb/cap.jpg",
+              "thumb": "products/cap/thumb/cap.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -419,7 +655,7 @@
               "description": "A vector multicolor image, one colorizable area, no sizes",
               "multicolor": true,
               "minQuantity": 10,
-              "thumbUrl": "products/hoodie/hoodie_front.svg",
+              "thumb": "products/hoodie/hoodie_front.svg",
               "locations": [
                 {
                   "name": "Front",
@@ -503,7 +739,7 @@
         {
           "id": "2",
           "name": "Multicolor Uniform",
-          "thumbUrl": "products/uniform/thumb/uniform_cat.jpg",
+          "thumb": "products/uniform/thumb/uniform_cat.jpg",
           "products": [
             {
               "id": "21",
@@ -512,7 +748,7 @@
               "description": "A perfect uniform",
               "multicolor": true,
               "price": "29",
-              "thumbUrl": "products/uniform/thumb/respawn.jpg",
+              "thumb": "products/uniform/thumb/respawn.jpg",
               "namesNumbersEnabled": true,
               "pantones": {
                 "useForDecoration": false,
@@ -620,7 +856,7 @@
               "description": "A perfect uniform",
               "multicolor": true,
               "price": "29",
-              "thumbUrl": "products/uniform/thumb/renegade.jpg",
+              "thumb": "products/uniform/thumb/renegade.jpg",
               "namesNumbersEnabled": true,
               "locations": [
                 {
@@ -710,12 +946,12 @@
     {
       "id": "r2",
       "name": "Things",
-      "thumbUrl": "products/mug/thumb/mug.jpg",
+      "thumb": "products/mug/thumb/mug.jpg",
       "categories": [
         {
           "id": "3",
           "name": "Promotional items",
-          "thumbUrl": "products/tote/thumb/promotional_cat.jpg",
+          "thumb": "products/tote/thumb/promotional_cat.jpg",
           "products": [
             {
               "id": "31",
@@ -723,7 +959,7 @@
               "categoryId": "3",
               "description": "A vector multicolor image, one colorizable area, no sizes",
               "multicolor": true,
-              "thumbUrl": "products/mug/thumb/mug.jpg",
+              "thumb": "products/mug/thumb/mug.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -811,7 +1047,7 @@
               "categoryId": "3",
               "description": "A vector multicolor image, one colorizable area, no sizes",
               "multicolor": true,
-              "thumbUrl": "products/tote/thumb/tote.jpg",
+              "thumb": "products/tote/thumb/tote.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -888,7 +1124,7 @@
               "categoryId": "3",
               "multicolor": true,
               "minQuantity": 15,
-              "thumbUrl": "products/flash-drive/thumb/flash_drive.jpg",
+              "thumb": "products/flash-drive/thumb/flash_drive.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -928,7 +1164,7 @@
               "name": "Bottle",
               "categoryId": "3",
               "multicolor": true,
-              "thumbUrl": "products/bottle/thumb/bottle.jpg",
+              "thumb": "products/bottle/thumb/bottle.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -964,7 +1200,7 @@
               "name": "Koozie",
               "categoryId": "3",
               "multicolor": true,
-              "thumbUrl": "products/koozie/thumb/koozie.jpg",
+              "thumb": "products/koozie/thumb/koozie.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -1032,7 +1268,7 @@
         {
           "id": "phones",
           "name": "Phone Covers",
-          "thumbUrl": "products/iPhone/thumb/phone_cat.jpg",
+          "thumb": "products/iPhone/thumb/phone_cat.jpg",
           "products": [
             {
               "id": "iPhone_5",
@@ -1040,7 +1276,7 @@
               "description": "raster mask, multicolor (1 colorizable area), no editable area, 2 sizes",
               "categoryId": "phones",
               "multicolor": "true",
-              "thumbUrl": "products/iPhone/iPhone - small.png",
+              "thumb": "products/iPhone/iPhone - small.png",
               "locations": [
                 {
                   "name": "Back",
@@ -1103,7 +1339,7 @@
               "name": "Samsung",
               "categoryId": "phones",
               "multicolor": true,
-              "thumbUrl": "products/iPhone/SGS4CS-small.png",
+              "thumb": "products/iPhone/SGS4CS-small.png",
               "locations": [
                 {
                   "name": "Back",
@@ -1151,12 +1387,12 @@
     {
       "id": "r3",
       "name": "Paper",
-	  "thumbUrl": "products/stationary/thumb/a4.jpg",
+	  "thumb": "products/stationary/thumb/a4.jpg",
       "categories": [
         {
           "id": "4",
           "name": "Signs/Decals",
-          "thumbUrl": "products/signs/thumb/sign_cat.jpg",
+          "thumb": "products/signs/thumb/sign_cat.jpg",
           "products": [
             {
               "id": "41",
@@ -1166,7 +1402,7 @@
               "resizable": true,
               "minQuantity": 3,
               "showRuler": true,
-              "thumbUrl": "products/signs/thumb/stand_sign.jpg",
+              "thumb": "products/signs/thumb/stand_sign.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -1249,7 +1485,7 @@
                   "height": 4
                 }
               ],
-              "thumbUrl": "products/signs/thumb/bumper.png",
+              "thumb": "products/signs/thumb/bumper.png",
               "locations": [
                 {
                   "name": "Front",
@@ -1310,7 +1546,7 @@
               "name": "Truck Magnet (12x24in)",
               "categoryId": "4",
               "multicolor": true,
-              "thumbUrl": "products/signs/thumb/truck_magnet.png",
+              "thumb": "products/signs/thumb/truck_magnet.png",
               "locations": [
                 {
                   "name": "Front",
@@ -1372,7 +1608,7 @@
               "name": "Car Magnet (12x18in)",
               "categoryId": "4",
               "multicolor": true,
-              "thumbUrl": "products/signs/thumb/car_magnet.png",
+              "thumb": "products/signs/thumb/car_magnet.png",
               "locations": [
                 {
                   "name": "Front",
@@ -1433,7 +1669,7 @@
         {
           "id": "5",
           "name": "Stationery",
-          "thumbUrl": "products/stationary/thumb/stationary_cat.jpg",
+          "thumb": "products/stationary/thumb/stationary_cat.jpg",
           "products": [
             {
               "id": "51",
@@ -1441,7 +1677,7 @@
               "categoryId": "5",
               "showRuler": true,
               "hideEditableAreaBorder": true,
-              "thumbUrl": "products/stationary/thumb/a4.jpg",
+              "thumb": "products/stationary/thumb/a4.jpg",
               "locations": [
                 {
                   "name": "Front",
@@ -1481,7 +1717,7 @@
               "multicolor": true,
               "showRuler": true,
               "hideEditableAreaBorder": true,
-              "thumbUrl": "products/stationary/thumb/b_card.jpg",
+              "thumb": "products/stationary/thumb/b_card.jpg",
               "locations": [
                 {
                   "name": "Front",

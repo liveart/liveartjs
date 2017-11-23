@@ -57,10 +57,14 @@
 
     <!-- LiveArt Designer Fonts -->
     <link rel="stylesheet" href="fonts/fonts.css" type="text/css" />
+
+    <!-- LiveArt Designer Adoptive Canvas (requires '.fullSize' for '#liveart-main-container') -->
+    <script src="assets/js/resize.less.js"></script>
+    <script src="assets/js/resize.script.js"></script>
 </head>
 <body>
 <div id="liveart-isolate-container">   
-    <div id="liveart-main-container">
+    <div id="liveart-main-container" class="">
         <div id="liveart-header"><strong>LIVEART</strong><span>HTML5</span></div>
         <div id="liveart-init-preloader" data-bind="visible: !$root.status().completed">
             <h5 data-bind="text: $root.status().message" class="text-center text-info"></h5>
@@ -72,23 +76,37 @@
         <div id="liveart-content" data-bind="visible: $root.status().completed" style="display: none">
             <div id="main-controls-container" class="liveart-panel-container">
                 <ul class="nav nav-stacked liveart-list-view" role="tablist" id="liveart-main-menu">
-                    <li id="select-product" class="liveart-dropdown" data-bind="visible: showProductSelector()">
+
+                    <li id="select-template" class="liveart-dropdown" data-bind="visible: !adminMode() && !hideDesignIdeas()">
+                        <a href="#select-template-form" aria-controls="select-template-form" role="tab" data-toggle="tab">
+                            <img src="assets/img/add-design-ideas-icon.svg" class="inject-me" />
+                            <label>Design Ideas</label>
+                        </a>
+                    </li>
+                    <li id="admin-container" class="liveart-dropdown" data-bind="visible: adminMode() && !caaMode()">
+                        <a href="#admin-mode-form" aria-controls="admin-mode-form" role="tab" data-toggle="tab">
+                            <span class="glyphicon glyphicon-cog"></span> 
+                            <label>Admin Mode</label>
+                        </a>
+                    </li>       
+                    <li id="select-product" class="liveart-dropdown" data-bind="visible: showProductSelector() && !caaMode()">
                         <a href="#select-product-form" aria-controls="select-product-form" role="tab" data-toggle="tab">
                             <img src="assets/img/select-product-icon.svg" class="inject-me" />
                             <label>Select Product</label>
                         </a>
-                    </li>                      
-                    <li id="change-colours" class="liveart-dropdown" data-bind="visible: !strictTemplate() && showChangeSizeAndColorTab">
+                    </li>           
+                    <li id="change-colours" class="liveart-dropdown" data-bind="visible: !strictTemplate() && showChangeSizeAndColorTab() && !caaMode()">
                         <a href="#product-colors-form" aria-controls="product-colors-form" role="tab" data-toggle="tab">
                             <img src="assets/img/product-color-icon.svg" class="inject-me" />
                             <label data-bind="if: !selectedProductVO().resizable()">Product Color</label>
                             <label data-bind="if: selectedProductVO().resizable()">Product Color and Size</label>
                         </a>
                     </li>
-                    <li id="add-text" class="liveart-dropdown" data-bind="visible: !strictTemplate() || hasSelected()">
+                    <li id="add-text" class="liveart-dropdown"  data-bind="visible: adminMode() || (!strictTemplateMode() && !isTemplate()) || (strictTemplateMode() && selectedIsText())">
                         <a href="#add-text-form" aria-controls="add-text-form" role="tab" data-toggle="tab">
                             <img src="assets/img/add-text-icon.svg" class="inject-me" />
-                            <label>Add Text</label>
+                            <label data-bind="visible: !selectedIsText()">Add Text</label>
+                            <label data-bind="visible: selectedIsText">Edit Text</label>
                         </a>
                     </li>
                     <li id="add-names" class="liveart-dropdown" data-bind="visible: $root.selectedProductVO().namesNumbersEnabled()">
@@ -97,22 +115,24 @@
                             <label>Add Names and Numbers</label>
                         </a>
                     </li>
-                    <li id="add-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate()">
+                    <li id="add-graphics" class="liveart-dropdown" data-bind="visible: adminMode() || (!strictTemplateMode() && !isTemplate()) || (strictTemplateMode() && selectedIsGraphics()), click: $root.removeMobileAddedGraphicsTooltip">
                         <a href="#add-graphics-form" aria-controls="add-graphics-form" role="tab" data-toggle="tab">
                             <img src="assets/img/add-image-icon.svg" class="inject-me" />
-                            <label>Add Gallery Artwork</label>
+                            <span class="badge menu-warning-badge" data-bind="visible: selectedIsGraphics() && selectedObjectDPUExceeded()">!</span>
+                            <label data-bind="text: artworkTabTitle">Add Gallery Artwork</label>
                         </a>
                     </li>
-                    <li id="upload-graphics" class="liveart-dropdown" data-bind="visible: !strictTemplate()" >
-                        <a href="#upload-graphics-form" aria-controls="upload-graphics-form" role="tab" data-toggle="tab">
+                    <li id="upload-graphics" class="liveart-dropdown" data-bind="visible: adminMode() || (!strictTemplateMode() && !isTemplate()) || (strictTemplateMode() && selectedIsGraphics()), click: $root.showUploadTab" >
+                        <a data-bind="attr: $root.uploadButtonAttrs()">
                             <img src="assets/img/upload-artwork-icon.svg" class="inject-me" />
                             <label>Upload Artwork</label>
                         </a>   
                     </li>
-                    <li id="save-share-load" class="liveart-dropdown">
+
+                    <li id="save-share-load" class="liveart-dropdown" data-bind="visible: !adminMode()">
                         <a href="#save-share-load-form" aria-controls="save-share-load-form" role="tab" data-toggle="tab">
                             <img src="assets/img/share-design-icon.svg" class="inject-me" />
-                            <label>Save & Share</label>
+                            <label>Save, Share & Load</label>
                         </a>   
                     </li>
                     <li id="clear-design" class="liveart-dropdown" data-bind="click: clearDesign">
@@ -123,6 +143,48 @@
                     </li>
                 </ul>    
                 <div class="liveart-tabs-content tab-content">
+                    <!-- SELECT PRODUCT FORM starts -->
+                    <div role="tabpanel" id="admin-mode-form" class="tab-pane fade liveart-panel small-tab">
+                        <div class="liveart-dropdown-form-header">
+                            <span> Admin Tab</span>
+                            <a class="liveart-close-window-btn liveart-close-form-btn"></a>
+                        </div>
+                        <ul id="constraints-list">
+                            <li id="constraints-container" class="liveart-dropdown">
+                                <h6>Constraints</h6>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: selectedObjectRequired"> Required
+                                    </label>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-html="true" title="User can not remove 'Required' object"> </span>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: selectedObjectFixedPosition"> Fixed Position
+                                    </label>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-html="true" title="User can not drag/rotate 'Fixed Position' object"> </span>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" data-bind="checked: selectedObjectConstrained"> Constrained
+                                    </label>
+                                    <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-html="true" title="Constraints for an object"> </span>
+                                </div>
+                                <div class="offsetleft" data-bind="visible: selectedObjectConstrained">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" data-bind="checked: showObjectConstraints"> Edit constraint box
+                                        </label>
+                                        <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-html="true" title="Edit possible area for an object"> </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- SELECT PRODUCT FORM ends -->
+
+                   
+
                     <!-- SELECT PRODUCT FORM starts -->
                     <div role="tabpanel" id="select-product-form" class="tab-pane fade liveart-panel large-tab">
                         <div class="liveart-dropdown-form-header">
@@ -144,7 +206,7 @@
                                 <a data-bind="css: { active: $data.id() == $root.selectedProductVO().id() }">
                                     <div class="state"></div>
                                     <span data-bind="text: name"></span>
-                                    <img data-bind="if: thumbUrl, attr: { 'data-src': thumbUrl, title: name }" alt="" class="lazy-load" />
+                                    <img data-bind="if: thumb, attr: { 'data-src': thumb, title: name }" alt="" class="lazy-load" />
                                 </a>
                             </li>                            
                             <!-- /ko -->
@@ -235,19 +297,20 @@
                     <!-- ADD TEXT FORM starts -->
                     <div role="tabpanel" id="add-text-form" class="tab-pane fade liveart-panel small-tab">
                             <div class="liveart-dropdown-form-header">
-                                <span class="liveart-form-header-title" data-bind="if: !strictTemplate()">Add/Edit Text</span>
-                                <span class="liveart-form-header-title" data-bind="if: strictTemplate()">Edit Text</span>
+                                <span class="liveart-form-header-title" data-bind="visible: addingNewText">Add New Text</span>
+                                <span class="liveart-form-header-title" data-bind="visible: !addingNewText()">Edit Text</span>
                                 <a class="liveart-close-window-btn liveart-close-form-btn"></a>
                             </div>
                             <div id="add-text-form-content">
                                 <!--div class="input-append" style="width: 100%;">
-                                    <input id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplate()" type="text" placeholder="Your text here">
-                                    <input id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplate()" type="text" placeholder="Your text here">
-                                    <button class="btn" id="add-text-btn" type="button" data-bind="click: addText, enable: selectedLetteringVO().text().length > 0, visible: !strictTemplate()">Add</button>
+                                    <input id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplateMode()" type="text" placeholder="Your text here">
+                                    <input id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplateMode()" type="text" placeholder="Your text here">
+                                    <button class="btn" id="add-text-btn" type="button" data-bind="click: addText, enable: selectedLetteringVO().text().length > 0, visible: !strictTemplateMode()">Add</button>
                                 </div>-->
-                                <textarea class="form-control" id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplate(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
-                                <textarea class="form-control" id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplate(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
-                                <div class="container-scrollable">
+
+                                <textarea class="form-control" id="add-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: !strictTemplateMode(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here" autofocus></textarea>
+                                <textarea class="form-control" id="edit-text-input" data-bind="value: selectedLetteringVO().text, valueUpdate: 'input', enable: editTextEnabled(), visible: strictTemplateMode(), style: { textAlign: selectedLetteringVO().formatVO().textAlign }" type="text" placeholder="Your text here"></textarea>
+								<div class="container-scrollable">
                                     <div class="column">
                                         <div class="text-form-row">
                                             <div id="text-align-group" class="btn-group" data-toggle="buttons" data-bind="radio: selectedLetteringVO().formatVO().textAlign">
@@ -261,7 +324,7 @@
                                                     <input type="radio" name="rb-text-align-group" value="right" data-bind="enable: textAlignEnabled()">
                                                 </label>
                                             </div>
-                                            <button class="btn btn-primary col-xs-5" id="add-text-btn" type="button" data-bind="click: addText, enable: selectedLetteringVO().text().length > 0, visible: !strictTemplate()">Add</button>
+                                            <button class="btn btn-primary col-xs-5" id="add-text-btn" type="button" data-bind="click: addText, visible:adminMode() || (!strictTemplateMode() && !isTemplate()) || (strictTemplateMode() && selectedIsText())">Add New</button>
                                         </div>
                                         <div class="divider"></div>
                                         <h6>Font options</h6>
@@ -427,15 +490,15 @@
                     <!-- ADD NAMES FORM starts -->
 
                     <!-- ADD GRAPHICS FORM starts -->
-                    <div role="tabpanel" id="add-graphics-form" data-bind="css: {'small-tab': selectedIsGraphics, 'large-tab': !selectedIsGraphics() }" class="tab-pane fade liveart-panel">
+                    <div role="tabpanel" id="add-graphics-form" data-bind="css: {'small-tab': selectedIsGraphics, 'large-tab': showGallery }" class="tab-pane fade liveart-panel">
                         <div class="liveart-dropdown-form-header">
-							<a class="liveart-back-btn" data-bind="visible: graphicSelectedSubcategory(), click: backGraphicItem"></a>
+							<a class="liveart-back-btn" data-bind="visible: showGallery() && graphicSelectedSubcategory(), click: backGraphicItem"></a>
                             <span data-bind="text: graphicBreadcrumbsString, visible: !selectedIsGraphics()"></span>
-                            <span data-bind="visible: selectedIsGraphics">Edit Artwork</span>
+                            <span data-bind="visible: selectedIsGraphics, text: editArtworkTitle">Edit Artwork</span>
                             <a class="liveart-close-window-btn liveart-close-form-btn" data-bind="click: $root.removeMobileAddedGraphicsTooltip"></a>
                         </div>
 
-                        <!-- ko ifnot: selectedIsGraphics -->
+                        <!-- ko if: showGallery -->
                         <div id="graphics-search" class="search-box">
                             <div class="input-group">
                                 <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
@@ -465,13 +528,17 @@
                         <div class="search-preloader" data-bind="visible: showGraphicSearchPreloader">
                         </div>
 
-                        <!-- ko if: selectedIsGraphics -->
+                        <!-- ko ifnot: showGallery -->
                         <div class="column">
 
-                            <div id="image-added-info" class="alert alert-success">
+                            <div id="image-added-info" class="alert alert-success" data-bind="visible: $root.showImageAddedInfo">
                                 Your artwork was successfuly added
-                            </div>        
+                            </div>
 
+                            <div id="dpu-exceeded-popup" class="alert alert-danger" data-bind="visible: $root.selectedObjectDPUExceeded" onclick="onDPUexceeded()">
+                                <b>Low Resolution Warning!</b> Click for info.
+                            </div>
+                            <!-- ko if: isColorizableGraphics -->
                             <ul class="list-unstyled" data-bind="if: isColorizableGraphics">
                                 <li>
                                     <a class="liveart-color-picker-btn">
@@ -486,6 +553,7 @@
                                     </a>
                                 </li>
                             </ul>
+                            <!-- /ko -->
                             <div data-bind="if: isMulticolorGraphics">
                                 <ul class="list-unstyled" data-bind="foreach: { data: selectedGraphicsFormatVO().complexColor().colorizeList, afterAdd: selectedGraphicsFormatVO().complexColor().createColorPicker }">
                                     <li>
@@ -509,14 +577,43 @@
                                     <input id="graphic-height" class="form-control" type="text" data-bind="value: selectedObjectPropertiesVO().height, event: { keypress: selectedObjectPropertiesVO().updateHeight}" />
                                 </div>
                             </div>
-                            <button id="add-another-graphic" class="btn btn-primary btn-block" data-bind="click: addAnotherArtwork">
-                                Add Another Gallery Artwork
-                            </button>
+                            <div class="divider"></div>
+                            <button id="replace-graphic" class="btn btn-primary btn-block" data-bind="click: replaceArtwork, text: 'Replace Artwork'"></button>
+                            <h6 class="text-center">or</h6>
+                            <button id="add-another-graphic" class="btn btn-default btn-block" data-bind="click: addAnotherArtwork, text: 'Add New Artwork'"></button>
                         </div>
                         <!-- /ko -->
 
                     </div>
                     <!-- ADD GRAPHICS FORM ends -->
+
+                    <!-- SELECT TEMPLATE FORM starts -->
+                    <div role="tabpanel" id="select-template-form" class="tab-pane fade liveart-panel large-tab">
+                        <div class="liveart-dropdown-form-header">
+                            <a class="liveart-back-btn" data-bind="visible: templateSelectedSubcategory(), click: backTemplateItem"></a>
+                            <span data-bind="text: templateBreadcrumbsString"></span>
+                            <a class="liveart-close-window-btn liveart-close-form-btn"></a> <!--data-bind="click: $root.removeMobileAddedGraphicsTooltip"-->
+                        </div>
+
+                        <div id="templates-search" class="search-box">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                                <input type="text" class="form-control" placeholder="Search" data-bind="value: templatesSearchQuery, valueUpdate: 'input'">
+                                <button class="close" aria-hidden="true" data-bind="visible: templatesSearchQuery().length > 0, click: clearTemplatesSearch">&times;</button>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <ul data-bind="foreach: currentTemplates, css: { narrow: templateSelectedSubcategory }" class="thumbnails liveart-categories-subcategories">
+                            <li class="thumbnail" data-bind="click: $root.selectTemplateItem, css: { category: isCategory(), product: isTemplate() }"> <!--, css: { category: isCategory(), image: isTemplate() }-->
+                                <a>
+                                    <div class="state"></div>
+                                    <span data-bind="text: name"></span>
+                                    <img src="" data-bind="attr: { src: thumb }" alt="" />
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- SELECT TEMPLATE FORM end -->
 
                     <!-- UPLOAD CUSTOM GRAPHICS FORM starts -->
                     <div role="tabpanel" id="upload-graphics-form" class="tab-pane fade liveart-panel small-tab expandable-tab">
@@ -572,7 +669,7 @@
                     <!-- SAVE/SHARE/LOAD FORM starts -->
                     <div role="tabpanel" id="save-share-load-form" class="tab-pane fade liveart-panel small-tab">
                             <div class="liveart-dropdown-form-header">
-                                <span class="liveart-form-header-title">Save & Share</span>
+                                <span class="liveart-form-header-title">Save, Share & Load</span>
                                 <a class="liveart-close-window-btn liveart-close-form-btn"></a>
                             </div>
                             <div class="column">
@@ -656,7 +753,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- GET QUOTE FORM ends -->               
+                    <!-- GET QUOTE FORM ends -->    
                 </div>
             </div>
             <div id="canvas-container" class="dynamic-height">
@@ -689,8 +786,10 @@
                     <!--<li id="clear-design" data-bind="visible: !strictTemplate()"><a id="clear-design-btn" data-bind="    click: clearDesign"><span>Clear Design</span></a></li>-->
                     <li id="undo" data-bind="css: {enabled: isUndoActive}"><a id="undo-btn" data-bind="click: undo"><img src="assets/img/undo-icon.svg" class="inject-me" /><span>Undo</span></a></li>
                     <li id="redo" data-bind="css: {enabled: isRedoActive}"><a id="redo-btn" data-bind="click: redo"><span>Redo</span><img src="assets/img/redo-icon.svg" class="inject-me" /></a></li>
+
                     <li id="tools" class="dropup" data-bind="css: {enabled: isEnabledToolsButton}">
                         <a id="object-operations" class="dropdown-toggle" data-toggle="dropdown" data-bind="css: {disabled: !isEnabledToolsButton()}"><img src="assets/img/tools-icon.svg" class="inject-me" /><span>Tools</span></a>
+
                         <ul class="dropdown-menu" role="menu" aria-labelledby="objectOperations">
                             <li role="presentation" class="dropdown-header" data-bind="css: {'disabled-menu': disableObjectToolsAction}">Align</li>
                             <li id="align-left" role="presentation" data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="align-left-btn" data-bind="click: align.bind($data, 'left')">Left</a></li>
@@ -718,7 +817,7 @@
                             <li id="vertical-flip"><a id="vertical-flip-btn" data-bind="click: flip.bind($data, 'vertical')"></a></li>
                         </ul>
                     </li>
-                    <li id="align" class="dropup" data-bind="visible: hasSelected() && !strictTemplate()">
+                    <li id="align" class="dropup" data-bind="visible: hasSelected() && !strictTemplateMode()">
                         <a id="align-btn" class="dropdown-toggle" data-toggle="dropdown">Align</a>
                         <ul id="align-list" class="dropdown-menu">
                             <li id="align-left"><a id="align-left-btn" data-bind="click: align.bind($data, 'left')"></a></li>
@@ -746,9 +845,15 @@
                         </a>
                     </li>-->        
                     
-                    <li id="get-quote-btn" data-bind="click: proceedQuote" class="pull-right">
+                    <li id="get-quote-btn" data-bind="click: proceedQuote, visible: !adminMode()" class="pull-right">
                         <a href="#quote-popup" aria-controls="quote-popup" role="tab" data-toggle="tab">
                             <span>Proceed to Quote</span> 
+                            <img src="assets/img/cart-icon.svg" class="inject-me" />
+                        </a>
+                    </li>
+                    <li id="save-template-btn" data-bind="click: onSaveDesignIdea, visible: adminMode" class="pull-right">
+                        <a>
+                            <span>Save Design Idea</span>
                             <img src="assets/img/proceed-quote-icon.svg" class="inject-me" />
                         </a>
                     </li>
@@ -763,8 +868,6 @@
                 <!-- <div id="preview-controls-content" class="liveart-panel">
                     </div> -->
             </div>
-
-            
         </div>
     </div>
 
@@ -1069,11 +1172,46 @@
     <!-- DPU exceeded confirm popup end -->
 
     <!-- DPU exceeded popup -->
-    <div id="dpu-exceeded-popup" data-bind="visible: $root.selectedObjectDPUExceeded" style="display:none">
-        This image is of insufficient quality to be printed this large and still meet our suggested print quality standards (<tspan data-bind="text: minDPU"></tspan>
-        dpi). You may choose to use this image as is, but we recommend that you reduce the size of this image in your design, (by clicking and dragging its lower right corner until this message disappears), or delete this image and upload another, higher resolution image.
+    <div id="dpu-exceeded-info-popup" class="modal fade" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3>Low Resolution Warning</h3>
+                </div>
+                <div class="modal-body">
+                    This image is of insufficient quality to be printed this large and still meet our suggested print quality standards (<tspan data-bind="text: minDPU"></tspan>
+                    dpi). <p>You may choose to use this image as is, but we recommend that you reduce the size of this image in your design, (by clicking and dragging its lower right corner until this message disappears), or delete this image and upload another, higher resolution image.</p>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" data-dismiss="modal">OK</a>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- DPU exceeded popup end -->
+
+    <!-- Save design popup -->
+    <div id="liveart-save-template-popup" class="modal fade" role="dialog" aria-labelledby="liveart-save-template-popup-title" aria-hidden="true" onkeypress="onSaveDesignIdeaDialogSubmit(event)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3 id="liveart-save-template-popup-title">Save Design Idea</h3>
+                    <p>Please name your template below and click "Save Design Idea".</p>
+                </div>
+                <div class="modal-body">
+                    <label>Name Your Design Idea Below</label>
+                    <input id="liveart-save-template-name-input" type="text" class="form-control" placeholder="My Design Idea" data-bind="value: designIdeaName, valueUpdate: 'input'">
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-inverse" onclick="onSaveDesignIdeaDialogSubmit()" data-bind="css: { disabled: !designIdeaNameIsValid() }">Save Design Idea</a>
+                    <a class="btn btn-default" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Save design popup end -->
 
     <!-- Bootstrap progress bar for graphics uploading -->
     <div id="liveart-upload-bar" class="modal fade" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -1104,11 +1242,11 @@
         </div>
     </div>
     <!-- end Bootstrap progress bar -->
+
+    <!-- end Bootstrap progress bar for graphics uploading -->
     <script type="text/javascript" src="assets/js/liveart-ui-components.js" defer="defer"></script>
     <script type="text/javascript" src="LA.js" defer="defer"></script>
     <script type="text/javascript" src="LA.config.js" defer="defer"></script>
-
-
 </div>
 </body>
 </html>

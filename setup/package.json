@@ -9,13 +9,11 @@
     "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-less": "^1.2.0"
   },
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "scripts": {
     "test": "grunt"
   },
-  "repository": {
-  },
+  "repository": {},
   "keywords": [
     "liveart",
     "html5"

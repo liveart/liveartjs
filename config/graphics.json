@@ -1701,6 +1701,94 @@
               "image": "gallery/Icons/travel/svg/plane.svg"
             }
           ]
+        },
+        {
+          "id": "14",
+          "name": "Frames",
+          "thumb": "gallery/Icons/frames/1.svg",
+          "graphicsList": [
+            {
+              "id": "1304",
+              "categoryId": "14",
+              "name": "Frame_1",
+              "description": "Frame_1",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/1.svg",
+              "image": "gallery/Icons/frames/1.svg"
+            },
+            {
+              "id": "1305",
+              "categoryId": "14",
+              "name": "Frame_2",
+              "description": "Frame_2",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/2.svg",
+              "image": "gallery/Icons/frames/2.svg"
+            },
+            {
+              "id": "1306",
+              "categoryId": "14",
+              "name": "Frame_3",
+              "description": "Frame_3",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/3.svg",
+              "image": "gallery/Icons/frames/3.svg"
+            },
+            {
+              "id": "1307",
+              "categoryId": "14",
+              "name": "Frame_4",
+              "description": "Frame_4",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/4.svg",
+              "image": "gallery/Icons/frames/4.svg"
+            },
+            {
+              "id": "1308",
+              "categoryId": "14",
+              "name": "Frame_5",
+              "description": "Frame_5",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/5.svg",
+              "image": "gallery/Icons/frames/5.svg"
+            },
+            {
+              "id": "1309",
+              "categoryId": "14",
+              "name": "Frame_6",
+              "description": "Frame_6",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/6.svg",
+              "image": "gallery/Icons/frames/6.svg"
+            },
+            {
+              "id": "1310",
+              "categoryId": "14",
+              "name": "Frame_7",
+              "description": "Frame_7",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/7.svg",
+              "image": "gallery/Icons/frames/7.svg"
+            },
+            {
+              "id": "1311",
+              "categoryId": "14",
+              "name": "Frame_8",
+              "description": "Frame_8",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/8.svg",
+              "image": "gallery/Icons/frames/8.svg"
+            },
+            {
+              "id": "1312",
+              "categoryId": "14",
+              "name": "Frame_9",
+              "description": "Frame_9",
+              "colorize": true,
+              "thumb": "gallery/Icons/frames/9.svg",
+              "image": "gallery/Icons/frames/9.svg"
+            }
+          ]
         }
       ]
     }
