@@ -28,6 +28,12 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.31 RELEASE NOTES
+Added
+- Added pa_selected_unit GET parameter
+Fixed
+- Fix unit selector for step 0
+
 ### 0.10.30 RELEASE NOTES
 Added:
 - Added product.defaultTemplateId
@@ -71,7 +77,6 @@ Fixed:
  Deprecated:
  - deprecated `options.unit`, `options.unit2` and `options.unitConversionMult` in main config
  - use `option.defaultUnit` and `option.secondaryUnit` instead
-
 
 ### 0.10.29 RELEASE NOTES
 Fixes:

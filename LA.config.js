@@ -20,6 +20,7 @@ laOptions.defaultProductAttributes = {};
 
 laOptions.defaultProductAttributes.sizeUnits = getQueryParam("pa_size_units", "json");
 laOptions.defaultProductAttributes.quantities = getQueryParam("pa_quantities", "json");
+laOptions.defaultProductAttributes.selectedUnit = getQueryParam("pa_selected_unit");
 
 var configFile = getQueryParam("config") || "config/config.json";
 
