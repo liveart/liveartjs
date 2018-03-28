@@ -29,9 +29,10 @@ This particular package also does include sample PHP backend endpoints, containe
 
 ## CHANGELOG
 ### 0.10.31 RELEASE NOTES
-Added
+Added:
 - Added pa_selected_unit GET parameter
-Fixed
+
+Fixed:
 - Fix unit selector for step 0
 
 ### 0.10.30 RELEASE NOTES
