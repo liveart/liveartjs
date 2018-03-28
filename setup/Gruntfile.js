@@ -3,12 +3,12 @@ module.exports = function(grunt) {
 		// copy styles to /Release folder
 		copy: {
 			css: {
-				files: [ 
+				files: [
 					{
 						expand: true,
 						cwd: '',
 						src: [
-							'../assets/**/*.css'
+							'assets/**/*.css'
 						],
 						dest: '../.',
 						filter: 'isFile'
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
 		// cleaning css files
 		clean: {
-			css: ["../assets/**/*.css"]
+			css: ["assets/**/*.css"]
 		},
 
 		less: {
@@ -38,23 +38,20 @@ module.exports = function(grunt) {
                 }
             }
         }
-
-		
-
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-less');
 
-	// Custom task to generate javascript file with all constants from .less file 
+	// Custom task to generate javascript file with all constants from .less file
 	grunt.registerTask('exportLessVars', function () {
-		var configJS = "../assets/js/resize.less.js";
-		var configLess = "../assets/css/variables.config.less";
+		var configJS = "assets/js/resize.less.js";
+		var configLess = "assets/css/variables.config.less";
 		var varGlobName = "laLessConst";
 		var less = grunt.file.read(configLess);
 		var variables = less.match(/@[\w-_]+:\s*.*;[\/.]*/gm);
-		var scriptText = "/** Auto-generated file with const's from less */\n\n"; 
+		var scriptText = "/** Auto-generated file with const's from less */\n\n";
 		scriptText += "var " + varGlobName + " = { }\n";
 		variables.forEach(function (variable){
 			var parts = variable.match(/@(.*):(.*);/);
@@ -64,7 +61,7 @@ module.exports = function(grunt) {
 			varValue = varValue.replace("min(", "Math.min(");
 			varValue = varValue.replace(/\s|px/g, "");
 			varValue = varValue.replace(/@/g, varGlobName + ".");
-			//color 
+			//color
 			if (varValue.match(/#(?:[0-9A-Fa-f]{3}){1,2}/g)) {
 				varValue = "\"" + varValue + "\"";
 			}

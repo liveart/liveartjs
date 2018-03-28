@@ -28,6 +28,10 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.29 RELEASE NOTES
+Fixes:
+- Fixed Templates List for a product with id type == "number"
+
 ### 0.10.28 RELEASE NOTES
 Fixes:
 - Fixed error in console ("ReferenceError: liveArtResponsive")
@@ -49,7 +53,7 @@ Features:
 
 Fixes:
 - Fixed mouse click detection
-- Added viewBox parsing for uploaded .svg images 
+- Added viewBox parsing for uploaded .svg images
 
 Updates:
 - Refactored PHP services (divided into modules, easy to integrate, added config.php with settings)
@@ -83,7 +87,7 @@ Fixes:
 
 API changes:
 - `config.options.showSuitableProductColorize` - enable showing suitable color picker for multicolor product (default value - false)
-- `GET var` configuration changes 
+- `GET var` configuration changes
   - added possibility to set up default product size
   - added possibility to set up default quantities
   - added possibility to set up main config URL
@@ -99,7 +103,7 @@ Migration notes
 Updates:
 - print window match custom canvas dimensions
 - Bootstrap is updated to the v3.3.7
-- LiveArt logo text is editable 
+- LiveArt logo text is editable
 - More accurate object snapping on canvas
 - Added lazy loading for product and graphics galleries:
   - limit thumbs requests only to visible items
@@ -109,7 +113,7 @@ Fixes:
 - fixed jumps during slow pan dragging
 - fixed whitespace preserving in Safari, Chrome, IE
 - fixed 'Order' button state after unsuccessful save design
-- correct work of config.options.fontsCSSUrl for relative path 
+- correct work of config.options.fontsCSSUrl for relative path
 - replace "_" to "-x5f-" for class names in `<style>` node content in `<svg>` (needed for correct Illustrator parsing)
 
 API changes:
@@ -171,7 +175,7 @@ saveDesign.php sample:
 - implemented design resaving with the same id and title
 
 ### 0.10.19 RELEASE NOTES
-Updates: 
+Updates:
 - correct flip
 - removed dpu warning for products without editable area or editable area units
 - correct loading of raster product color
@@ -180,13 +184,13 @@ Updates:
 - fonts configuration fix
 
 Social Networks:
-- output changed max output photo size to 1375x1375 
+- output changed max output photo size to 1375x1375
 
 getQuote changes:
 - added: `product.location.object.isUploaded` (boolean) - added only for images.
 
 **uploadImage changes**:
-- changed request param: `fileurl` - string encoded with `encodeURIComponent()` function.<br/>example of decoding: `urldecode($_POST['fileurl'])` 
+- changed request param: `fileurl` - string encoded with `encodeURIComponent()` function.<br/>example of decoding: `urldecode($_POST['fileurl'])`
 
 ### 0.10.18 RELEASE NOTES
 - reverted 'Promise' polyfill
@@ -320,20 +324,20 @@ added options:
 - graphic.colorizableElements.showPantones - the same
 
 ### 0.10.3 RELEASE NOTES
-Fixes designs created in v0.10.0 
+Fixes designs created in v0.10.0
 (no saved quantity for products.sizes.length == 0; as result - broken load/order)
 
 ### 0.10.2 RELEASE NOTES
 Added resizable canvas for responsive
 Configuration:
-1. in LA.js: change laOptions.dimensions: 
+1. in LA.js: change laOptions.dimensions:
 2. in variables.config.less: change @canvasWidth and @canvasHeight, recompile css
 for end-user:
 - follow /Release/setup/README.txt instruction
 
 Changes:
 - no dedicated css for horizontal layout (aka landscape iPhone)
-- if container 900 > width > 587 : 
+- if container 900 > width > 587 :
 -- canvas.width = 100%
 -- before: 587px (const)
 
@@ -341,7 +345,7 @@ Changes:
 - UI fixes, sizes on UI fixes (both zero sizes product and multiple sizes product)
 
 ### 0.10.0 RELEASE NOTES
-LiveArt Container is responsive with more usable edit panels now. 
+LiveArt Container is responsive with more usable edit panels now.
 Responsive notes:
 - Default dimensions: 900px * 650px
 - Adopted width dimensions: 587px;
