@@ -1,6 +1,7 @@
 ﻿function isNullOrUndefined(val) {
     return (typeof (val) == 'undefined' || val == null);
 }
+
 /*
 * Object with translation
 */
@@ -38,6 +39,7 @@ var laTranslation = {
         WRONG_PRODUCT_ID_ERROR_MESSAGE: "Wrong product ID: %id%.",
         ORDER_PLACED_SUCCESSFULLY_MESSAGE: "Order placed successfully!",
         TEMPLATE_SAVED_MESSAGE: "Template '%title%' saved successfully!",
+        TEMPLATE_UPDATED_MESSAGE: "Template updated successfully!",
         FAIL_TO_SAVE_TEMPLATE_MESSAGE: "Failed to save template!",
         DESIGN_LOADED_MESSAGE: "Design '%title%' loaded successfully!",
         DESIGN_WITHOUT_TITLE_LOADED_MESSAGE: "Design loaded successfully!",
@@ -58,6 +60,16 @@ var laTranslation = {
         LOADING_MESSAGE: "Loading...",
         LOADED_MESSAGE: "Loaded",
         LOADING_CONFIGURATION_MESSAGE: "Loading configuration...",
+        LOAD_UNSAVED_DESIGN_MESSAGE: "You have unsaved design. Do you want to recover it?",
+        LOAD_UNSAVED_DESIGN_HEADER_MESSAGE: "Design Recover",
+        DESIGN_NOT_SUPPORTED_BY_PRODUCT_MESSAGE: "Your design is not supported by this product and will be removed.",
+        DESIGN_NOT_SUPPORTED_BY_TEMPLATE_MESSAGE: "Your design is not supported by this template and will be removed.",
+        CONTINUE_OPTION: "Continue",
+        CANCEL_OPTION: "Cancel",
+        LOAD_PRODUCT: "Load product",
+        LOAD_TEMPLATE: "Load template",
+        REPLACE_CURRENT_DESIGN_OPTION: "Replace Current Design",
+        ADD_DESIGN_OPTION: "Add Design",
 
         /*
         * CORE TRANSLATION ENDS HERE
@@ -82,8 +94,8 @@ var laTranslation = {
         "ALL_CATEGORIES": "All Categories",
         "SEARCH": "Search",
 
-        "NO_OBJECTS" : "no objects",
-        "NO_LETTERINGS" : "no letterings",
+        "NO_OBJECTS": "no objects",
+        "NO_LETTERINGS": "no letterings",
         "ONE_LETTERING": "one lettering",
         "LETTERINGS_COUNT": "%count% letterings",
         "IMAGES_COUNT": "%count% images",
@@ -105,8 +117,10 @@ var laTranslation = {
         "CLEAR_DESIGN_CONFIRMATION": "Are you sure to clear design?",
         "INVALID_EMAIL_FORMAT": "Invalid email format",
         "INVALID_DESIGN_NAME": "Invalid design name",
+        "EMPTY_DESIGN_NAME_ERROR": "Design name should not be empty",
         "NO_EFFECT_WARNING": "Selected object has deprecated text effect. It will be removed on object change.",
-        "DESIGN_WILL_BE_CLEARED": "Your design could be cleared. Please confirm to proceed."
+        "DESIGN_WILL_BE_CLEARED": "The selected product has own default templates. Your design will be cleared. Proceed?",
+        "CLEAR_DESIGN_HEADER_MESSAGE": "Clear design"
         /*
         * UI TRANSLATION ENDS HERE
         */
@@ -371,7 +385,7 @@ var GraphicsFormatVO = function (updateHandler, colorize, fillColor, strokeColor
         }
         if (!isNullOrUndefined(obj['stroke-width'])) {
             self.strokeWidth(obj['stroke-width']);
-    }
+        }
     }
 }
 
@@ -488,7 +502,7 @@ var ObjectPropertiesVO = function (width, height, lockScale, id) {
 }
 
 var ProductVO = function (id, categoryId, name, description, data, colors, locations, sizes, multicolor, namesNumbersEnabled, resizable,
-    editableAreaSizes, minQuantity, pantones, thumbUrl) {
+                          editableAreaSizes, minQuantity, pantones, thumbUrl) {
     if (isNullOrUndefined(id)) id = 'product-' + (new Date().getTime());
     if (isNullOrUndefined(categoryId)) categoryId = 'product-category-' + (new Date().getTime());
     if (isNullOrUndefined(name)) name = '';
@@ -506,7 +520,7 @@ var ProductVO = function (id, categoryId, name, description, data, colors, locat
     if (isNullOrUndefined(pantones.useForDecoration)) pantones.useForDecoration = false;
     if (isNullOrUndefined(pantones.useForDecoration)) pantones.useForProduct = false;
     if (isNullOrUndefined(thumbUrl)) thumbUrl = "";
-         
+
     var self = this;
     self.id = ko.observable(id);
     self.name = ko.observable(name);
@@ -575,8 +589,8 @@ var ProductVO = function (id, categoryId, name, description, data, colors, locat
             if (!isNullOrUndefined(obj['pantones'].useForDecoration)) {
                 pantones.useForDecoration = obj['pantones'].useForDecoration;
             }
-            if (!isNullOrUndefined(obj['pantones'].useForProduct )) {
-                pantones.useForProduct  = obj['pantones'].useForProduct;
+            if (!isNullOrUndefined(obj['pantones'].useForProduct)) {
+                pantones.useForProduct = obj['pantones'].useForProduct;
             }
         }
         self.pantones().useForDecoration(pantones.useForDecoration);
@@ -672,21 +686,23 @@ var ComplexColorVO = function (updateHandler, hexValue, name, colorizeList) {
         var res = [];
         for (var i = 0; i < self.colorizeList().length; i++) {
             var colEl = self.colorizeList()[i];
-            res.push({ id: colEl.id(), value: colEl.value() });
+            res.push({id: colEl.id(), value: colEl.value()});
         }
         return res;
     }
 }
 
-var ProductSizeVO = function (width, height, label) {
+var ProductSizeVO = function (width, height, label, unit) {
     if (isNullOrUndefined(width)) width = 0;
     if (isNullOrUndefined(height)) height = 0;
     if (isNullOrUndefined(label)) label = "";
+    if (isNullOrUndefined(unit)) unit = "";
 
     var self = this;
     self.width = ko.observable(width);
     self.height = ko.observable(height);
     self.label = ko.observable(label);
+    self.unit = ko.observable(unit);
 
     self.widthInput = ko.observable(width);
     self.heightInput = ko.observable(height);
@@ -706,6 +722,9 @@ var ProductSizeVO = function (width, height, label) {
         }
         if (!isNullOrUndefined(obj['label'])) {
             self.label(obj['label']);
+        }
+        if (!isNullOrUndefined(obj['unit'])) {
+            self.unit(obj['unit']);
         }
 
         self.widthInput(self.width());
@@ -786,7 +805,8 @@ var ColorizeElementVO = function (updateHandler, value, name, colors, id, availa
 var SizeQuantityVO = function (size, quantity, changeHandler) {
     if (isNullOrUndefined(size)) size = '';
     if (isNullOrUndefined(quantity)) quantity = 1;
-    if (isNullOrUndefined(changeHandler)) changeHandler = function () { };
+    if (isNullOrUndefined(changeHandler)) changeHandler = function () {
+    };
 
     var self = this;
     self.size = ko.observable(size);
@@ -817,7 +837,8 @@ var NameNumberVO = function (name, number, size, changeHandler) {
     if (isNullOrUndefined(name)) name = '';
     if (isNullOrUndefined(number)) number = '';
     if (isNullOrUndefined(size)) size = '';
-    if (isNullOrUndefined(changeHandler)) changeHandler = function () { };
+    if (isNullOrUndefined(changeHandler)) changeHandler = function () {
+    };
 
     var self = this;
     self.name = ko.observable(name);
@@ -911,6 +932,25 @@ var ImageColorCountVO = function (processColors, colorCount) {
     }
 }
 
+var UnitVO = function (data) { // for future refactoring, now stuped hardhoded
+    var self = this;
+
+    if (isNullOrUndefined(data)) data = {};
+    if (isNullOrUndefined(data.unit)) data.unit = "";
+    if (isNullOrUndefined(data.label)) data.label = "";
+
+    self.unit = ko.observable(data.unit);
+    self.label = ko.observable(data.label);
+
+    self.fromObject = function (obj) {
+        if (isNullOrUndefined(obj)) obj = {};
+
+        isNullOrUndefined(obj.unit) ? self.unit("") : self.unit(obj.unit);
+        isNullOrUndefined(obj.label) ? self.label("") : self.label(obj.label);
+    }
+}
+
+
 /**
  * LiveArt ViewModel
  */
@@ -931,18 +971,12 @@ function LAControlsModel() {
 
     // selected product value object
     self.selectedProductVO = ko.observable(new ProductVO());
-    self.isTemplate  = ko.observable(false);
+    self.isTemplate = ko.observable(false);
 
     self.selectProduct = function (product) {
         liveartUI.closeActiveTab();
         if (product.id != self.selectedProductVO().id()) {
-            var apply = true;
-            if(self.shouldClearOnProductChange(product.id)){
-                apply = confirm(laTranslation.translateUI("DESIGN_WILL_BE_CLEARED"));
-            }
-            if(apply) {
-                self.selectedProductVO().fromObject(product);
-            }
+            self.processProductChange(product.id);
         }
     };
 
@@ -950,15 +984,15 @@ function LAControlsModel() {
         if (self.isCompact()) {
             liveartUI.closeActiveTab();
         }
-        userInteract({ selectedProductId: id });
+        userInteract({selectedProductId: id});
     });
-   
+
     // product's selected color value object
     self.selectedProductColorVO = ko.observable(new ComplexColorVO(updateProductColorize));
 
     self.selectedProductColorVO().hexValue.subscribe(function (newValue) {
         if (!self.selectedProductColorVO().suppressUpdate) {
-            userInteract({ selectedProductColor: newValue });
+            userInteract({selectedProductColor: newValue});
         }
     });
 
@@ -1013,10 +1047,19 @@ function LAControlsModel() {
     self.editableAreaRestrictRotation = ko.observable(false);
     self.switchedDimensions = ko.observable(false);
 
+    self.isTemplateStrict = ko.observable(false);
+
+    // for admin mode only
+    self.templateIsBeingEdited = ko.observable(false);
+
+    self.saveDesignIdeaBtnText = ko.computed(function () {
+        return self.templateIsBeingEdited() ? "Update Design Idea" : "Save Design Idea";
+    });
+
     self.selectedProductVO().id.subscribe(function () {
         if (self.selectedProductVO().resizable()
-               && self.selectedProductVO().locations()[0]
-               && self.selectedProductVO().locations()[0].editableAreaUnitsRestrictRotation) {
+            && self.selectedProductVO().locations()[0]
+            && self.selectedProductVO().locations()[0].editableAreaUnitsRestrictRotation) {
             self.editableAreaRestrictRotation(self.selectedProductVO().locations()[0].editableAreaUnitsRestrictRotation);
         } else {
             self.editableAreaRestrictRotation(false);
@@ -1024,11 +1067,19 @@ function LAControlsModel() {
     });
 
     self.selectedProductSizeVO().widthInput.subscribe(function (newValue) {
-        self.changeProductSize(true, newValue);
+        if (isNaN(parseFloat(newValue))) {
+            self.selectedProductWidthInputBlur();
+        } else {
+            self.changeProductSize(true, newValue);
+        }
     });
 
     self.selectedProductSizeVO().heightInput.subscribe(function (newValue) {
-        self.changeProductSize(false, newValue);
+        if (isNaN(parseFloat(newValue))) {
+            self.selectedProductHeightInputBlur();
+        } else {
+            self.changeProductSize(false, newValue);
+        }
     });
 
     self.changeProductSize = function (isWidthControl, newValue) {
@@ -1049,12 +1100,13 @@ function LAControlsModel() {
         var step = 0;
 
         if (self.selectedProductVO().resizable()
-                && self.selectedProductVO().locations()[0]
-                && self.selectedProductVO().locations()[0].editableAreaUnitsRange) {
-            min = self.selectedProductVO().locations()[0].editableAreaUnitsRange[idx][0];
-            max = self.selectedProductVO().locations()[0].editableAreaUnitsRange[idx][1];
+            && self.editableAreaUnitsRange()
+            && self.editableAreaUnitsRange().length) {
+            min = self.editableAreaUnitsRange()[idx][0];
+            max = self.editableAreaUnitsRange()[idx][1];
         }
 
+        newValue = parseFloat(newValue);
         //editableAreaRestrictRotation logic: max values are different but don't depend on orientation
         if (!self.editableAreaRestrictRotation()) {
             var otherValue = otherVariable();
@@ -1069,13 +1121,13 @@ function LAControlsModel() {
         idx = Number(!(isWidthControl ^ self.switchedDimensions()));
 
         if (self.selectedProductVO().resizable()
-                && self.selectedProductVO().locations()[0]
-                && self.selectedProductVO().locations()[0].editableAreaUnitsRange) {
-            min = self.selectedProductVO().locations()[0].editableAreaUnitsRange[idx][0];
-            max = self.selectedProductVO().locations()[0].editableAreaUnitsRange[idx][1];
-            step = self.selectedProductVO().locations()[0].editableAreaUnitsRange[0][2];
+            && self.editableAreaUnitsRange()
+            && self.editableAreaUnitsRange().length) {
+            min = self.editableAreaUnitsRange()[idx][0];
+            max = self.editableAreaUnitsRange()[idx][1];
+            step = self.editableAreaUnitsRange()[0][2];
         }
-        
+
         /*  Validate Value - show tooltip if invalid or apply value otherwise */
         liveartUI.validationSuccess(control);
 
@@ -1084,9 +1136,10 @@ function LAControlsModel() {
             laTranslation.translateUI("WIDTH_DIMENSION") :
             laTranslation.translateUI("HEIGHT_DIMENSION");
 
-        var l2Side = (isWidthControl ^ self.switchedDimensions()) ?
-            laTranslation.translateUI("SHORT_SIDE") :
-            laTranslation.translateUI("LONG_SIDE");
+        var isWidthLongest = Number(self.selectedProductSizeVO().width()) > Number(self.selectedProductSizeVO().height());
+        var l2Side = (isWidthControl ? isWidthLongest : !isWidthLongest) ?
+            laTranslation.translateUI("LONG_SIDE") :
+            laTranslation.translateUI("SHORT_SIDE");
 
         if (isNaN(newValue)) {
             var translate = laTranslation.translateUI("INVALID_VALUE");
@@ -1096,9 +1149,15 @@ function LAControlsModel() {
             var minUnitVal = min + self.unitLabel();
 
             if (self.editableAreaRestrictRotation()) {
-                minWarningLabel = laTranslation.translateUI("MINIMUM_DIMENSTION_TOOLTIP", { dimension: l1Dimension, value: minUnitVal });
+                minWarningLabel = laTranslation.translateUI("MINIMUM_DIMENSTION_TOOLTIP", {
+                    dimension: l1Dimension,
+                    value: minUnitVal
+                });
             } else {
-                minWarningLabel = laTranslation.translateUI("MINIMUM_SIDE_WIDTH_TOOLTIP", { side: l2Side, value: minUnitVal });
+                minWarningLabel = laTranslation.translateUI("MINIMUM_SIDE_WIDTH_TOOLTIP", {
+                    side: l2Side,
+                    value: minUnitVal
+                });
             }
 
             minWarningLabel = laTranslation.firstLetterUppercase(minWarningLabel);
@@ -1108,22 +1167,35 @@ function LAControlsModel() {
             var maxUnitVal = max + self.unitLabel();
 
             if (self.editableAreaRestrictRotation()) {
-                maxWarningLabel = laTranslation.translateUI("MAXIMUM_DIMENSTION_TOOLTIP", { dimension: l1Dimension, value: maxUnitVal });
+                maxWarningLabel = laTranslation.translateUI("MAXIMUM_DIMENSTION_TOOLTIP", {
+                    dimension: l1Dimension,
+                    value: maxUnitVal
+                });
             } else {
-                maxWarningLabel = laTranslation.translateUI("MAXIMUM_SIDE_WIDTH_TOOLTIP", { side: l2Side, value: maxUnitVal });
+                maxWarningLabel = laTranslation.translateUI("MAXIMUM_SIDE_WIDTH_TOOLTIP", {
+                    side: l2Side,
+                    value: maxUnitVal
+                });
             }
 
             maxWarningLabel = laTranslation.firstLetterUppercase(maxWarningLabel);
             liveartUI.validationError(control, maxWarningLabel);
-        } else if (step > 0 && newValue % step != 0) {
+        } else if (step > 0 && (newValue * 10) % (step * 10) !== 0) { // "* 10" fixing http://img.newtonideas.com/TSn9ZuR4zRftmyUWFEtx.png
             var stepUnitVal = step + self.unitLabel();
-            var minStep = laTranslation.translateUI("MINIMUM_STEP", { value: stepUnitVal });
+            var minStep = laTranslation.translateUI("MINIMUM_STEP", {value: stepUnitVal});
 
             minStep = laTranslation.firstLetterUppercase(minStep);
             liveartUI.validationError(control, minStep);
         } else {
             dimensionVariable(newValue);
-            userInteract({ selectedProductSize: { width: self.selectedProductSizeVO().width(), height: self.selectedProductSizeVO().height() } });
+            userInteract({
+                selectedProductSize: {
+                    width: self.selectedProductSizeVO().width(),
+                    height: self.selectedProductSizeVO().height(),
+                    label: self.selectedProductSizeVO().label(),
+                    unit: self.selectedProductSizeVO().unit()
+                }
+            });
         }
     }
 
@@ -1132,12 +1204,19 @@ function LAControlsModel() {
         self.selectedProductSizeVO().width(self.selectedProductSizeVO().height());
         self.selectedProductSizeVO().height(w);
 
-        self.switchedDimensions(!self.switchedDimensions());
+        // self.switchedDimensions(!self.switchedDimensions());
 
         self.selectedProductSizeVO().widthInput(self.selectedProductSizeVO().width());
         self.selectedProductSizeVO().heightInput(self.selectedProductSizeVO().height());
 
-        userInteract({ selectedProductSize: { width: self.selectedProductSizeVO().width(), height: self.selectedProductSizeVO().height() } });
+        userInteract({
+            selectedProductSize: {
+                width: self.selectedProductSizeVO().width(),
+                height: self.selectedProductSizeVO().height(),
+                label: self.selectedProductSizeVO().label(),
+                unit: self.selectedProductSizeVO().unit()
+            }
+        });
     }
 
     self.selectedProductWidthInputBlur = function () {
@@ -1153,15 +1232,17 @@ function LAControlsModel() {
     }
 
     self.selectProductSize = function (size) {
-        self.selectedProductSizeVO().width(size.width);
-        self.selectedProductSizeVO().height(size.height);
-        self.selectedProductSizeVO().label(size.label);
+        self.selectedProductSizeVO().width(size.width());
+        self.selectedProductSizeVO().height(size.height());
+        self.selectedProductSizeVO().label(size.label());
+        self.selectedProductSizeVO().unit(size.unit());
 
         userInteract({
             selectedProductSize: {
                 width: self.selectedProductSizeVO().width(),
                 height: self.selectedProductSizeVO().height(),
-                label: self.selectedProductSizeVO().label()
+                label: self.selectedProductSizeVO().label(),
+                unit: self.selectedProductSizeVO().unit()
             }
         });
     }
@@ -1175,11 +1256,11 @@ function LAControlsModel() {
     }
 
     self.selectedProductLocation.subscribe(function (newValue) {
-        userInteract({ selectedProductLocation: newValue });
+        userInteract({selectedProductLocation: newValue});
     });
 
     function updateProductColorize() {
-        userInteract({ selectedProductColorize: self.selectedProductColorVO().toColorizeList() });
+        userInteract({selectedProductColorize: self.selectedProductColorVO().toColorizeList()});
     }
 
     /**
@@ -1192,7 +1273,7 @@ function LAControlsModel() {
      */
 
     //variables
-    self.productRootCategory = ko.observable(new ProductCategoryVO({ id: 'root' }));
+    self.productRootCategory = ko.observable(new ProductCategoryVO({id: 'root'}));
     self.productSelectedCategories = ko.observableArray();
     self.productCurrentCategory = ko.computed(function () {
         if (!self.productSelectedCategories() || self.productSelectedCategories().length < 1)
@@ -1298,7 +1379,8 @@ function LAControlsModel() {
         if (productItem && query == self.productsSearchQuery().toLowerCase()) {
             //query match condition
             var words = query.split(" ");
-            var match = true;i
+            var match = true;
+            i
             for (var i = 0; i < words.length; i++) {
                 var word = words[i];
                 if (word.length) {
@@ -1331,7 +1413,7 @@ function LAControlsModel() {
         if (self.productsSearchQuery().length > 0) {
             str = laTranslation.translateUI("SEARCH");
         }
-            
+
         return str;
     };
 
@@ -1370,7 +1452,6 @@ function LAControlsModel() {
     /**
      * PRODUCT CATEGORY ENDS HERE
      */
-
 
 
     /**
@@ -1423,7 +1504,6 @@ function LAControlsModel() {
     };
 
 
-
     self.removeQuantity = function (line, clickEvent) {
         var q = parseInt(line.quantity());
         var decreaseStep = -q; // decrease to -q for set quantity to zero before delete
@@ -1444,7 +1524,7 @@ function LAControlsModel() {
     };
 
     self.changeQuantity = function (line, number1, clickEvent, changeQuantityOptions) {
-        if (!changeQuantityOptions) changeQuantityOptions = { ignoreTotal: false, removeZero: false };
+        if (!changeQuantityOptions) changeQuantityOptions = {ignoreTotal: false, removeZero: false};
 
         var r = parseInt(line.quantity());
         var totalQ = self.totalQuantity();
@@ -1460,7 +1540,7 @@ function LAControlsModel() {
             line.quantity(rAfterUpdate);
         }
 
-    };    
+    };
 
     self.getQuantity = function () {
         var dataToSave = jQuery.map(self.quantities(), function (item) {
@@ -1487,14 +1567,17 @@ function LAControlsModel() {
         });
         if (totalQuantity < minQuantity) {
             jQuery("#place-order-btn").addClass("disabled");
-            
-            var translation = laTranslation.translateUI("MINIMUM_ORDER_QUANTITY", { name: self.selectedProductVO().name(), minQuantity: minQuantity });
+
+            var translation = laTranslation.translateUI("MINIMUM_ORDER_QUANTITY", {
+                name: self.selectedProductVO().name(),
+                minQuantity: minQuantity
+            });
             jQuery("#place-order-wrapper[data-toggle='tooltip']").tooltip('enable').attr('data-original-title', translation);
         } else {
             jQuery("#place-order-btn").removeClass("disabled");
             jQuery("#place-order-wrapper[data-toggle='tooltip']").tooltip('disable');
         }
-        userInteract({ updateQuantities: quantities });
+        userInteract({updateQuantities: quantities});
     }
 
     /**
@@ -1511,13 +1594,13 @@ function LAControlsModel() {
             jQuery('#add-names-form').addClass('expanded');
         }
 
-        if(self.isCompact()) jQuery("#add-names-info").show();
+        if (self.isCompact()) jQuery("#add-names-info").show();
         if (type == "name") {
             jQuery("#add-names-info").text("Name is added!");
-            userInteract({ addNameObj: self.selectedLetteringVO().toObject() });
+            userInteract({addNameObj: self.selectedLetteringVO().toObject()});
         } else {
             jQuery("#add-names-info").text("Number is added!");
-            userInteract({ addNumberObj: self.selectedLetteringVO().toObject() });
+            userInteract({addNumberObj: self.selectedLetteringVO().toObject()});
         }
         setTimeout(function () {
             jQuery('#names-number-table input').first().focus();
@@ -1529,7 +1612,7 @@ function LAControlsModel() {
     }
 
     self.namesNumbers = ko.observableArray();
-    
+
     self.namesNumbers.subscribe(function (newValue) {
         updateNamesNumbers();
     });
@@ -1572,9 +1655,10 @@ function LAControlsModel() {
         var namesNumbers = jQuery.map(controlsModel.namesNumbers(), function (item) {
             return item.toObject();
         });
-        userInteract({ updateNamesNumbers: namesNumbers });
+        userInteract({updateNamesNumbers: namesNumbers});
         nnQuantitySynchronizer.onNamesNumbersChanged();
     }
+
     self.isValidNameNumber = function (nameNumber) {
         var name = nameNumber.name();
         var validName = false;
@@ -1609,7 +1693,7 @@ function LAControlsModel() {
                 return fonts[i];
             }
         }
-        return { name: "", fontFamily: "", boldAllowed: true, italicAllowed: true };
+        return {name: "", fontFamily: "", boldAllowed: true, italicAllowed: true};
     });
 
 
@@ -1626,7 +1710,7 @@ function LAControlsModel() {
 
     // list of available fill colors for graphics and letterings
     self.colors = ko.observableArray();
-    
+
     // list of available stroke colors for graphics and letterings
     self.strokeColors = ko.observableArray();
 
@@ -1635,10 +1719,10 @@ function LAControlsModel() {
      */
 
     /**
-      * GRAPHICS CATEGORY BEGINS HERE
-      */
+     * GRAPHICS CATEGORY BEGINS HERE
+     */
     // tree if graphics categories
-    self.graphicRootCategory = ko.observable(new GraphicsCategoryVO({ id: 'root' }));
+    self.graphicRootCategory = ko.observable(new GraphicsCategoryVO({id: 'root'}));
 
     // list of graphics categories
     self.graphicCatalogBreadcrumbs = ko.observableArray();
@@ -1688,10 +1772,10 @@ function LAControlsModel() {
     self.selectGraphicItem = function (categoryItem) {
         if (categoryItem.isImage()) {
             if (categoryItem.id()) {
-                if(self.isCompact()){
+                if (self.isCompact()) {
                     self.showImageAddedInfo(true);
                 }
-                userInteract({ addGraphics: categoryItem.id() });
+                userInteract({addGraphics: categoryItem.id()});
             }
             return;
         }
@@ -1721,7 +1805,7 @@ function LAControlsModel() {
     //Search
     self.graphicsSearchQuery = ko.observable("");
     self.searchGraphicsResult = ko.observableArray();
-        
+
 
     self.graphicsItemProcessor = function (query, graphicItem) {
         if (graphicItem && query == self.graphicsSearchQuery().toLowerCase()) {
@@ -1740,7 +1824,7 @@ function LAControlsModel() {
             }
         }
     }
-    self.graphicSearchPartFinished = function(query){
+    self.graphicSearchPartFinished = function (query) {
         self.searchGraphicsResult.notifySubscribers();
         liveartUI.updateLazyLoadContainer();
         return query == self.graphicsSearchQuery().toLowerCase() && self.searchGraphicsResult().length < self.MAX_SEARCH_RESULTS_LENGTH;
@@ -1853,19 +1937,25 @@ function LAControlsModel() {
     self.selectedObjectType = ko.observable('none');
 
     // return true if some object is selected
-    self.hasSelected = ko.computed(function () { return self.selectedObjectType() != 'none'; });
+    self.hasSelected = ko.computed(function () {
+        return self.selectedObjectType() != 'none';
+    });
 
     // return true if selected object is text
-    self.selectedIsText = ko.computed(function () { return self.selectedObjectType() == 'text'; });
+    self.selectedIsText = ko.computed(function () {
+        return self.selectedObjectType() == 'text';
+    });
 
 
     // return true if selected object is graphics
-    self.selectedIsGraphics = ko.computed(function () { return self.selectedObjectType() == 'graphics'; });
+    self.selectedIsGraphics = ko.computed(function () {
+        return self.selectedObjectType() == 'graphics';
+    });
 
     self.replaceRequired = ko.observable(false);
 
     self.showGallery = ko.computed(function () {
-        if((self.selectedIsGraphics() && self.replaceRequired()) || !self.selectedIsGraphics())
+        if ((self.selectedIsGraphics() && self.replaceRequired()) || !self.selectedIsGraphics())
             return true;
         else
             return false;
@@ -1875,13 +1965,13 @@ function LAControlsModel() {
 
     self.selectedObjectPropertiesVO().width.subscribe(function (value) {
         if (!self.selectedObjectPropertiesVO().suppressUpdate) {
-            userInteract({ updateObject: self.selectedObjectPropertiesVO().toWidthObject() });
+            userInteract({updateObject: self.selectedObjectPropertiesVO().toWidthObject()});
         }
     });
 
     self.selectedObjectPropertiesVO().height.subscribe(function (value) {
         if (!self.selectedObjectPropertiesVO().suppressUpdate) {
-            userInteract({ updateObject: self.selectedObjectPropertiesVO().toHeightObject() });
+            userInteract({updateObject: self.selectedObjectPropertiesVO().toHeightObject()});
         }
     });
 
@@ -1896,7 +1986,7 @@ function LAControlsModel() {
     self.selectedObjectDPUExceeded = ko.observable(false);
 
     self.editArtworkTitle = ko.computed(function () {
-        if(self.replaceRequired())
+        if (self.replaceRequired())
             return 'Replace Artwork';
         else
             return 'Edit Artwork';
@@ -1910,7 +2000,7 @@ function LAControlsModel() {
     self.selectedObjectConstrained = ko.observable(false);
 
     self.selectedObjectConstrained.subscribe(function (value) {
-        userInteract({ setConstained: self.selectedObjectConstrained() });
+        userInteract({setConstained: self.selectedObjectConstrained()});
         if (!value && self.selectedObjectFixedPosition()) {
             self.selectedObjectFixedPosition(false);
         }
@@ -1919,7 +2009,7 @@ function LAControlsModel() {
     self.showObjectConstraints = ko.observable(false);
 
     self.showObjectConstraints.subscribe(function (value) {
-        userInteract({ showObjectConstraints: self.showObjectConstraints() });
+        userInteract({showObjectConstraints: self.showObjectConstraints()});
     });
 
     self.selectedObjectConstraintString = ko.observable("");
@@ -1927,7 +2017,7 @@ function LAControlsModel() {
     self.selectedObjectRequired = ko.observable(false);
 
     self.selectedObjectRequired.subscribe(function (value) {
-        userInteract({ setRequired: self.selectedObjectRequired() });
+        userInteract({setRequired: self.selectedObjectRequired()});
         if (!value) {
             self.selectedObjectFixedPosition(false);
         }
@@ -1936,7 +2026,7 @@ function LAControlsModel() {
     self.selectedObjectFixedPosition = ko.observable(false);
 
     self.selectedObjectFixedPosition.subscribe(function (value) {
-        userInteract({ setFixedPosition: self.selectedObjectFixedPosition() });
+        userInteract({setFixedPosition: self.selectedObjectFixedPosition()});
 
         if (value && !self.selectedObjectConstrained()) {
             self.selectedObjectConstrained(true);
@@ -1946,8 +2036,8 @@ function LAControlsModel() {
         }
     });
 
-    self.artworkTabTitle = ko.computed(function(){
-        if(self.selectedObjectRequired() && self.selectedIsGraphics())
+    self.artworkTabTitle = ko.computed(function () {
+        if (self.selectedObjectRequired() && self.selectedIsGraphics())
             return 'Edit Gallery Artwork';
         else
             return 'Add Gallery Artwork';
@@ -1964,11 +2054,11 @@ function LAControlsModel() {
     // public function that forces LiveArt to add new text
     self.addText = function () {
         var text = self.selectedLetteringVO().toObject();
-        if(self.selectedIsText()){
+        if (self.selectedIsText()) {
             text.text = "";
         }
         // resetting text value
-        userInteract({ addText: text });
+        userInteract({addText: text});
     };
 
     self.selectedLetteringVO().text.subscribe(function (value) {
@@ -2026,9 +2116,10 @@ function LAControlsModel() {
 
     // private function that informs LiveArt about change in letterings (fill, stroke, bold, italic, etc.)
     self.suppressTextUpdate = false;
+
     function updateText() {
         if (self.selectedObjectType() == 'text' && !self.suppressTextUpdate) {
-            userInteract({ updateText: self.selectedLetteringVO().toObject() });
+            userInteract({updateText: self.selectedLetteringVO().toObject()});
         }
     }
 
@@ -2037,8 +2128,8 @@ function LAControlsModel() {
      */
 
     /**
- * TEXT EFFECT START 
- */
+     * TEXT EFFECT START
+     */
     self.textEffects = ko.observableArray([]);
     self.selectedTextEffectVO = ko.observable(new TextEffectVO());
 
@@ -2191,16 +2282,16 @@ function LAControlsModel() {
 
 
     /**
-     * TEXT EFFECT END 
+     * TEXT EFFECT END
      */
 
     /**
      * TEMPLATES LIST START
      */
-    
+
 
     // tree of templates categories
-    self.templateRootCategory = ko.observable(new TemplatesCategoryVO({ id: 'root' }));
+    self.templateRootCategory = ko.observable(new TemplatesCategoryVO({id: 'root'}));
 
     // list of template categories
     self.templateCatalogBreadcrumbs = ko.observableArray();
@@ -2223,6 +2314,10 @@ function LAControlsModel() {
         self.templateRootCategory().categories(mappedData);
         self.templateCatalogBreadcrumbs([self.templateRootCategory()]);
     };
+
+    self.templatesAvailable = ko.computed(function () {
+        return self.templateRootCategory().categories().length > 0;
+    });
 
     //initialisation of template categories
     self.templateListLoaded = function (templates) {
@@ -2313,8 +2408,8 @@ function LAControlsModel() {
                 }
             }
             if (match) {
-                for(var i = 0; i < self.searchTemplatesResult().length; i++){
-                    if(self.searchTemplatesResult()[i].id() === templateItem.id){
+                for (var i = 0; i < self.searchTemplatesResult().length; i++) {
+                    if (self.searchTemplatesResult()[i].id() === templateItem.id) {
                         return;
                     }
                 }
@@ -2397,12 +2492,12 @@ function LAControlsModel() {
     });
 
     self.addAnotherArtwork = function () {
-        userInteract({ deselectObject: true });
+        userInteract({deselectObject: true});
         liveartUI.showGraphicsForm();
     };
 
     self.replaceArtwork = function () {
-        if(self.selectedIsGraphics)
+        if (self.selectedIsGraphics)
             self.replaceRequired(true);
         liveartUI.showGraphicsForm();
         liveartUI.updateLazyLoadContainer();
@@ -2413,16 +2508,17 @@ function LAControlsModel() {
         if (self.isCompact()) {
             liveartUI.closeActiveTab();
         }
-        userInteract({ updateGraphics: self.selectedGraphicsFormatVO().toObject() });
+        userInteract({updateGraphics: self.selectedGraphicsFormatVO().toObject()});
     }
 
     function updateGraphicsColorize() {
-        userInteract({ selectedGraphicsColorize: self.selectedGraphicsFormatVO().complexColor().toColorizeList() });
+        userInteract({selectedGraphicsColorize: self.selectedGraphicsFormatVO().complexColor().toColorizeList()});
     }
+
     self.socialShowUploadConditions = function (image) {
         self.customImageUrl(image);
         self.showUploadConditions("social");
-        userInteract({ deselectObject: true });
+        userInteract({deselectObject: true});
     }
 
     self.showUploadConditions = function (type) {
@@ -2430,19 +2526,19 @@ function LAControlsModel() {
 
         self.customImageType(type);
         jQuery("#liveart-upload-conditions-popup").modal("show");
-        userInteract({ deselectObject: true });
+        userInteract({deselectObject: true});
     }
 
     self.showUploadTab = function () {
-        if(self.showSocialNetworksPhotos())
+        if (self.showSocialNetworksPhotos())
             self.removeMobileUploadedGraphicsTooltip();
-        else{
+        else {
             liveartUI.closeActiveTab();
             self.showUploadConditions('upload');
         }
     };
     self.uploadButtonAttrs = function () {
-        if(self.showSocialNetworksPhotos())
+        if (self.showSocialNetworksPhotos())
             return {
                 "href": "#upload-graphics-form",
                 "aria-controls": "upload-graphics-form",
@@ -2490,7 +2586,7 @@ function LAControlsModel() {
         if (self.isCompact()) {
             liveartUI.closeActiveTab();
         }
-        if(self.selectedObjectRequired)
+        if (self.selectedObjectRequired)
             self.replaceRequired(true);
         userInteract({
             uploadGraphics: url
@@ -2521,7 +2617,7 @@ function LAControlsModel() {
     self.addPhoto = function (photo) {
         liveartUI.hideExpandedWindow();
         if (self.selectedObjectType() != "none") {
-            userInteract({ deselectObject: true });
+            userInteract({deselectObject: true});
             liveartUI.showUploadedGraphicsForm();
         }
         userInteract({
@@ -2547,14 +2643,14 @@ function LAControlsModel() {
     self.fadeDelay = 1200;
 
     self.paginationInstagramPhotos = function () {
-        hello("instagram").api(self.paginationPath(), { limit: self.paginationLimit() }, function (response) {
+        hello("instagram").api(self.paginationPath(), {limit: self.paginationLimit()}, function (response) {
             if (response.error) {
                 self.responseSocialError(response);
                 return false;
             }
             if (response.data.length < 1) {
                 var instagram = laTranslation.translateUI("INSTAGRAM");
-                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", { network: instagram });
+                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", {network: instagram});
 
                 self.loadPhotosStatus.html(text);
                 self.isPagination(false);
@@ -2584,14 +2680,17 @@ function LAControlsModel() {
     }
 
     self.paginationFacebookPhotos = function () {
-        hello("facebook").api(self.paginationPath(), { limit: self.paginationLimit(), "fields": "images" }, function (response) {
+        hello("facebook").api(self.paginationPath(), {
+            limit: self.paginationLimit(),
+            "fields": "images"
+        }, function (response) {
             if (response.error) {
                 self.responseSocialError(response);
                 return false;
             }
             if (response.data.length < 1) {
                 var fb = laTranslation.translateUI("FACEBOOK");
-                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", { network: fb });
+                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", {network: fb});
 
                 self.loadPhotosStatus.html(text);
                 self.isPagination(false);
@@ -2625,14 +2724,14 @@ function LAControlsModel() {
     }
 
     self.paginationFlickrPhotos = function () {
-        hello("flickr").api(self.paginationPath(), { limit: self.paginationLimit() }, function (response) {
+        hello("flickr").api(self.paginationPath(), {limit: self.paginationLimit()}, function (response) {
             if (response.error) {
                 self.responseSocialError(response);
                 return false;
             }
             if (response.data.length < 1) {
                 var flickr = laTranslation.translateUI("FLICKR");
-                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", { network: flickr });
+                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", {network: flickr});
 
                 self.loadPhotosStatus.html(text);
                 self.isPagination(false);
@@ -2674,7 +2773,7 @@ function LAControlsModel() {
             }
             if (!response.data || response.data.length < 1) {
                 var google = laTranslation.translateUI("GOOGLE");
-                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", { network: google });
+                var text = laTranslation.translateUI("NO_PHOTOS_IN_SOCIAL_NETWORK", {network: google});
 
                 self.loadPhotosStatus.html(text);
                 self.isPagination(false);
@@ -2690,7 +2789,7 @@ function LAControlsModel() {
                     self.photosGoogle.push(new PhotosVO(response.data[i].images[1].source, response.data[i].picture));
                 }
                 self.photos(self.photosGoogle());
-                self.photosPreloader.fadeOut(self.fadeDelay);                
+                self.photosPreloader.fadeOut(self.fadeDelay);
                 if (response.paging) {
                     self.isPagination(true);
                     self.paginationPath(response.paging.next);
@@ -2704,20 +2803,28 @@ function LAControlsModel() {
         });
     }
     jQuery('#upload-graphics-form > .expanded-part .liveart-close-expanded-part-btn').click(function (e) {
-      //  jQuery(e.currentTarget).parents('.tab-pane').toggleClass('expanded');
-   //     self.currentNetwork(null);
+        //  jQuery(e.currentTarget).parents('.tab-pane').toggleClass('expanded');
+        //     self.currentNetwork(null);
     });
 
     // binding scroll to load next photos
     jQuery(function () {
         var win = jQuery("#upload-graphics-form #liveart-social-graphics-list");
         win.on("scroll", function () {
-            if (win.scrollTop() + win.innerHeight() >= this.scrollHeight && self.isPagination()) {                
+            if (win.scrollTop() + win.innerHeight() >= this.scrollHeight && self.isPagination()) {
                 switch (self.currentNetwork()) {
-                    case "instagram": self.paginationInstagramPhotos(); break;
-                    case "facebook": self.paginationFacebookPhotos(); break;
-                    case "flickr": self.paginationFlickrPhotos(); break;
-                    case "google": self.paginationGooglePhotos(); break;
+                    case "instagram":
+                        self.paginationInstagramPhotos();
+                        break;
+                    case "facebook":
+                        self.paginationFacebookPhotos();
+                        break;
+                    case "flickr":
+                        self.paginationFlickrPhotos();
+                        break;
+                    case "google":
+                        self.paginationGooglePhotos();
+                        break;
                 }
             }
         });
@@ -2739,7 +2846,8 @@ function LAControlsModel() {
                 self.authorizationGoogle();
                 break;
 
-            default: self.currentNetwork(null);
+            default:
+                self.currentNetwork(null);
         }
     }
 
@@ -2747,7 +2855,7 @@ function LAControlsModel() {
         self.currentNetwork(null);
         self.photos([]);
         liveartUI.hideExpandedWindow();
-        var msg = laTranslation.translateUI("FAIL_TO_SIGN_IN", { error: e.error.message });
+        var msg = laTranslation.translateUI("FAIL_TO_SIGN_IN", {error: e.error.message});
         self.addAlert(msg, "error");
     }
     self.responseSocialError = function (e) {
@@ -2769,26 +2877,26 @@ function LAControlsModel() {
         }
         helloInit();
         hello(network).login().on('success',
-			function (r) {
-			    self.isAuthorizedInstagram(true);
-			    liveartUI.showExpandedWindow("upload-graphics-form");
-			    jQuery("#liveart-social-graphics-list").scrollTop(0);
-			    self.photosPreloader.fadeIn(self.fadeDelay);
-			    self.paginationInstagramPhotos();
-			}).on('error', self.logInSocialError);
+            function (r) {
+                self.isAuthorizedInstagram(true);
+                liveartUI.showExpandedWindow("upload-graphics-form");
+                jQuery("#liveart-social-graphics-list").scrollTop(0);
+                self.photosPreloader.fadeIn(self.fadeDelay);
+                self.paginationInstagramPhotos();
+            }).on('error', self.logInSocialError);
 
         //initialize hello
         function helloInit() {
             self.paginationPath("me/photos");
             hello.init(
-				{
-				    instagram: self.instagramClientID()
-				},
-				{
-				    scope: 'photos',
-				    redirect_uri: self.authorizedRedirectUrl()
-				}
-			);
+                {
+                    instagram: self.instagramClientID()
+                },
+                {
+                    scope: 'photos',
+                    redirect_uri: self.authorizedRedirectUrl()
+                }
+            );
         }
     }
 
@@ -2802,26 +2910,26 @@ function LAControlsModel() {
         }
         helloInit();
         hello(network).login().on('success',
-			function (r) {
-			    self.isAuthorizedFacebook(true);
-			    liveartUI.showExpandedWindow("upload-graphics-form");
-			    jQuery("#liveart-social-graphics-list").scrollTop(0);
-			    self.photosPreloader.fadeIn(self.fadeDelay);
-			    self.paginationFacebookPhotos();
-			}).on('error', self.logInSocialError);
+            function (r) {
+                self.isAuthorizedFacebook(true);
+                liveartUI.showExpandedWindow("upload-graphics-form");
+                jQuery("#liveart-social-graphics-list").scrollTop(0);
+                self.photosPreloader.fadeIn(self.fadeDelay);
+                self.paginationFacebookPhotos();
+            }).on('error', self.logInSocialError);
 
         //initialize hello
         function helloInit() {
             self.paginationPath("me/photos/uploaded");
             hello.init(
-				{
-				    facebook: self.facebookClientID()
-				},
-				{
-				    scope: 'user_photos',
-				    redirect_uri: self.authorizedRedirectUrl()
-				}
-			);
+                {
+                    facebook: self.facebookClientID()
+                },
+                {
+                    scope: 'user_photos',
+                    redirect_uri: self.authorizedRedirectUrl()
+                }
+            );
         }
     }
 
@@ -2835,26 +2943,26 @@ function LAControlsModel() {
         }
         helloInit();
         hello(network).login().on('success',
-			function (r) {
-			    self.isAuthorizedFlickr(true);
-			    liveartUI.showExpandedWindow("upload-graphics-form");
-			    jQuery("#liveart-social-graphics-list").scrollTop(0);
-			    self.photosPreloader.fadeIn(self.fadeDelay);
-			    self.paginationFlickrPhotos();
-			}).on('error', self.logInSocialError);
+            function (r) {
+                self.isAuthorizedFlickr(true);
+                liveartUI.showExpandedWindow("upload-graphics-form");
+                jQuery("#liveart-social-graphics-list").scrollTop(0);
+                self.photosPreloader.fadeIn(self.fadeDelay);
+                self.paginationFlickrPhotos();
+            }).on('error', self.logInSocialError);
 
         //initialize hello
         function helloInit() {
             self.paginationPath("me/photos");
             hello.init(
-				{
-				    flickr: self.flickrClientID()
-				},
-				{
-				    scope: 'photos',
-				    redirect_uri: self.authorizedRedirectUrl()
-				}
-			);
+                {
+                    flickr: self.flickrClientID()
+                },
+                {
+                    scope: 'photos',
+                    redirect_uri: self.authorizedRedirectUrl()
+                }
+            );
 
         }
     }
@@ -2869,26 +2977,26 @@ function LAControlsModel() {
         }
         helloInit();
         hello(network).login().on('success',
-			function (r) {
-			    self.isAuthorizedGoogle(true);
-			    liveartUI.showExpandedWindow("upload-graphics-form");
-			    jQuery("#liveart-social-graphics-list").scrollTop(0);
-			    self.photosPreloader.fadeIn(self.fadeDelay);
-			    self.paginationGooglePhotos();
-			}).on('error', self.logInSocialError);
+            function (r) {
+                self.isAuthorizedGoogle(true);
+                liveartUI.showExpandedWindow("upload-graphics-form");
+                jQuery("#liveart-social-graphics-list").scrollTop(0);
+                self.photosPreloader.fadeIn(self.fadeDelay);
+                self.paginationGooglePhotos();
+            }).on('error', self.logInSocialError);
 
         //initialize hello
         function helloInit() {
             self.paginationPath("me/photos");
             hello.init(
-				{
-				    google: self.googleClientID()
-				},
-				{
-				    scope: 'photos',
-				    redirect_uri: self.authorizedRedirectUrl()
-				}
-			);
+                {
+                    google: self.googleClientID()
+                },
+                {
+                    scope: 'photos',
+                    redirect_uri: self.authorizedRedirectUrl()
+                }
+            );
         }
     }
 
@@ -2900,11 +3008,11 @@ function LAControlsModel() {
     function parseObjectAttributes(selectedObject) {
         self.suppressTextUpdate = true;
         if (selectedObject == null) {
-            if(!self.adminMode()) {
-                if(liveartUI.isTextTabActive()){
+            if (!self.adminMode()) {
+                if (liveartUI.isTextTabActive()) {
                     // TODO: replace this hell. Fixing text tab blinking on "Add New" click
-                    setTimeout(function(){
-                        if(self.selectedObjectType() === 'none')
+                    setTimeout(function () {
+                        if (self.selectedObjectType() === 'none')
                             liveartUI.closeActiveTab();
                     }, 300);
                 } else {
@@ -2923,7 +3031,7 @@ function LAControlsModel() {
             }
             liveartUI.updateLazyLoadContainer();
         } else {
-            // ADMIN MODE: 
+            // ADMIN MODE:
             self.selectedObjectConstrained(selectedObject.constrained);
             self.showObjectConstraints(selectedObject.showConstraints);
             self.selectedObjectConstraintString(selectedObject.constraintString);
@@ -2940,21 +3048,23 @@ function LAControlsModel() {
                 self.selectedLetteringVO().fromObject(selectedObject);
                 self.setTextEffect();
                 self.selectedObjectDPUExceeded(false);
-                if (!self.adminMode()) { openTextForm(); }
+                if (!self.adminMode()) {
+                    openTextForm();
+                }
             } else {
                 self.selectedObjectType('graphics');
                 self.selectedGraphicsFormatVO().fromObject(selectedObject);
                 self.selectedObjectDPUExceeded(selectedObject.dpuExceeded);
-                
+
                 if (self.selectedObjectPropertiesVO().id() != selectedObject.id) {
                     if (!self.adminMode()) {
                         if (selectedObject.sourceId && selectedObject.sourceId != "") {
                             openGraphicsForm();
-                        } else if(self.showSocialNetworksPhotos()){
+                        } else if (self.showSocialNetworksPhotos()) {
                             openUploadGraphicsForm();
                         }
                     }
-                } 
+                }
             }
         }
         self.selectedObjectPropertiesVO().fromObject(selectedObject);
@@ -2970,6 +3080,7 @@ function LAControlsModel() {
             document.dispatchEvent(evt);
         }, 200);
     }
+
     /**
      * SELECTED OBJECT ENDS HERE
      */
@@ -2997,8 +3108,7 @@ function LAControlsModel() {
      * LIVEART PROGRESS STATUS BEGINS HERE
      */
 
-    self.status = ko.observable({
-    });
+    self.status = ko.observable({});
 
 
     self.percentCompleted = ko.computed(function () {
@@ -3055,13 +3165,15 @@ function LAControlsModel() {
     }
 
     self.clearDesign = function () {
-        var retVal = confirm(laTranslation.translateUI("CLEAR_DESIGN_CONFIRMATION"));
-        if (retVal == true) {
-
-            // clean name/numbers
-            self.removeAllNameNumbers();
-            userInteract({ clearDesign: true });
-        }
+        self.confirm(laTranslation.translateUI("CLEAR_DESIGN_CONFIRMATION"), {header: laTranslation.translateUI("CLEAR_DESIGN_HEADER_MESSAGE")}).then(function (confirmed) {
+            if (confirmed) {
+                // clean name/numbers
+                self.removeAllNameNumbers();
+                jQuery("#clear-design-popup").modal("hide");
+                userInteract({clearDesign: true});
+            }
+        });
+        jQuery("#clear-design-popup").modal("show");
     }
 
     self.proceedQuote = function () {
@@ -3075,8 +3187,6 @@ function LAControlsModel() {
             "lockProportions": value
         });
     });
-
-    self.unitLabel = ko.observable("");
 
     self.zoomEnabled = ko.observable(false);
     self.minZoom = ko.observable(50);
@@ -3120,7 +3230,7 @@ function LAControlsModel() {
     self.selectedDesign = ko.observable();
     self.designNotes = ko.observable();
     self.designNotes.subscribe(function (val) {
-        userInteract({ designNotes: val });
+        userInteract({designNotes: val});
     });
 
     self.onDesignSelected = function (design) {
@@ -3135,11 +3245,11 @@ function LAControlsModel() {
 
     /**
      * USER'S EMAIL BEGINS HERE
-    */
+     */
     self.userEmail = ko.observable();
     /**
      * USER'S EMAIL ENDS HERE
-    */
+     */
 
     self.designName = ko.observable("");
 
@@ -3147,20 +3257,21 @@ function LAControlsModel() {
     * Design Idea is a saved template by admin with some restrictions which user can load from the list
     */
     self.designIdeaName = ko.observable("");
-    self.designIdeaNameIsValid = ko.computed(function () { return self.designIdeaName() != ""; });
+    self.designIdeaNameIsValid = ko.computed(function () {
+        return self.designIdeaName() != "";
+    });
     /**
      * DESIGN INFO BEGINS HERE
      */
 
-    self.designInfo = ko.observable({
-    });
+    self.designInfo = ko.observable({});
 
     self.objectsCount = ko.computed(function () {
         var objCount = "";
         if (isNullOrUndefined(self.designInfo().objectsCount)) {
             objCount = laTranslation.translateUI('NO_OBJECTS');
         } else if (self.designInfo().objectsCount) {
-            
+
             if (self.designInfo().objectsCount.letteringsCount === 0 && self.designInfo().objectsCount.imagesCount === 0) {
                 objCount = laTranslation.translateUI('NO_OBJECTS');
 
@@ -3174,7 +3285,7 @@ function LAControlsModel() {
                     letteringsCount = laTranslation.translateUI('ONE_LETTERING');
                 } else if (self.designInfo().objectsCount.letteringsCount > 1) {
                     var lcnt = self.designInfo().objectsCount.letteringsCount;
-                    letteringsCount = laTranslation.translateUI('LETTERINGS_COUNT', { count: lcnt });
+                    letteringsCount = laTranslation.translateUI('LETTERINGS_COUNT', {count: lcnt});
                 }
 
                 if (self.designInfo().objectsCount.imagesCount === 0) {
@@ -3183,7 +3294,7 @@ function LAControlsModel() {
                     imagesCount = laTranslation.translateUI('ONE_IMAGE');
                 } else if (self.designInfo().objectsCount.imagesCount > 1) {
                     var icnt = self.designInfo().objectsCount.imagesCount;
-                    imagesCount = laTranslation.translateUI('IMAGES_COUNT', { count: icnt });
+                    imagesCount = laTranslation.translateUI('IMAGES_COUNT', {count: icnt});
                 }
 
                 objCount = letteringsCount + ', ' + imagesCount;
@@ -3202,7 +3313,7 @@ function LAControlsModel() {
         } else if (count === 1) {
             colorsCount = laTranslation.translateUI('ONE_COLOR');
         } else if (count > 1) {
-            var translate = laTranslation.translateUI('COLORS_COUNT', { count: count });
+            var translate = laTranslation.translateUI('COLORS_COUNT', {count: count});
             colorsCount = translate;
         }
 
@@ -3269,31 +3380,31 @@ function LAControlsModel() {
      */
 
     /**
-    * UNDO/REDO BEGINS HERE
-    */
+     * UNDO/REDO BEGINS HERE
+     */
     self.undo = function () {
-		if (self.isUndoActive()) {
-			userInteract({ undo: true });
-		}
+        if (self.isUndoActive()) {
+            userInteract({undo: true});
+        }
     }
 
     self.redo = function () {
-		if (self.isRedoActive()) {
-			userInteract({ redo: true });
-		}
+        if (self.isRedoActive()) {
+            userInteract({redo: true});
+        }
     }
 
     self.isUndoActive = ko.observable(false);
     self.isRedoActive = ko.observable(false);
     /**
-    * UNDO/REDO ENDS HERE
-    */
+     * UNDO/REDO ENDS HERE
+     */
 
     self.showUploadedColorsDialog = ko.observable(true);
 
     /**
-    * Client ID's from social networks BEGIN HERE
-    */
+     * Client ID's from social networks BEGIN HERE
+     */
 
     self.instagramClientID = ko.observable("");
     self.facebookClientID = ko.observable("");
@@ -3313,13 +3424,13 @@ function LAControlsModel() {
     self.showGooglePhotos = ko.computed(function () {
         return self.googleClientID() !== "" && self.authorizedRedirectUrl() !== "";
     });
-	self.showSocialNetworksPhotos = ko.computed(function(){
-		return self.showInstagramPhotos()||self.showFacebookPhotos()||self.showFlickrPhotos()||self.showGooglePhotos();
-	});
+    self.showSocialNetworksPhotos = ko.computed(function () {
+        return self.showInstagramPhotos() || self.showFacebookPhotos() || self.showFlickrPhotos() || self.showGooglePhotos();
+    });
 
     /**
-    * Client ID's from social networks ENDS HERE
-    */
+     * Client ID's from social networks ENDS HERE
+     */
 
     self.addAlert = function (text, level) {
         liveartUI.addAlert(text, level);
@@ -3327,7 +3438,7 @@ function LAControlsModel() {
 
     self.showLoadDesignPreloader = ko.observable(false);
     self.showLoadDesignPreloader.subscribe(function (value) {
-        var status = { showPreloader: false, text: laTranslation.translateUI("LOADING_YOUR_DESIGN_MESSAGE") };
+        var status = {showPreloader: false, text: laTranslation.translateUI("LOADING_YOUR_DESIGN_MESSAGE")};
         if (value && self.status().completed) {
             status.showPreloader = true;
         }
@@ -3335,15 +3446,15 @@ function LAControlsModel() {
     });
 
     /**
-    * ADMIN MODE
-    */
+     * ADMIN MODE
+     */
     self.adminMode = ko.observable(false);
     // complex art admin mode (CAAM)
     self.caaMode = ko.observable(false);
 
     self.showPlaceOrderPreloader = ko.observable(false);
     self.showPlaceOrderPreloader.subscribe(function (value) {
-        var status = { showPreloader: false, text: laTranslation.translateUI("PLACING_ORDER_MESSAGE") };
+        var status = {showPreloader: false, text: laTranslation.translateUI("PLACING_ORDER_MESSAGE")};
         if (value && self.status().completed) {
             status.showPreloader = true;
         }
@@ -3353,10 +3464,10 @@ function LAControlsModel() {
     self.preloaderStatus = ko.observable({});
     var preloaderTimeot;
     self.preloaderStatus.subscribe(function (value) {
-        if(preloaderTimeot){
+        if (preloaderTimeot) {
             clearTimeout(preloaderTimeot)
         }
-        preloaderTimeot = setTimeout(function(){
+        preloaderTimeot = setTimeout(function () {
             value = self.preloaderStatus();
             if (value) {
                 if (value.showPreloader) {
@@ -3368,7 +3479,7 @@ function LAControlsModel() {
                     }
                     var $text = jQuery("#liveart-preloader").find(".preloader-text");
                     if ($text && $text.length) {
-                        $text[0].innerHTML  = textValue;
+                        $text[0].innerHTML = textValue;
                     }
                 } else {
                     jQuery("#liveart-preloader").modal('hide');
@@ -3407,11 +3518,10 @@ function LAControlsModel() {
         self.showTextEffectImages(show);
     }
 
-    
 
     self.selectedLetteringVO().formatVO().textEffect.subscribe(function (value) {
         var exists = false;
-        for (var i = 0; i < self.textEffects().length ; i++) {
+        for (var i = 0; i < self.textEffects().length; i++) {
             if (self.textEffects()[i].name() === value) {
                 exists = true;
             }
@@ -3424,9 +3534,150 @@ function LAControlsModel() {
 
 
     // This function will be overwritten from core
-    self.shouldClearOnProductChange  = function() {return false;};
+    self.processProductChange = function () {
+        return false;
+    };
+
+    self.currentDesign = ko.observable(null);
 
     self.addingNewText = ko.observable(false);
+
+    /** UNITS STARTS HERE */
+    self.selectedUnitVO = ko.observable(new UnitVO());
+    self.availableUnits = ko.observableArray([]);
+    self.setAvailableUnits = function (units) {
+        var availableUnits = jQuery.map(units, function (item) {
+            return new UnitVO(item);
+        });
+        self.availableUnits(availableUnits);
+    };
+
+    self.selectUnit = function (unit) {
+        userInteract({
+            selectUnit: unit.unit()
+        })
+    };
+
+    self.configUnitLabel = ko.observable("");
+    self.unitLabel = ko.computed(function () {
+        return self.selectedUnitVO().label() || self.configUnitLabel();
+    });
+    self.editableAreaUnitsRange = ko.observableArray([]);
+
+    /** UNITS ENDS HERE */
+
+    self.showProductColorDivider = ko.computed(function () {
+        var hasProductColorPicker = self.selectedProductVO().multicolor() || self.showProductColorPicker();
+        var hasContentBelow = self.availableUnits().length > 1 || self.selectedProductVO().resizable();
+        return hasProductColorPicker && hasContentBelow;
+    });
+
+    /**
+     * Editable area iszes with converted units
+     * @type {KnockoutObservableArray<any>}
+     */
+    self.editableAreaSizes = ko.observableArray([]);
+
+    self.setEditableAreaSizes = function (sizes) {
+        var editableAreaSizes = jQuery.map(sizes, function (item) {
+            return new ProductSizeVO(item.width, item.height, item.label, item.unit);
+        });
+        self.editableAreaSizes(editableAreaSizes);
+    };
+
+    self.productSizeStep = ko.computed(function () {
+        var step = 1;
+        var locations = self.selectedProductVO().locations();
+        if (locations && locations.length) {
+            var editableAreaUnitsRange = locations[0].editableAreaUnitsRange;
+            if (editableAreaUnitsRange && editableAreaUnitsRange.length && editableAreaUnitsRange[0].length > 2) {
+                step = editableAreaUnitsRange[0][2];
+            }
+        }
+        return step;
+    });
+
+
+    /** Confirmation modal start */
+    self.confirmModal = {
+        visible: ko.observable(false),
+        text: ko.observable(""),
+        header: ko.observable(""),
+        result: ko.observable(false),
+        callback: function (bool) {
+        },
+        onConfirm: function () {
+            self.confirmModal.result(true);
+            self.confirmModal.visible(false);
+        }
+    };
+    self.confirmModal.visible.subscribe(function (value) {
+        if (value) {
+            // clear previous value on show
+            self.confirmModal.result(false);
+        } else {
+            if (self.confirmModal.callback) {
+                self.confirmModal.callback(self.confirmModal.result());
+            }
+        }
+    });
+
+    self.confirm = function (text, options) {
+        // Resolving previous confirm if exists
+        if (self.confirmModal.visible()) {
+            self.confirmModal.callback(false);
+        }
+        // Configuring a new confirm pop up
+        return new Promise(function (resolve) {
+            self.confirmModal.text(text);
+            self.confirmModal.header((options && options.header) ? options.header : "");
+            self.confirmModal.callback = function (value) {
+                resolve(value);
+            };
+            self.confirmModal.visible(true);
+        });
+    };
+    /** Confirmation modal end */
+
+    // region Actions dialog
+
+    self.showActionDialog = ko.observable(false);
+    self.actionDialogText = ko.observable("");
+    self.actionDialogTitle = ko.observable("");
+    self.actionDialogOptions = ko.observable([]);
+    self.actionDialogResult = ko.observable("dismiss");
+    self.actionDialogCallback = null;
+    self.showActionDialog.subscribe(function (value) {
+        if (!value) {
+            self.actionDialogText("");
+            self.actionDialogTitle("");
+            self.actionDialogOptions([]);
+            const res = self.actionDialogResult();
+            self.actionDialogResult("dismiss");
+            if (typeof self.actionDialogCallback === "function") {
+                self.actionDialogCallback(res);
+            }
+        }
+    });
+
+    self.onActionDialogInteraction = function (action) {
+        self.actionDialogResult(action);
+        self.showActionDialog(false);
+    };
+
+    self.actionDialog = function (title, text, actions) {
+        return new Promise(function (res) {
+            self.actionDialogTitle(title);
+            self.actionDialogText(text);
+            self.actionDialogOptions(actions);
+            self.actionDialogCallback = function (value) {
+                res(value);
+            };
+            self.showActionDialog(true);
+        });
+    };
+
+    // endregion Actions dialog
 
     /**
      * UPDATE VIEW MODEL BEGINS HERE
@@ -3539,8 +3790,9 @@ function LAControlsModel() {
         if (isInvalid(invalidateList, 'pantones')) {
             jQuery.fn.colorPicker.setPantones(model.pantones);
             validate(invalidateList, 'pantones');
-        };
-        
+        }
+
+
         // parse a selected object
         if (isInvalid(invalidateList, 'selectedObj')) {
             parseObjectAttributes(model.selectedObj);
@@ -3549,11 +3801,11 @@ function LAControlsModel() {
 
         // parse added object
         if (isInvalid(invalidateList, 'addedObj')) {
+            validate(invalidateList, 'addedObj');
             var evt = document.createEvent("Event");
             evt.initEvent("liveart-object-added", true, false);
             evt.value = model.addedObj;
             document.dispatchEvent(evt);
-            validate(invalidateList, 'addedObj');
         }
 
         // Order
@@ -3618,12 +3870,12 @@ function LAControlsModel() {
             self.showPlaceOrderPreloader(model.showPlaceOrderPreloader);
             validate(invalidateList, 'showPlaceOrderPreloader');
         }
-        
+
         if (isInvalid(invalidateList, 'showDPUExceededDialog') && model.showDPUExceededDialog) {
             showDPUExceededDialog();
             validate(invalidateList, 'showDPUExceededDialog');
         }
-       
+
         if (isInvalid(invalidateList, 'showShareLink') && model.showShareLink) {
             self.shareLink(model.shareLink);
             showShareLink();
@@ -3661,7 +3913,7 @@ function LAControlsModel() {
         }
         if (isInvalid(invalidateList, 'unitLabel') && model.unitLabel) {
             //get obly first 2 symbols
-            self.unitLabel(model.unitLabel.substring(0, 2));
+            self.configUnitLabel(model.unitLabel.substring(0, 2));
             validate(invalidateList, 'unitLabel');
         }
         // fill textEffects
@@ -3679,6 +3931,12 @@ function LAControlsModel() {
         // fill templates categories list
         if (isInvalid(invalidateList, 'templatesCategories')) {
             self.templateCatalogLoaded(model.templatesCategories);
+            // open root category if only 1 category is present
+            if (self.templateCatalogBreadcrumbs() && self.templateCatalogBreadcrumbs().length === 1 &&
+                self.templateCatalogBreadcrumbs()[0].id() === "root" && self.currentTemplates() &&
+                self.currentTemplates().length === 1) {
+                self.selectTemplateItem(self.currentTemplates()[0])
+            }
             validate(invalidateList, 'templatesCategories');
         }
         // fill templates list
@@ -3792,6 +4050,7 @@ function LAControlsModel() {
         }
 
         if (isInvalid(invalidateList, 'currentDesign')) {
+            self.currentDesign(model.currentDesign);
             setCurrentDesign(model.currentDesign);
             validate(invalidateList, 'currentDesign');
         }
@@ -3813,13 +4072,48 @@ function LAControlsModel() {
             validate(invalidateList, 'showSutableColorize');
         }
 
-        if (isInvalid(invalidateList, 'shouldClearOnProductChange')) {
-            self.shouldClearOnProductChange  = model.shouldClearOnProductChange;
-            validate(invalidateList, 'shouldClearOnProductChange');
+        if (isInvalid(invalidateList, 'processProductChange')) {
+            self.processProductChange = model.processProductChange;
+            validate(invalidateList, 'processProductChange');
         }
         if (isInvalid(invalidateList, 'caaMode')) {
             self.caaMode(model.caaMode);
             validate(invalidateList, 'caaMode');
+        }
+
+        if (isInvalid(invalidateList, 'availableUnits')) {
+            self.setAvailableUnits(model.availableUnits);
+            validate(invalidateList, 'availableUnits');
+        }
+
+        if (isInvalid(invalidateList, 'selectedUnit')) {
+            self.selectedUnitVO().fromObject(model.selectedUnit);
+            validate(invalidateList, 'selectedUnit');
+        }
+
+        if (isInvalid(invalidateList, 'editableAreaUnitsRange')) {
+            self.editableAreaUnitsRange(model.editableAreaUnitsRange);
+            validate(invalidateList, 'editableAreaUnitsRange');
+        }
+
+        if (isInvalid(invalidateList, 'editableAreaSizes')) {
+            self.setEditableAreaSizes(model.editableAreaSizes);
+            validate(invalidateList, 'editableAreaSizes');
+        }
+
+        if (isInvalid(invalidateList, 'isTemplateStrict')) {
+            self.isTemplateStrict(model.isTemplateStrict);
+            validate(invalidateList, 'isTemplateStrict');
+        }
+
+        if (isInvalid(invalidateList, 'templateIsBeingEdited')) {
+            self.templateIsBeingEdited(model.templateIsBeingEdited);
+            validate(invalidateList, 'templateIsBeingEdited');
+        }
+
+        if (isInvalid(invalidateList, 'validatedProductSize')) {
+            changeProductSize(model.validatedProductSize);
+            validate(invalidateList, 'validatedProductSize');
         }
 
         self.suppressUpdate = false;
@@ -3837,6 +4131,7 @@ function LAControlsModel() {
 
 // bootstrap checkboxes
 var uelementId = 0;
+
 function checkUniqueId(element) {
     if (element.attr("id") == null || element.attr("id") == "") {
         uelementId++;
@@ -3874,8 +4169,7 @@ ko.bindingHandlers.colorPickerInit = {
         }*/
         $element = jQuery(element);
         checkUniqueId($element);
-        var params = {
-        };
+        var params = {};
         if (observable.container) params.container = $element.parent();
         if (observable.isDropup) params.isDropup = true;
         if (observable.paletteClass) params.paletteClass = observable.paletteClass;
@@ -3895,7 +4189,7 @@ ko.bindingHandlers.colorPickerInit = {
             }
             var colorValues = [];
             for (var i = 0; i < _observableArray.length; i++) {
-                colorValues.push({ value: _observableArray[i].value, name: _observableArray[i].name });
+                colorValues.push({value: _observableArray[i].value, name: _observableArray[i].name});
             }
             params.colors = colorValues;
         }
@@ -3973,7 +4267,7 @@ ko.bindingHandlers.colorPalette = {
                 var colorValues = [];
                 var _observableArray = observableArray();
                 for (var i = 0; i < _observableArray.length; i++) {
-                    colorValues.push({ value: _observableArray[i].value, name: _observableArray[i].name });
+                    colorValues.push({value: _observableArray[i].value, name: _observableArray[i].name});
                 }
                 if (colorValues.length > 0) {
                     jQuery.fn.colorPicker.changeColor($element.attr('id'), colorValues[0].value);
@@ -4009,7 +4303,7 @@ ko.bindingHandlers.productColorPalette = {
                 var colorValues = [];
                 var _observableArray = observableArray();
                 for (var i = 0; i < _observableArray.length; i++) {
-                    colorValues.push({ value: _observableArray[i].value, name: _observableArray[i].name });
+                    colorValues.push({value: _observableArray[i].value, name: _observableArray[i].name});
                 }
                 jQuery.fn.colorPicker.setColors($element.attr('id'), colorValues);
             }
@@ -4176,22 +4470,72 @@ ko.bindingHandlers.updateLazyLoadContainer = {
     update: function (element, valueAccessor) {
         liveartUI.updateLazyLoadContainer(element, true);
     }
-}
+};
+
+ko.bindingHandlers.positiveIntegerValue = {
+    init: function (element, valueAccessor) {
+        if (!ko.isObservable(valueAccessor())) {
+            throw new Error('integerValue binding should be used only with observable values');
+        }
+        element.value = valueAccessor()();
+        var previousValue = element.value;
+        jQuery(element).on('input change', function (e) {
+            var value = Number(this.value);
+            if (value !== parseInt(value, 10)) {
+                value = Number(previousValue);
+            }
+            this.value = value;
+            previousValue = value;
+            valueAccessor()(value);
+        });
+    },
+    update: function (element, valueAccessor) {
+        element.value = valueAccessor()();
+    }
+};
+
+ko.bindingHandlers.modal = {
+    init: function (element, valueAccessor) {
+        jQuery(element).modal({
+            show: false
+        });
+
+        var value = valueAccessor();
+        if (typeof value === 'function') {
+            jQuery(element).on('hide.bs.modal', function () {
+                value(false);
+            });
+        }
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+            jQuery(element).modal("destroy");
+        });
+
+    },
+    update: function (element, valueAccessor) {
+        var value = valueAccessor();
+        if (ko.utils.unwrapObservable(value)) {
+            jQuery(element).modal('show');
+        } else {
+            jQuery(element).modal('hide');
+        }
+    }
+};
 
 
 liveartUI.validationError = function (element, message) {
     element.tooltip({
         title: message,
+        animation: false,
         trigger: "manual"
     });
     element.addClass('has-error');
     element.tooltip('show');
-}
+};
 
 liveartUI.validationSuccess = function (element) {
     element.tooltip('destroy');
     element.removeClass('has-error');
-}
+};
 
 /**
  * CUSTOM KNOCKOUT BINDINGS END HERE
@@ -4214,7 +4558,7 @@ jQuery('a[href=\'#add-graphics-form\']').on('shown.bs.tab', function () {
     controlsModel.replaceRequired(false);
 });
 jQuery('a[href=\'#add-text-form\']').on('shown.bs.tab', function () {
-    if(!controlsModel.selectedIsText()){
+    if (!controlsModel.selectedIsText()) {
         controlsModel.addText();
         controlsModel.addingNewText(true);
     } else {
@@ -4244,6 +4588,7 @@ function clearValidationErrors($container) {
     $container.find(".has-error").removeClass("has-error");
     $container.find(".validation-error").hide();
 }
+
 /** Validatin block ends here */
 
 function showAuthDialog() {
@@ -4309,7 +4654,7 @@ function updateConfirmDPUExceeded() {
 function onConfirmDPUExceeded() {
     if (!controlsModel.dpuExceedConfirmed()) return;
     jQuery("#liveart-confirm-dpu-exceeded-popup").modal("hide");
-    userInteract({ dpuExceedConfirmed: true });
+    userInteract({dpuExceedConfirmed: true});
 }
 
 function onCancelDPUExceeded() {
@@ -4321,6 +4666,7 @@ function showAuthAndSaveDialog() {
     clearValidationErrors($container);
     $container.modal("show");
 }
+
 /*
  if (isEmailValid(email)) {
         userInteract({
@@ -4344,7 +4690,7 @@ function onAuthAndSaveDialogSubmit(event) {
 
         if (!isDesignNameValid(name)) {
             var $designNameContainer = jQuery("#liveart-auth-and-save-dialog .design-name-controls");
-            var text = laTranslation.translateUI("INVALID_DESIGN_NAME");
+            var text = laTranslation.translateUI("EMPTY_DESIGN_NAME_ERROR");
             showValidationError($designNameContainer, text);
             jQuery("#liveart-auth-and-save-name-input").focus();
             return;
@@ -4382,7 +4728,7 @@ function onSaveDesignDialogSubmit(event) {
 
         if (!isDesignNameValid(name)) {
             var $designNameContainer = jQuery("#liveart-save-design-popup .design-name-controls");
-            var text = laTranslation.translateUI("INVALID_DESIGN_NAME");
+            var text = laTranslation.translateUI("EMPTY_DESIGN_NAME_ERROR");
             showValidationError($designNameContainer, text);
             jQuery("#liveart-save-design-name-input").focus();
             return;
@@ -4415,12 +4761,14 @@ function openGraphicsForm() {
 
     liveartUI.showGraphicsForm();
 }
+
 function openUploadGraphicsForm() {
     if (controlsModel.isCompact())
         return;
 
     liveartUI.showUploadedGraphicsForm();
 }
+
 function onLoadDesignDialogSubmit(event) {
     if (event == null || event.keyCode == 13) {
         if (controlsModel.selectedDesign() != null) {
@@ -4433,13 +4781,14 @@ function onLoadDesignDialogSubmit(event) {
     }
 }
 
-function showColorCountDialog() {  
+function showColorCountDialog() {
     if (!controlsModel.showUploadedColorsDialog()) {
         controlsModel.imageColorCount(new ImageColorCountVO(true, 0));
         controlsModel.suppressUpdate = false;
         onColorCountDialogSubmit();
         return;
-    };
+    }
+    ;
     controlsModel.imageColorCount(new ImageColorCountVO());
     jQuery("#liveart-color-count-popup").modal({
         backdrop: false
@@ -4493,11 +4842,37 @@ function onShareDesign() {
         shareDesign: ""
     });
 }
+
 function copyShareLink() {
     jQuery("#liveart-share-link-popup .alert").hide();
     try {
-        jQuery("#liveart-share-link-input").select();
-        var success = document.execCommand('copy');
+        var $input = jQuery("#liveart-share-link-input");
+        var success = false;
+
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            $input.val();
+            var el = $input.get(0);
+            var editable = el.contentEditable;
+            var readOnly = el.readOnly;
+            el.contentEditable = true;
+            el.readOnly = false;
+            var range = document.createRange();
+            range.selectNodeContents(el);
+            var sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            el.setSelectionRange(0, 999999);
+            el.contentEditable = editable;
+            el.readOnly = readOnly;
+
+            success = document.execCommand('copy');
+            $input.blur();
+        } else {
+            $input.select();
+            success = document.execCommand('copy');
+        }
+
+
         if (success) {
             jQuery("#liveart-share-link-popup .alert-success").show();
         } else {
@@ -4507,6 +4882,7 @@ function copyShareLink() {
         jQuery("#liveart-share-link-popup .alert-danger").show();
     }
 }
+
 function showShareLink() {
     jQuery("#liveart-share-link-popup .alert").hide();
     // jQuery("#liveart-share-link-popup .copy-label").hide();
@@ -4566,18 +4942,28 @@ function placeOrderHandler(id) {
 }
 
 function onSaveDesignIdea() {
-    jQuery("#liveart-save-template-popup").modal("show");
+    if (controlsModel.templateIsBeingEdited()) {
+        processSaveDesignIdea();
+    } else {
+        jQuery("#liveart-save-template-popup").modal("show");
+    }
 }
+
 function onSaveDesignIdeaDialogSubmit(event) {
     if ((event == null || event.keyCode == 13) && controlsModel.designIdeaNameIsValid()) {
         var name = controlsModel.designIdeaName();
-        userInteract({
-            saveTemplate: name
-        });
+        processSaveDesignIdea(name);
 
         jQuery("#liveart-save-template-popup").modal("hide");
     }
 }
+
+function processSaveDesignIdea(name) {
+    userInteract({
+        saveTemplate: name
+    });
+}
+
 function onPlaceOrderFail() {
     //TODO: move/wrap to some API
     jQuery("#place-order-btn").button("reset");
@@ -4595,7 +4981,7 @@ window.onbeforeunload = function () {
 
 jQuery("#canvas-container").contextmenu(function (event) {
     var window = jQuery(".version-buildtime");
-    window.css({ 'left': event.clientX, 'top': event.clientY });
+    window.css({'left': event.clientX, 'top': event.clientY});
     window.html("<b>LiveArtJS version: </b>" + controlsModel.version() + "<br/><b>Build time: </b>" + controlsModel.buildTime());
     window.show();
     return false;
@@ -4604,7 +4990,8 @@ jQuery("#canvas-container").contextmenu(function (event) {
 jQuery(document).click(function (event) {
     if (jQuery("#liveart-content").is(":visible")) {
         jQuery(".version-buildtime").hide();
-    };
+    }
+    ;
 });
 
 // Setting up default container for color pickers
@@ -4624,7 +5011,7 @@ ko.applyBindings(controlsModel);
 var nnQuantitySynchronizer = new NNQuantitySynchronizer(controlsModel);// add additional properties request for NNQuantitySynchronizer
 
 // before use uncoment it in .ts file
-//var nnDebugHelper = new NNDebugHelper(controlsModel, true); //trackNamesNumberSizeQuantities=true 
+//var nnDebugHelper = new NNDebugHelper(controlsModel, true); //trackNamesNumberSizeQuantities=true
 
 
 // this handler will be invoked when UI needs to be updated
@@ -4638,4 +5025,9 @@ function userInteract(o) {
         liveArt.userInteract(o);
 }
 
+// UI helper functions which are used in the core
+uiHelpers = {
+    confirm: controlsModel.confirm,
+    showActionDialog: controlsModel.actionDialog
+};
 

@@ -1,3 +1,4 @@
+
 /*  Canvas Scaling  - default size  */
 @import 'variables.config.less';
 
@@ -236,6 +237,20 @@
                 .column {
                     width: 50%;
                 }
+                &#save-share-load-form .column {
+                    width: 100%;
+                    padding-left: 10px;
+                    padding-right: 10px;
+
+                    button {
+                        margin-left: 10px;
+                        margin-right: 10px;
+                        width: ~"calc(25% - 20px)";
+                         &:nth-child(2n) {
+                            float: left;
+                        }
+                    }
+                }
 
                 &.expandable-tab {
                     width: 100%;
@@ -418,10 +433,6 @@
             font-size: 12px;
         }
 
-        #print-design-btn span {
-            font-size: 12px;
-        }
-
         #preview-controls-container {
             left: 0;
             width: 100%;
@@ -588,6 +599,17 @@
                 }
             }
         }
+        .liveart-tabs-content > .tab-pane#save-share-load-form .column {
+            padding: 20px;
+            button {
+                margin-left: 0px;
+                margin-right: 0px;
+                width: ~"calc(50% - 10px)";
+                    &:nth-child(2n) {
+                    float: right;
+                }
+            }
+        }
     }
     /*  1 Column, very compact view    */
     @media (max-width: 420px) {
@@ -706,6 +728,18 @@
             width: 100%;
         }
         
+    }
+    @media only screen and (max-device-width: 740px) and (orientation: landscape) {
+        #liveart-content {
+            padding-right: 30px;
+            background-image: url(../img/bottom.svg), url(../img/top.svg);
+            background-position: right (@topMenuHeight + 2*@gap + 25), right (@topMenuHeight + 2*@gap + 10);
+            background-repeat: no-repeat;
+            background-size: 30px;
+        }
+        #preview-controls-container {
+            top: calc(@unitlessCanvasHeight/@unitlessCanvasWidth ~"*(100vw - 30px)");
+        }
     }
     /*  2 Columns - remove header to fit (default width)    */
     /*@media (max-height: 650px) {

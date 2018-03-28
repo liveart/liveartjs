@@ -14,7 +14,7 @@ controlsModel.adminMode(isAdmin);
 
 laOptions.defaultDesignId = getQueryParam("design_id");
 laOptions.defaultProductId = getQueryParam("product_id");
-controlsModel.caaMode(isAdmin && typeof laOptions.defaultProductId !== "string" && typeof laOptions.defaultDesignId !== "string");
+laOptions.caaMode = getQueryParam("caa_mode", "boolean");
 laOptions.defaultGraphicId = getQueryParam("graphic_id");
 laOptions.defaultProductAttributes = {};
 
@@ -31,15 +31,15 @@ laOptions.placeOrderHandler = null;
 laOptions.translation = laTranslation.dictionary;
 
 //Initing liveArt
-//controlsUpdateHandler() defined in LA.js
-liveArt.init(document.getElementById('canvas-container'), configFile, controlsUpdateHandler, laOptions);
+//controlsUpdateHandler(), uiHelpers() defined in LA.js
+liveArt.init(document.getElementById('canvas-container'), configFile, controlsUpdateHandler, laOptions, uiHelpers);
 
 /**
  * LIVEART INITALIZATION ENDS HERE
  */
 
 // liveart-template-saved event will be triggered on save template
-document.addEventListener("liveart-template-saved", function(event){
+document.addEventListener("liveart-template-saved", function (event) {
     // event.value - saveTemplate response data
 });
 

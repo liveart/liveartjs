@@ -28,6 +28,51 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.30 RELEASE NOTES
+Added:
+- Added product.defaultTemplateId
+- Added templateId to design object on saveDesign
+- Added Unit selector. Full list of changes: https://liveart.uservoice.com/knowledgebase/articles/1836322-how-to-configure-units
+- Added translation keys:
+    - SAVING_TEMPLATE_MESSAGE
+    - LOAD_UNSAVED_DESIGN_MESSAGE
+    - LOAD_UNSAVED_DESIGN_HEADER_MESSAGE
+    - LOAD_UNSAVED_DESIGN_HEADER_MESSAGE
+    - ONLY_REPLACE_PRODUCT_OPTION
+    - LOAD_TEMPLATE_OPTION
+    - CANCEL_OPTION
+    - DESIGN_NOT_SUPPORTED_BY_PRODUCT_MESSAGE
+    - DESIGN_NOT_SUPPORTED_BY_TEMPLATE_MESSAGE
+    - LOAD_PRODUCT
+    - LOAD_TEMPLATE
+    - REPLACE_CURRENT_DESIGN_OPTION
+    - EMPTY_DESIGN_NAME_ERROR
+- Added kerning to cufon fonts
+
+- **Beta**: Added Full Canvas width mode. Can be enabled by adding class="fullSize" to "#liveart-main-container" container
+
+
+Changed:
+- changed Save, Share & Load form icons
+
+Fixed:
+- Fixed local storage design loading for products with templates
+- Fixed copy design url for IOS devices
+- Fixed error in console when getTempaltesUrl was not set upped
+- Improved translation
+- Improved design loading from local storage
+- Fixed passing not integer values in quantity
+- Fixed correct editable area position when it is not visible
+- Added scroll area for canvas in mobile landscape mode
+- Changed source of local design from localStorage to sessionStorage
+- fix appearance of low resolution warning popup
+- fix photos and images uploading popup dpi
+
+ Deprecated:
+ - deprecated `options.unit`, `options.unit2` and `options.unitConversionMult` in main config
+ - use `option.defaultUnit` and `option.secondaryUnit` instead
+
+
 ### 0.10.29 RELEASE NOTES
 Fixes:
 - Fixed Templates List for a product with id type == "number"

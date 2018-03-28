@@ -1,0 +1,21 @@
+{
+  "name": "liveartjs-develop",
+  "version": "0.10.1",
+  "description": "LiveArt HTML5",
+  "scripts": {
+    "services:dev": "php -S 0.0.0.0:9000",
+    "dependencies": "\"npm install yarn -g\"",
+    "echoInfo": "echo \"-----> Access the project at http://localhost:9000/ <-----\"",
+    "start": "yarn run echoInfo && yarn run services:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gw.newtonideas.com:LiveArtJS"
+  },
+  "keywords": [
+    "liveart",
+    "html5"
+  ],
+  "author": "liveart",
+  "license": "ISC"
+}

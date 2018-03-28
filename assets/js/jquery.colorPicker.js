@@ -32,7 +32,7 @@
 (function (jQuery) {
     /**
      * Create a couple private variables.
-    **/
+     **/
     var selectorOwner,
         activePalette,
         cItterate = 0,
@@ -42,19 +42,19 @@
             swatch: jQuery('<div class="colorPicker-swatch">&nbsp;</div>')
         },
         transparent = "none",
-		maxColorsNumber = 30,
+        maxColorsNumber = 30,
         lastColor;
     /**
      * Create our colorPicker function
-    **/
+     **/
     jQuery.fn.colorPicker = function (options) {
         return this.each(function () {
             // Setup time. Clone new elements from our templates, set some IDs, make shortcuts, jazzercise.
             var element = jQuery(this),
                 opts = jQuery.extend({}, jQuery.fn.colorPicker.defaults, options),
                 defaultColor = jQuery.fn.colorPicker.toHex(
-                        (element.val().length > 0) ? element.val() : opts.pickerDefault
-                    ),
+                    (element.val().length > 0) ? element.val() : opts.pickerDefault
+                ),
                 newControl = templates.control.clone(),
                 paletteId = element.attr("id") + '-palette';
 
@@ -66,14 +66,14 @@
 
             /**
              * Build a color palette.
-            **/
+             **/
             //TODO: add palette as options
             jQuery.fn.colorPicker.createPalette(paletteId, opts.colors, defaultColor, opts.skipDefault, opts.showPantones);
 
 
             /**
              * Build replacement interface for original color input.
-            **/
+             **/
             newControl.css("background-color", defaultColor);
 
             newControl.bind("click", function () {
@@ -85,7 +85,8 @@
             if (options && options.onColorChange) {
                 newControl.data('onColorChange', options.onColorChange);
             } else {
-                newControl.data('onColorChange', function () { });
+                newControl.data('onColorChange', function () {
+                });
             }
             if (options && options.container) {
                 newControl.data('container', options.container);
@@ -102,7 +103,7 @@
             } else {
                 newControl.data('gap', 1);
             }
-            
+
             element.after(newControl);
 
             element.bind("change", function () {
@@ -118,7 +119,7 @@
         });
     };
 
-    //TODO: optimize 
+    //TODO: optimize
     function addSwatches(colors, newPalette, defaultColor, noBind) {
         if (!colors) return;
         jQuery.each(colors, function (i) {
@@ -152,7 +153,9 @@
             swatch.appendTo(newPalette);
         });
     }
+
     var pantomsHTLM;
+
     function getPantomsHTML(pantones, defaultColor) {
         if (!pantomsHTLM) {
             pantomsHTLM = templates.palette.clone();
@@ -172,11 +175,11 @@
     /**
      * Extend colorPicker with... all our functionality.
      * skipDefault - boolean or undefined. If true or present in skipDefaultData object - skipping the default color value
-    **/
+     **/
     jQuery.extend(true, jQuery.fn.colorPicker, {
         createPalette: function (paletteId, colors, defaultColor, skipDefault, showPantones) {
             var pantones = jQuery.fn.colorPicker.defaults.pantones;
-            
+
             // reading showPantones value from the storage
             if (showPantones === undefined) {
                 if (pantonesInfo[paletteId]) {
@@ -215,7 +218,7 @@
                         if (selectorOwner)
                             jQuery.fn.colorPicker.changeColor(selectorOwner.prev('input').attr('id'), color);
                     }
-                   )[0].farbtastic;
+                )[0].farbtastic;
                 newPalette.css('width', 'auto');
 
                 if (onlyTrasparent) { // background color
@@ -225,21 +228,21 @@
 
             var self = this;
             if (showPantones) {
-                pantonesInfo[paletteId] = { showPantones: showPantones, drawn: true };
+                pantonesInfo[paletteId] = {showPantones: showPantones, drawn: true};
                 var defaultId = paletteId + "-default";
                 var pantonesId = paletteId + "-pantones";
                 var tabsId = paletteId + "-tabs";
                 var newContainer = jQuery(
                     '<div class="picker-with-pantons">' +
-                        '<ul id="' + tabsId + '" class ="nav nav-tabs">' +
-                            '<li data-toggle="tab" class ="active default-nav"><a href="#' + defaultId + '"><span>Default</span></a></li>' +
-                            '<li data-toggle="tab" class="pantones-nav"><a href="#' + pantonesId + '"><span>Pantones</span></a></li>' +
-                            '</ul>' +
-                        '<div class="tab-content">' +
-                            '<div id="' + defaultId + '" class="tab-pane default-tab active"> </div>' +
-                            '<div id="' + pantonesId + '"class="tab-pane pantones-tab" >' +
-                            '</div>' +
-                        '</div>' +
+                    '<ul id="' + tabsId + '" class ="nav nav-tabs">' +
+                    '<li data-toggle="tab" class ="active default-nav"><a href="#' + defaultId + '"><span>Default</span></a></li>' +
+                    '<li data-toggle="tab" class="pantones-nav"><a href="#' + pantonesId + '"><span>Pantones</span></a></li>' +
+                    '</ul>' +
+                    '<div class="tab-content">' +
+                    '<div id="' + defaultId + '" class="tab-pane default-tab active"> </div>' +
+                    '<div id="' + pantonesId + '"class="tab-pane pantones-tab" >' +
+                    '</div>' +
+                    '</div>' +
                     '</div>');
 
                 if (fb) {
@@ -259,7 +262,7 @@
                     if (selector.indexOf("-pantones") > -1 && globalPantones) {
                         globalPantones.show();
                         var position = jQuery.fn.colorPicker.getLeftUpperCornerCoordinates(elem);
-                        globalPantones.css({ top: position.top, left: position.left });
+                        globalPantones.css({top: position.top, left: position.left});
                         //mark palette as product palette
                         var productMarker = elem.parent().parent().hasClass("product-color-picker");
                         if (productMarker) {
@@ -268,12 +271,12 @@
                             globalPantones.removeClass("product-color-picker");
                         }
                     } else {
-                        if(globalPantones) globalPantones.hide();
+                        if (globalPantones) globalPantones.hide();
                     }
                 });
 
             } else {
-                pantonesInfo[paletteId] = { showPantones: showPantones, drawn: false };
+                pantonesInfo[paletteId] = {showPantones: showPantones, drawn: false};
             }
             newPalette.attr('id', paletteId);
             var container = jQuery.fn.colorPicker.defaults.container || jQuery('body');
@@ -281,10 +284,10 @@
             if (colors.length > maxColorsNumber) {
                 newPalette.addClass("scrolled-element");
             }
-            if(customClasses) newPalette.addClass(customClasses)
+            if (customClasses) newPalette.addClass(customClasses)
             newPalette.hide();
 
-            jQuery('#' + paletteId + ' .tooltipster').tooltipster({ theme: 'tooltipster-noir' });
+            jQuery('#' + paletteId + ' .tooltipster').tooltipster({theme: 'tooltipster-noir'});
 
             if (colorsData[paletteId]) {
                 var inputId = paletteId.replace("-palette", "")
@@ -304,7 +307,7 @@
                     var theSame = true;
                     for (var i = 0; i < newColors.length; i++) {
                         if (!(prevColors[i].name == newColors[i].name &&
-                            prevColors[i].value == newColors[i].value)) {
+                                prevColors[i].value == newColors[i].value)) {
                             theSame = false;
                             break;
                         }
@@ -321,7 +324,7 @@
          * Return a Hex color, convert an RGB value and return Hex, or return false.
          *
          * Inspired by http://code.google.com/p/jquery-color-utils
-        **/
+         **/
         toHex: function (color) {
             // If we have a standard or shorthand Hex color, return that value.
             if (color.match(/[0-9A-F]{6}|[0-9A-F]{3}$/i)) {
@@ -357,12 +360,12 @@
         touchStart: function (e) {
             var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             if (touch) {
-                jQuery.fn.colorPicker.touchStartCoordinations = { x: touch.pageX, y: touch.pageY };
+                jQuery.fn.colorPicker.touchStartCoordinations = {x: touch.pageX, y: touch.pageY};
             }
         },
         /**
          * Check whether user clicked on the selector or owner.
-        **/
+         **/
         checkMouse: function (event, paletteId) {
             var selector = activePalette,
                 selectorParent = jQuery(event.target).parents("#" + selector.attr('id')).length;
@@ -375,7 +378,7 @@
             }
             var globalPantones = jQuery.fn.colorPicker.globalPantones;
             if (globalPantones && event.target === jQuery(globalPantones)[0] ||
-               (globalPantones && (globalPantones.has(event.target).length > 0 || globalPantones.is(event.target)))) {
+                (globalPantones && (globalPantones.has(event.target).length > 0 || globalPantones.is(event.target)))) {
                 return;
             }
             if (event.type == 'touchend' && jQuery.fn.colorPicker.touchStartCoordinations) {
@@ -391,7 +394,7 @@
 
         /**
          * Hide the color palette modal.
-        **/
+         **/
         hidePalette: function () {
             jQuery(document).unbind("mousedown", jQuery.fn.colorPicker.checkMouse);
             jQuery(document).unbind("touchstart", jQuery.fn.colorPicker.touchStart);
@@ -404,7 +407,7 @@
                 globalPantones.hide();
             }
         },
-        getLeftUpperCornerCoordinates: function(palette){
+        getLeftUpperCornerCoordinates: function (palette) {
             var _selectorOwner = selectorOwner.data('container') ? selectorOwner.data('container') : selectorOwner,
                 _offset = _selectorOwner.offset(),
                 _gap = selectorOwner.data('gap');
@@ -416,18 +419,18 @@
             if (posLeft + palette.outerWidth() > window.innerWidth) {
                 posLeft -= posLeft + palette.outerWidth() - window.innerWidth;
             }
-            return { left: posLeft, top: posTop };
+            return {left: posLeft, top: posTop};
         },
         /**
          * Show the color palette modal.
-        **/
+         **/
         showPalette: function (palette) {
             var hexColor = selectorOwner.prev("input").val();
 
             jQuery.fn.colorPicker.globalPantonesTargetId = selectorOwner.prev('input').attr('id');
 
             var position = jQuery.fn.colorPicker.getLeftUpperCornerCoordinates(palette);
-            palette.css({ top: position.top, left: position.left });
+            palette.css({top: position.top, left: position.left});
 
             jQuery("#color_value").val(hexColor);
             //farbtastic logic
@@ -437,7 +440,7 @@
             palette.show();
 
             var globalPantones = jQuery.fn.colorPicker.globalPantones;
-            if(globalPantones){
+            if (globalPantones) {
                 // setting active swatch
                 var paletteId = palette.attr("id");
                 var inputId = paletteId.replace("-palette", "");
@@ -459,7 +462,7 @@
 
         /**
          * Toggle visibility of the colorPicker palette.
-        **/
+         **/
         togglePalette: function (palette, origin) {
             // selectorOwner is the clicked .colorPicker-picker.
             if (origin) {
@@ -478,11 +481,11 @@
                 jQuery.fn.colorPicker.showPalette(palette);
 
             }
-           
+
         },
         /**
          * Update the input with a newly selected color.
-        **/
+         **/
         changeColor: function (inputId, value) {
             colorsData[inputId + '-palette'] = value;
             if (value && value !== transparent) value = value.toUpperCase();
@@ -510,7 +513,8 @@
                     jQuery(this).addClass("selected");
                 } else {
                     var color = jQuery.fn.colorPicker.toHex(jQuery(this).css('background-color'));
-                    color = color.toUpperCase();
+                    if (color)
+                        color = color.toUpperCase();
                     if (color == value && !jQuery(this).hasClass("transparent")) {
                         jQuery(this).addClass("selected");
                     }
@@ -541,7 +545,7 @@
 
         /**
          * Preview the input with a newly selected color.
-        **/
+         **/
         previewColor: function (value) {
             var isTransparent = (value === transparent);
             if (!isTransparent) {
@@ -554,7 +558,7 @@
 
         /**
          * Bind events to the color palette swatches.
-        */
+         */
         bindPalette: function (element, color) {
             color = color ? color : jQuery.fn.colorPicker.toHex(element.css('background-color'));
 
@@ -590,14 +594,14 @@
             //generates global pantones
             var globalPantones = jQuery.fn.colorPicker.globalPantones = jQuery(
                 '<div id="global-pantones" class="tab-pane pantones-tab picker-with-pantons" >' +
-                    '<div class="search-box">' +
-                        '<div class="input-group">' +
-                            '<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>' +
-                            '<input type="text" class="form-control" placeholder="Search Pantones">' +
-                            '<button class="close" aria-hidden="true" data-bind="visible: graphicsSearchQuery().length > 0, click: clearGraphicsSearch">&times;</button>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="divider"></div>' +
+                '<div class="search-box">' +
+                '<div class="input-group">' +
+                '<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>' +
+                '<input type="text" class="form-control" placeholder="Search Pantones">' +
+                '<button class="close" aria-hidden="true" data-bind="visible: graphicsSearchQuery().length > 0, click: clearGraphicsSearch">&times;</button>' +
+                '</div>' +
+                '</div>' +
+                '<div class="divider"></div>' +
                 '</div>');
             var container = jQuery.fn.colorPicker.defaults.container || jQuery('body');
             globalPantones.appendTo(container);
@@ -606,7 +610,8 @@
             var newPantones = getPantomsHTML(jQuery.fn.colorPicker.defaults.pantones, null);
             globalPantones.append(newPantones);
 
-            newPantones.find('.tooltipster').tooltipster({ theme: 'tooltipster-noir' });
+            newPantones.find('.tooltipster').tooltipster({theme: 'tooltipster-noir'});
+
             function applySearch() {
                 var container = jQuery(this).parent().parent().parent();
                 var $this = jQuery(this);
@@ -695,7 +700,7 @@
      * jQuery('#element1').colorPicker({pickerDefault: 'efefef', transparency: true});
      * jQuery('#element2').colorPicker({pickerDefault: '333333', colors: ['333333', '111111']});
      *
-    **/
+     **/
     jQuery.fn.colorPicker.defaults = {
         // colorPicker default selected color.
         pickerDefault: "000000",

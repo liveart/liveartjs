@@ -26,9 +26,6 @@
     "minZoom": 50,
     "maxZoom": 150,
     "checkeredBackground": true,
-    "unit": "in",
-    "unit2": "ft",
-    "unitConversionMult": 12,
     "showProductSelector": true,
     "checkTextFXThrottle": 400,
     "minDPU": 45,
@@ -37,7 +34,9 @@
     "fitEditableArea": true,
     "enableSnapGuides": true,
     "hideDesignIdeas": false,
-    "showSuitableProductColorize": true
+    "showSuitableProductColorize": true,
+    "defaultUnit": "in",
+    "secondaryUnit": "cm"
   },
   "textEffects": {
     "config": "config/textEffects.json",
