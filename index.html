@@ -299,7 +299,7 @@
                             </div>
 
                             <div id="main-controls-product-dimensions"
-                                 data-bind="visible: selectedProductVO().resizable()">
+                                 data-bind="visible: selectedProductVO().resizable(), css: {shifted: availableUnits().length > 1}">
                                 <label data-bind="visible: editableAreaSizes().length == 0">Change size</label>
                                 <div id="product-dimensions-container"
                                      data-bind="visible: editableAreaSizes().length == 0">

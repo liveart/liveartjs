@@ -36,7 +36,8 @@
     "hideDesignIdeas": false,
     "showSuitableProductColorize": true,
     "defaultUnit": "in",
-    "secondaryUnit": "cm"
+    "secondaryUnit": "cm",
+    "mergeDesignIdeas": false
   },
   "textEffects": {
     "config": "config/textEffects.json",

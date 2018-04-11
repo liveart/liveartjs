@@ -28,6 +28,17 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.32 RELEASE NOTES
+Added:
+- `config.options.mergeDesignIdeas`; default value - false
+    - if true: the complex artwork and product templates will be merged and all shown under Design Ideas tab for a product
+    - if false: the complex artwork and product templates will not be merged (same logic as before)
+
+Fixed:
+- Fix unit selector view when product has no colors
+- Fixed graphic image position after replace
+
+
 ### 0.10.31 RELEASE NOTES
 Added:
 - Added pa_selected_unit GET parameter

@@ -1005,6 +1005,30 @@ function LAControlsModel() {
         return (self.selectedProductVO().colors().length > 0 && !self.selectedProductVO().multicolor()) || self.selectedProductVO().multicolor();
     });
 
+    /** UNITS STARTS HERE */
+    self.selectedUnitVO = ko.observable(new UnitVO());
+    self.availableUnits = ko.observableArray([]);
+    self.setAvailableUnits = function (units) {
+        var availableUnits = jQuery.map(units, function (item) {
+            return new UnitVO(item);
+        });
+        self.availableUnits(availableUnits);
+    };
+
+    self.selectUnit = function (unit) {
+        userInteract({
+            selectUnit: unit.unit()
+        })
+    };
+
+    self.configUnitLabel = ko.observable("");
+    self.unitLabel = ko.computed(function () {
+        return self.selectedUnitVO().label() || self.configUnitLabel();
+    });
+    self.editableAreaUnitsRange = ko.observableArray([]);
+
+    /** UNITS ENDS HERE */
+
     self.showChangeSizeAndColorTab = ko.computed(function () {
         // Show Because of Size logic:
         var becauseOfEditableAreaSizes = self.selectedProductVO().editableAreaSizes().length > 1;
@@ -3541,30 +3565,6 @@ function LAControlsModel() {
     self.currentDesign = ko.observable(null);
 
     self.addingNewText = ko.observable(false);
-
-    /** UNITS STARTS HERE */
-    self.selectedUnitVO = ko.observable(new UnitVO());
-    self.availableUnits = ko.observableArray([]);
-    self.setAvailableUnits = function (units) {
-        var availableUnits = jQuery.map(units, function (item) {
-            return new UnitVO(item);
-        });
-        self.availableUnits(availableUnits);
-    };
-
-    self.selectUnit = function (unit) {
-        userInteract({
-            selectUnit: unit.unit()
-        })
-    };
-
-    self.configUnitLabel = ko.observable("");
-    self.unitLabel = ko.computed(function () {
-        return self.selectedUnitVO().label() || self.configUnitLabel();
-    });
-    self.editableAreaUnitsRange = ko.observableArray([]);
-
-    /** UNITS ENDS HERE */
 
     self.showProductColorDivider = ko.computed(function () {
         var hasProductColorPicker = self.selectedProductVO().multicolor() || self.showProductColorPicker();

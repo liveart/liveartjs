@@ -18,17 +18,19 @@ $lajsFolder = Configs::$LAJS_FOLDER_PATH;
 $designFolderPath = $lajsFolder . Configs::$DESIGNS_RELATIVE_PATH . $guid . "/";
 
 $json = SvgUtils::readSavedDesign($designFolderPath);
+$isPHPzipInstalled = extension_loaded('zip');
+if ($isPHPzipInstalled) {
+    $res = Utils::processDesign($guid);
+    $filesToZip = $res["filesToZip"];
 
-$res = Utils::processDesign($guid);
-$filesToZip = $res["filesToZip"];
+    $zipFilename = $designFolderPath . $guid . ".zip";
+    $zip = Utils::zipFiles($zipFilename, $designFolderPath, $filesToZip);
 
-$zipFilename = $designFolderPath.$guid.".zip";
-$zip = Utils::zipFiles($zipFilename, $designFolderPath, $filesToZip);
+    $zipNumFiles = $zip->numFiles;
+    $zipStatus = $zip->status;
 
-$zipNumFiles = $zip->numFiles;
-$zipStatus = $zip->status;
-
-$zip->close();
+    $zip->close();
+}
 ?>
 <!doctype html>
 <html>
@@ -60,6 +62,18 @@ if(!$inkscapeInfo["installed"]){ ?>
 			<li><?php echo $inkscapeVersion[$i]; ?></li>
 		<?php } ?>
 	</ul>
+<?php }?>
+<?php
+if(!$isPHPzipInstalled){ ?>
+    <span class="warning">
+    <label>WARNING:</label>
+    PHP Zip Extension is not installed
+  </span>
+    <br/>
+<?php } else { ?>
+    <ul>
+        <li>PHP Zip Extension installed</li>
+    </ul>
 <?php }?>
 <ul>
 	<li><label>OUTPUT_TYPE:</label> <?php echo Configs::$OUTPUT_TYPE; ?></li>
@@ -121,12 +135,15 @@ foreach($json->data->locations as $loc) {
 	</div>
 	<?php
 }
+
+if ($isPHPzipInstalled) {
 ?>
 	<div class="well well-small" style="clear: both; margin: 20px 50px; 10px 50px;">
 		<a href='<?php echo $zipFilename; ?>'>
 			<h4><i class='icon-download-alt'></i>download zip package</h4>
 		</a>
 		<small><?php echo "Zip filename: " . $guid . ".zip" . " numfiles: " .$zipNumFiles . " status: " . $zipStatus . "\n"; ?></small>
-	<div/>
+	</div>
+        <?php } ?>
 </body>
 </html>
