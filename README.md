@@ -28,6 +28,21 @@ This particular package also does include sample PHP backend endpoints, containe
 ========================
 
 ## CHANGELOG
+### 0.10.34 RELEASE NOTES
+Changed:
+- One-color (`colorize: true` and `multicolor: false`) gallery image may have `fill` presentation attribute(s)
+
+### 0.10.33 RELEASE NOTES
+Added:
+- `none` value for `laOptions.defaultProudctId`
+    - none - opens LiveArt without any predefined product. Can be used for creating Design Idea without a locking it to a product.
+
+Fixed:
+- SVG images with line breaks
+
+Deprecated:
+- deprecated `laOptions.caaMode`
+
 ### 0.10.32 RELEASE NOTES
 Added:
 - `config.options.mergeDesignIdeas`; default value - false
@@ -37,7 +52,6 @@ Added:
 Fixed:
 - Fix unit selector view when product has no colors
 - Fixed graphic image position after replace
-
 
 ### 0.10.31 RELEASE NOTES
 Added:
@@ -86,7 +100,7 @@ Fixed:
 - fix appearance of low resolution warning popup
 - fix photos and images uploading popup dpi
 
- Deprecated:
+Deprecated:
  - deprecated `options.unit`, `options.unit2` and `options.unitConversionMult` in main config
  - use `option.defaultUnit` and `option.secondaryUnit` instead
 

@@ -287,7 +287,7 @@
 
                             <div class="divider" data-bind="visible: showProductColorDivider"></div>
 
-                            <div id="available-units-form" data-bind="visible: availableUnits().length > 1">
+                            <div id="available-units-form" data-bind="visible: availableUnits().length > 1 && selectedProductVO().resizable()">
                                 <label>Units</label>
                                 <div class="btn-group available-units-list" data-toggle="buttons"
                                      data-bind="foreach: availableUnits">
@@ -802,8 +802,11 @@
                                         file...
                                     </button>
                                 </div>
+                                <!-- TODO  Disabled until it is fixed
                                 <h6 class="text-center" data-bind="visible: showSocialNetworksPhotos()">or</h6>
+                                -->
                                 <!-- beta feature buttons -->
+                                <!-- TODO  Disabled until it is fixed
                                 <h6 class="text-center" data-bind="visible: showSocialNetworksPhotos()">Connect to</h6>
                                 <button id="instagram-btn" class="btn btn-default btn-block btn-social-acc"
                                         data-bind="visible: showInstagramPhotos(), click: logInSocial.bind($data,'instagram'), css: {active: currentNetwork() == 'instagram'}">
@@ -817,6 +820,7 @@
                                 <button id="facebook-btn" class="btn btn-default btn-block btn-social-acc"
                                         data-bind="visible: showFacebookPhotos(), click: logInSocial.bind($data,'facebook'), css: {active: currentNetwork() == 'facebook'}">
                                     <span></span></button>
+                                     -->
                             </div>
                         </div>
                         <div class="expanded-part">

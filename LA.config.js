@@ -14,7 +14,6 @@ controlsModel.adminMode(isAdmin);
 
 laOptions.defaultDesignId = getQueryParam("design_id");
 laOptions.defaultProductId = getQueryParam("product_id");
-laOptions.caaMode = getQueryParam("caa_mode", "boolean");
 laOptions.defaultGraphicId = getQueryParam("graphic_id");
 laOptions.defaultProductAttributes = {};
 

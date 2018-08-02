@@ -3568,7 +3568,7 @@ function LAControlsModel() {
 
     self.showProductColorDivider = ko.computed(function () {
         var hasProductColorPicker = self.selectedProductVO().multicolor() || self.showProductColorPicker();
-        var hasContentBelow = self.availableUnits().length > 1 || self.selectedProductVO().resizable();
+        var hasContentBelow = self.availableUnits().length > 1 && self.selectedProductVO().resizable() || self.selectedProductVO().resizable();
         return hasProductColorPicker && hasContentBelow;
     });
 
