@@ -2,10 +2,11 @@
 Trial version of the LiveArt HTML5 Product designer - https://www.liveartdesigner.com/html5-product-designer
 
 LiveArt HTML5 is an HTML-based product designer with clean MVVM model, based on the following core technologies:
-0. TypeScript;
-1. Raphael;
-2. Bootstrap;
-3. KnockouJS and JQuery;
+
+1. TypeScript;
+2. Raphael;
+3. Bootstrap;
+4. KnockoutJS and JQuery;
 
 Further documentation could be found on:
 - Primary API Reference - http://liveart.github.io/slate/#introduction
