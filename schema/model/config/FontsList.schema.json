@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/FontsList.schema.json",
+  "title": "FontsList",
+  "type": "object",
+  "version": "1.1.0",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to JSON Schema of the supported version"
+    },
+    "fonts": {
+      "type": "array",
+      "items": {
+        "$ref": "vo/Font.schema.json"
+      }
+    }
+  },
+  "required": [
+    "fonts"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/vo/GraphicCategory.schema.json",
+  "title": "GraphicCategory",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thumb": {
+      "type": "string",
+      "minLength": 1
+    },
+    "graphicsList": {
+      "type": "array",
+      "items": {
+        "$ref": "Graphic.schema.json"
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "$ref": "GraphicCategory.schema.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ],
+  "additionalProperties": false
+}

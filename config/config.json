@@ -1,60 +1,59 @@
 ﻿{
+  "$schema": "../schema/model/config/Config.schema.json",
   "productsList": {
-    "url": "config/products.json"
+    "url": "config/productsCatalog.json"
   },
   "defaultProductId": "11",
   "fonts": {
-    "url": "config/fonts.json"
+    "url": "config/fontsList.json"
   },
   "colors": {
-    "url": "config/colors.json",
-    "pantones_url": "config/pantones.json"
+    "url": "config/colorsList.json"
   },
   "graphicsList": {
-    "url": "config/graphics.json"
+    "url": "config/graphicsCatalog.json"
   },
   "social": {
-    "url": "config/social.json"
   },
   "options": {
-    "deleteOnDoubleClick": false,
-    "includeProductInDesign": true,
-    "includePrintingAreaInDesign": true,
-    "includeMaskInDesign": true,
     "fontsCSSUrl": "fonts/fonts.css",
-    "zoomEnabled": true,
-    "minZoom": 50,
-    "maxZoom": 150,
     "checkeredBackground": true,
     "unit": "in",
     "unit2": "ft",
     "unitConversionMult": 12,
     "showProductSelector": true,
-    "checkTextFXThrottle": 400,
     "minDPU": 45,
     "showUploadedColorsDialog": true,
-    "fitProductImage": true,
-    "fitEditableArea": true,
-    "enableSnapGuides": true,
-    "hideDesignIdeas": false,
-    "showSuitableProductColorize": true
+    "enableQuantity": true,
+    "snapConfigs": {
+      "snapToEditableArea": true,
+      "snapToObjects": true,
+      "snapRotation": true,
+      "enableSnapGuides": true
+    },
+    "zoomConfigs": {
+      "enabled": true,
+      "min": 50,
+      "max": 150,
+      "step": 10
+    }
   },
   "textEffects": {
-    "config": "config/textEffects.json",
-    "url_deprecated": "http://hive.liveartdesigner.com/mmjs/services/getTextZv4.php"
+    "config": "config/textEffectsList.json"
   },
   "defaultNameObjectText": "NAMES HERE",
   "defaultNumberObjectText": "00",
   "assetsUrl": "assets/",
   "galleryBaseUrl": "",
-  "getQuoteUrl": "services/getQuote.php",
-  "getDesignsUrl": "services/getDesigns.php?email=${email}&product_id=${product_id}",
-  "saveDesignUrl": "services/saveDesign.php",
-  "saveTemplateUrl": "services/saveTemplate.php",
-  "loadDesignUrl": "services/loadDesign.php?design_id=${design_id}",
-  "redirectUrl": "services/order.php?design_id=${design_id}",
-  "uploadImageUrl": "services/uploadImage.php",
-  "shareLinkUrl": "index.html?design_id=${design_id}",
-  "getTemplatesUrl": "services/getTemplates.php?product_id=${product_id}",
-  "redirectWindow": "parent"
+  "getQuoteUrl": "services/php/getQuote.php",
+  "getDesignsUrl": "services/php/getDesigns.php?email=${email}&product_id=${product_id}",
+  "saveDesignUrl": "services/php/saveDesign.php",
+  "loadDesignUrl": "services/php/loadDesign.php?design_id=${design_id}",
+  "redirectUrl": "services/php/order.php?info=true&design_id=${design_id}",
+  "generateVisualsUrl": "services/php/generateVisuals.php?design_id=${design_id}",
+  "uploadImageUrl": "services/php/uploadImage.php",
+  "shareLinkUrl": "?design_id=${design_id}",
+  "redirectWindow": "",
+  "saveTemplateUrl": "services/php/saveTemplate.php",
+  "getTemplatesUrl": "services/php/getTemplates.php?product_id=${product_id}"
 }

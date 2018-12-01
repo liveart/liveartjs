@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/vo/Graphic.schema.json",
+  "title": "Graphic",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "categoryId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "image": {
+      "type": "string",
+      "minLength": 1
+    },
+    "colors": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "colorize": {
+      "type": "boolean",
+      "default": false
+    },
+    "parseColorAreas": {
+      "type": "boolean",
+      "default": false
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "multicolor": {
+      "type": "boolean",
+      "default": false
+    },
+    "thumb": {
+      "type": "string",
+      "minLength": 1
+    },
+    "colorizableElements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "name",
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "categoryId",
+    "image"
+  ],
+  "additionalProperties": false
+}

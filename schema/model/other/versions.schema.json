@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/other/versions.schema.json",
+  "title": "VersionsObject",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "designer": {
+      "type": "string",
+      "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+    },
+    "current": {
+      "type": "object",
+      "properties": {
+        "DesignDataObject": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "Config": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "ColorsList": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "FontsList": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "GraphicsCatalog": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "ProductsCatalog": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "Social": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        },
+        "TextEffects": {
+          "type": "string",
+          "pattern": "^(\\d+\\.\\d+\\.\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+        }
+      },
+      "description": "Current versions",
+      "required": [
+        "DesignDataObject",
+        "Config",
+        "ColorsList",
+        "FontsList",
+        "GraphicsCatalog",
+        "ProductsCatalog",
+        "Social",
+        "TextEffects"
+      ],
+      "additionalProperties": false
+    },
+    "supported": {
+      "type": "object",
+      "properties": {
+        "model": {
+          "type": "object",
+          "properties": {
+          },
+          "required": [
+          ],
+          "additionalProperties": false
+        },
+        "service": {
+          "type": "object",
+          "properties": {
+            "LoadDesign": {
+              "type": "string",
+              "minLength": 1
+            },
+            "GetDesigns": {
+              "type": "string",
+              "minLength": 1
+            },
+            "GetTemplates": {
+              "type": "string",
+              "minLength": 1
+            },
+            "GetQuote": {
+              "type": "string",
+              "minLength": 1
+            },
+            "SaveDesign": {
+              "type": "string",
+              "minLength": 1
+            },
+            "SaveTemplate": {
+              "type": "string",
+              "minLength": 1
+            },
+            "GenerateVisuals": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "LoadDesign",
+            "GetDesigns",
+            "GetQuote",
+            "SaveDesign",
+            "GenerateVisuals",
+            "SaveTemplate"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "description": "Supported versions",
+      "required": [
+        "service"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "designer",
+    "current",
+    "supported"
+  ],
+  "additionalProperties": false
+}

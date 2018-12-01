@@ -2,50 +2,68 @@
  * LIVEART INITALIZATION BEGINS HERE
  */
 
+//Use this to receive liveArt debug info to console
+//liveArt.debug();
+
 var laOptions = {
-    dimensions: [587, 543]
+    dimensions: [590, 530]
 };
 
 
-//Enabling Admin mode
-var isAdmin = getQueryParam("admin", "boolean") || false;
-laOptions.adminMode = isAdmin;
-controlsModel.adminMode(isAdmin);
-
 laOptions.defaultDesignId = getQueryParam("design_id");
 laOptions.defaultProductId = getQueryParam("product_id");
-controlsModel.caaMode(isAdmin && typeof laOptions.defaultProductId !== "string" && typeof laOptions.defaultDesignId !== "string");
 laOptions.defaultGraphicId = getQueryParam("graphic_id");
+
+var configObj = null;
+
 laOptions.defaultProductAttributes = {};
+var sizeUnits = decodeURI((new RegExp("pa_size_units" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+var quantities = decodeURI((new RegExp("pa_quantities" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+laOptions.defaultProductAttributes.sizeUnits = JSON.parse(decodeURIComponent(sizeUnits));
+laOptions.defaultProductAttributes.quantities = JSON.parse(decodeURIComponent(quantities));
 
-laOptions.defaultProductAttributes.sizeUnits = getQueryParam("pa_size_units", "json");
-laOptions.defaultProductAttributes.quantities = getQueryParam("pa_quantities", "json");
+var configFile = decodeURI((new RegExp("config" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+if (configFile && configFile !== "null") {
+    configFile = decodeURIComponent(configFile);
+} else {
+    configFile = null;
+}
 
-var configFile = getQueryParam("config") || "config/config.json";
+//Designer mode param. Enabling pre-made template or design idea mode.
+laOptions.mode = getQueryParam("mode");
 
 //You can provide placeOrderHandler here
 //optional custom handler for place order
 //format: `function (ordered_design_id: string)`
 laOptions.placeOrderHandler = null;
 //optional translation
-laOptions.translation = laTranslation.dictionary;
+laOptions.translation = self.laTranslation.dictionary;
 
 //Initing liveArt
 //controlsUpdateHandler() defined in LA.js
-liveArt.init(document.getElementById('canvas-container'), configFile, controlsUpdateHandler, laOptions);
+liveArt.init(document.getElementById('canvas-container'), configObj || configFile || "config/config.json", self.controlsUpdateHandler, laOptions, uiHelpers);
 
 /**
  * LIVEART INITALIZATION ENDS HERE
  */
 
 // liveart-template-saved event will be triggered on save template
-document.addEventListener("liveart-template-saved", function(event){
-    // event.value - saveTemplate response data
+document.addEventListener("liveart-template-saved", function (event) {
+    // event.detail - saveTemplate response data
+    if (window.parent) {
+        window.parent.postMessage(JSON.stringify(event.detail), "*");
+    }
 });
 
 
+/**
+ * Returns query parameter
+ * @param param
+ * @param type - (number|boolean|json), default - string
+ * @returns {*}
+ */
 function getQueryParam(param, type) {
-    var val = decodeURI((RegExp(param + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+    var val = decodeURI((RegExp(param + '=' + '(.*?)(&|$)').exec(location.search) || [, null])[1]);
     if (val === "null")
         return null;
     if (type) {

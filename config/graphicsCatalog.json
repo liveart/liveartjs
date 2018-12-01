@@ -1,0 +1,2163 @@
+﻿{
+  "$schema": "../schema/model/config/GraphicsCatalog.schema.json",
+  "graphicsCategoriesList": [
+    {
+      "id": "r1",
+      "name": "Animals",
+      "thumb": "gallery/animals/raster/thumbs/crab.png",
+      "categories": [
+        {
+          "id": "1",
+          "name": "Raster",
+          "thumb": "gallery/animals/raster/thumbs/crab.png",
+          "graphicsList": [
+            {
+              "id": "11",
+              "categoryId": "1",
+              "name": "Crab",
+              "description": "crab",
+              "colors": "-1",
+              "thumb": "gallery/animals/raster/thumbs/crab.png",
+              "image": "gallery/animals/raster/crab.png"
+            },
+            {
+              "id": "12",
+              "categoryId": "1",
+              "name": "Chinese Crab",
+              "description": "crab, chinese",
+              "colors": [
+                "#000000"
+              ],
+              "thumb": "gallery/animals/raster/thumbs/chinese_crab.jpg",
+              "image": "gallery/animals/raster/chinese_crab.jpg"
+            },
+            {
+              "id": "14",
+              "categoryId": "1",
+              "name": "Teapot",
+              "description": "teapot",
+              "colors": [
+                "#4682B4"
+              ],
+              "thumb": "gallery/animals/raster/thumbs/teapot.png",
+              "image": "gallery/animals/raster/teapot.png"
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Multicolor",
+          "thumb": "gallery/animals/multicolor/PNG/Crab.png",
+          "graphicsList": [
+            {
+              "id": "parsed-0",
+              "categoryId": "2",
+              "name": "Butterfly",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Butterfly.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Butterfly.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-1",
+              "categoryId": "2",
+              "name": "Cat",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Cat.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Cat.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-2",
+              "categoryId": "2",
+              "name": "Chicken",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Chicken.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Chicken.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-3",
+              "categoryId": "2",
+              "name": "Clown Fish",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Clown Fish.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Clown Fish.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-4",
+              "categoryId": "2",
+              "name": "Corgi",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Corgi.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Corgi.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-5",
+              "categoryId": "2",
+              "name": "Crab",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Crab.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Crab.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-6",
+              "categoryId": "2",
+              "name": "Dog",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Dog.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Dog.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-7",
+              "categoryId": "2",
+              "name": "Dolphin",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Dolphin.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Dolphin.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-8",
+              "categoryId": "2",
+              "name": "Dragonfly",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Dragonfly.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Dragonfly.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-9",
+              "categoryId": "2",
+              "name": "Duck",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Duck.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Duck.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-10",
+              "categoryId": "2",
+              "name": "Elephant",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Elephant.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Elephant.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-11",
+              "categoryId": "2",
+              "name": "Falcon",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Falcon.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Falcon.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-12",
+              "categoryId": "2",
+              "name": "Fish Food",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Fish Food.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Fish Food.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-13",
+              "categoryId": "2",
+              "name": "Fish",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Fish.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Fish.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-14",
+              "categoryId": "2",
+              "name": "Frog",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Frog.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Frog.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-15",
+              "categoryId": "2",
+              "name": "Gorilla",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Gorilla.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Gorilla.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-16",
+              "categoryId": "2",
+              "name": "Horse",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Horse.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Horse.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-17",
+              "categoryId": "2",
+              "name": "Kangaroo",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Kangaroo.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Kangaroo.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-18",
+              "categoryId": "2",
+              "name": "Ladybird",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Ladybird.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Ladybird.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-19",
+              "categoryId": "2",
+              "name": "Octopus",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Octopus.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Octopus.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-20",
+              "categoryId": "2",
+              "name": "Pig",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Pig.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Pig.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-21",
+              "categoryId": "2",
+              "name": "Prawn",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Prawn.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Prawn.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-22",
+              "categoryId": "2",
+              "name": "Rabbit",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Rabbit.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Rabbit.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-25",
+              "categoryId": "2",
+              "name": "Sheep",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Sheep.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Sheep.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-26",
+              "categoryId": "2",
+              "name": "Snail",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Snail.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Snail.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-27",
+              "categoryId": "2",
+              "name": "Starfish",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Starfish.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Starfish.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-28",
+              "categoryId": "2",
+              "name": "Stork",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Stork.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Stork.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-29",
+              "categoryId": "2",
+              "name": "Turtle",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Turtle.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Turtle.png",
+              "parseColorAreas": true
+            },
+            {
+              "id": "parsed-30",
+              "categoryId": "2",
+              "name": "Whale",
+              "colorize": true,
+              "image": "gallery/animals/multicolor/SVG/Whale.svg",
+              "thumb": "gallery/animals/multicolor/PNG/Whale.png",
+              "parseColorAreas": true
+            }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Vector",
+          "thumb": "gallery/animals/vector/PNG/crab.png",
+          "graphicsList": [
+            {
+              "id": "21",
+              "categoryId": "2",
+              "name": "Crab",
+              "description": "crab",
+              "colorize": true,
+              "thumb": "gallery/animals/vector/PNG/crab.png",
+              "image": "gallery/animals/vector/SVG/crab.svg"
+            },
+            {
+              "id": "22",
+              "categoryId": "2",
+              "name": "Butterfly",
+              "description": "butterfly",
+              "colors": [
+                "#F67F00",
+                "#FFF6E3",
+                "#000000"
+              ],
+              "thumb": "gallery/animals/vector/PNG/butterfly.png",
+              "image": "gallery/animals/vector/SVG/butterfly.svg"
+            },
+            {
+              "id": "23",
+              "categoryId": "2",
+              "name": "Lion",
+              "description": "lion, animal",
+              "colors": "7",
+              "thumb": "gallery/animals/vector/PNG/lion.png",
+              "image": "gallery/animals/vector/SVG/lion.svg"
+            },
+            {
+              "id": "24",
+              "categoryId": "2",
+              "name": "Lizard",
+              "description": "lizard, animal",
+              "colorize": true,
+              "thumb": "gallery/animals/vector/PNG/lizard.png",
+              "image": "gallery/animals/vector/SVG/lizard.svg"
+            },
+            {
+              "id": "25",
+              "categoryId": "2",
+              "name": "Killer whale",
+              "description": "orca, killer, whale, animal",
+              "colors": "3",
+              "thumb": "gallery/animals/vector/PNG/orca.png",
+              "image": "gallery/animals/vector/SVG/orca.svg"
+            },
+            {
+              "id": "26",
+              "categoryId": "2",
+              "name": "Thunnus",
+              "description": "thunnus, fish",
+              "thumb": "gallery/animals/vector/PNG/thunnus.png",
+              "image": "gallery/animals/vector/SVG/thunnus.svg",
+              "colorize": true
+            },
+            {
+              "id": "28",
+              "categoryId": "2",
+              "name": "Pinguin",
+              "description": "pinguin, bird",
+              "thumb": "gallery/animals/vector/PNG/pinguin.png",
+              "image": "gallery/animals/vector/SVG/pinguin.svg"
+            },
+            {
+              "id": "29",
+              "categoryId": "2",
+              "name": "Toucan",
+              "description": "toucan, bird",
+              "colors": [
+                "#005BAB",
+                "#FFE600",
+                "#ED1C24",
+                "#6D67AF",
+                "#72BF44",
+                "#F58220",
+                "#003465"
+              ],
+              "thumb": "gallery/animals/vector/PNG/toucan.png",
+              "image": "gallery/animals/vector/SVG/toucan.svg"
+            },
+            {
+              "id": "210",
+              "categoryId": "2",
+              "name": "Sparrow",
+              "description": "sparrow, bird",
+              "colors": "6",
+              "thumb": "gallery/animals/vector/PNG/aimophila-ruficeps.png",
+              "image": "gallery/animals/vector/SVG/aimophila-ruficeps.svg"
+            },
+            {
+              "id": "211",
+              "categoryId": "2",
+              "name": "Brittany spaniel",
+              "description": "spaniel, animal, dog",
+              "colors": "3",
+              "thumb": "gallery/animals/vector/PNG/brittany_spaniel.png",
+              "image": "gallery/animals/vector/SVG/brittany_spaniel.svg"
+            },
+            {
+              "id": "212",
+              "categoryId": "2",
+              "name": "Zebra",
+              "description": "zebra, animal",
+              "colorize": true,
+              "colors": [
+                "#FFFFFF",
+                "#000000"
+              ],
+              "thumb": "gallery/animals/vector/PNG/zebra.png",
+              "image": "gallery/animals/vector/SVG/zebra.svg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r2",
+      "name": "Icons",
+      "thumb": "gallery/icons/LineCons/PNG/like.png",
+      "categories": [
+        {
+          "id": "3",
+          "name": "Icons by icons/LineCons",
+          "thumb": "gallery/icons/LineCons/PNG/fire.png",
+          "graphicsList": [
+            {
+              "id": "301",
+              "categoryId": "3",
+              "name": "Banknote",
+              "image": "gallery/icons/LineCons/SVG/banknote.svg",
+              "thumb": "gallery/icons/LineCons/PNG/banknote.png",
+              "description": "banknote",
+              "colorize": true
+            },
+            {
+              "id": "302",
+              "categoryId": "3",
+              "name": "Bubble",
+              "image": "gallery/icons/LineCons/SVG/bubble.svg",
+              "thumb": "gallery/icons/LineCons/PNG/bubble.png",
+              "description": "bubble",
+              "colorize": true
+            },
+            {
+              "id": "303",
+              "categoryId": "3",
+              "name": "Bulb",
+              "image": "gallery/icons/LineCons/SVG/bulb.svg",
+              "thumb": "gallery/icons/LineCons/PNG/bulb.png",
+              "description": "bulb",
+              "colorize": true
+            },
+            {
+              "id": "304",
+              "categoryId": "3",
+              "name": "Calendar",
+              "image": "gallery/icons/LineCons/SVG/calendar.svg",
+              "thumb": "gallery/icons/LineCons/PNG/calendar.png",
+              "description": "calendar",
+              "colorize": true
+            },
+            {
+              "id": "305",
+              "categoryId": "3",
+              "name": "Camera",
+              "image": "gallery/icons/LineCons/SVG/camera.svg",
+              "thumb": "gallery/icons/LineCons/PNG/camera.png",
+              "description": "camera",
+              "colorize": true
+            },
+            {
+              "id": "306",
+              "categoryId": "3",
+              "name": "Clip",
+              "image": "gallery/icons/LineCons/SVG/clip.svg",
+              "thumb": "gallery/icons/LineCons/PNG/clip.png",
+              "description": "clip",
+              "colorize": true
+            },
+            {
+              "id": "307",
+              "categoryId": "3",
+              "name": "Clock",
+              "image": "gallery/icons/LineCons/SVG/clock.svg",
+              "thumb": "gallery/icons/LineCons/PNG/clock.png",
+              "description": "clock",
+              "colorize": true
+            },
+            {
+              "id": "308",
+              "categoryId": "3",
+              "name": "Cloud",
+              "image": "gallery/icons/LineCons/SVG/cloud.svg",
+              "thumb": "gallery/icons/LineCons/PNG/cloud.png",
+              "description": "cloud",
+              "colorize": true
+            },
+            {
+              "id": "309",
+              "categoryId": "3",
+              "name": "Cup",
+              "image": "gallery/icons/LineCons/SVG/cup.svg",
+              "thumb": "gallery/icons/LineCons/PNG/cup.png",
+              "description": "cup",
+              "colorize": true
+            },
+            {
+              "id": "310",
+              "categoryId": "3",
+              "name": "Data",
+              "image": "gallery/icons/LineCons/SVG/data.svg",
+              "thumb": "gallery/icons/LineCons/PNG/data.png",
+              "description": "data",
+              "colorize": true
+            },
+            {
+              "id": "311",
+              "categoryId": "3",
+              "name": "Diamond",
+              "image": "gallery/icons/LineCons/SVG/diamond.svg",
+              "thumb": "gallery/icons/LineCons/PNG/diamond.png",
+              "description": "diamond",
+              "colorize": true
+            },
+            {
+              "id": "312",
+              "categoryId": "3",
+              "name": "Display",
+              "image": "gallery/icons/LineCons/SVG/display.svg",
+              "thumb": "gallery/icons/LineCons/PNG/display.png",
+              "description": "display",
+              "colorize": true
+            },
+            {
+              "id": "313",
+              "categoryId": "3",
+              "name": "Eye",
+              "image": "gallery/icons/LineCons/SVG/eye.svg",
+              "thumb": "gallery/icons/LineCons/PNG/eye.png",
+              "description": "eye",
+              "colorize": true
+            },
+            {
+              "id": "314",
+              "categoryId": "3",
+              "name": "Fire",
+              "image": "gallery/icons/LineCons/SVG/fire.svg",
+              "thumb": "gallery/icons/LineCons/PNG/fire.png",
+              "description": "fire",
+              "colorize": true
+            },
+            {
+              "id": "315",
+              "categoryId": "3",
+              "name": "Food",
+              "image": "gallery/icons/LineCons/SVG/food.svg",
+              "thumb": "gallery/icons/LineCons/PNG/food.png",
+              "description": "food",
+              "colorize": true
+            },
+            {
+              "id": "316",
+              "categoryId": "3",
+              "name": "Heart",
+              "image": "gallery/icons/LineCons/SVG/heart.svg",
+              "thumb": "gallery/icons/LineCons/PNG/heart.png",
+              "description": "heart",
+              "colorize": true
+            },
+            {
+              "id": "317",
+              "categoryId": "3",
+              "name": "Key",
+              "image": "gallery/icons/LineCons/SVG/key.svg",
+              "thumb": "gallery/icons/LineCons/PNG/key.png",
+              "description": "key",
+              "colorize": true
+            },
+            {
+              "id": "318",
+              "categoryId": "3",
+              "name": "Lab",
+              "image": "gallery/icons/LineCons/SVG/lab.svg",
+              "thumb": "gallery/icons/LineCons/PNG/lab.png",
+              "description": "lab",
+              "colorize": true
+            },
+            {
+              "id": "319",
+              "categoryId": "3",
+              "name": "Like",
+              "image": "gallery/icons/LineCons/SVG/like.svg",
+              "thumb": "gallery/icons/LineCons/PNG/like.png",
+              "description": "like",
+              "colorize": true
+            },
+            {
+              "id": "320",
+              "categoryId": "3",
+              "name": "Location",
+              "image": "gallery/icons/LineCons/SVG/location.svg",
+              "thumb": "gallery/icons/LineCons/PNG/location.png",
+              "description": "location",
+              "colorize": true
+            },
+            {
+              "id": "321",
+              "categoryId": "3",
+              "name": "Lock",
+              "image": "gallery/icons/LineCons/SVG/lock.svg",
+              "thumb": "gallery/icons/LineCons/PNG/lock.png",
+              "description": "lock",
+              "colorize": true
+            },
+            {
+              "id": "322",
+              "categoryId": "3",
+              "name": "Mail",
+              "image": "gallery/icons/LineCons/SVG/mail.svg",
+              "thumb": "gallery/icons/LineCons/PNG/mail.png",
+              "description": "mail",
+              "colorize": true
+            },
+            {
+              "id": "323",
+              "categoryId": "3",
+              "name": "Megaphone",
+              "image": "gallery/icons/LineCons/SVG/megaphone.svg",
+              "thumb": "gallery/icons/LineCons/PNG/megaphone.png",
+              "description": "megaphone",
+              "colorize": true
+            },
+            {
+              "id": "324",
+              "categoryId": "3",
+              "name": "Music",
+              "image": "gallery/icons/LineCons/SVG/music.svg",
+              "thumb": "gallery/icons/LineCons/PNG/music.png",
+              "description": "music",
+              "colorize": true
+            },
+            {
+              "id": "325",
+              "categoryId": "3",
+              "name": "News",
+              "image": "gallery/icons/LineCons/SVG/news.svg",
+              "thumb": "gallery/icons/LineCons/PNG/news.png",
+              "description": "news",
+              "colorize": true
+            },
+            {
+              "id": "326",
+              "categoryId": "3",
+              "name": "Note",
+              "image": "gallery/icons/LineCons/SVG/note.svg",
+              "thumb": "gallery/icons/LineCons/PNG/note.png",
+              "description": "note",
+              "colorize": true
+            },
+            {
+              "id": "327",
+              "categoryId": "3",
+              "name": "Paperplane",
+              "image": "gallery/icons/LineCons/SVG/paperplane.svg",
+              "thumb": "gallery/icons/LineCons/PNG/paperplane.png",
+              "description": "paperplane",
+              "colorize": true
+            },
+            {
+              "id": "328",
+              "categoryId": "3",
+              "name": "Params",
+              "image": "gallery/icons/LineCons/SVG/params.svg",
+              "thumb": "gallery/icons/LineCons/PNG/params.png",
+              "description": "params",
+              "colorize": true
+            },
+            {
+              "id": "329",
+              "categoryId": "3",
+              "name": "Pen",
+              "image": "gallery/icons/LineCons/SVG/pen.svg",
+              "thumb": "gallery/icons/LineCons/PNG/pen.png",
+              "description": "pen",
+              "colorize": true
+            },
+            {
+              "id": "330",
+              "categoryId": "3",
+              "name": "Phone",
+              "image": "gallery/icons/LineCons/SVG/phone.svg",
+              "thumb": "gallery/icons/LineCons/PNG/phone.png",
+              "description": "phone",
+              "colorize": true
+            },
+            {
+              "id": "331",
+              "categoryId": "3",
+              "name": "Photo",
+              "image": "gallery/icons/LineCons/SVG/photo.svg",
+              "thumb": "gallery/icons/LineCons/PNG/photo.png",
+              "description": "photo",
+              "colorize": true
+            },
+            {
+              "id": "332",
+              "categoryId": "3",
+              "name": "Search",
+              "image": "gallery/icons/LineCons/SVG/search.svg",
+              "thumb": "gallery/icons/LineCons/PNG/search.png",
+              "description": "search",
+              "colorize": true
+            },
+            {
+              "id": "333",
+              "categoryId": "3",
+              "name": "Settings",
+              "image": "gallery/icons/LineCons/SVG/settings.svg",
+              "thumb": "gallery/icons/LineCons/PNG/settings.png",
+              "description": "settings",
+              "colorize": true
+            },
+            {
+              "id": "334",
+              "categoryId": "3",
+              "name": "Shop",
+              "image": "gallery/icons/LineCons/SVG/shop.svg",
+              "thumb": "gallery/icons/LineCons/PNG/shop.png",
+              "description": "shop",
+              "colorize": true
+            },
+            {
+              "id": "335",
+              "categoryId": "3",
+              "name": "Sound",
+              "image": "gallery/icons/LineCons/SVG/sound.svg",
+              "thumb": "gallery/icons/LineCons/PNG/sound.png",
+              "description": "sound",
+              "colorize": true
+            },
+            {
+              "id": "336",
+              "categoryId": "3",
+              "name": "Stack",
+              "image": "gallery/icons/LineCons/SVG/stack.svg",
+              "thumb": "gallery/icons/LineCons/PNG/stack.png",
+              "description": "stack",
+              "colorize": true
+            },
+            {
+              "id": "337",
+              "categoryId": "3",
+              "name": "Star",
+              "image": "gallery/icons/LineCons/SVG/star.svg",
+              "thumb": "gallery/icons/LineCons/PNG/star.png",
+              "description": "star",
+              "colorize": true
+            },
+            {
+              "id": "338",
+              "categoryId": "3",
+              "name": "Study",
+              "image": "gallery/icons/LineCons/SVG/study.svg",
+              "thumb": "gallery/icons/LineCons/PNG/study.png",
+              "description": "study",
+              "colorize": true
+            },
+            {
+              "id": "339",
+              "categoryId": "3",
+              "name": "T-shirt",
+              "image": "gallery/icons/LineCons/SVG/t-shirt.svg",
+              "thumb": "gallery/icons/LineCons/PNG/t-shirt.png",
+              "description": "t-shirt",
+              "colorize": true
+            },
+            {
+              "id": "340",
+              "categoryId": "3",
+              "name": "Tag",
+              "image": "gallery/icons/LineCons/SVG/tag.svg",
+              "thumb": "gallery/icons/LineCons/PNG/tag.png",
+              "description": "tag",
+              "colorize": true
+            },
+            {
+              "id": "341",
+              "categoryId": "3",
+              "name": "Trash",
+              "image": "gallery/icons/LineCons/SVG/trash.svg",
+              "thumb": "gallery/icons/LineCons/PNG/trash.png",
+              "description": "trash",
+              "colorize": true
+            },
+            {
+              "id": "342",
+              "categoryId": "3",
+              "name": "Truck",
+              "image": "gallery/icons/LineCons/SVG/truck.svg",
+              "thumb": "gallery/icons/LineCons/PNG/truck.png",
+              "description": "truck",
+              "colorize": true
+            },
+            {
+              "id": "343",
+              "categoryId": "3",
+              "name": "Tv",
+              "image": "gallery/icons/LineCons/SVG/tv.svg",
+              "thumb": "gallery/icons/LineCons/PNG/tv.png",
+              "description": "tv",
+              "colorize": true
+            },
+            {
+              "id": "344",
+              "categoryId": "3",
+              "name": "User",
+              "image": "gallery/icons/LineCons/SVG/user.svg",
+              "thumb": "gallery/icons/LineCons/PNG/user.png",
+              "description": "user",
+              "colorize": true
+            },
+            {
+              "id": "345",
+              "categoryId": "3",
+              "name": "Vallet",
+              "image": "gallery/icons/LineCons/SVG/vallet.svg",
+              "thumb": "gallery/icons/LineCons/PNG/vallet.png",
+              "description": "vallet",
+              "colorize": true
+            },
+            {
+              "id": "346",
+              "categoryId": "3",
+              "name": "Video",
+              "image": "gallery/icons/LineCons/SVG/video.svg",
+              "thumb": "gallery/icons/LineCons/PNG/video.png",
+              "description": "video",
+              "colorize": true
+            },
+            {
+              "id": "347",
+              "categoryId": "3",
+              "name": "Vynil",
+              "image": "gallery/icons/LineCons/SVG/vynil.svg",
+              "thumb": "gallery/icons/LineCons/PNG/vynil.png",
+              "description": "vynil",
+              "colorize": true
+            },
+            {
+              "id": "348",
+              "categoryId": "3",
+              "name": "World",
+              "image": "gallery/icons/LineCons/SVG/world.svg",
+              "thumb": "gallery/icons/LineCons/PNG/world.png",
+              "description": "world",
+              "colorize": true
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "name": "Multicolor",
+          "thumb": "gallery/icons/multicolor/png/butterfly.png",
+          "graphicsList": [
+            {
+              "id": "41",
+              "categoryId": "4",
+              "name": "Butterfly",
+              "description": "butterfly",
+              "thumb": "gallery/icons/multicolor/png/butterfly.png",
+              "image": "gallery/icons/multicolor/svg/butterfly.svg",
+              "colors": [
+                "#000000"
+              ],
+              "colorize": true,
+              "colorizableElements": [
+                {
+                  "name": "Top left",
+                  "query": "#la_x7C_Top_Left",
+                  "colors": [
+                    {
+                      "name": "Green",
+                      "value": "#72BF44"
+                    },
+                    {
+                      "name": "Red",
+                      "value": "#F04C4B"
+                    },
+                    {
+                      "name": "Yellow",
+                      "value": "#F5ED57"
+                    },
+                    {
+                      "name": "Blue",
+                      "value": "#82D1DF"
+                    }
+                  ]
+                },
+                {
+                  "name": "Top right",
+                  "query": "#la_x7C_Top_Right",
+                  "colors": [
+                    {
+                      "name": "Red",
+                      "value": "#F04C4B"
+                    },
+                    {
+                      "name": "Yellow",
+                      "value": "#F5ED57"
+                    },
+                    {
+                      "name": "Blue",
+                      "value": "#82D1DF"
+                    },
+                    {
+                      "name": "Green",
+                      "value": "#72BF44"
+                    }
+                  ]
+                },
+                {
+                  "name": "Bottom left",
+                  "query": "#la_x7C_Bottom_Left",
+                  "colors": [
+                    {
+                      "name": "Yellow",
+                      "value": "#F5ED57"
+                    },
+                    {
+                      "name": "Blue",
+                      "value": "#82D1DF"
+                    },
+                    {
+                      "name": "Green",
+                      "value": "#72BF44"
+                    },
+                    {
+                      "name": "Red",
+                      "value": "#F04C4B"
+                    }
+                  ]
+                },
+                {
+                  "name": "Bottom right",
+                  "query": "#la_x7C_Bottom_Right",
+                  "colors": [
+                    {
+                      "name": "Blue",
+                      "value": "#82D1DF"
+                    },
+                    {
+                      "name": "Green",
+                      "value": "#72BF44"
+                    },
+                    {
+                      "name": "Red",
+                      "value": "#F04C4B"
+                    },
+                    {
+                      "name": "Yellow",
+                      "value": "#F5ED57"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "42",
+              "categoryId": "4",
+              "name": "Lion",
+              "description": "lion",
+              "thumb": "gallery/icons/multicolor/png/lion.png",
+              "image": "gallery/icons/multicolor/svg/lion.svg",
+              "colors": [
+                "#000000"
+              ],
+              "colorize": true
+            }
+          ]
+        },
+        {
+          "id": "5",
+          "name": "Animal icons",
+          "thumb": "gallery/icons/animals/svg/butterfly.svg",
+          "graphicsList": [
+            {
+              "id": "501",
+              "categoryId": "5",
+              "name": "Bear",
+              "description": "bear",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/bear.svg",
+              "image": "gallery/icons/animals/svg/bear.svg"
+            },
+            {
+              "id": "502",
+              "categoryId": "5",
+              "name": "Butterfly",
+              "description": "butterfly",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/butterfly.svg",
+              "image": "gallery/icons/animals/svg/butterfly.svg"
+            },
+            {
+              "id": "503",
+              "categoryId": "5",
+              "name": "Cat",
+              "description": "cat",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/cat.svg",
+              "image": "gallery/icons/animals/svg/cat.svg"
+            },
+            {
+              "id": "504",
+              "categoryId": "5",
+              "name": "Dog",
+              "description": "dog",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/dog.svg",
+              "image": "gallery/icons/animals/svg/dog.svg"
+            },
+            {
+              "id": "505",
+              "categoryId": "5",
+              "name": "Duck",
+              "description": "duck, animal",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/duck.svg",
+              "image": "gallery/icons/animals/svg/duck.svg"
+            },
+            {
+              "id": "506",
+              "categoryId": "5",
+              "name": "Elephant",
+              "description": "elephant",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/elephant.svg",
+              "image": "gallery/icons/animals/svg/elephant.svg"
+            },
+            {
+              "id": "507",
+              "categoryId": "5",
+              "name": "Monkey",
+              "description": "monkey",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/monkey.svg",
+              "image": "gallery/icons/animals/svg/monkey.svg"
+            },
+            {
+              "id": "508",
+              "categoryId": "5",
+              "name": "Mouse",
+              "description": "mouse",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/mouse.svg",
+              "image": "gallery/icons/animals/svg/mouse.svg"
+            },
+            {
+              "id": "509",
+              "categoryId": "5",
+              "name": "Pig",
+              "description": "pig",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/pig.svg",
+              "image": "gallery/icons/animals/svg/pig.svg"
+            },
+            {
+              "id": "510",
+              "categoryId": "5",
+              "name": "Rabbit",
+              "description": "rabbit, animal",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/rabbit.svg",
+              "image": "gallery/icons/animals/svg/rabbit.svg"
+            },
+            {
+              "id": "511",
+              "categoryId": "5",
+              "name": "Skunk",
+              "description": "skunk, animal",
+              "colorize": true,
+              "thumb": "gallery/icons/animals/svg/skunk.svg",
+              "image": "gallery/icons/animals/svg/skunk.svg"
+            }
+          ]
+        },
+        {
+          "id": "7",
+          "name": "Business icons",
+          "thumb": "gallery/icons/business/svg/ascendant.svg",
+          "graphicsList": [
+            {
+              "id": "701",
+              "categoryId": "7",
+              "name": "Ascendant",
+              "description": "ascendant",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/ascendant.svg",
+              "image": "gallery/icons/business/svg/ascendant.svg"
+            },
+            {
+              "id": "702",
+              "categoryId": "7",
+              "name": "Bars",
+              "description": "bars",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/bars.svg",
+              "image": "gallery/icons/business/svg/bars.svg"
+            },
+            {
+              "id": "703",
+              "categoryId": "7",
+              "name": "Briefcase",
+              "description": "briefcase",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/briefcase.svg",
+              "image": "gallery/icons/business/svg/briefcase.svg"
+            },
+            {
+              "id": "704",
+              "categoryId": "7",
+              "name": "Business",
+              "description": "business",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/business.svg",
+              "image": "gallery/icons/business/svg/business.svg"
+            },
+            {
+              "id": "705",
+              "categoryId": "7",
+              "name": "Calendar",
+              "description": "calendar",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/calendar.svg",
+              "image": "gallery/icons/business/svg/calendar.svg"
+            },
+            {
+              "id": "706",
+              "categoryId": "7",
+              "name": "Increasing",
+              "description": "increasing",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/increasing.svg",
+              "image": "gallery/icons/business/svg/increasing.svg"
+            },
+            {
+              "id": "707",
+              "categoryId": "7",
+              "name": "Line",
+              "description": "line",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/line.svg",
+              "image": "gallery/icons/business/svg/line.svg"
+            },
+            {
+              "id": "708",
+              "categoryId": "7",
+              "name": "Pen",
+              "description": "pen",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/pen.svg",
+              "image": "gallery/icons/business/svg/pen.svg"
+            },
+            {
+              "id": "709",
+              "categoryId": "7",
+              "name": "Pen",
+              "description": "pen",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/pen1.svg",
+              "image": "gallery/icons/business/svg/pen1.svg"
+            },
+            {
+              "id": "710",
+              "categoryId": "7",
+              "name": "Pencil",
+              "description": "pencil",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/pencil.svg",
+              "image": "gallery/icons/business/svg/pencil.svg"
+            },
+            {
+              "id": "711",
+              "categoryId": "7",
+              "name": "Pencil",
+              "description": "pencil",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/pencil1.svg",
+              "image": "gallery/icons/business/svg/pencil1.svg"
+            },
+            {
+              "id": "712",
+              "categoryId": "7",
+              "name": "Pie",
+              "description": "pie",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/pie.svg",
+              "image": "gallery/icons/business/svg/pie.svg"
+            },
+            {
+              "id": "713",
+              "categoryId": "7",
+              "name": "Rising",
+              "description": "rising",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/rising.svg",
+              "image": "gallery/icons/business/svg/rising.svg"
+            },
+            {
+              "id": "714",
+              "categoryId": "7",
+              "name": "Wristwatch",
+              "description": "wristwatch",
+              "colorize": true,
+              "thumb": "gallery/icons/business/svg/wristwatch.svg",
+              "image": "gallery/icons/business/svg/wristwatch.svg"
+            }
+          ]
+        },
+        {
+          "id": "8",
+          "name": "Emotions icons",
+          "thumb": "gallery/icons/emotions/svg/emoticons3.svg",
+          "graphicsList": [
+            {
+              "id": "801",
+              "categoryId": "8",
+              "name": "Angry",
+              "description": "angry",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/angry.svg",
+              "image": "gallery/icons/emotions/svg/angry.svg"
+            },
+            {
+              "id": "802",
+              "categoryId": "8",
+              "name": "Bad",
+              "description": "bad",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/bad.svg",
+              "image": "gallery/icons/emotions/svg/bad.svg"
+            },
+            {
+              "id": "803",
+              "categoryId": "8",
+              "name": "Emoticon",
+              "description": "emoticon",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/emoticon.svg",
+              "image": "gallery/icons/emotions/svg/emoticon.svg"
+            },
+            {
+              "id": "804",
+              "categoryId": "8",
+              "name": "Emoticon",
+              "description": "emoticon",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/emoticon1.svg",
+              "image": "gallery/icons/emotions/svg/emoticon1.svg"
+            },
+            {
+              "id": "805",
+              "categoryId": "8",
+              "name": "Emoticon",
+              "description": "emoticon",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/emoticons2.svg",
+              "image": "gallery/icons/emotions/svg/emoticons2.svg"
+            },
+            {
+              "id": "806",
+              "categoryId": "8",
+              "name": "Emoticon",
+              "description": "emoticon",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/emoticons3.svg",
+              "image": "gallery/icons/emotions/svg/emoticons3.svg"
+            },
+            {
+              "id": "807",
+              "categoryId": "8",
+              "name": "Happy",
+              "description": "happy",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/happy.svg",
+              "image": "gallery/icons/emotions/svg/happy.svg"
+            },
+            {
+              "id": "808",
+              "categoryId": "8",
+              "name": "Happy",
+              "description": "happy",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/happy1.svg",
+              "image": "gallery/icons/emotions/svg/happy1.svg"
+            },
+            {
+              "id": "809",
+              "categoryId": "8",
+              "name": "Happy",
+              "description": "happy",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/happy2.svg",
+              "image": "gallery/icons/emotions/svg/happy2.svg"
+            },
+            {
+              "id": "810",
+              "categoryId": "8",
+              "name": "Male",
+              "description": "male",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/male.svg",
+              "image": "gallery/icons/emotions/svg/male.svg"
+            },
+            {
+              "id": "811",
+              "categoryId": "8",
+              "name": "Nerd",
+              "description": "nerd",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/nerd.svg",
+              "image": "gallery/icons/emotions/svg/nerd.svg"
+            },
+            {
+              "id": "812",
+              "categoryId": "8",
+              "name": "Sad",
+              "description": "sad",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/sad.svg",
+              "image": "gallery/icons/emotions/svg/sad.svg"
+            },
+            {
+              "id": "813",
+              "categoryId": "8",
+              "name": "Sad",
+              "description": "sad",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/sad1.svg",
+              "image": "gallery/icons/emotions/svg/sad1.svg"
+            },
+            {
+              "id": "814",
+              "categoryId": "8",
+              "name": "Sleeping",
+              "description": "sleeping",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/sleeping.svg",
+              "image": "gallery/icons/emotions/svg/sleeping.svg"
+            },
+            {
+              "id": "815",
+              "categoryId": "8",
+              "name": "Smiley",
+              "description": "smiley",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiley.svg",
+              "image": "gallery/icons/emotions/svg/smiley.svg"
+            },
+            {
+              "id": "816",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling.svg",
+              "image": "gallery/icons/emotions/svg/smiling.svg"
+            },
+            {
+              "id": "817",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling1.svg",
+              "image": "gallery/icons/emotions/svg/smiling1.svg"
+            },
+            {
+              "id": "818",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling2.svg",
+              "image": "gallery/icons/emotions/svg/smiling2.svg"
+            },
+            {
+              "id": "819",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling3.svg",
+              "image": "gallery/icons/emotions/svg/smiling3.svg"
+            },
+            {
+              "id": "820",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling4.svg",
+              "image": "gallery/icons/emotions/svg/smiling4.svg"
+            },
+            {
+              "id": "821",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling5.svg",
+              "image": "gallery/icons/emotions/svg/smiling5.svg"
+            },
+            {
+              "id": "822",
+              "categoryId": "8",
+              "name": "Smiling",
+              "description": "smiling",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/smiling6.svg",
+              "image": "gallery/icons/emotions/svg/smiling6.svg"
+            },
+            {
+              "id": "823",
+              "categoryId": "8",
+              "name": "Surprised",
+              "description": "surprised",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/surprised.svg",
+              "image": "gallery/icons/emotions/svg/surprised.svg"
+            },
+            {
+              "id": "824",
+              "categoryId": "8",
+              "name": "Wink",
+              "description": "wink",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/wink.svg",
+              "image": "gallery/icons/emotions/svg/wink.svg"
+            },
+            {
+              "id": "825",
+              "categoryId": "8",
+              "name": "Winking",
+              "description": "winking",
+              "colorize": true,
+              "thumb": "gallery/icons/emotions/svg/winking.svg",
+              "image": "gallery/icons/emotions/svg/winking.svg"
+            }
+          ]
+        },
+        {
+          "id": "9",
+          "name": "Logistics icons",
+          "thumb": "gallery/icons/logistics/png/delivery.png",
+          "graphicsList": [
+            {
+              "id": "901",
+              "categoryId": "9",
+              "name": "24 hours",
+              "description": "24 hours",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/24.png",
+              "image": "gallery/icons/logistics/svg/24.svg"
+            },
+            {
+              "id": "902",
+              "categoryId": "9",
+              "name": "24 hours",
+              "description": "24 hours",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/24_1.png",
+              "image": "gallery/icons/logistics/svg/24_1.svg"
+            },
+            {
+              "id": "903",
+              "categoryId": "9",
+              "name": "Air",
+              "description": "air",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/air.png",
+              "image": "gallery/icons/logistics/svg/air.svg"
+            },
+            {
+              "id": "904",
+              "categoryId": "9",
+              "name": "Airplane",
+              "description": "airplane",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/airplane.png",
+              "image": "gallery/icons/logistics/svg/airplane.svg"
+            },
+            {
+              "id": "905",
+              "categoryId": "9",
+              "name": "Call",
+              "description": "call",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/call.png",
+              "image": "gallery/icons/logistics/svg/call.svg"
+            },
+            {
+              "id": "906",
+              "categoryId": "9",
+              "name": "Commercial",
+              "description": "commercial",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/commercial.png",
+              "image": "gallery/icons/logistics/svg/commercial.svg"
+            },
+            {
+              "id": "907",
+              "categoryId": "9",
+              "name": "Delivery",
+              "description": "delivery",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/delivery.png",
+              "image": "gallery/icons/logistics/svg/delivery.svg"
+            },
+            {
+              "id": "908",
+              "categoryId": "9",
+              "name": "Delivery",
+              "description": "delivery",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/delivery1.png",
+              "image": "gallery/icons/logistics/svg/delivery1.svg"
+            },
+            {
+              "id": "909",
+              "categoryId": "9",
+              "name": "Delivery",
+              "description": "delivery",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/delivery2.png",
+              "image": "gallery/icons/logistics/svg/delivery2.svg"
+            },
+            {
+              "id": "910",
+              "categoryId": "9",
+              "name": "Delivery",
+              "description": "delivery",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/delivery3.png",
+              "image": "gallery/icons/logistics/svg/delivery3.svg"
+            },
+            {
+              "id": "911",
+              "categoryId": "9",
+              "name": "International",
+              "description": "international",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/international.png",
+              "image": "gallery/icons/logistics/svg/international.svg"
+            },
+            {
+              "id": "912",
+              "categoryId": "9",
+              "name": "Logistics",
+              "description": "logistics",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/logistics.png",
+              "image": "gallery/icons/logistics/svg/logistics.svg"
+            },
+            {
+              "id": "913",
+              "categoryId": "9",
+              "name": "Package",
+              "description": "package",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/package.png",
+              "image": "gallery/icons/logistics/svg/package.svg"
+            },
+            {
+              "id": "914",
+              "categoryId": "9",
+              "name": "Phone",
+              "description": "phone",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/phone.png",
+              "image": "gallery/icons/logistics/svg/phone.svg"
+            },
+            {
+              "id": "915",
+              "categoryId": "9",
+              "name": "Placeholder",
+              "description": "placeholder",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/placeholder.png",
+              "image": "gallery/icons/logistics/svg/placeholder.svg"
+            },
+            {
+              "id": "916",
+              "categoryId": "9",
+              "name": "Talking",
+              "description": "talking",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/talking.png",
+              "image": "gallery/icons/logistics/svg/talking.svg"
+            },
+            {
+              "id": "917",
+              "categoryId": "9",
+              "name": "Telephone",
+              "description": "telephone",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/telephone.png",
+              "image": "gallery/icons/logistics/svg/telephone.svg"
+            },
+            {
+              "id": "918",
+              "categoryId": "9",
+              "name": "Triangular",
+              "description": "triangular",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/triangular.png",
+              "image": "gallery/icons/logistics/svg/triangular.svg"
+            },
+            {
+              "id": "919",
+              "categoryId": "9",
+              "name": "Verification",
+              "description": "verification",
+              "colorize": true,
+              "thumb": "gallery/icons/logistics/png/verification.png",
+              "image": "gallery/icons/logistics/svg/verification.svg"
+            }
+          ]
+        },
+        {
+          "id": "10",
+          "name": "Music icons",
+          "thumb": "gallery/icons/music/png/dj.png",
+          "graphicsList": [
+            {
+              "id": "1001",
+              "categoryId": "10",
+              "name": "Acoustic",
+              "description": "acoustic",
+              "colorize": true,
+              "thumb": "gallery/icons/music/png/acoustic.png",
+              "image": "gallery/icons/music/svg/acoustic.svg"
+            },
+            {
+              "id": "1002",
+              "categoryId": "10",
+              "name": "Bass",
+              "description": "bass",
+              "colorize": true,
+              "thumb": "gallery/icons/music/png/bass.png",
+              "image": "gallery/icons/music/svg/bass.svg"
+            },
+            {
+              "id": "1003",
+              "categoryId": "10",
+              "name": "DJ",
+              "description": "dj",
+              "colorize": true,
+              "thumb": "gallery/icons/music/png/dj.png",
+              "image": "gallery/icons/music/svg/dj.svg"
+            },
+            {
+              "id": "1004",
+              "categoryId": "10",
+              "name": "Microphone",
+              "description": "microphone",
+              "colorize": true,
+              "thumb": "gallery/icons/music/png/microphone.png",
+              "image": "gallery/icons/music/svg/microphone.svg"
+            },
+            {
+              "id": "1005",
+              "categoryId": "10",
+              "name": "Musical",
+              "description": "musical",
+              "colorize": true,
+              "thumb": "gallery/icons/music/png/musical.png",
+              "image": "gallery/icons/music/svg/musical.svg"
+            },
+            {
+              "id": "1006",
+              "categoryId": "10",
+              "name": "Treble",
+              "description": "treble",
+              "colorize": true,
+              "thumb": "gallery/icons/music/png/treble.png",
+              "image": "gallery/icons/music/svg/treble.svg"
+            }
+          ]
+        },
+        {
+          "id": "11",
+          "name": "Sport icons",
+          "thumb": "gallery/icons/sports/png/swimming.png",
+          "graphicsList": [
+            {
+              "id": "1101",
+              "categoryId": "11",
+              "name": "Barbell",
+              "description": "barbell",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/barbell.png",
+              "image": "gallery/icons/sports/svg/barbell.svg"
+            },
+            {
+              "id": "1102",
+              "categoryId": "11",
+              "name": "Basketball",
+              "description": "basketball",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/basketball.png",
+              "image": "gallery/icons/sports/svg/basketball.svg"
+            },
+            {
+              "id": "1103",
+              "categoryId": "11",
+              "name": "Finish",
+              "description": "finish",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/finish.png",
+              "image": "gallery/icons/sports/svg/finish.svg"
+            },
+            {
+              "id": "1104",
+              "categoryId": "11",
+              "name": "Regular",
+              "description": "regular",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/regular.png",
+              "image": "gallery/icons/sports/svg/regular.svg"
+            },
+            {
+              "id": "1105",
+              "categoryId": "11",
+              "name": "Runner",
+              "description": "runner",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/runner.png",
+              "image": "gallery/icons/sports/svg/runner.svg"
+            },
+            {
+              "id": "1106",
+              "categoryId": "11",
+              "name": "Skiing",
+              "description": "skiing",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/skiing.png",
+              "image": "gallery/icons/sports/svg/skiing.svg"
+            },
+            {
+              "id": "1107",
+              "categoryId": "11",
+              "name": "Soccer",
+              "description": "soccer",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/soccer.png",
+              "image": "gallery/icons/sports/svg/soccer.svg"
+            },
+            {
+              "id": "1108",
+              "categoryId": "11",
+              "name": "Soccer",
+              "description": "soccer",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/soccer1.png",
+              "image": "gallery/icons/sports/svg/soccer1.svg"
+            },
+            {
+              "id": "1109",
+              "categoryId": "11",
+              "name": "Swimming",
+              "description": "swimming",
+              "colorize": true,
+              "thumb": "gallery/icons/sports/png/swimming.png",
+              "image": "gallery/icons/sports/svg/swimming.svg"
+            }
+          ]
+        },
+        {
+          "id": "12",
+          "name": "Transport icons",
+          "thumb": "gallery/icons/transport/svg/sedan.svg",
+          "graphicsList": [
+            {
+              "id": "1201",
+              "categoryId": "12",
+              "name": "Bicycle",
+              "description": "bicycle",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/bicycle.svg",
+              "image": "gallery/icons/transport/svg/bicycle.svg"
+            },
+            {
+              "id": "1202",
+              "categoryId": "12",
+              "name": "Bus",
+              "description": "bus",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/bus.svg",
+              "image": "gallery/icons/transport/svg/bus.svg"
+            },
+            {
+              "id": "1203",
+              "categoryId": "12",
+              "name": "Car",
+              "description": "car",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/car.svg",
+              "image": "gallery/icons/transport/svg/car.svg"
+            },
+            {
+              "id": "1204",
+              "categoryId": "12",
+              "name": "Motorcycle",
+              "description": "motorcycle",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/motorcycle.svg",
+              "image": "gallery/icons/transport/svg/motorcycle.svg"
+            },
+            {
+              "id": "1205",
+              "categoryId": "12",
+              "name": "Sedan",
+              "description": "sedan",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/sedan.svg",
+              "image": "gallery/icons/transport/svg/sedan.svg"
+            },
+            {
+              "id": "1206",
+              "categoryId": "12",
+              "name": "Semaphore",
+              "description": "semaphore",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/semaphore.svg",
+              "image": "gallery/icons/transport/svg/semaphore.svg"
+            },
+            {
+              "id": "1207",
+              "categoryId": "12",
+              "name": "Traffic",
+              "description": "traffic",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/traffic.svg",
+              "image": "gallery/icons/transport/svg/traffic.svg"
+            },
+            {
+              "id": "1208",
+              "categoryId": "12",
+              "name": "Train",
+              "description": "train",
+              "colorize": true,
+              "thumb": "gallery/icons/transport/svg/train.svg",
+              "image": "gallery/icons/transport/svg/train.svg"
+            }
+          ]
+        },
+        {
+          "id": "13",
+          "name": "Travel icons",
+          "thumb": "gallery/icons/travel/svg/photo.svg",
+          "graphicsList": [
+            {
+              "id": "1301",
+              "categoryId": "13",
+              "name": "Coconut",
+              "description": "coconut",
+              "colorize": true,
+              "thumb": "gallery/icons/travel/svg/coconut.svg",
+              "image": "gallery/icons/travel/svg/coconut.svg"
+            },
+            {
+              "id": "1302",
+              "categoryId": "13",
+              "name": "Photo",
+              "description": "photo",
+              "colorize": true,
+              "thumb": "gallery/icons/travel/svg/photo.svg",
+              "image": "gallery/icons/travel/svg/photo.svg"
+            },
+            {
+              "id": "1303",
+              "categoryId": "13",
+              "name": "Plane",
+              "description": "plane",
+              "colorize": true,
+              "thumb": "gallery/icons/travel/svg/plane.svg",
+              "image": "gallery/icons/travel/svg/plane.svg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6s",
+      "name": "Shapes&Arrows",
+      "thumb": "gallery/icons/shape/shape-circle.svg",
+      "categories": [
+        {
+          "id": "6",
+          "name": "Arrows",
+          "thumb": "gallery/icons/arrows/arrow-1.svg",
+          "graphicsList": [
+            {
+              "id": "601",
+              "categoryId": "6",
+              "name": "Arrow 1",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-1.svg",
+              "image": "gallery/icons/arrows/arrow-1.svg"
+            },
+            {
+              "id": "602",
+              "categoryId": "6",
+              "name": "Arrow 2",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-2.svg",
+              "image": "gallery/icons/arrows/arrow-2.svg"
+            },
+            {
+              "id": "603",
+              "categoryId": "6",
+              "name": "Arrow 3",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-3.svg",
+              "image": "gallery/icons/arrows/arrow-3.svg"
+            },
+            {
+              "id": "604",
+              "categoryId": "6",
+              "name": "Arrow 4",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-4.svg",
+              "image": "gallery/icons/arrows/arrow-4.svg"
+            },
+            {
+              "id": "605",
+              "categoryId": "6",
+              "name": "Arrow 5",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-5.svg",
+              "image": "gallery/icons/arrows/arrow-5.svg"
+            },
+            {
+              "id": "606",
+              "categoryId": "6",
+              "name": "Arrow 6",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-6.svg",
+              "image": "gallery/icons/arrows/arrow-6.svg"
+            },
+            {
+              "id": "616",
+              "categoryId": "6",
+              "name": "Arrow 16",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-16.svg",
+              "image": "gallery/icons/arrows/arrow-16.svg"
+            },
+            {
+              "id": "618",
+              "categoryId": "6",
+              "name": "Arrow 18",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-18.svg",
+              "image": "gallery/icons/arrows/arrow-18.svg"
+            },
+            {
+              "id": "607",
+              "categoryId": "6",
+              "name": "Arrow 7",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-7.svg",
+              "image": "gallery/icons/arrows/arrow-7.svg"
+            },
+            {
+              "id": "608",
+              "categoryId": "6",
+              "name": "Arrow 8",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-8.svg",
+              "image": "gallery/icons/arrows/arrow-8.svg"
+            },
+            {
+              "id": "609",
+              "categoryId": "6",
+              "name": "Arrow 9",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-9.svg",
+              "image": "gallery/icons/arrows/arrow-9.svg"
+            },
+            {
+              "id": "617",
+              "categoryId": "6",
+              "name": "Arrow 17",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-17.svg",
+              "image": "gallery/icons/arrows/arrow-17.svg"
+            },
+            {
+              "id": "610",
+              "categoryId": "6",
+              "name": "Arrow 10",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-10.svg",
+              "image": "gallery/icons/arrows/arrow-10.svg"
+            },
+            {
+              "id": "611",
+              "categoryId": "6",
+              "name": "Arrow 11",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-11.svg",
+              "image": "gallery/icons/arrows/arrow-11.svg"
+            },
+            {
+              "id": "612",
+              "categoryId": "6",
+              "name": "Arrow 12",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-12.svg",
+              "image": "gallery/icons/arrows/arrow-12.svg"
+            },
+            {
+              "id": "613",
+              "categoryId": "6",
+              "name": "Arrow 13",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-13.svg",
+              "image": "gallery/icons/arrows/arrow-13.svg"
+            },
+            {
+              "id": "614",
+              "categoryId": "6",
+              "name": "Arrow 14",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-14.svg",
+              "image": "gallery/icons/arrows/arrow-14.svg"
+            },
+            {
+              "id": "615",
+              "categoryId": "6",
+              "name": "Arrow 15",
+              "description": "Arrow",
+              "colorize": true,
+              "thumb": "gallery/icons/arrows/arrow-15.svg",
+              "image": "gallery/icons/arrows/arrow-15.svg"
+            }
+          ]
+        },
+        {
+          "id": "6_shapes",
+          "name": "Shapes",
+          "thumb": "gallery/icons/shape/shape-circle.svg",
+          "graphicsList": [
+            {
+              "id": "6s01",
+              "categoryId": "6s",
+              "name": "Square",
+              "description": "Shape, Square",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-square.svg",
+              "image": "gallery/icons/shape/shape-square.svg"
+            },
+            {
+              "id": "6s02",
+              "categoryId": "6s",
+              "name": "Rounded Square",
+              "description": "Shape, Square",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-square-round.svg",
+              "image": "gallery/icons/shape/shape-square-round.svg"
+            },
+            {
+              "id": "6s03",
+              "categoryId": "6s",
+              "name": "Triangle",
+              "description": "Shape, Triangle",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-triangle.svg",
+              "image": "gallery/icons/shape/shape-triangle.svg"
+            },
+            {
+              "id": "6s04",
+              "categoryId": "6s",
+              "name": "Rounded Triangle",
+              "description": "Shape, Triangle",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-triangle-rounded.svg",
+              "image": "gallery/icons/shape/shape-triangle-rounded.svg"
+            },
+            {
+              "id": "6s05",
+              "categoryId": "6s",
+              "name": "Circle",
+              "description": "Shape, Circle",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-circle.svg",
+              "image": "gallery/icons/shape/shape-circle.svg"
+            },
+            {
+              "id": "6s06",
+              "categoryId": "6s",
+              "name": "Hexagon",
+              "description": "Shape, Hexagon",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-hex.svg",
+              "image": "gallery/icons/shape/shape-hex.svg"
+            },
+            {
+              "id": "6s07",
+              "categoryId": "6s",
+              "name": "Star",
+              "description": "Shape, Star",
+              "colorize": true,
+              "thumb": "gallery/icons/shape/shape-star.svg",
+              "image": "gallery/icons/shape/shape-star.svg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

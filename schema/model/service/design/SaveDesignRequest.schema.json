@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/design/SaveDesignRequest.schema.json",
+  "title": "SaveDesignRequest",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "shared",
+        "saved",
+        "ordered",
+        "template",
+        "design idea",
+        "service"
+      ]
+    },
+    "quote": {
+      "type": "string",
+      "minLength": 1
+    },
+    "productId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "email": {
+      "type": "string",
+      "minLength": 1
+    },
+    "data": {
+      "$ref": "DesignDataObject.schema.json"
+    }
+  },
+  "required": [
+    "type",
+    "data"
+  ],
+  "additionalProperties": false
+}

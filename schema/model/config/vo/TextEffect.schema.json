@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/vo/TextEffect.schema.json",
+  "title": "TextEffect",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "enum": [
+        "curveUp",
+        "curveDown",
+        "archUp",
+        "archDown",
+        "simpleWave",
+        "widen",
+        "wedge",
+        "pinch",
+        "bulge",
+        "slantLeft",
+        "slantRight",
+        "slantUp",
+        "slantDown"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "fxName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "paramName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "paramValName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "min": {
+      "type": "number"
+    },
+    "max": {
+      "type": "number"
+    },
+    "step": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "paramName",
+    "paramValName",
+    "min",
+    "max",
+    "step",
+    "name"
+  ],
+  "additionalProperties": false
+}

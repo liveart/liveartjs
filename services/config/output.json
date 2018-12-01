@@ -1,0 +1,30 @@
+{
+  "zip": true,
+  "files": [
+    {
+      "type": "PDF",
+      "fileName": "design.pdf",
+      "id": "design_pdf",
+      "options": {
+        "zip": false
+      }
+    },
+    {
+      "type": "PNG",
+      "fileName": "location_$name_preview.png",
+      "id": "preview_small_png",
+      "options": {
+        "useEditableArea": false,
+        "zip": false
+      }
+    },
+    {
+      "type": "PNG",
+      "fileName": "location_$name.png",
+      "id": "design_png",
+      "options": {
+        "exportDpi": 300
+      }
+    }
+  ]
+}

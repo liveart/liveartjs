@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/GetQuoteRequest.schema.json",
+  "title": "GetQuoteRequest",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "minLength": 3,
+      "description": "the version of the current get-quote request structure",
+      "examples": ["1.0"]
+    },
+    "product": {
+      "$ref": "QuoteProduct.schema.json"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "colors": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "processColors"
+          ]
+        },
+        {
+          "type": "number",
+          "min": 0
+        }
+      ]
+    },
+    "colorsNum": {
+      "type": "number",
+      "min": 0
+    },
+    "colorsList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "isFullColor": {
+      "type": "boolean"
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "$ref": "QuoteLocation.schema.json"
+      }
+    },
+    "quantities": {
+      "type": "array",
+      "items": {
+        "$ref": "QuantityObject.schema.json"
+      }
+    },
+    "namesNumbers": {
+      "type": "array",
+      "items": {
+        "$ref": "QuoteNamesNumbersObject.schema.json"
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "$ref": "QuoteOption.schema.json"
+      }
+    }
+  },
+  "required": [
+    "product",
+    "locations"
+  ],
+  "additionalProperties": false
+}

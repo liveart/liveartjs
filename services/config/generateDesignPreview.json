@@ -1,0 +1,15 @@
+{
+  "zip": false,
+  "files": [
+    {
+      "type": "custom",
+      "renderFunction": "generateDesignPreview",
+      "fileName": "design_preview.png",
+      "id": "design_preview_png",
+      "options": {
+        "useEditableArea": false,
+        "width": 110
+      }
+    }
+  ]
+}

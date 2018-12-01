@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/Config.schema.json",
+  "title": "Config",
+  "version": "1.1.0",
+  "description": "Both for its main configuration file and resources configurations such as products and gallery images, LiveArt JS uses JSON format. The primary configuration file contains all the necessary options, as well as REST-like endpoints for server-side integration.",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to JSON Schema of the supported version"
+    },
+    "base": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assetsUrl": {
+      "type": "string",
+      "description": "Relative or absolute URL to the assets folder containing necessary css, image, and javascript files that make LiveArt HTML5 component work.",
+      "examples": ["assets/"]
+    },
+    "colors": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "pantones_url": {
+              "type": "string",
+              "examples": ["config/pantones.json"]
+            },
+            "url": {
+              "type": "string",
+              "examples": ["config/colors.json"]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "vo/Color.schema.json"
+          }
+        }
+      ],
+      "description": "Object containing urls to the services to get Colors and optional pantones JSON structures. These are the colors for fonts and colorizable artwork. Added in v0.10.4, pantones are available for fonts and colorizable artwork, in color picker appear as a separate tab. To disable the Pantones feature — remove pantones_url property. Note: for colorizing multicolor products refer to Product List configuration."
+    },
+    "defaultNameObjectText": {
+      "type": "string",
+      "description": "default text which will be rendered in placeholder for Names list.",
+      "examples": ["NAMES HERE"]
+    },
+    "defaultNumberObjectText": {
+      "type": "string",
+      "description": "default text, which will be rendered in placeholder for Numbers list.",
+      "examples": ["00"]
+    },
+    "defaultProductId": {
+      "type": "string",
+      "description": "Id of the product which will be loaded on the start-up of LiveArt.",
+      "examples": ["11"]
+    },
+    "defaultProductSize": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "deprecated": {
+        "description": "*DEPRECATED* as of v0.10.24. Use \"laOptions.defaultProductAttributes.sizeUnits\"."
+      },
+      "description": "Sets default size in units if the default product is resizable. (Note: has lower priority than \"product.locations.editableAreaUnits\")."
+    },
+    "fonts": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "examples": ["config/fonts.json"]
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "vo/Font.schema.json"
+          }
+        }
+      ],
+      "description": "Object containing url to the service to get Fonts JSON structure from."
+    },
+    "galleryBaseUrl": {
+      "type": "string",
+      "description": "Absolute URL to the folder where artwork gallery is located. This might be useful if you’d like the gallery to reside on different server or folder rather than the default one.",
+      "examples": ["http://example.com/gallery"]
+    },
+    "getDesignsUrl": {
+      "type": "string",
+      "description": "URL to the service to get a list of saved designs from (in JSON format).",
+      "examples": ["services/getDesigns.php?email=${email}"]
+    },
+    "getQuoteUrl": {
+      "type": "string",
+      "description": "URL to a backend service which gets a record with a current design and returns the information in JSON format about pricing, such as price per item, discount amount, total price and so on.",
+      "examples": ["services/getQuote.php"]
+    },
+    "graphicsList": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string",
+              "examples": ["config/graphics.json"]
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "items": {
+            "$ref": "vo/GraphicCategory.schema.json"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "Object containing url to the service to get Graphics JSON structure from."
+    },
+    "loadDesignUrl": {
+      "type": "string",
+      "description": "URL to a backend service which returns a single design by unique identifier.",
+      "examples": ["services/loadDesign.php?design_id=${design_id}"]
+    },
+    "options": {
+      "description": "Object containing options controlling visual appearance and behaviour of the designer area.",
+      "$ref": "ConfigOptions.schema.json"
+    },
+    "productsList": {
+      "oneOf": [
+        {
+          "properties": {
+            "url": {
+              "type": "string",
+              "examples": ["config/products.json"]
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "items": {
+            "$ref": "vo/ProductCategory.schema.json"
+          },
+          "type": "array"
+        }
+      ],
+      "description": "Object containing url to the service to get Products JSON structure from."
+    },
+    "redirectUrl": {
+      "type": "string",
+      "description": "URL to a backend service which places order and redirects user to some other page, for example, shopping cart.",
+      "examples": ["services/order.php?design_id=${design_id}"]
+    },
+    "generateVisualsUrl": {
+      "type": "string",
+      "examples": ["services/order.php?design_id=${design_id}"]
+    },
+    "redirectWindow": {
+      "type": "string",
+      "enum": [
+        "",
+        "parent",
+        "top"
+      ],
+      "default": "\"\"",
+      "description": "Window target when redirecting to \"redirectUrl\". Used by LiveArt inside the iframe.",
+      "examples": ["parent"]
+    },
+    "saveDesignUrl": {
+      "type": "string",
+      "description": "URL to a backend service which places order and redirects user to some other page, for example, shopping cart.",
+      "examples": ["services/order.php?design_id=${design_id}"]
+    },
+    "shareLinkUrl": {
+      "type": "string",
+      "description": "URL to a backend service which places order and redirects user to some other page, for example, shopping cart.",
+      "examples": ["services/order.php?design_id=${design_id}"]
+    },
+    "social": {
+      "oneOf": [
+        {
+          "properties": {
+            "url": {
+              "type": "string",
+              "examples": ["config/social.json"]
+            }
+          },
+          "required": [
+            "url"
+          ],
+          "type": "object",
+          "additionalProperties": false
+        },
+        {
+          "$ref": "Social.schema.json"
+        }
+      ],
+      "description": "Object containing url to the service to get social networks configuration for uploading photos from. Added in v0.10.10."
+    },
+    "textEffects": {
+      "oneOf": [
+        {
+          "properties": {
+            "config": {
+              "type": "string",
+              "examples": ["config/textEffects.json"]
+            },
+            "url_deprecated": {
+              "type": "string",
+              "examples": ["config/deprecatedEffects.json"]
+            }
+          },
+          "required": [
+            "config"
+          ],
+          "type": "object"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "vo/TextEffect.schema.json"
+          }
+        }
+      ],
+      "description": "Object containing url to the service to get text effects configuration file from. See \"Data Structure\" section for details on using text effects. To disable the feature completely, leave both fields of the object empty."
+    },
+    "uploadImageUrl": {
+      "type": "string",
+      "description": "URL to a backend service that will upload user image from local file or URL. After uploading and processing the image is shown on the preview area and ready to be moved or resized. Allowed file extensions: .jpg, .png, .gif, .svg."
+    },
+    "saveTemplateUrl": {
+      "type": "string",
+      "description": "URL to a backend service which saves template designed in admin mode.",
+      "examples": ["services/php/saveTemplate.php"]
+    },
+    "getTemplatesUrl": {
+      "type": "string",
+      "description": "URL to a backend service which returns template list.",
+      "examples": ["services/php/getTemplates.php?product_id=${product_id}"]
+    },
+    "removeDesignUrl": {
+      "type": "string",
+      "description": "Remove saved design"
+    },
+    "handlers": {
+      "type": "object",
+      "properties": {
+      }
+    }
+  },
+  "required": [
+    "getDesignsUrl",
+    "galleryBaseUrl",
+    "redirectWindow",
+    "loadDesignUrl",
+    "saveDesignUrl",
+    "productsList",
+    "textEffects",
+    "fonts",
+    "assetsUrl",
+    "graphicsList",
+    "redirectUrl",
+    "uploadImageUrl",
+    "social",
+    "shareLinkUrl",
+    "options"
+  ],
+  "type": "object",
+  "additionalProperties": false
+}

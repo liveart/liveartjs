@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/QuoteLocationObject.schema.json",
+  "title": "QuoteLocationObject",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "txt",
+        "image",
+        "svg"
+      ]
+    },
+    "colors": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "processColors"
+          ]
+        },
+        {
+          "type": "number",
+          "min": 0
+        }
+      ]
+    },
+    "colorsNum": {
+      "type": "number",
+      "min": 0
+    },
+    "colorsList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "designedArea": {
+      "type": "number",
+      "min": 0
+    },
+    "isFullColor": {
+      "type": "boolean"
+    },
+    "isUploaded": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "colors",
+    "colorsNum",
+    "colorsList",
+    "isFullColor",
+    "type",
+    "designedArea"
+  ],
+  "additionalProperties": false
+}

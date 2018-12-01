@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/vo/ProductCategory.schema.json",
+  "title": "ProductCategory",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "unique": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thumb": {
+      "type": "string",
+      "minLength": 1
+    },
+    "products": {
+      "items": {
+        "$ref": "Product.schema.json"
+      },
+      "type": "array"
+    },
+    "categories": {
+      "items": {
+        "$ref": "ProductCategory.schema.json"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "name"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/vo/Font.schema.json",
+  "title": "Font",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the font visible to end-users"
+    },
+    "fontFamily": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ascent": {
+      "type": "number"
+    },
+    "boldAllowed": {
+      "type": "boolean",
+      "default": true
+    },
+    "italicAllowed": {
+      "type": "boolean",
+      "default": true
+    },
+    "vector": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "name",
+    "fontFamily"
+  ],
+  "additionalProperties": false
+}

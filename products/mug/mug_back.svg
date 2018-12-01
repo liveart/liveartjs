@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="587px" height="543px" viewBox="0 0 587 543" enable-background="new 0 0 587 543" xml:space="preserve">
-<style type="text/css">
-	<![CDATA[
-	 .bg {fill:#D67474}
-	]]>
-</style>
+	 width="590px" height="530px" viewBox="0 0 590 530" enable-background="new 0 0 590 530" xml:space="preserve">
 <g>
 	
-		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0.7002" y1="499.8789" x2="467.8223" y2="499.8789" gradientTransform="matrix(-1 0 0 1 580.8027 0)">
-		<stop  offset="0.0056" style="stop-color:#F8F8F9"/>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="-720.5692" y1="882.0792" x2="-267.4608" y2="882.0792" gradientTransform="matrix(-1 0 0 1 -147.6572 -395.5502)">
+		<stop  offset="5.600000e-03" style="stop-color:#F8F8F9"/>
 		<stop  offset="0.1966" style="stop-color:#CACACA"/>
 		<stop  offset="0.2461" style="stop-color:#D6D6D6"/>
 		<stop  offset="0.3343" style="stop-color:#E9E8E8"/>
@@ -23,49 +17,46 @@
 		<stop  offset="0.8652" style="stop-color:#CACACA"/>
 		<stop  offset="1" style="stop-color:#F8F8F9"/>
 	</linearGradient>
-	<ellipse fill="url(#SVGID_1_)" cx="346.542" cy="499.879" rx="233.561" ry="36.668"/>
-	<g>
-		<path class="bg" d="M149.298,94.956l0.722,71.631h-5.063c0,0-9.404-41.966-57.159-28.942
-			c-47.754,13.024-59.333,72.354-43.414,150.497c15.919,78.141,95.509,65.12,107.809,41.241l2.894,61.499
-			c0,0-3.616-2.894-7.233-2.894c-3.619,0-97.68,11.579-130.962-64.393c0,0-29.665-80.313-8.683-151.221
-			s73.801-78.143,135.302-75.972L149.298,94.956z"/>
-		<path class="bg" d="M148.708,95.033l0.722,71.63h-5.063c0,0-9.404-41.966-57.159-28.942
-			c-47.754,13.024-59.333,72.354-43.414,150.497c15.919,78.14,95.79,77.977,108.09,54.096l2.612,48.644c0,0-3.616-2.894-7.233-2.894
-			c-3.619,0-84.597,9.047-117.879-66.924c0,0-27.537-73.27-6.555-144.177c20.983-70.907,64.024-67.706,125.525-65.535
-			L148.708,95.033z"/>
+	<ellipse fill="url(#SVGID_1_)" cx="346.4" cy="486.5" rx="226.6" ry="35.6"/>
+	<g id="la_x7C_Mug_Color_x7C_fill">
 		<g>
-			<path fill="#F8F8F9" d="M90.884,111.429c-4.663-0.189-42.051,8.089-59.988,44.361c0,0-6.05-10.082,18.146-31.254
-				C73.239,103.363,90.884,111.429,90.884,111.429z"/>
-			<path fill="#F8F8F9" d="M74.754,140.667c0,0-20.168,11.092-23.694,20.166C51.06,160.833,56.103,141.674,74.754,140.667z"/>
-			<path fill="#F8F8F9" d="M151.379,343.827c0,0-9.075,13.107-31.76,12.603c0,0,31.76-14.619,31.76-19.155
-				C151.379,332.735,151.379,343.827,151.379,343.827z"/>
+			<path fill="#D67474" d="M155,93.8l0.7,69.5h-4.9c0,0-9.1-40.7-55.4-28.1c-46.3,12.6-57.6,70.2-42.1,146
+				c15.4,75.8,92.6,63.2,104.6,40l2.8,59.7c0,0-3.5-2.8-7-2.8c-3.5,0-94.7,11.2-127-62.5c0,0-28.8-77.9-8.4-146.7
+				S89.8,93,149.4,95.2L155,93.8z"/>
+			<path fill="#D67474" d="M154.5,93.8l0.7,69.5h-4.9c0,0-9.1-40.7-55.4-28.1c-46.3,12.6-57.6,70.2-42.1,146
+				c15.4,75.8,92.9,75.6,104.8,52.5l2.5,47.2c0,0-3.5-2.8-7-2.8c-3.5,0-82.1,8.8-114.3-64.9c0,0-26.7-71.1-6.4-139.9
+				c20.4-68.8,62.1-65.7,121.8-63.6L154.5,93.8z"/>
+			<g>
+				<path fill="#F8F8F9" d="M98.4,109.7c-4.5-0.2-40.8,7.8-58.2,43c0,0-5.9-9.8,17.6-30.3C81.3,101.9,98.4,109.7,98.4,109.7z"/>
+				<path fill="#F8F8F9" d="M82.7,138.1c0,0-19.6,10.8-23,19.6C59.7,157.7,64.6,139.1,82.7,138.1z"/>
+				<path fill="#F8F8F9" d="M157,335.2c0,0-8.8,12.7-30.8,12.2c0,0,30.8-14.2,30.8-18.6C157,324.4,157,335.2,157,335.2z"/>
+			</g>
+		</g>
+		<g>
+			<g>
+				<path fill="#D67474" d="M345,10.4c6.4-0.1,159.5-1,193.9,22.9L528.2,475l-3.1,13.8c0,0-62.6,29-180.1,26
+					c-117.5,3-180.1-26-180.1-26l-3.1-13.8L151.2,33.3C185.6,9.4,338.6,10.4,345,10.4z"/>
+			</g>
 		</g>
 	</g>
-	<g>
-		<g>
-			<path class="bg" d="M345.17,9.032c6.595-0.052,164.383-1.046,199.858,23.633L534,487.961l-3.15,14.18
-				c0,0-64.516,29.896-185.68,26.786c-121.163,3.109-185.679-26.786-185.679-26.786l-3.15-14.18L145.313,32.665
-				C180.787,7.986,338.575,8.98,345.17,9.032z"/>
-		</g>
-	</g>
-	<path fill="#F8F8F9" d="M412.071,513.153c0,0-51.274,18.727-153.052,0C259.02,513.153,373.192,522.92,412.071,513.153z"/>
-	<path fill="#9A999C" d="M530.806,502.16c0,0-79.975,28.444-186.745,25.971c0,0-133.979-2.473-184.272-25.971l2.063,4.534
-		c0,0,75.028,27.62,176.85,27.208c101.823-0.412,182.211-21.437,190.455-27.208L530.806,502.16z"/>
+	<path fill="#F8F8F9" d="M409.9,499.4c0,0-49.7,18.2-148.5,0C261.5,499.4,372.2,508.9,409.9,499.4z"/>
+	<path fill="#9A999C" d="M525.1,488.7c0,0-77.6,27.6-181.1,25.2c0,0-130-2.4-178.7-25.2l2,4.4c0,0,72.8,26.8,171.5,26.4
+		c98.8-0.4,176.7-20.8,184.7-26.4L525.1,488.7z"/>
 	
-		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="372.166" y1="193.9697" x2="372.166" y2="42.5137" gradientTransform="matrix(-1 0 0 1 580.8027 0)">
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="-360.2477" y1="585.3475" x2="-360.2477" y2="438.4352" gradientTransform="matrix(-1 0 0 1 -147.6572 -395.5502)">
 		<stop  offset="0" style="stop-color:#EAEAEA"/>
 		<stop  offset="0.5852" style="stop-color:#ECECEC"/>
 		<stop  offset="0.9171" style="stop-color:#F4F4F5"/>
 		<stop  offset="1" style="stop-color:#F8F8F9"/>
 	</linearGradient>
-	<path fill="url(#SVGID_2_)" d="M219.797,44.108c0,0-9.565,132.325-7.972,149.862L197.478,42.514L219.797,44.108z"/>
-	<ellipse fill="#D67474" cx="348.136" cy="33.649" rx="198.487" ry="27.103"/>
+	<path fill="url(#SVGID_2_)" d="M223.4,44.4c0,0-9.3,128.4-7.7,145.4L201.8,42.9L223.4,44.4z"/>
+	<ellipse id="la_x7C_Mug_Color_x7C_fill_1_" fill="#D67474" cx="347.9" cy="34.3" rx="192.5" ry="26.3"/>
 	
-		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="51.7168" y1="34.542" x2="416.8057" y2="34.542" gradientTransform="matrix(-1 0 0 1 580.8027 0)">
+		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="-671.0827" y1="430.7023" x2="-316.9473" y2="430.7023" gradientTransform="matrix(-1 0 0 1 -147.6572 -395.5502)">
 		<stop  offset="0" style="stop-color:#BCBEC0"/>
 		<stop  offset="0.2191" style="stop-color:#F4F4F4"/>
 		<stop  offset="1" style="stop-color:#9D9FA2"/>
 	</linearGradient>
-	<ellipse fill="url(#SVGID_3_)" cx="346.542" cy="34.542" rx="182.544" ry="17.537"/>
+	<ellipse fill="url(#SVGID_3_)" cx="346.4" cy="35.2" rx="177.1" ry="17"/>
 </g>
 </svg>

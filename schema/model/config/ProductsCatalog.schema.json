@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/ProductsCatalog.schema.json",
+  "title": "ProductsCatalog",
+  "type": "object",
+  "version": "1.1.0",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to JSON Schema of the supported version"
+    },
+    "productCategoriesList": {
+      "items": {
+        "$ref": "vo/ProductCategory.schema.json"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "productCategoriesList"
+  ],
+  "additionalProperties": false
+}

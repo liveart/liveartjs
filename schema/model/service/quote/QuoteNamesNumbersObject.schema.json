@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/QuoteNamesNumbersObject.schema.json",
+  "title": "QuoteNamesNumbersObject",
+  "type": "object",
+  "properties": {
+    "size": {
+      "type": "string",
+      "minLength": 1
+    },
+    "numberText": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "size",
+    "numberText",
+    "name"
+  ],
+  "additionalProperties": false
+}

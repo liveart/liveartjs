@@ -1,9 +1,9 @@
 window.addEventListener('resize', function () {
-	liveArtResponsive.resize();
+    liveArtResponsive.resize();
 });
 
 window.addEventListener('load', function () {
-	liveArtResponsive.resize();
+    liveArtResponsive.resize();
 });
 
 /**
@@ -11,78 +11,54 @@ window.addEventListener('load', function () {
  * Requires: add to '#liveart-main-container' class 'fullSize'
  * Dependencies: requires file 'assets\js\resize.less.js' with 'laLessConst' object
  */
+(function () {
+
+    if (typeof window.CustomEvent === "function") return false;
+
+    function CustomEvent(event, params) {
+        params = params || {bubbles: false, cancelable: false, detail: undefined};
+        var evt = document.createEvent('CustomEvent');
+        evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+        return evt;
+    }
+
+    CustomEvent.prototype = window.Event.prototype;
+
+    window.CustomEvent = CustomEvent;
+})();
 
 liveArtResponsive = {};
+liveArtResponsive.resizeCompleteDelay = 40;
 
-liveArtResponsive.resize = function() {
-	var wrap = document.getElementById("liveart-isolate-container");
-	var container = document.getElementById("liveart-main-container");
-	var canvas = document.getElementById("canvas-container");
-		
-	var wrapWidth = wrap.offsetWidth;
-	//get max viewport height
-	var wrapHeight = window.innerHeight;
+liveArtResponsive.resize = function () {
+    var canvas = document.querySelector("#canvas-container");
+    if (!canvas) return;
+    liveArtResponsive.resize = function () {
+        var width = canvas.clientWidth;
+        var height = canvas.clientHeight;
 
-	var needResize = wrapWidth > laLessConst.mainContainerWidth && wrapHeight > laLessConst.mainContainerHeight;
-	//resize only marked with 'fullSize' container
-	if (container.classList.contains('fullSize') && needResize) {		
-		container.style['width'] = Math.floor(wrapWidth) + "px";
-		container.style['height'] = Math.floor(wrapHeight) + "px";
-		canvas.style['width'] = Math.floor(liveArtResponsive.getCanvasWidth(wrapWidth)) + "px";
-		canvas.style['height'] = Math.floor(liveArtResponsive.getCanvasHeight(wrapHeight)) + "px";
-	} else {
-		container.style['width'] = "";
-		container.style['height'] = "";
-		canvas.style['width'] = "";
-		canvas.style['height'] = "";
-	}
-}
+        var checkAfterDelay = function () {
+            if (liveArtResponsive.resizeTimeout) {
+                clearTimeout(liveArtResponsive.resizeTimeout);
+            }
+            width = canvas.clientWidth;
+            height = canvas.clientHeight;
+            liveArtResponsive.resizeTimeout = setTimeout(localProcessor, liveArtResponsive.resizeCompleteDelay);
+        };
+        var localProcessor = function () {
+            if (canvas.clientWidth === width && canvas.clientHeight === height) {
+                var event = new CustomEvent('la-responsive-resize');
+                canvas.dispatchEvent(event);
 
-liveArtResponsive.getHeight = function(wrapWidth) {
-	var canvasRatio = liveArtResponsive.getCanvasRatio();
-	//Canvas resized width
-	var canvasWidthNew = liveArtResponsive.getCanvasWidth(wrapWidth);
-	//liveart.height - canvas.height - logo.height(?)
-	var notCanvasHeight = laLessConst.mainContainerHeight - laLessConst.canvasHeight - laLessConst.logoHeight;
-	//Canvas resized height + other elements
-	var wrapNewHeight = canvasWidthNew / canvasRatio + notCanvasHeight;
-
-	return wrapNewHeight;
-}
-
-liveArtResponsive.getWidth = function(wrapHeight) {
-	var canvasRatio = liveArtResponsive.getCanvasRatio();
-	//Canvas resized height
-	var canvasHeightNew = liveArtResponsive.getCanvasHeight(wrapHeight);
-	//liveart.width - canvas.width
-	var notCanvasWidth = laLessConst.mainContainerWidth - laLessConst.canvasWidth;
-	//Canvas resized height + other elements
-	var wrapNewWidth = canvasHeightNew * canvasRatio + notCanvasWidth;
-
-	return wrapNewWidth;
-}
-
-liveArtResponsive.getProportionalDimensions = function(wrapWidth, wrapHeight) {
-		var wrapNewWidth = wrapWidth;
-		//Canvas resized height + other elements
-		var wrapNewHeight = liveArtResponsive.getHeight(wrapWidth);
-
-		if (wrapNewHeight > wrapHeight) {
-			wrapNewWidth = liveArtResponsive.getWidth(wrapHeight);
-			wrapNewHeight = wrapHeight;
-		}
-
-	return {width: wrapNewWidth, height: wrapNewHeight}
-}
-
-liveArtResponsive.getCanvasWidth = function(width) {
-	return width - (laLessConst.mainContainerWidth - laLessConst.canvasWidth);
-}
-
-liveArtResponsive.getCanvasHeight = function(height) {
-	return height - (laLessConst.mainContainerHeight - laLessConst.canvasHeight);
-}
-
-liveArtResponsive.getCanvasRatio = function() {
-	return laLessConst.canvasWidth / laLessConst.canvasHeight;
-}
+                // Post event. Fixes switching between desktop and mobile (see LAJS100/TASK733 msg#5##2)
+                setTimeout(function () {
+                    var event = new CustomEvent('la-responsive-resize');
+                    canvas.dispatchEvent(event);
+                }, 300);
+            } else {
+                checkAfterDelay();
+            }
+        };
+        checkAfterDelay();
+    }
+};

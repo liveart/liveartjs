@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/QuoteLocation.schema.json",
+  "title": "QuoteLocation",
+  "type": "object",
+  "properties": {
+    "colors": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "processColors"
+          ]
+        },
+        {
+          "type": "number",
+          "min": 0
+        }
+      ]
+    },
+    "colorsNum": {
+      "type": "number",
+      "min": 0
+    },
+    "colorsList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "images": {
+      "type": "number",
+      "min": 0
+    },
+    "isFullColor": {
+      "type": "boolean"
+    },
+    "letterings": {
+      "type": "number",
+      "min": 0
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "designedArea": {
+      "type": "number",
+      "min": 0,
+      "description": "Total area of all decoration objects at the current location (square units). Example: http://img.newtonideas.com/VJlUHYzuBWEyZOobVPVL.png"
+    },
+    "designedAreaRect": {
+      "type": "number",
+      "min": 0,
+      "description": "Area of rectangle, containing all objects in location (square units). Example: http://img.newtonideas.com/E9IwHIeA9biDA0seNsDD.png"
+    },
+    "designedWidth": {
+      "type": "number",
+      "min": 0,
+      "description": "Width of designed area rect in units."
+    },
+    "designedHeight": {
+      "type": "number",
+      "min": 0,
+      "description": "Height of designed area rect in units."
+    },
+    "objectCount": {
+      "type": "number",
+      "min": 0
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "$ref": "QuoteLocationObject.schema.json"
+      }
+    }
+  },
+  "required": [
+    "colors",
+    "colorsNum",
+    "colorsList",
+    "images",
+    "isFullColor",
+    "letterings",
+    "name",
+    "objectCount",
+    "objects"
+  ],
+  "additionalProperties": false
+}

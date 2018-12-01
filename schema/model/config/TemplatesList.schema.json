@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/TemplatesList.schema.json",
+  "title": "TemplatesList",
+  "type": "object",
+  "version": "1.0.0",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to JSON Schema of the supported version"
+    },
+    "templatesList": {
+      "type": "array",
+      "items": {
+        "$ref": "vo/Template.schema.json"
+      }
+    },
+    "templatesCategoriesList": {
+      "items": {
+        "$ref": "vo/TemplateCategory.schema.json"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+  ],
+  "additionalProperties": false
+}

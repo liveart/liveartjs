@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="500px" height="500px" viewBox="0 0 500 500" enable-background="new 0 0 500 500" xml:space="preserve">
+<circle id="bg" fill="#FFFFFF" cx="250" cy="250" r="240"/>
+<path id="border" d="M250,500c-66.771,0-129.583-26.042-176.771-73.229C26.042,379.584,0,316.771,0,250
+	c0-66.771,26.042-129.583,73.229-176.771C120.417,26.042,183.229,0,250,0c66.771,0,129.584,26.042,176.771,73.229
+	C473.958,120.417,500,183.229,500,250c0,66.771-26.042,129.584-73.229,176.771C379.584,473.958,316.771,500,250,500z M250,10.417
+	c-132.083,0-239.583,107.5-239.583,239.583S117.917,489.583,250,489.583S489.583,382.083,489.583,250S382.083,10.417,250,10.417z"/>
+<circle id="la-product-cutmask" fill="#FFFFFF" cx="250" cy="250" r="240"/>
+</svg>

@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/GetQuoteResponse.schema.json",
+  "title": "GetQuoteResponse",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "prices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "price": {
+            "type": "string",
+            "minLength": 1,
+            "examples": [
+              "$59.55"
+            ]
+          },
+          "isTotal": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "label",
+          "price"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "prices"
+  ],
+  "additionalProperties": false
+}

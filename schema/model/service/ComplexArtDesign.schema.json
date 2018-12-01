@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/ComplexArtDesign.schema.json",
+  "title": "ComplexArtDesign",
+  "type": "object",
+  "version": "1.0",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "locations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "editableArea": {
+            "type": "string"
+          },
+          "svg": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "svg"
+        ]
+      }
+    },
+    "fontsCSSUrl": {
+      "type": "string"
+    },
+    "namesNumbers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "numberText": {
+            "type": "string"
+          },
+          "size": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "numberText",
+          "size"
+        ]
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "design": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "required": [
+    "locations"
+  ],
+  "additionalProperties": true
+}

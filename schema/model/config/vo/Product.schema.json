@@ -1,0 +1,407 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/vo/Product.schema.json",
+  "title": "Product",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "unique": true
+    },
+    "categoryId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "defaultTemplateId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "multicolor": {
+      "type": "boolean",
+      "default": false
+    },
+    "colorWheel": {
+      "type": "boolean",
+      "default": false
+    },
+    "colorizableElements": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "styleAttr": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "query": {
+            "type": "string",
+            "minLength": 1
+          },
+          "colors": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "name",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "colorWheel": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "name",
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "colors": {
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "image": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "mask": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "name",
+                "image"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "additionalProperties": false
+      },
+      "type": "array"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locations": {
+      "items": {
+        "properties": {
+          "image": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "editableAreaUnitsRestrictRotation": {
+            "type": "boolean",
+            "default": false
+          },
+          "editableArea": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "editableAreaUnits": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "clipRect": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "mask": {
+            "type": "string",
+            "minLength": 1
+          },
+          "editableAreaUnitsRange": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 3
+            }
+          },
+          "sizeInputs": {
+            "type": "string",
+            "enum": [
+              "enable",
+              "disable",
+              "hide"
+            ]
+          }
+        },
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "image"
+        ]
+      },
+      "type": "array"
+    },
+    "options": {
+      "items": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dropdown",
+              "checkbox"
+            ]
+          },
+          "bindingAttr": {
+            "type": "string",
+            "enum": [
+              "product.size",
+              "none",
+              "locations.enableBack"
+            ]
+          },
+          "relation": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "HasAndBelongsToMany"
+                ]
+              },
+              "value": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "variations": {
+            "items": {
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "type": "object",
+              "additionalProperties": true
+            },
+            "type": "array"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "type": "array"
+    },
+    "relationValues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "key",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "id",
+          "values"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "template": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hideEditableAreaBorder": {
+      "type": "boolean",
+      "default": false
+    },
+    "sizes": {
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "type": "array"
+    },
+    "pantones": {
+      "properties": {
+        "useForDecoration": {
+          "type": "boolean",
+          "default": false
+        },
+        "useForProduct": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "type": "object",
+      "additionalProperties": false
+    },
+    "thumb": {
+      "type": "string",
+      "minLength": 1
+    },
+    "editableAreaSizes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "width": {
+            "type": "number"
+          },
+          "height": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "price": {
+      "type": "string",
+      "minLength": 1
+    },
+    "minDPU": {
+      "type": "number"
+    },
+    "minQuantity": {
+      "type": "number",
+      "default": 1
+    },
+    "enableCopyToBack": {
+      "type": "boolean",
+      "default": false
+    },
+    "colorGroup": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resizable": {
+      "type": "boolean"
+    },
+    "showRuler": {
+      "type": "boolean",
+      "default": false
+    },
+    "namesNumbersEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "categoryId",
+    "locations",
+    "name",
+    "thumb"
+  ],
+  "additionalProperties": false
+}

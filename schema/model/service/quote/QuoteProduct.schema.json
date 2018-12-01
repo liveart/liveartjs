@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/QuoteProduct.schema.json",
+  "title": "QuoteProduct",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "productColors": {
+      "type": "array",
+      "items": {
+        "$ref": "../design/DesignProductColor.schema.json"
+      }
+    },
+    "color": {
+      "type": "string",
+      "minLength": 1
+    },
+    "colorName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "size": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "min": 0
+        },
+        "height": {
+          "type": "number",
+          "min": 0
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "additionalProperties": false
+}

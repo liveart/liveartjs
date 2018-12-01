@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/design/SaveTemplateResponse.schema.json",
+  "title": "SaveTemplateResponse",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "template": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "template"
+  ],
+  "additionalProperties": true
+}

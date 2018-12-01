@@ -1,0 +1,46 @@
+﻿{
+    "$schema": "../schema/model/config/ColorsList.schema.json",
+    "colors": [
+    { "name": "Black", "value": "#000000", "groups": ["group1"] },
+	  { "name": "Dim Gray", "value": "#696969", "groups": ["group1"] },
+    { "name": "Gray", "value": "#808080", "groups": ["group1"] },
+  	{ "name": "Silver", "value": "#C0C0C0", "groups": ["group1"] },
+  	{ "name": "White", "value": "#FFFFFF", "groups": ["group1"] },
+
+    { "name": "Dark Red", "value": "#8B0000", "groups": ["group2"] },
+    { "name": "Red", "value": "#FF0000", "groups": ["group2"] },
+    { "name": "Coral Red", "value": "#FF5252", "groups": ["group2"] },
+    { "name": "Salmon", "value": "#FF7B7B", "groups": ["group2"] },
+    { "name": "Your Pink", "value": "#FFBABA", "groups": ["group2"] },
+
+    { "name": "Dark Green", "value": "#006400", "groups": ["group3", "group5"] },
+	  { "name": "Forest Green", "value": "#228B22", "groups": ["group3", "group5"] },
+    { "name": "Lite Green", "value": "#00AC00", "groups": ["group3", "group5"] },
+    { "name": "Lime", "value": "#00FF00", "groups": ["group3", "group5"] },
+    { "name": "Screamin' Green", "value": "#52FF52", "groups": ["group3", "group5"] },
+
+    { "name": "Regal Blue", "value": "#003A6B", "groups": ["group4", "group5"] },
+    { "name": "Endeavour", "value": "#0058A1", "groups": ["group4", "group5"] },
+    { "name": "Mariner", "value": "#297BC0", "groups": ["group4", "group5"] },
+    { "name": "Havelock Blue", "value": "#539BD7", "groups": ["group4", "group5"] },
+    { "name": "Light Sky Blue", "value": "#85BDEC", "groups": ["group4", "group5"] },
+
+	  { "name": "Orange Red", "value": "#E65100" },
+    { "name": "Dark Orange", "value": "#F57C00" },
+    { "name": "Orange", "value": "#FF9800" },
+    { "name": "Sandy Orange", "value": "#FFB74D" },
+    { "name": "Navajo White", "value": "#FFE0B2" },
+
+    { "name": "Blue Indigo", "value": "#4A148C" },
+  	{ "name": "Dark Violet", "value": "#7B1FA2" },
+    { "name": "Dark Orchid", "value": "#9C27B0" },
+    { "name": "Violet Orchid", "value": "#BA68C8" },
+    { "name": "Plum", "value": "#E1BEE7" },
+
+    { "name": "Aqua Deep", "value": "#004D40" },
+    { "name": "Pine Green", "value": "#00796B" },
+    { "name": "Persian Green", "value": "#009688" },
+    { "name": "Fountain Green", "value": "#4DB6AC" },
+    { "name": "Aqua Island Light", "value": "#B2DFDB" }
+    ]
+}

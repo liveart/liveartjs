@@ -1,0 +1,32 @@
+{
+  "software": [
+    {
+      "name": "PHP",
+      "expectedRange": ">=5.5",
+      "url": "http://php.net/downloads.php",
+      "type": "error"
+    },
+    {
+      "name": "PHP ZIP extension",
+      "expectedRange": ">=0.0.1",
+      "url": "http://pecl.php.net/package/zip",
+      "type": "warning",
+      "errorText": "ZIP archive will not be produced for orders."
+    },
+    {
+      "name": "Inkscape",
+      "expectedRange": ">=0.92.3",
+      "url": "https://inkscape.org",
+      "type": "warning",
+      "errorText": "No PDF and PNG output will be available."
+    },
+    {
+      "name": "Ghostscript",
+      "expectedRange": ">=0.0.1",
+      "url": "https://www.ghostscript.com/download.html",
+      "type": "warning",
+      "errorText": "No PDF output for multiple location products will be available."
+    }
+  ],
+  "configuration": []
+}

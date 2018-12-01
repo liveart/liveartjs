@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/ConfigOptions.schema.json",
+  "title": "ConfigOptions",
+  "type": "object",
+  "properties": {
+    "checkeredBackground": {
+      "type": "boolean",
+      "description": "If enabled, shows checkered background where no product background is rendered. The asset for background is located in assets/img/bg-fill.png.",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "fontsCSSUrl": {
+      "type": "string",
+      "description": "URL to the location of the fonts CSS definitions that will be available for the user. Used for a stand-alone SVG preview (for proper text fonts rendering in browser).",
+      "examples": [
+        "/fonts/fonts.css"
+      ],
+      "default": "\"\""
+    },
+    "minDPU": {
+      "type": "number",
+      "description": "Warning message that will be shown to a user on raster image resize more than safe dimensions to meet suggested print quality standards. Also this feature requires *editableArea* and *editableAreaUnits* (see *Product Location Object*) for each product location to use this feature (for correct unit/pixel ratio). Warning message is configured in html (‘#dpu-exceeded-popup’). If user ignores such warning and continues design editing - on Place Order will fire additional pop-up. Also may be re-defined for certain products (see *Product Object*).",
+      "examples": [
+        0
+      ],
+      "default": 0
+    },
+    "showProductSelector": {
+      "type": "boolean",
+      "description": "Defines whether Select Product form is shown. If false, make sure you indicate the *defaultProductId* to preload the product.",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "showUploadedColorsDialog": {
+      "type": "boolean",
+      "description": "Defines whether to show a pop-up with color choices for uploaded image (default palette and 'Process Colors' checkbox). If *false*, uploaded images are treated as 'Process Colors'.",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "unit": {
+      "type": "string",
+      "description": "Units shown for custom sizes products.",
+      "examples": [
+        "in"
+      ],
+      "default": "\"\""
+    },
+    "unit2": {
+      "type": "string",
+      "description": "Units shown for custom sizes products.",
+      "examples": [
+        "ft"
+      ],
+      "default": "\"\""
+    },
+    "unitConversionMult": {
+      "type": "number",
+      "description": "Indicates respective multiplier for proper conversion of unit to unit2.",
+      "examples": [
+        10
+      ],
+      "default": 10
+    },
+    "enableQuantity": {
+      "type": "boolean",
+      "description": "Defines whether quantity will be enabled inside designer.",
+      "examples": [
+        true
+      ],
+      "default": true
+    },
+    "enableCopyToBack": {
+      "type": "boolean",
+      "description": "Defines whether 'Copy To Back' button will be enabled inside designer.",
+      "examples": [
+        false
+      ],
+      "default": false,
+      "experimental": {
+        "description": "Experimental property from SDJS project"
+      }
+    },
+    "snapConfigs": {
+      "type": "object",
+      "properties": {
+        "enableSnapGuides": {
+          "type": "boolean",
+          "description": "Defines weather snapping to guide lines is turned on.",
+          "examples": [
+            true
+          ],
+          "default": true
+        },
+        "snapToEditableArea": {
+          "type": "boolean",
+          "description": "Defines weather snapping to editable area is turned on.",
+          "examples": [
+            true
+          ],
+          "default": true
+        },
+        "snapToObjects": {
+          "type": "boolean",
+          "description": "Defines weather snapping to other objects is turned on.",
+          "examples": [
+            true
+          ],
+          "default": true
+        },
+        "snapRotation": {
+          "type": "boolean",
+          "description": "Defines weather rotation snappin is turned on",
+          "examples": [
+            true
+          ],
+          "default": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "zoomConfigs": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Defines whether zoom tool will be enabled inside designer.",
+          "examples": [
+            true
+          ],
+          "default": false
+        },
+        "min": {
+          "type": "number",
+          "description": "Defines min value for zoom control, will be used as percents.",
+          "examples": [
+            50
+          ],
+          "default": 50
+        },
+        "max": {
+          "type": "number",
+          "description": "Defines max value for zoom control, will be used as percents.",
+          "examples": [
+            150
+          ],
+          "default": 150
+        },
+        "step": {
+          "type": "number",
+          "description": "Defines step for zoom control, will be used as percents.",
+          "examples": [
+            10
+          ],
+          "default": 10
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "showUploadedColorsDialog",
+    "showProductSelector",
+    "checkeredBackground",
+    "minDPU",
+    "fontsCSSUrl",
+    "unitConversionMult",
+    "unit2",
+    "unit"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/service/quote/QuoteOption.schema.json",
+  "title": "QuoteOption",
+  "type": "object",
+  "properties": {
+    "optionId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "optionName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "variationId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "variationName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "optionId",
+    "optionName"
+  ],
+  "additionalProperties": false
+}

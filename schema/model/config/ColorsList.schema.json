@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$id": "https://liveart/config/ColorsList.schema.json",
+  "title": "ColorsList",
+  "version": "1.1.0",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to JSON Schema of the supported version"
+    },
+    "colors": {
+      "type": "array",
+      "items": {
+        "$ref": "vo/Color.schema.json"
+      }
+    }
+  },
+  "required": [
+    "colors"
+  ],
+  "additionalProperties": false
+}
