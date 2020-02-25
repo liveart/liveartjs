@@ -296,7 +296,7 @@
                             <div data-bind="if: selectedProductVO().multicolor()">
                                 <ul class="product-colorPickers-list clearfix"
                                     data-bind="foreach: { data: selectedProductColorVO().colorizeList, afterAdd: selectedProductColorVO().createColorPicker }">
-                                    <li data-bind="css: {inline: compactUI, block: !compactUI()}">
+                                    <li data-bind="css: computeClass">
                                         <a class="liveart-color-picker-btn">
                                             <span data-bind="text: name"></span>
                                             <input type="text" class="liveart-color-picker dropup-color-picker"
