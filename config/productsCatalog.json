@@ -2024,6 +2024,374 @@
           ]
         }
       ]
-    }
+    },
+    {
+        "id": "r4",
+        "name": "Face masks",
+        "thumb": "products/mask/thumb/mask_cat_thumb.png",
+        "products": [
+          {
+            "id": "61",
+            "categoryId": "r4",
+            "name": "Face mask",
+            "description": "Simple face mask",
+            "thumb": "products/mask/thumb/simple_mask_thumb.png",
+            "namesNumbersEnabled": false,
+            "hideEditableAreaBorder": true,
+            "minQuantity": 5,
+            "minDPU": 75,
+            "resizable": true,
+            "editableAreaSizes": [
+              {
+                "width": 5.87,
+                "height": 4.5
+              }
+            ],
+            "locations": [
+              {
+                "name": "Front",
+                "image": "products/mask/simple_mask.svg"
+              }
+            ],
+            "colors": [
+              {
+                "name": "White",
+                "value": "#FFF"
+              },
+              {
+                "name": "Black",
+                "value": "#000"
+              },
+              {
+                "name": "Steel Blue",
+                "value": "#4682B4"
+              },
+              {
+                "name": "Firebrick",
+                "value": "#B22222"
+              },
+              {
+                "name": "Maroon",
+                "value": "#B03060"
+              },
+              {
+                "name": "Navajo White 4",
+                "value": "#8B795E"
+              },
+              {
+                "name": "Dark Olive Green 4",
+                "value": "#6E8B3D"
+              },
+              {
+                "name": "Red",
+                "value": "#E3000F"
+              },
+              {
+                "name": "Forest Green",
+                "value": "#00923A"
+              },
+              {
+                "name": "Siena",
+                "value": "#EE7200"
+              }
+            ],
+            "sizes": [
+              "M"
+            ]
+          },
+          {
+            "id": "62",
+            "categoryId": "r4",
+            "name": "Face mask",
+            "description": "Face mask",
+            "thumb": "products/mask/thumb/face_mask_thumb.png",
+            "namesNumbersEnabled": false,
+            "hideEditableAreaBorder": true,
+            "minQuantity": 5,
+            "resizable": true,
+            "minDPU": 75,
+            "editableAreaSizes": [
+              {
+                "width": 6.2,
+                "height": 5.03
+              }
+            ],
+            "locations": [
+              {
+                "name": "Front",
+                "image": "products/mask/face_mask.svg"
+              }
+            ],
+            "colors": [
+              {
+                "name": "White",
+                "value": "#FFF"
+              },
+              {
+                "name": "Black",
+                "value": "#000"
+              },
+              {
+                "name": "Steel Blue",
+                "value": "#4682B4"
+              },
+              {
+                "name": "Firebrick",
+                "value": "#B22222"
+              },
+              {
+                "name": "Maroon",
+                "value": "#B03060"
+              },
+              {
+                "name": "Navajo White 4",
+                "value": "#8B795E"
+              },
+              {
+                "name": "Dark Olive Green 4",
+                "value": "#6E8B3D"
+              },
+              {
+                "name": "Red",
+                "value": "#E3000F"
+              },
+              {
+                "name": "Forest Green",
+                "value": "#00923A"
+              },
+              {
+                "name": "Siena",
+                "value": "#EE7200"
+              },
+              {
+                "name": "Dark Brown",
+                "value": "#271f11"
+              }
+            ],
+            "sizes": [
+              "M"
+            ]
+          },
+          {
+            "id": "63",
+            "categoryId": "r4",
+            "name": "Face mask with valve",
+            "description": "Face mask with valve",
+            "thumb": "products/mask/thumb/face_mask_valve_thumb.png",
+            "namesNumbersEnabled": false,
+            "hideEditableAreaBorder": true,
+            "minQuantity": 5,
+            "minDPU": 75,
+            "resizable": true,
+            "editableAreaSizes": [
+              {
+                "width": 6.2,
+                "height": 4.8
+              }
+            ],
+            "locations": [
+              {
+                "name": "Front",
+                "image": "products/mask/face_mask_valve.svg"
+              }
+            ],
+            "colors": [
+              {
+                "name": "White",
+                "value": "#FFF"
+              },
+              {
+                "name": "Black",
+                "value": "#000"
+              },
+              {
+                "name": "Steel Blue",
+                "value": "#4682B4"
+              },
+              {
+                "name": "Firebrick",
+                "value": "#B22222"
+              },
+              {
+                "name": "Maroon",
+                "value": "#B03060"
+              },
+              {
+                "name": "Navajo White 4",
+                "value": "#8B795E"
+              },
+              {
+                "name": "Dark Olive Green 4",
+                "value": "#6E8B3D"
+              },
+              {
+                "name": "Red",
+                "value": "#E3000F"
+              },
+              {
+                "name": "Forest Green",
+                "value": "#00923A"
+              },
+              {
+                "name": "Siena",
+                "value": "#EE7200"
+              },
+              {
+                "name": "Dark Brown",
+                "value": "#271f11"
+              }
+            ],
+            "sizes": [
+              "M"
+            ]
+          },
+          {
+            "id": "64",
+            "categoryId": "r4",
+            "name": "Face mask",
+            "description": "Simple face mask",
+            "thumb": "products/mask/thumb/simple_mask2_thumb.png",
+            "namesNumbersEnabled": false,
+            "hideEditableAreaBorder": true,
+            "minQuantity": 5,
+            "minDPU": 75,
+            "resizable": true,
+            "editableAreaSizes": [
+              {
+                "width": 6.2,
+                "height": 4.5
+              }
+            ],
+            "locations": [
+              {
+                "name": "Front",
+                "image": "products/mask/simple_mask2.svg"
+              }
+            ],
+            "colors": [
+              {
+                "name": "White",
+                "value": "#FFF"
+              },
+              {
+                "name": "Black",
+                "value": "#000"
+              },
+              {
+                "name": "Steel Blue",
+                "value": "#4682B4"
+              },
+              {
+                "name": "Firebrick",
+                "value": "#B22222"
+              },
+              {
+                "name": "Maroon",
+                "value": "#B03060"
+              },
+              {
+                "name": "Navajo White 4",
+                "value": "#8B795E"
+              },
+              {
+                "name": "Dark Olive Green 4",
+                "value": "#6E8B3D"
+              },
+              {
+                "name": "Red",
+                "value": "#E3000F"
+              },
+              {
+                "name": "Forest Green",
+                "value": "#00923A"
+              },
+              {
+                "name": "Siena",
+                "value": "#EE7200"
+              },
+              {
+                "name": "Dark Brown",
+                "value": "#271f11"
+              }
+            ],
+            "sizes": [
+              "M"
+            ]
+          },
+          {
+            "id": "65",
+            "categoryId": "r4",
+            "name": "Face mask with valves",
+            "description": "Face mask with valves",
+            "thumb": "products/mask/thumb/face_mask_valves_thumb.png",
+            "namesNumbersEnabled": false,
+            "hideEditableAreaBorder": true,
+            "minQuantity": 5,
+            "minDPU": 75,
+            "resizable": true,
+            "editableAreaSizes": [
+              {
+                "width": 6.2,
+                "height": 5
+              }
+            ],
+            "locations": [
+              {
+                "name": "Front",
+                "image": "products/mask/face_mask_valves.svg"
+              }
+            ],
+            "colors": [
+              {
+                "name": "White",
+                "value": "#FFF"
+              },
+              {
+                "name": "Black",
+                "value": "#000"
+              },
+              {
+                "name": "Steel Blue",
+                "value": "#4682B4"
+              },
+              {
+                "name": "Firebrick",
+                "value": "#B22222"
+              },
+              {
+                "name": "Maroon",
+                "value": "#B03060"
+              },
+              {
+                "name": "Navajo White 4",
+                "value": "#8B795E"
+              },
+              {
+                "name": "Dark Olive Green 4",
+                "value": "#6E8B3D"
+              },
+              {
+                "name": "Red",
+                "value": "#E3000F"
+              },
+              {
+                "name": "Forest Green",
+                "value": "#00923A"
+              },
+              {
+                "name": "Siena",
+                "value": "#EE7200"
+              },
+              {
+                "name": "Dark Brown",
+                "value": "#271f11"
+              }
+            ],
+            "sizes": [
+              "M"
+            ]
+          }
+        ]
+      }
   ]
 }
