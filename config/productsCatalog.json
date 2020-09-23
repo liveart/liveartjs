@@ -501,9 +501,376 @@
         },
         {
           "id": "2",
-          "name": "Multicolor Uniform",
+          "name": "Uniforms",
           "thumb": "products/uniform/football/preview.png",
           "products": [
+            {
+              "id": "23",
+              "categoryId": "2",
+              "name": "Football Jersey",
+              "description": "A perfect football uniform",
+              "thumb": "products/uniform/football/preview.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Front",
+                  "image": "products/uniform/football/front.svg",
+                  "editableArea": [
+                    220,
+                    60,
+                    380,
+                    500
+                  ]
+                },
+                {
+                  "name": "Back",
+                  "image": "products/uniform/football/back.svg",
+                  "editableArea": [
+                    220,
+                    60,
+                    380,
+                    500
+                  ]
+                },
+                {
+                  "name": "Socks",
+                  "image": "products/uniform/football/socks.svg",
+                  "editableArea": [
+                    96,
+                    38,
+                    466,
+                    484
+                  ]
+                }
+              ],
+              "colors": [
+                {
+                  "name": "White",
+                  "value": "#FFF"
+                },
+                {
+                  "name": "Black",
+                  "value": "#000"
+                },
+                {
+                  "name": "Steel Blue",
+                  "value": "#4682B4"
+                },
+                {
+                  "name": "Firebrick",
+                  "value": "#B22222"
+                },
+                {
+                  "name": "Maroon",
+                  "value": "#B03060"
+                },
+                {
+                  "name": "Navajo White 4",
+                  "value": "#8B795E"
+                },
+                {
+                  "name": "Dark Olive Green 4",
+                  "value": "#6E8B3D"
+                },
+                {
+                  "name": "Red",
+                  "value": "#E3000F"
+                },
+                {
+                  "name": "Forest Green",
+                  "value": "#00923A"
+                },
+                {
+                  "name": "Siena",
+                  "value": "#EE7200"
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "24",
+              "categoryId": "2",
+              "name": "Basketball Jersey",
+              "description": "A perfect basketball uniform",
+              "thumb": "products/uniform/basketball/preview.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Top F",
+                  "image": "products/uniform/basketball/front-top.svg",
+                  "editableArea": [
+                    40,
+                    80,
+                    340,
+                    500
+                  ]
+                },
+                {
+                  "name": "Top B",
+                  "image": "products/uniform/basketball/back-top.svg",
+                  "editableArea": [
+                    40,
+                    80,
+                    340,
+                    500
+                  ]
+                },
+                {
+                  "name": "Bottom F",
+                  "image": "products/uniform/basketball/front-bottom.svg",
+                  "editableArea": [
+                    40,
+                    140,
+                    350,
+                    390
+                  ]
+                },
+                {
+                  "name": "Bottom B",
+                  "image": "products/uniform/basketball/front-bottom.svg",
+                  "editableArea": [
+                    40,
+                    140,
+                    350,
+                    390
+                  ]
+                },
+                {
+                  "name": "Bottom L",
+                  "image": "products/uniform/basketball/side-bottom.svg",
+                  "editableArea": [
+                    90,
+                    140,
+                    290,
+                    390
+                  ]
+                },
+                {
+                  "name": "Bottom R",
+                  "image": "products/uniform/basketball/right-bottom.svg",
+                  "editableArea": [
+                    90,
+                    140,
+                    290,
+                    390
+                  ]
+                }
+              ],
+              "colors": [
+                {
+                  "name": "White",
+                  "value": "#FFF"
+                },
+                {
+                  "name": "Black",
+                  "value": "#000"
+                },
+                {
+                  "name": "Steel Blue",
+                  "value": "#4682B4"
+                },
+                {
+                  "name": "Firebrick",
+                  "value": "#B22222"
+                },
+                {
+                  "name": "Maroon",
+                  "value": "#B03060"
+                },
+                {
+                  "name": "Navajo White 4",
+                  "value": "#8B795E"
+                },
+                {
+                  "name": "Dark Olive Green 4",
+                  "value": "#6E8B3D"
+                },
+                {
+                  "name": "Red",
+                  "value": "#E3000F"
+                },
+                {
+                  "name": "Forest Green",
+                  "value": "#00923A"
+                },
+                {
+                  "name": "Siena",
+                  "value": "#EE7200"
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "25",
+              "categoryId": "2",
+              "name": "Tennis (Men)",
+              "description": "A perfect tennis uniform",
+              "thumb": "products/uniform/tennis/man_thumb.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Main",
+                  "image": "products/uniform/tennis/tennis_man.svg",
+                  "editableArea": [
+                    24,
+                    5,
+                    567,
+                    525
+                  ]
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "26",
+              "categoryId": "2",
+              "name": "Tennis (Women)",
+              "description": "A perfect tennis uniform",
+              "thumb": "products/uniform/tennis/woman_thumb.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Main",
+                  "image": "products/uniform/tennis/tennis_woman.svg",
+                  "editableArea": [
+                    75,
+                    4,
+                    514,
+                    525
+                  ]
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "27",
+              "categoryId": "2",
+              "name": "Baseball",
+              "description": "A perfect baseball uniform",
+              "thumb": "products/uniform/baseball/thumb.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Front",
+                  "image": "products/uniform/baseball/baseball_front.svg",
+                  "editableArea": [
+                    0,
+                    0,
+                    590,
+                    530
+                  ]
+                },
+                {
+                  "name": "Back",
+                  "image": "products/uniform/baseball/baseball_back.svg",
+                  "editableArea": [
+                    0,
+                    0,
+                    590,
+                    530
+                  ]
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "28",
+              "categoryId": "2",
+              "name": "American Football",
+              "description": "A perfect american football uniform",
+              "thumb": "products/uniform/am_football/thumb.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Main",
+                  "image": "products/uniform/am_football/american_football.svg",
+                  "editableArea": [
+                    59,
+                    5,
+                    472,
+                    520
+                  ]
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
+            {
+              "id": "29",
+              "categoryId": "2",
+              "name": "Cycling",
+              "description": "A perfect cycling uniform",
+              "thumb": "products/uniform/cycling/thumb.png",
+              "hideEditableAreaBorder": true,
+              "namesNumbersEnabled": true,
+              "locations": [
+                {
+                  "name": "Main",
+                  "image": "products/uniform/cycling/cycling.svg",
+                  "editableArea": [
+                    5,
+                    41,
+                    586,
+                    489
+                  ]
+                }
+              ],
+              "sizes": [
+                "S",
+                "M",
+                "L",
+                "XL",
+                "XXL",
+                "XXXL"
+              ]
+            },
             {
               "id": "21",
               "categoryId": "2",
@@ -802,218 +1169,6 @@
                   "styleAttr": "fill",
                   "query": "#la_x7C_Third_Color_x7C_third"
                 }
-              ]
-            },
-            {
-              "id": "23",
-              "categoryId": "2",
-              "name": "Football Jersey",
-              "description": "A perfect football uniform",
-              "thumb": "products/uniform/football/preview.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/uniform/football/front.svg",
-                  "editableArea": [
-                    220,
-                    60,
-                    380,
-                    500
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/uniform/football/back.svg",
-                  "editableArea": [
-                    220,
-                    60,
-                    380,
-                    500
-                  ]
-                },
-                {
-                  "name": "Socks",
-                  "image": "products/uniform/football/socks.svg",
-                  "editableArea": [
-                    96,
-                    38,
-                    466,
-                    484
-                  ]
-                }
-              ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "24",
-              "categoryId": "2",
-              "name": "Basketball Jersey",
-              "description": "A perfect basketball uniform",
-              "thumb": "products/uniform/basketball/preview.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Top F",
-                  "image": "products/uniform/basketball/front-top.svg",
-                  "editableArea": [
-                    40,
-                    80,
-                    340,
-                    500
-                  ]
-                },
-                {
-                  "name": "Top B",
-                  "image": "products/uniform/basketball/back-top.svg",
-                  "editableArea": [
-                    40,
-                    80,
-                    340,
-                    500
-                  ]
-                },
-                {
-                  "name": "Bottom F",
-                  "image": "products/uniform/basketball/front-bottom.svg",
-                  "editableArea": [
-                    40,
-                    140,
-                    350,
-                    390
-                  ]
-                },
-                {
-                  "name": "Bottom B",
-                  "image": "products/uniform/basketball/front-bottom.svg",
-                  "editableArea": [
-                    40,
-                    140,
-                    350,
-                    390
-                  ]
-                },
-                {
-                  "name": "Bottom L",
-                  "image": "products/uniform/basketball/side-bottom.svg",
-                  "editableArea": [
-                    90,
-                    140,
-                    290,
-                    390
-                  ]
-                },
-                {
-                  "name": "Bottom R",
-                  "image": "products/uniform/basketball/right-bottom.svg",
-                  "editableArea": [
-                    90,
-                    140,
-                    290,
-                    390
-                  ]
-                }
-              ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
               ]
             }
           ]
