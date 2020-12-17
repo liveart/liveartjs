@@ -15,7 +15,7 @@
     },
     {
       "name": "Inkscape",
-      "expectedRange": ">=0.92.3",
+      "expectedRange": "0.92.3 - 0.92.5",
       "url": "https://inkscape.org",
       "type": "warning",
       "errorText": "No PDF and PNG output will be available."

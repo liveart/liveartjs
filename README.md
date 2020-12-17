@@ -19,11 +19,11 @@ Despite LiveArt is a fully client-side component, it is provided with basic back
         - Run cmd `php -version` to check manually
     - _What if I ignore the installation?_
         - The component will not launch as it requires sample PHP services to function. Please refer to [v1.0.0 migration guide](https://liveart.uservoice.com/knowledgebase/articles/1839187) for more information.
-2. [Inkscape](https://inkscape.org) 0.92.3+
+2. [Inkscape](https://inkscape.org) 0.92.3 - 0.92.5
     - Needed to proceed with the order output generation
     - Ensure it is added to PATH
         - Run cmd `inkscape --version` to check manually
-    - _What if I ignore the installation?_
+    - _What if I ignore the installation or install a different version?_
         - No PNG/PDF production output will be generated 
 3. [Ghostscript](https://www.ghostscript.com/download.html)
     - Needed to concatenate single-file PDF if multiple locations were designed
