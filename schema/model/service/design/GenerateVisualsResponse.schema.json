@@ -2,48 +2,38 @@
   "$schema": "http://json-schema.org/draft-06/schema#",
   "$id": "https://liveart/service/design/GenerateVisualsResponse.schema.json",
   "title": "GenerateVisualsResponse",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "object",
   "properties": {
     "$schema": {
       "type": "string",
       "description": "Reference to JSON Schema of the supported version"
     },
-    "visuals": {
+    "id": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "files": {
       "type": "object",
-      "properties": {
-        "zip": {
-          "type": "string"
-        },
-        "previews": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "minLength": 1
-              },
-              "files": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            },
-            "additionalProperties": false
-          }
-        },
-        "error": {
-          "type": "string"
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
         }
-      },
-      "additionalProperties": false
+      }
+    },
+    "designId": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
     }
   },
   "required": [
-    "visuals"
+    "files"
   ],
   "additionalProperties": false
 }

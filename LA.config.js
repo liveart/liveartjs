@@ -1,5 +1,5 @@
 /**
- * LIVEART INITALIZATION BEGINS HERE
+ * LIVEART INITIALIZATION BEGINS HERE
  */
 
 //Use this to receive liveArt debug info to console
@@ -22,29 +22,34 @@ var quantities = decodeURI((new RegExp("pa_quantities" + '=' + '(.+?)(&|$)').exe
 laOptions.defaultProductAttributes.sizeUnits = JSON.parse(decodeURIComponent(sizeUnits));
 laOptions.defaultProductAttributes.quantities = JSON.parse(decodeURIComponent(quantities));
 
-var configFile = decodeURI((new RegExp("config" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
-if (configFile && configFile !== "null") {
-    configFile = decodeURIComponent(configFile);
+// `configPath` - alternate config path to override default one
+var configPath = decodeURI((new RegExp("config" + '=' + '(.+?)(&|$)').exec(location.search) || [, null])[1]);
+if (configPath && configPath !== "null") {
+    configPath = decodeURIComponent(configPath);
 } else {
-    configFile = null;
+    configPath = null;
+}
+
+//to be replaced by nginx (docker) to use in LACP stack
+var public_path = '_PUBLIC_ADDRESS_';
+if (!configPath && !public_path.includes('PUBLIC_ADDRESS')) {
+    configPath = `${public_path}/lacp/api/liveart/configuration`;
 }
 
 //Designer mode param. Enabling pre-made template or design idea mode.
 laOptions.mode = getQueryParam("mode");
 
-//You can provide placeOrderHandler here
-//optional custom handler for place order
-//format: `function (ordered_design_id: string)`
-laOptions.placeOrderHandler = null;
 //optional translation
 laOptions.translation = self.laTranslation.dictionary;
 
-//Initing liveArt
+//Init liveArt
 //controlsUpdateHandler() defined in LA.js
-liveArt.init(document.getElementById('canvas-container'), configObj || configFile || "config/config.json", self.controlsUpdateHandler, laOptions, uiHelpers);
+
+var defaultConfig = configObj || configPath || 'config/config.json';
+liveArtLoader.init(document.getElementById('canvas-container'), defaultConfig, self.controlsUpdateHandler, laOptions, uiHelpers);
 
 /**
- * LIVEART INITALIZATION ENDS HERE
+ * LIVEART INITIALIZATION ENDS HERE
  */
 
 // liveart-template-saved event will be triggered on save template

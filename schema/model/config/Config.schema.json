@@ -2,16 +2,17 @@
   "$schema": "http://json-schema.org/draft-06/schema#",
   "$id": "https://liveart/config/Config.schema.json",
   "title": "Config",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Both for its main configuration file and resources configurations such as products and gallery images, LiveArt JS uses JSON format. The primary configuration file contains all the necessary options, as well as REST-like endpoints for server-side integration.",
   "properties": {
     "$schema": {
       "type": "string",
       "description": "Reference to JSON Schema of the supported version"
     },
-    "base": {
+    "baseConfigUrl": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "description": "Config URL that will be used as a base for the config."
     },
     "assetsUrl": {
       "type": "string",

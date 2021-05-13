@@ -152,7 +152,8 @@
               "type": "number"
             },
             "minItems": 4,
-            "maxItems": 4
+            "maxItems": 4,
+            "description": "Editable area coordinates in image coordinate system. Format: [TL.x, TL.y, BR.x, BR.y]. If product is non-resizable, value is translated into canvas coordinate system. If product is resizable, value is used as is."
           },
           "editableAreaUnits": {
             "type": "array",

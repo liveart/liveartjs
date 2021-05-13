@@ -3,1188 +3,752 @@
     "productCategoriesList": [
     {
       "id": "r1",
-      "name": "Clothing",
+      "name": "Apparel",
       "thumb": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
-      "categories": [
+      "products": [
         {
-          "id": "1",
-          "name": "Apparel",
-          "thumb": "products/cool-t-shirt/thumbs/apparel_cat.jpg",
-          "products": [
+          "id": "12",
+          "name": "Cap",
+          "categoryId": "r1",
+          "description": "A vector multicolor image, one colorizable area, no sizes",
+          "minQuantity": 3,
+          "minDPU": 200,
+          "thumb": "products/cap/thumb/cap.jpg",
+          "locations": [
             {
-              "id": "11",
-              "categoryId": "1",
-              "name": "T-shirt",
-              "description": "<ul><li>A perfect tee for hipsters</li><li>4.8x8.2 (4.8x8.6)</li><li>vector multicolor product images</li><li>clip-rect</li><li>150DPU</li></ul>",
-              "data": {
-                "price": "29",
-                "material": "Cotton"
-              },
-              "thumb": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
-              "namesNumbersEnabled": true,
-              "minQuantity": 5,
-              "minDPU": 50,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/cool-t-shirt/t-shirt_front.svg",
-                  "editableArea": [
-                    170,
-                    75,
-                    410,
-                    475
-                  ],
-                  "editableAreaUnits": [
-                    4.8,
-                    8
-                  ],
-                  "clipRect": [
-                    170,
-                    75,
-                    410,
-                    475
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/cool-t-shirt/t-shirt_back.svg",
-                  "editableArea": [
-                    170,
-                    75,
-                    410,
-                    475
-                  ],
-                  "editableAreaUnits": [
-                    4.8,
-                    8
-                  ],
-                  "clipRect": [
-                    170,
-                    75,
-                    410,
-                    475
-                  ]
-                }
+              "name": "Front",
+              "image": "products/cap/bg.svg",
+              "mask": "products/cap/cap.png"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ],
+          "sizes": [
+            "Size 1",
+            "Size 2"
+          ]
+        },
+        {
+          "id": "11a",
+          "categoryId": "r1",
+          "name": "Cool Tee 1",
+          "description": "A perfect sample tee, raster images",
+          "data": {
+            "price": "29"
+          },
+          "thumb": "products/cool-t-shirt/thumbs/t-shirt-yellow.png",
+          "minQuantity": 7,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg",
+              "editableArea": [
+                185,
+                70,
+                410,
+                520
               ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "XS",
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
+              "editableAreaUnits": [
+                5,
+                10
               ]
             },
             {
-              "id": "11a",
-              "categoryId": "1",
-              "name": "Cool Tee 1",
-              "description": "A perfect sample tee, raster images",
-              "data": {
-                "price": "29"
-              },
-              "thumb": "products/cool-t-shirt/thumbs/t-shirt-yellow.png",
-              "minQuantity": 7,
-              "locations": [
+              "name": "Back",
+              "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg",
+              "editableArea": [
+                185,
+                70,
+                410,
+                520
+              ],
+              "editableAreaUnits": [
+                5,
+                10
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "Aero",
+              "value": "#9cb8d0",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Aero_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Aero_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "White",
+              "value": "#FFF",
+              "location": [
                 {
                   "name": "Front",
                   "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg",
-                  "editableArea": [
-                    185,
-                    70,
-                    410,
-                    520
-                  ],
-                  "editableAreaUnits": [
-                    5,
-                    10
-                  ]
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                 },
                 {
                   "name": "Back",
                   "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg",
-                  "editableArea": [
-                    185,
-                    70,
-                    410,
-                    520
-                  ],
-                  "editableAreaUnits": [
-                    5,
-                    10
-                  ]
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                 }
-              ],
-              "colors": [
-                {
-                  "name": "Aero",
-                  "value": "#9cb8d0",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aero_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "White",
-                  "value": "#FFF",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_White_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_White_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Alizarin",
-                  "value": "#d76366",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Aqua",
-                  "value": "#529993",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Aqua_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Cherry",
-                  "value": "#704b52",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Cherry_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#529a51",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Forest_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Gray",
-                  "value": "#8d8d8d",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Gray_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Indigo",
-                  "value": "#815ac7",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Indigo_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Olive",
-                  "value": "#a4ab5e",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Olive_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Yellow",
-                  "value": "#d98c46",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Orange_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                },
-                {
-                  "name": "Pink",
-                  "value": "#dd7ca5",
-                  "location": [
-                    {
-                      "name": "Front",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_front.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
-                    },
-                    {
-                      "name": "Back",
-                      "image": "products/cool-t-shirt/cool-t-shirt_Pink_back.jpg",
-                      "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
-                    }
-                  ]
-                }
-              ],
-              "sizes": [
-                "XS",
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
               ]
             },
             {
-              "id": "12",
-              "name": "Cap",
-              "categoryId": "1",
-              "description": "A vector multicolor image, one colorizable area, no sizes",
-              "minQuantity": 3,
-              "minDPU": 1,
-              "thumb": "products/cap/thumb/cap.jpg",
-              "locations": [
+              "name": "Alizarin",
+              "value": "#d76366",
+              "location": [
                 {
                   "name": "Front",
-                  "image": "products/cap/bg.svg",
-                  "mask": "products/cap/cap.png"
-                }
-              ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "Size 1",
-                "Size 2"
-              ]
-            },
-            {
-              "id": "13",
-              "name": "Hoodie",
-              "categoryId": "1",
-              "description": "A vector multicolor image, one colorizable area, no sizes",
-              "minQuantity": 10,
-              "thumb": "products/hoodie/hoodie_front.svg",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/hoodie/hoodie_front.svg",
-                  "editableArea": [
-                    205,
-                    118,
-                    390,
-                    470
-                  ],
-                  "clipRect": [
-                    205,
-                    118,
-                    390,
-                    470
-                  ]
+                  "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                 },
                 {
                   "name": "Back",
-                  "image": "products/hoodie/hoodie_back.svg",
-                  "editableArea": [
-                    205,
-                    118,
-                    390,
-                    470
-                  ],
-                  "clipRect": [
-                    205,
-                    118,
-                    390,
-                    470
-                  ]
+                  "image": "products/cool-t-shirt/cool-t-shirt_Alizarin_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                 }
-              ],
-              "colors": [
+              ]
+            },
+            {
+              "name": "Aqua",
+              "value": "#529993",
+              "location": [
                 {
-                  "name": "White",
-                  "value": "#FFF"
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Aqua_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
                 },
                 {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Aqua_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
                 }
-              ],
-              "sizes": [
-                "M",
-                "L",
-                "X"
+              ]
+            },
+            {
+              "name": "Cherry",
+              "value": "#704b52",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Cherry_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Cherry_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "Forest Green",
+              "value": "#529a51",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Forest_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Forest_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "Gray",
+              "value": "#8d8d8d",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Gray_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Gray_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "Indigo",
+              "value": "#815ac7",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Indigo_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Indigo_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "Olive",
+              "value": "#a4ab5e",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Olive_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Olive_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "Yellow",
+              "value": "#d98c46",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Orange_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Orange_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
+              ]
+            },
+            {
+              "name": "Pink",
+              "value": "#dd7ca5",
+              "location": [
+                {
+                  "name": "Front",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Pink_front.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_front.png"
+                },
+                {
+                  "name": "Back",
+                  "image": "products/cool-t-shirt/cool-t-shirt_Pink_back.jpg",
+                  "mask": "products/cool-t-shirt/cool-t-shirt_mask_back.png"
+                }
               ]
             }
+          ],
+          "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
           ]
         },
         {
-          "id": "2",
-          "name": "Uniforms",
-          "thumb": "products/uniform/football/preview.png",
-          "products": [
+          "id": "13",
+          "name": "Hoodie",
+          "categoryId": "r1",
+          "description": "A vector multicolor image, one colorizable area, no sizes",
+          "minQuantity": 10,
+          "thumb": "products/hoodie/hoodie_front.svg",
+          "locations": [
             {
-              "id": "23",
-              "categoryId": "2",
-              "name": "Football Jersey",
-              "description": "A perfect football uniform",
-              "thumb": "products/uniform/football/preview.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/uniform/football/front.svg",
-                  "editableArea": [
-                    220,
-                    60,
-                    380,
-                    500
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/uniform/football/back.svg",
-                  "editableArea": [
-                    220,
-                    60,
-                    380,
-                    500
-                  ]
-                },
-                {
-                  "name": "Socks",
-                  "image": "products/uniform/football/socks.svg",
-                  "editableArea": [
-                    96,
-                    38,
-                    466,
-                    484
-                  ]
-                }
+              "name": "Front",
+              "image": "products/hoodie/hoodie_front.svg",
+              "editableArea": [
+                205,
+                118,
+                390,
+                470
               ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
+              "clipRect": [
+                205,
+                118,
+                390,
+                470
               ]
             },
             {
-              "id": "24",
-              "categoryId": "2",
-              "name": "Basketball Jersey",
-              "description": "A perfect basketball uniform",
-              "thumb": "products/uniform/basketball/preview.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Top F",
-                  "image": "products/uniform/basketball/front-top.svg",
-                  "editableArea": [
-                    40,
-                    80,
-                    340,
-                    500
-                  ]
-                },
-                {
-                  "name": "Top B",
-                  "image": "products/uniform/basketball/back-top.svg",
-                  "editableArea": [
-                    40,
-                    80,
-                    340,
-                    500
-                  ]
-                },
-                {
-                  "name": "Bottom F",
-                  "image": "products/uniform/basketball/front-bottom.svg",
-                  "editableArea": [
-                    40,
-                    140,
-                    350,
-                    390
-                  ]
-                },
-                {
-                  "name": "Bottom B",
-                  "image": "products/uniform/basketball/front-bottom.svg",
-                  "editableArea": [
-                    40,
-                    140,
-                    350,
-                    390
-                  ]
-                },
-                {
-                  "name": "Bottom L",
-                  "image": "products/uniform/basketball/side-bottom.svg",
-                  "editableArea": [
-                    90,
-                    140,
-                    290,
-                    390
-                  ]
-                },
-                {
-                  "name": "Bottom R",
-                  "image": "products/uniform/basketball/right-bottom.svg",
-                  "editableArea": [
-                    90,
-                    140,
-                    290,
-                    390
-                  ]
-                }
+              "name": "Back",
+              "image": "products/hoodie/hoodie_back.svg",
+              "editableArea": [
+                205,
+                118,
+                390,
+                470
               ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "25",
-              "categoryId": "2",
-              "name": "Tennis (Men)",
-              "description": "A perfect tennis uniform",
-              "thumb": "products/uniform/tennis/man_thumb.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Main",
-                  "image": "products/uniform/tennis/tennis_man.svg",
-                  "editableArea": [
-                    24,
-                    5,
-                    567,
-                    525
-                  ]
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "26",
-              "categoryId": "2",
-              "name": "Tennis (Women)",
-              "description": "A perfect tennis uniform",
-              "thumb": "products/uniform/tennis/woman_thumb.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Main",
-                  "image": "products/uniform/tennis/tennis_woman.svg",
-                  "editableArea": [
-                    75,
-                    4,
-                    514,
-                    525
-                  ]
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "27",
-              "categoryId": "2",
-              "name": "Baseball",
-              "description": "A perfect baseball uniform",
-              "thumb": "products/uniform/baseball/thumb.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/uniform/baseball/baseball_front.svg",
-                  "editableArea": [
-                    0,
-                    0,
-                    590,
-                    530
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/uniform/baseball/baseball_back.svg",
-                  "editableArea": [
-                    0,
-                    0,
-                    590,
-                    530
-                  ]
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "28",
-              "categoryId": "2",
-              "name": "American Football",
-              "description": "A perfect american football uniform",
-              "thumb": "products/uniform/am_football/thumb.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Main",
-                  "image": "products/uniform/am_football/american_football.svg",
-                  "editableArea": [
-                    59,
-                    5,
-                    472,
-                    520
-                  ]
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "29",
-              "categoryId": "2",
-              "name": "Cycling",
-              "description": "A perfect cycling uniform",
-              "thumb": "products/uniform/cycling/thumb.png",
-              "hideEditableAreaBorder": true,
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Main",
-                  "image": "products/uniform/cycling/cycling.svg",
-                  "editableArea": [
-                    5,
-                    41,
-                    586,
-                    489
-                  ]
-                }
-              ],
-              "sizes": [
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ]
-            },
-            {
-              "id": "21",
-              "categoryId": "2",
-              "name": "Respawn Jersey",
-              "description": "A perfect uniform",
-              "thumb": "products/uniform/thumb/respawn.jpg",
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/uniform/respawn_front.svg",
-                  "editableArea": [
-                    185,
-                    66,
-                    393,
-                    495
-                  ],
-                  "clipRect": [
-                    185,
-                    66,
-                    393,
-                    495
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/uniform/respawn_back.svg",
-                  "editableArea": [
-                    192,
-                    51,
-                    399,
-                    506
-                  ],
-                  "clipRect": [
-                    192,
-                    51,
-                    399,
-                    506
-                  ]
-                },
-                {
-                  "name": "Left Sleeve",
-                  "image": "products/uniform/respawn_sleeve.svg",
-                  "editableArea": [
-                    135,
-                    40,
-                    452,
-                    298
-                  ],
-                  "clipRect": [
-                    135,
-                    40,
-                    452,
-                    298
-                  ]
-                },
-                {
-                  "name": "Right Sleeve",
-                  "image": "products/uniform/respawn_sleeve.svg",
-                  "editableArea": [
-                    135,
-                    40,
-                    452,
-                    298
-                  ],
-                  "clipRect": [
-                    135,
-                    40,
-                    452,
-                    298
-                  ]
-                }
-              ],
-              "colors": [
-                {
-                  "name": "Black",
-                  "value": "#000000"
-                },
-                {
-                  "name": "Green",
-                  "value": "#157F3F"
-                },
-                {
-                  "name": "Yellow",
-                  "value": "#FEFC5B"
-                },
-                {
-                  "name": "Raspberry",
-                  "value": "#FE5B8D"
-                },
-                {
-                  "name": "Blue",
-                  "value": "#0E06AB"
-                }
-              ],
-              "sizes": [
-                "XS",
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ],
-              "colorizableElements": [
-                {
-                  "id": "mainColor",
-                  "name": "Color",
-                  "styleAttr": "fill",
-                  "query": "#la_x7C_Main_Color_x7C_main",
-                  "colors": [
-                    {
-                      "name": "Black",
-                      "value": "#000000"
-                    },
-                    {
-                      "name": "Green",
-                      "value": "#157F3F"
-                    },
-                    {
-                      "name": "Raspberry",
-                      "value": "#FE5B8D"
-                    },
-                    {
-                      "name": "Blue",
-                      "value": "#0E06AB"
-                    }
-                  ]
-                },
-                {
-                  "id": "secondaryColor",
-                  "name": "Secondary Color",
-                  "styleAttr": "fill",
-                  "query": "#la_x7C_Secondary_Color_x7C_second",
-                  "colors": [
-                    {
-                      "name": "Green",
-                      "value": "#157F3F"
-                    },
-                    {
-                      "name": "Yellow",
-                      "value": "#FEFC5B"
-                    },
-                    {
-                      "name": "Raspberry",
-                      "value": "#FE5B8D"
-                    },
-                    {
-                      "name": "Blue",
-                      "value": "#0E06AB"
-                    }
-                  ]
-                },
-                {
-                  "id": "thirdColor",
-                  "name": "Third Color",
-                  "styleAttr": "fill",
-                  "query": "#la_x7C_Third_Color_x7C_third"
-                }
-              ]
-            },
-            {
-              "id": "22",
-              "categoryId": "2",
-              "name": "Renegade Jersey",
-              "description": "A perfect uniform",
-              "thumb": "products/uniform/thumb/renegade.jpg",
-              "namesNumbersEnabled": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/uniform/renegade_front.svg",
-                  "editableArea": [
-                    221,
-                    84,
-                    366,
-                    500
-                  ],
-                  "clipRect": [
-                    221,
-                    84,
-                    366,
-                    500
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/uniform/renegade_back.svg",
-                  "editableArea": [
-                    221,
-                    37,
-                    372,
-                    500
-                  ],
-                  "clipRect": [
-                    221,
-                    37,
-                    372,
-                    500
-                  ]
-                },
-                {
-                  "name": "Left Sleeve",
-                  "image": "products/uniform/renegade_sleeve.svg",
-                  "editableArea": [
-                    144,
-                    45,
-                    431,
-                    340
-                  ],
-                  "clipRect": [
-                    144,
-                    45,
-                    431,
-                    340
-                  ]
-                },
-                {
-                  "name": "Right Sleeve",
-                  "image": "products/uniform/renegade_sleeve.svg",
-                  "editableArea": [
-                    144,
-                    45,
-                    431,
-                    340
-                  ],
-                  "clipRect": [
-                    144,
-                    45,
-                    431,
-                    340
-                  ]
-                }
-              ],
-              "sizes": [
-                "XS",
-                "S",
-                "M",
-                "L",
-                "XL",
-                "XXL",
-                "XXXL"
-              ],
-              "colorizableElements": [
-                {
-                  "id": "mainColor",
-                  "name": "Color",
-                  "styleAttr": "fill",
-                  "query": "#la_x7C_Main_Color_x7C_main",
-                  "colors": [
-                    {
-                      "name": "Black",
-                      "value": "#000000"
-                    },
-                    {
-                      "name": "Green",
-                      "value": "#157F3F"
-                    },
-                    {
-                      "name": "Raspberry",
-                      "value": "#FE5B8D"
-                    },
-                    {
-                      "name": "Blue",
-                      "value": "#0E06AB"
-                    }
-                  ]
-                },
-                {
-                  "id": "secondaryColor",
-                  "name": "Secondary Color",
-                  "styleAttr": "fill",
-                  "query": "#la_x7C_Secondary_Color_x7C_second",
-                  "colors": [
-                    {
-                      "name": "Green",
-                      "value": "#157F3F"
-                    },
-                    {
-                      "name": "Yellow",
-                      "value": "#FEFC5B"
-                    },
-                    {
-                      "name": "Raspberry",
-                      "value": "#FE5B8D"
-                    },
-                    {
-                      "name": "Blue",
-                      "value": "#0E06AB"
-                    }
-                  ]
-                },
-                {
-                  "id": "thirdColor",
-                  "name": "Third Color",
-                  "styleAttr": "fill",
-                  "query": "#la_x7C_Third_Color_x7C_third"
-                }
+              "clipRect": [
+                205,
+                118,
+                390,
+                470
               ]
             }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ],
+          "sizes": [
+            "M",
+            "L",
+            "X"
+          ]
+        },
+        {
+          "id": "11",
+          "categoryId": "r1",
+          "name": "T-shirt",
+          "description": "<ul><li>A perfect tee for hipsters</li><li>4.8x8.2 (4.8x8.6)</li><li>vector multicolor product images</li><li>clip-rect</li><li>150DPU</li></ul>",
+          "data": {
+            "price": "29",
+            "material": "Cotton"
+          },
+          "thumb": "products/cool-t-shirt/thumbs/t-shirt-blue.png",
+          "namesNumbersEnabled": true,
+          "minQuantity": 5,
+          "minDPU": 75,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/cool-t-shirt/t-shirt_front.svg",
+              "editableArea": [
+                170,
+                75,
+                410,
+                475
+              ],
+              "editableAreaUnits": [
+                4.8,
+                8
+              ],
+              "clipRect": [
+                170,
+                75,
+                410,
+                475
+              ]
+            },
+            {
+              "name": "Back",
+              "image": "products/cool-t-shirt/t-shirt_back.svg",
+              "editableArea": [
+                170,
+                75,
+                410,
+                475
+              ],
+              "editableAreaUnits": [
+                4.8,
+                8
+              ],
+              "clipRect": [
+                170,
+                75,
+                410,
+                475
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ],
+          "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
           ]
         }
       ]
     },
     {
       "id": "r2",
-      "name": "Things",
+      "name": "Merch",
       "thumb": "products/mug/thumb/mug.jpg",
       "categories": [
+        {
+          "id": "phones",
+          "name": "Phone Covers",
+          "thumb": "products/iPhone/thumb/phone_cat.jpg",
+          "products": [
+            {
+              "id": "iPhone_5",
+              "name": "iPhone 5",
+              "description": "raster mask, multicolor (1 colorizable area), no editable area, 2 sizes",
+              "categoryId": "phones",
+              "thumb": "products/iPhone/iPhone - small.png",
+              "locations": [
+                {
+                  "name": "Back",
+                  "image": "products/iPhone/bg.svg",
+                  "mask": "products/iPhone/iPhone.png"
+                }
+              ],
+              "colors": [
+                {
+                  "name": "White",
+                  "value": "#FFF"
+                },
+                {
+                  "name": "Black",
+                  "value": "#000"
+                },
+                {
+                  "name": "Steel Blue",
+                  "value": "#4682B4"
+                },
+                {
+                  "name": "Firebrick",
+                  "value": "#B22222"
+                },
+                {
+                  "name": "Maroon",
+                  "value": "#B03060"
+                },
+                {
+                  "name": "Navajo White 4",
+                  "value": "#8B795E"
+                },
+                {
+                  "name": "Dark Olive Green 4",
+                  "value": "#6E8B3D"
+                },
+                {
+                  "name": "Red",
+                  "value": "#E3000F"
+                },
+                {
+                  "name": "Forest Green",
+                  "value": "#00923A"
+                },
+                {
+                  "name": "Siena",
+                  "value": "#EE7200"
+                }
+              ],
+              "sizes": [
+                "iPhone 5",
+                "iPhone 4"
+              ]
+            },
+            {
+              "id": "samsungSGS4CS",
+              "name": "Samsung",
+              "categoryId": "phones",
+              "thumb": "products/iPhone/SGS4CS-small.png",
+              "locations": [
+                {
+                  "name": "Back",
+                  "mask": "products/iPhone/SGS4CS.png",
+                  "image": "products/iPhone/bg.svg"
+                }
+              ],
+              "colors": [
+                {
+                  "name": "Canary",
+                  "value": "#ffff99"
+                },
+                {
+                  "name": "Charcoal",
+                  "value": "#36454f"
+                },
+                {
+                  "name": "Very soft orange",
+                  "value": "#fabfa5"
+                },
+                {
+                  "name": "Moderate cyan",
+                  "value": "#48bfa3"
+                },
+                {
+                  "name": "Soft green",
+                  "value": "#c6dd75"
+                },
+                {
+                  "name": "Soft blue",
+                  "value": "#7592dd"
+                }
+              ]
+            }
+          ]
+        },
         {
           "id": "3",
           "name": "Promotional items",
           "thumb": "products/tote/thumb/promotional_cat.jpg",
           "products": [
+            {
+              "id": "34",
+              "name": "Bottle",
+              "categoryId": "3",
+              "thumb": "products/bottle/thumb/bottle.jpg",
+              "locations": [
+                {
+                  "name": "Front",
+                  "image": "products/bottle/bottle.svg",
+                  "editableArea": [
+                    227,
+                    237,
+                    360,
+                    333
+                  ],
+                  "clipRect": [
+                    227,
+                    237,
+                    360,
+                    333
+                  ]
+                }
+              ],
+              "colors": [
+                {
+                  "name": "Yellow",
+                  "value": "#FEE161"
+                },
+                {
+                  "name": "White",
+                  "value": "#FFF"
+                }
+              ]
+            },
+            {
+              "id": "33",
+              "name": "Flash drive",
+              "categoryId": "3",
+              "minQuantity": 15,
+              "thumb": "products/flash-drive/thumb/flash_drive.jpg",
+              "locations": [
+                {
+                  "name": "Front",
+                  "image": "products/flash-drive/flash_drive.svg",
+                  "editableArea": [
+                    55,
+                    179,
+                    470,
+                    364
+                  ],
+                  "clipRect": [
+                    55,
+                    179,
+                    470,
+                    364
+                  ]
+                }
+              ],
+              "colors": [
+                {
+                  "name": "Grey",
+                  "value": "#676767"
+                },
+                {
+                  "name": "White",
+                  "value": "#FFF"
+                },
+                {
+                  "name": "Black",
+                  "value": "#000"
+                }
+              ]
+            },
+            {
+              "id": "35",
+              "name": "Koozie",
+              "categoryId": "3",
+              "thumb": "products/koozie/thumb/koozie.jpg",
+              "locations": [
+                {
+                  "name": "Front",
+                  "image": "products/koozie/koozie.svg",
+                  "editableArea": [
+                    197,
+                    64,
+                    388,
+                    495
+                  ],
+                  "clipRect": [
+                    197,
+                    64,
+                    388,
+                    495
+                  ]
+                }
+              ],
+              "colors": [
+                {
+                  "name": "Violet",
+                  "value": "#FEE161"
+                },
+                {
+                  "name": "Black",
+                  "value": "#000"
+                },
+                {
+                  "name": "Steel Blue",
+                  "value": "#4682B4"
+                },
+                {
+                  "name": "Firebrick",
+                  "value": "#B22222"
+                },
+                {
+                  "name": "Maroon",
+                  "value": "#B03060"
+                },
+                {
+                  "name": "Navajo White 4",
+                  "value": "#8B795E"
+                },
+                {
+                  "name": "Dark Olive Green 4",
+                  "value": "#6E8B3D"
+                },
+                {
+                  "name": "Red",
+                  "value": "#E3000F"
+                },
+                {
+                  "name": "Forest Green",
+                  "value": "#00923A"
+                },
+                {
+                  "name": "Siena",
+                  "value": "#EE7200"
+                }
+              ]
+            },
             {
               "id": "31",
               "name": "Mug",
@@ -1350,249 +914,944 @@
                 "Size 1",
                 "Size 2"
               ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "PPE",
+      "thumb": "products/mask/thumb/mask_cat_thumb.jpg",
+      "products": [
+        {
+          "id": "64",
+          "categoryId": "r4",
+          "name": "Nose Clip Mask",
+          "description": "Simple face mask",
+          "thumb": "products/mask/thumb/simple_mask2_thumb.png",
+          "namesNumbersEnabled": false,
+          "hideEditableAreaBorder": true,
+          "minQuantity": 5,
+          "minDPU": 75,
+          "resizable": true,
+          "editableAreaSizes": [
+            {
+              "width": 6.2,
+              "height": 4.5
+            }
+          ],
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/mask/simple_mask2.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
             },
             {
-              "id": "33",
-              "name": "Flash drive",
-              "categoryId": "3",
-              "minQuantity": 15,
-              "thumb": "products/flash-drive/thumb/flash_drive.jpg",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/flash-drive/flash_drive.svg",
-                  "editableArea": [
-                    55,
-                    179,
-                    470,
-                    364
-                  ],
-                  "clipRect": [
-                    55,
-                    179,
-                    470,
-                    364
-                  ]
-                }
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            },
+            {
+              "name": "Dark Brown",
+              "value": "#271f11"
+            }
+          ],
+          "sizes": [
+            "M"
+          ]
+        },
+        {
+          "id": "63",
+          "categoryId": "r4",
+          "name": "One Vent Mask",
+          "description": "Face mask with valve",
+          "thumb": "products/mask/thumb/face_mask_valve_thumb.png",
+          "namesNumbersEnabled": false,
+          "hideEditableAreaBorder": true,
+          "minQuantity": 5,
+          "minDPU": 75,
+          "resizable": true,
+          "editableAreaSizes": [
+            {
+              "width": 6.2,
+              "height": 4.8
+            }
+          ],
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/mask/face_mask_valve.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            },
+            {
+              "name": "Dark Brown",
+              "value": "#271f11"
+            }
+          ],
+          "sizes": [
+            "M"
+          ]
+        },
+        {
+          "id": "62",
+          "categoryId": "r4",
+          "name": "Simple Cotton Mask",
+          "description": "Face mask",
+          "thumb": "products/mask/thumb/face_mask_thumb.png",
+          "namesNumbersEnabled": false,
+          "hideEditableAreaBorder": true,
+          "minQuantity": 5,
+          "resizable": true,
+          "minDPU": 75,
+          "editableAreaSizes": [
+            {
+              "width": 6.2,
+              "height": 5.03
+            }
+          ],
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/mask/face_mask.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            },
+            {
+              "name": "Dark Brown",
+              "value": "#271f11"
+            }
+          ],
+          "sizes": [
+            "M"
+          ]
+        },
+        {
+          "id": "61",
+          "categoryId": "r4",
+          "name": "Simple White Mask",
+          "description": "Simple face mask",
+          "thumb": "products/mask/thumb/simple_mask_thumb.png",
+          "namesNumbersEnabled": false,
+          "hideEditableAreaBorder": true,
+          "minQuantity": 5,
+          "minDPU": 75,
+          "resizable": true,
+          "editableAreaSizes": [
+            {
+              "width": 5.87,
+              "height": 4.5
+            }
+          ],
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/mask/simple_mask.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ],
+          "sizes": [
+            "M"
+          ]
+        },
+        {
+          "id": "65",
+          "categoryId": "r4",
+          "name": "Two Vents Mask",
+          "description": "Face mask with valves",
+          "thumb": "products/mask/thumb/face_mask_valves_thumb.png",
+          "namesNumbersEnabled": false,
+          "hideEditableAreaBorder": true,
+          "minQuantity": 5,
+          "minDPU": 75,
+          "resizable": true,
+          "editableAreaSizes": [
+            {
+              "width": 6.2,
+              "height": 5
+            }
+          ],
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/mask/face_mask_valves.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            },
+            {
+              "name": "Dark Brown",
+              "value": "#271f11"
+            }
+          ],
+          "sizes": [
+            "M"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "Signs/Decals",
+      "thumb": "products/signs/thumb/sign_cat.jpg",
+      "products": [
+        {
+          "id": "42",
+          "name": "Bumper Sticker",
+          "categoryId": "4",
+          "resizable": true,
+          "editableAreaSizes": [
+            {
+              "label": "3x10in",
+              "width": 3,
+              "height": 10
+            },
+            {
+              "label": "4x4in",
+              "width": 4,
+              "height": 4
+            }
+          ],
+          "thumb": "products/signs/thumb/bumper.png",
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/signs/standard_sign.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFFFFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ]
+        },
+        {
+          "id": "44",
+          "name": "Car Magnet (12x18in)",
+          "categoryId": "4",
+          "thumb": "products/signs/thumb/car_magnet.png",
+          "showRuler": true,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/signs/car_magnet.svg",
+              "editableAreaUnits": [
+                12,
+                18
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFFFFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ]
+        },
+        {
+          "id": "41",
+          "name": "Standard sign",
+          "categoryId": "4",
+          "resizable": true,
+          "minQuantity": 3,
+          "showRuler": true,
+          "thumb": "products/signs/thumb/stand_sign.jpg",
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/signs/standard_sign.svg",
+              "editableAreaUnits": [
+                24,
+                18
               ],
-              "colors": [
+              "sizeInputs": "enable"
+            },
+            {
+              "name": "Back",
+              "image": "products/signs/standard_sign.svg"
+            }
+          ],
+          "options": [
+            {
+              "id": "material",
+              "name": "Material",
+              "type": "dropdown",
+              "variations": [
                 {
-                  "name": "Grey",
-                  "value": "#676767"
+                  "id": "al2mm",
+                  "name": "Aluminum (2mm)"
                 },
                 {
-                  "name": "White",
-                  "value": "#FFF"
+                  "id": "corr4mm",
+                  "name": "Corrugated Plastic (4mm)"
                 },
                 {
-                  "name": "Black",
-                  "value": "#000"
+                  "id": "rigid3mm",
+                  "name": "Rigid Plastic (3mm)"
+                },
+                {
+                  "id": "rigid6mm",
+                  "name": "Rigid Plastic (6mm)"
                 }
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFFFFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ]
+        },
+        {
+          "id": "41_template",
+          "name": "Template Open House (Standard sign)",
+          "categoryId": "4",
+          "defaultTemplateId": "template-standard-sign-open-house",
+          "resizable": true,
+          "minQuantity": 3,
+          "showRuler": true,
+          "thumb": "files\/template-standard-sign-open-house\/design_preview.png",
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/signs/standard_sign.svg",
+              "editableAreaUnits": [
+                24,
+                18
+              ],
+              "sizeInputs": "disable",
+              "editableAreaUnitsRestrictRotation": true
+            },
+            {
+              "name": "Back",
+              "image": "products/signs/standard_sign.svg"
+            }
+          ],
+          "options": [
+            {
+              "id": "material",
+              "name": "Material",
+              "type": "dropdown",
+              "variations": [
+                {
+                  "id": "al2mm",
+                  "name": "Aluminum (2mm)"
+                },
+                {
+                  "id": "corr4mm",
+                  "name": "Corrugated Plastic (4mm)"
+                },
+                {
+                  "id": "rigid3mm",
+                  "name": "Rigid Plastic (3mm)"
+                },
+                {
+                  "id": "rigid6mm",
+                  "name": "Rigid Plastic (6mm)"
+                }
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFFFFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ]
+        },
+        {
+          "id": "43",
+          "name": "Truck Magnet (12x24in)",
+          "categoryId": "4",
+          "resizable": true,
+          "editableAreaSizes": [
+            {
+              "width": 12,
+              "height": 24
+            }
+          ],
+          "thumb": "products/signs/thumb/truck_magnet.png",
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/signs/standard_sign.svg"
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFFFFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "r5",
+      "name": "Stationery",
+      "thumb": "products/stationary/thumb/b_card.jpg",
+      "products": [
+        {
+          "id": "51",
+          "name": "A4",
+          "categoryId": "5",
+          "showRuler": true,
+          "resizable": true,
+          "hideEditableAreaBorder": true,
+          "editableAreaSizes": [
+            {
+              "width": 8.268,
+              "height": 11.693
+            }
+          ],
+          "thumb": "products/stationary/thumb/a4.jpg",
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/stationary/a4.svg"
+            },
+            {
+              "name": "Back",
+              "image": "products/stationary/a4.svg"
+            }
+          ]
+        },
+        {
+          "id": "52",
+          "name": "Business Card",
+          "categoryId": "5",
+          "showRuler": true,
+          "hideEditableAreaBorder": true,
+          "thumb": "products/stationary/thumb/b_card.jpg",
+          "enableCopyToBack": true,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/stationary/business_card.svg",
+              "editableArea": [
+                0,
+                0,
+                252,
+                151.2
+              ],
+              "editableAreaUnits": [
+                3.5,
+                2.1
+              ],
+              "clipRect": [
+                0,
+                0,
+                252,
+                151.2
               ]
             },
             {
-              "id": "34",
-              "name": "Bottle",
-              "categoryId": "3",
-              "thumb": "products/bottle/thumb/bottle.jpg",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/bottle/bottle.svg",
-                  "editableArea": [
-                    227,
-                    237,
-                    360,
-                    333
-                  ],
-                  "clipRect": [
-                    227,
-                    237,
-                    360,
-                    333
-                  ]
-                }
+              "name": "Back",
+              "image": "products/stationary/business_card.svg",
+              "editableArea": [
+                0,
+                0,
+                252,
+                151.2
               ],
-              "colors": [
-                {
-                  "name": "Yellow",
-                  "value": "#FEE161"
-                },
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                }
-              ]
-            },
-            {
-              "id": "35",
-              "name": "Koozie",
-              "categoryId": "3",
-              "thumb": "products/koozie/thumb/koozie.jpg",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/koozie/koozie.svg",
-                  "editableArea": [
-                    197,
-                    64,
-                    388,
-                    495
-                  ],
-                  "clipRect": [
-                    197,
-                    64,
-                    388,
-                    495
-                  ]
-                }
+              "editableAreaUnits": [
+                3.5,
+                2.1
               ],
-              "colors": [
-                {
-                  "name": "Violet",
-                  "value": "#FEE161"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
+              "clipRect": [
+                0,
+                0,
+                252,
+                151.2
               ]
             }
           ]
         },
         {
-          "id": "phones",
-          "name": "Phone Covers",
-          "thumb": "products/iPhone/thumb/phone_cat.jpg",
-          "products": [
+          "id": "53",
+          "name": "Round Sticker",
+          "categoryId": "5",
+          "showRuler": true,
+          "resizable": true,
+          "hideEditableAreaBorder": true,
+          "thumb": "products/stationary/thumb/roundsticker.png",
+          "locations": [
             {
-              "id": "iPhone_5",
-              "name": "iPhone 5",
-              "description": "raster mask, multicolor (1 colorizable area), no editable area, 2 sizes",
-              "categoryId": "phones",
-              "thumb": "products/iPhone/iPhone - small.png",
-              "locations": [
-                {
-                  "name": "Back",
-                  "image": "products/iPhone/bg.svg",
-                  "mask": "products/iPhone/iPhone.png"
-                }
+              "name": "Front",
+              "image": "products/stationary/round-sticker.svg",
+              "editableAreaUnits": [
+                2,
+                2
               ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ],
-              "sizes": [
-                "iPhone 5",
-                "iPhone 4"
+              "editableAreaUnitsRange": [
+                [
+                  0.5,
+                  3,
+                  0.5
+                ],
+                [
+                  0.5,
+                  3,
+                  0.5
+                ]
               ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFFFFF"
             },
             {
-              "id": "samsungSGS4CS",
-              "name": "Samsung",
-              "categoryId": "phones",
-              "thumb": "products/iPhone/SGS4CS-small.png",
-              "locations": [
-                {
-                  "name": "Back",
-                  "mask": "products/iPhone/SGS4CS.png",
-                  "image": "products/iPhone/bg.svg"
-                }
-              ],
+              "name": "Yellow",
+              "value": "#FFF9C4"
+            },
+            {
+              "name": "Pink",
+              "value": "#F8BBD0"
+            },
+            {
+              "name": "Cyan",
+              "value": "#B2EBF2"
+            },
+            {
+              "name": "Lime",
+              "value": "#F0F4C3"
+            },
+            {
+              "name": "Amber",
+              "value": "#FFECB3"
+            },
+            {
+              "name": "Brown",
+              "value": "#D7CCC8"
+            },
+            {
+              "name": "Blue Gray",
+              "value": "#ECEFF1"
+            }
+          ],
+          "colorizableElements": [
+            {
+              "id": "mainColor",
+              "name": "Fill",
+              "query": "#bg"
+            },
+            {
+              "id": "borderColor",
+              "name": "Border",
+              "query": "#border",
               "colors": [
                 {
-                  "name": "Canary",
-                  "value": "#ffff99"
+                  "name": "Red",
+                  "value": "#f44336"
                 },
                 {
-                  "name": "Charcoal",
-                  "value": "#36454f"
+                  "name": "Purple",
+                  "value": "#9C27B0"
                 },
                 {
-                  "name": "Very soft orange",
-                  "value": "#fabfa5"
+                  "name": "Indigo",
+                  "value": "#3F51B5"
                 },
                 {
-                  "name": "Moderate cyan",
-                  "value": "#48bfa3"
+                  "name": "Blue",
+                  "value": "#2196F3"
                 },
                 {
-                  "name": "Soft green",
-                  "value": "#c6dd75"
+                  "name": "Teal",
+                  "value": "#009688"
                 },
                 {
-                  "name": "Soft blue",
-                  "value": "#7592dd"
+                  "name": "Green",
+                  "value": "#4CAF50"
+                },
+                {
+                  "name": "Orange",
+                  "value": "#FF9800"
+                },
+                {
+                  "name": "Gray",
+                  "value": "#9E9E9E"
                 }
               ]
             }
@@ -1601,952 +1860,678 @@
       ]
     },
     {
-      "id": "r3",
-      "name": "Signs",
-      "thumb": "products/stationary/thumb/a4.jpg",
-      "products": [],
-      "categories": [
+      "id": "2",
+      "name": "Uniforms",
+      "thumb": "products/uniform/football/preview.png",
+      "products": [
         {
-          "id": "4",
-          "name": "Signs/Decals",
-          "thumb": "products/signs/thumb/sign_cat.jpg",
-          "products": [
+          "id": "28",
+          "categoryId": "2",
+          "name": "American Football",
+          "description": "A perfect american football uniform",
+          "thumb": "products/uniform/am_football/thumb.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
             {
-              "id": "41",
-              "name": "Standard sign",
-              "categoryId": "4",
-              "resizable": true,
-              "minQuantity": 3,
-              "showRuler": true,
-              "thumb": "products/signs/thumb/stand_sign.jpg",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/signs/standard_sign.svg",
-                  "editableAreaUnits": [
-                    24,
-                    18
-                  ],
-                  "sizeInputs": "enable"
-                },
-                {
-                  "name": "Back",
-                  "image": "products/signs/standard_sign.svg"
-                }
+              "name": "Main",
+              "image": "products/uniform/am_football/american_football.svg",
+              "editableArea": [
+                59,
+                5,
+                472,
+                520
+              ]
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ]
+        },
+        {
+          "id": "27",
+          "categoryId": "2",
+          "name": "Baseball",
+          "description": "A perfect baseball uniform",
+          "thumb": "products/uniform/baseball/thumb.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/uniform/baseball/baseball_front.svg",
+              "editableArea": [
+                0,
+                0,
+                590,
+                530
+              ]
+            },
+            {
+              "name": "Back",
+              "image": "products/uniform/baseball/baseball_back.svg",
+              "editableArea": [
+                0,
+                0,
+                590,
+                530
+              ]
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ]
+        },
+        {
+          "id": "24",
+          "categoryId": "2",
+          "name": "Basketball Jersey",
+          "description": "A perfect basketball uniform",
+          "thumb": "products/uniform/basketball/preview.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Top F",
+              "image": "products/uniform/basketball/front-top.svg",
+              "editableArea": [
+                40,
+                80,
+                340,
+                500
+              ]
+            },
+            {
+              "name": "Top B",
+              "image": "products/uniform/basketball/back-top.svg",
+              "editableArea": [
+                40,
+                80,
+                340,
+                500
+              ]
+            },
+            {
+              "name": "Bottom F",
+              "image": "products/uniform/basketball/front-bottom.svg",
+              "editableArea": [
+                40,
+                140,
+                350,
+                390
+              ]
+            },
+            {
+              "name": "Bottom B",
+              "image": "products/uniform/basketball/front-bottom.svg",
+              "editableArea": [
+                40,
+                140,
+                350,
+                390
+              ]
+            },
+            {
+              "name": "Bottom L",
+              "image": "products/uniform/basketball/side-bottom.svg",
+              "editableArea": [
+                90,
+                140,
+                290,
+                390
+              ]
+            },
+            {
+              "name": "Bottom R",
+              "image": "products/uniform/basketball/right-bottom.svg",
+              "editableArea": [
+                90,
+                140,
+                290,
+                390
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ]
+        },
+        {
+          "id": "29",
+          "categoryId": "2",
+          "name": "Cycling",
+          "description": "A perfect cycling uniform",
+          "thumb": "products/uniform/cycling/thumb.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Main",
+              "image": "products/uniform/cycling/cycling.svg",
+              "editableArea": [
+                5,
+                41,
+                586,
+                489
+              ]
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ]
+        },
+        {
+          "id": "23",
+          "categoryId": "r6",
+          "name": "Football Jersey",
+          "description": "A perfect football uniform",
+          "thumb": "products/uniform/football/preview.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/uniform/football/front.svg",
+              "editableArea": [
+                220,
+                60,
+                380,
+                500
+              ]
+            },
+            {
+              "name": "Back",
+              "image": "products/uniform/football/back.svg",
+              "editableArea": [
+                220,
+                60,
+                380,
+                500
+              ]
+            },
+            {
+              "name": "Socks",
+              "image": "products/uniform/football/socks.svg",
+              "editableArea": [
+                96,
+                38,
+                466,
+                484
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "White",
+              "value": "#FFF"
+            },
+            {
+              "name": "Black",
+              "value": "#000"
+            },
+            {
+              "name": "Steel Blue",
+              "value": "#4682B4"
+            },
+            {
+              "name": "Firebrick",
+              "value": "#B22222"
+            },
+            {
+              "name": "Maroon",
+              "value": "#B03060"
+            },
+            {
+              "name": "Navajo White 4",
+              "value": "#8B795E"
+            },
+            {
+              "name": "Dark Olive Green 4",
+              "value": "#6E8B3D"
+            },
+            {
+              "name": "Red",
+              "value": "#E3000F"
+            },
+            {
+              "name": "Forest Green",
+              "value": "#00923A"
+            },
+            {
+              "name": "Siena",
+              "value": "#EE7200"
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ]
+        },
+        {
+          "id": "22",
+          "categoryId": "2",
+          "name": "Renegade Jersey",
+          "description": "A perfect uniform",
+          "thumb": "products/uniform/thumb/renegade.jpg",
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Front",
+              "image": "products/uniform/renegade_front.svg",
+              "editableArea": [
+                221,
+                84,
+                366,
+                500
               ],
-              "options": [
-                {
-                  "id": "material",
-                  "name": "Material",
-                  "type": "dropdown",
-                  "variations": [
-                    {
-                      "id": "al2mm",
-                      "name": "Aluminum (2mm)"
-                    },
-                    {
-                      "id": "corr4mm",
-                      "name": "Corrugated Plastic (4mm)"
-                    },
-                    {
-                      "id": "rigid3mm",
-                      "name": "Rigid Plastic (3mm)"
-                    },
-                    {
-                      "id": "rigid6mm",
-                      "name": "Rigid Plastic (6mm)"
-                    }
-                  ]
-                }
+              "clipRect": [
+                221,
+                84,
+                366,
+                500
+              ]
+            },
+            {
+              "name": "Back",
+              "image": "products/uniform/renegade_back.svg",
+              "editableArea": [
+                221,
+                37,
+                372,
+                500
               ],
+              "clipRect": [
+                221,
+                37,
+                372,
+                500
+              ]
+            },
+            {
+              "name": "Left Sleeve",
+              "image": "products/uniform/renegade_sleeve.svg",
+              "editableArea": [
+                144,
+                45,
+                431,
+                340
+              ],
+              "clipRect": [
+                144,
+                45,
+                431,
+                340
+              ]
+            },
+            {
+              "name": "Right Sleeve",
+              "image": "products/uniform/renegade_sleeve.svg",
+              "editableArea": [
+                144,
+                45,
+                431,
+                340
+              ],
+              "clipRect": [
+                144,
+                45,
+                431,
+                340
+              ]
+            }
+          ],
+          "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ],
+          "colorizableElements": [
+            {
+              "id": "mainColor",
+              "name": "Color",
+              "styleAttr": "fill",
+              "query": "#la_x7C_Main_Color_x7C_main",
               "colors": [
                 {
-                  "name": "White",
-                  "value": "#FFFFFF"
-                },
-                {
                   "name": "Black",
-                  "value": "#000"
+                  "value": "#000000"
                 },
                 {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
+                  "name": "Green",
+                  "value": "#157F3F"
                 },
                 {
-                  "name": "Firebrick",
-                  "value": "#B22222"
+                  "name": "Raspberry",
+                  "value": "#FE5B8D"
                 },
                 {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
+                  "name": "Blue",
+                  "value": "#0E06AB"
                 }
               ]
             },
             {
-              "id": "41_template",
-              "name": "Template Open House (Standard sign)",
-              "categoryId": "4",
-              "defaultTemplateId": "template-standard-sign-open-house",
-              "resizable": true,
-              "minQuantity": 3,
-              "showRuler": true,
-              "thumb": "files\/template-standard-sign-open-house\/design_preview.png",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/signs/standard_sign.svg",
-                  "editableAreaUnits": [
-                    24,
-                    18
-                  ],
-                  "sizeInputs": "disable",
-                  "editableAreaUnitsRestrictRotation": true
-                },
-                {
-                  "name": "Back",
-                  "image": "products/signs/standard_sign.svg"
-                }
-              ],
-              "options": [
-                {
-                  "id": "material",
-                  "name": "Material",
-                  "type": "dropdown",
-                  "variations": [
-                    {
-                      "id": "al2mm",
-                      "name": "Aluminum (2mm)"
-                    },
-                    {
-                      "id": "corr4mm",
-                      "name": "Corrugated Plastic (4mm)"
-                    },
-                    {
-                      "id": "rigid3mm",
-                      "name": "Rigid Plastic (3mm)"
-                    },
-                    {
-                      "id": "rigid6mm",
-                      "name": "Rigid Plastic (6mm)"
-                    }
-                  ]
-                }
-              ],
+              "id": "secondaryColor",
+              "name": "Secondary Color",
+              "styleAttr": "fill",
+              "query": "#la_x7C_Secondary_Color_x7C_second",
               "colors": [
                 {
-                  "name": "White",
-                  "value": "#FFFFFF"
+                  "name": "Green",
+                  "value": "#157F3F"
                 },
                 {
-                  "name": "Black",
-                  "value": "#000"
+                  "name": "Yellow",
+                  "value": "#FEFC5B"
                 },
                 {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
+                  "name": "Raspberry",
+                  "value": "#FE5B8D"
                 },
                 {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
+                  "name": "Blue",
+                  "value": "#0E06AB"
                 }
               ]
             },
             {
-              "id": "42",
-              "name": "Bumper Sticker",
-              "categoryId": "4",
-              "resizable": true,
-              "editableAreaSizes": [
-                {
-                  "label": "3x10in",
-                  "width": 3,
-                  "height": 10
-                },
-                {
-                  "label": "4x4in",
-                  "width": 4,
-                  "height": 4
-                }
-              ],
-              "thumb": "products/signs/thumb/bumper.png",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/signs/standard_sign.svg"
-                }
-              ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFFFFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White 4",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green 4",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ]
-            },
-            {
-              "id": "43",
-              "name": "Truck Magnet (12x24in)",
-              "categoryId": "4",
-              "resizable": true,
-              "editableAreaSizes": [
-                {
-                  "width": 12,
-                  "height": 24
-                }
-              ],
-              "thumb": "products/signs/thumb/truck_magnet.png",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/signs/standard_sign.svg"
-                }
-              ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFFFFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ]
-            },
-            {
-              "id": "44",
-              "name": "Car Magnet (12x18in)",
-              "categoryId": "4",
-              "thumb": "products/signs/thumb/car_magnet.png",
-              "showRuler": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/signs/car_magnet.svg",
-                  "editableAreaUnits": [
-                    12,
-                    18
-                  ]
-                }
-              ],
-              "colors": [
-                {
-                  "name": "White",
-                  "value": "#FFFFFF"
-                },
-                {
-                  "name": "Black",
-                  "value": "#000"
-                },
-                {
-                  "name": "Steel Blue",
-                  "value": "#4682B4"
-                },
-                {
-                  "name": "Firebrick",
-                  "value": "#B22222"
-                },
-                {
-                  "name": "Maroon",
-                  "value": "#B03060"
-                },
-                {
-                  "name": "Navajo White",
-                  "value": "#8B795E"
-                },
-                {
-                  "name": "Dark Olive Green",
-                  "value": "#6E8B3D"
-                },
-                {
-                  "name": "Red",
-                  "value": "#E3000F"
-                },
-                {
-                  "name": "Forest Green",
-                  "value": "#00923A"
-                },
-                {
-                  "name": "Siena",
-                  "value": "#EE7200"
-                }
-              ]
+              "id": "thirdColor",
+              "name": "Third Color",
+              "styleAttr": "fill",
+              "query": "#la_x7C_Third_Color_x7C_third"
             }
           ]
         },
         {
-          "id": "5",
-          "name": "Stationery",
-          "thumb": "products/stationary/thumb/stationary_cat.jpg",
-          "products": [
+          "id": "21",
+          "categoryId": "2",
+          "name": "Respawn Jersey",
+          "description": "A perfect uniform",
+          "thumb": "products/uniform/thumb/respawn.jpg",
+          "namesNumbersEnabled": true,
+          "locations": [
             {
-              "id": "51",
-              "name": "A4",
-              "categoryId": "5",
-              "showRuler": true,
-              "resizable": true,
-              "hideEditableAreaBorder": true,
-              "editableAreaSizes": [
-                {
-                  "width": 8.268,
-                  "height": 11.693
-                }
+              "name": "Front",
+              "image": "products/uniform/respawn_front.svg",
+              "editableArea": [
+                185,
+                66,
+                393,
+                495
               ],
-              "thumb": "products/stationary/thumb/a4.jpg",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/stationary/a4.svg"
-                },
-                {
-                  "name": "Back",
-                  "image": "products/stationary/a4.svg"
-                }
+              "clipRect": [
+                185,
+                66,
+                393,
+                495
               ]
             },
             {
-              "id": "52",
-              "name": "Business Card",
-              "categoryId": "5",
-              "showRuler": true,
-              "hideEditableAreaBorder": true,
-              "thumb": "products/stationary/thumb/b_card.jpg",
-              "enableCopyToBack": true,
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/stationary/business_card.svg",
-                  "editableArea": [
-                    0,
-                    0,
-                    252,
-                    151.2
-                  ],
-                  "editableAreaUnits": [
-                    3.5,
-                    2.1
-                  ],
-                  "clipRect": [
-                    0,
-                    0,
-                    252,
-                    151.2
-                  ]
-                },
-                {
-                  "name": "Back",
-                  "image": "products/stationary/business_card.svg",
-                  "editableArea": [
-                    0,
-                    0,
-                    252,
-                    151.2
-                  ],
-                  "editableAreaUnits": [
-                    3.5,
-                    2.1
-                  ],
-                  "clipRect": [
-                    0,
-                    0,
-                    252,
-                    151.2
-                  ]
-                }
+              "name": "Back",
+              "image": "products/uniform/respawn_back.svg",
+              "editableArea": [
+                192,
+                51,
+                399,
+                506
+              ],
+              "clipRect": [
+                192,
+                51,
+                399,
+                506
               ]
             },
             {
-              "id": "53",
-              "name": "Round Sticker",
-              "categoryId": "5",
-              "showRuler": true,
-              "resizable": true,
-              "hideEditableAreaBorder": true,
-              "thumb": "products/stationary/thumb/roundsticker.png",
-              "locations": [
-                {
-                  "name": "Front",
-                  "image": "products/stationary/round-sticker.svg",
-                  "editableAreaUnits": [
-                    2,
-                    2
-                  ],
-                  "editableAreaUnitsRange": [
-                    [
-                      0.5,
-                      3,
-                      0.5
-                    ],
-                    [
-                      0.5,
-                      3,
-                      0.5
-                    ]
-                  ]
-                }
+              "name": "Left Sleeve",
+              "image": "products/uniform/respawn_sleeve.svg",
+              "editableArea": [
+                135,
+                40,
+                452,
+                298
               ],
+              "clipRect": [
+                135,
+                40,
+                452,
+                298
+              ]
+            },
+            {
+              "name": "Right Sleeve",
+              "image": "products/uniform/respawn_sleeve.svg",
+              "editableArea": [
+                135,
+                40,
+                452,
+                298
+              ],
+              "clipRect": [
+                135,
+                40,
+                452,
+                298
+              ]
+            }
+          ],
+          "colors": [
+            {
+              "name": "Black",
+              "value": "#000000"
+            },
+            {
+              "name": "Green",
+              "value": "#157F3F"
+            },
+            {
+              "name": "Yellow",
+              "value": "#FEFC5B"
+            },
+            {
+              "name": "Raspberry",
+              "value": "#FE5B8D"
+            },
+            {
+              "name": "Blue",
+              "value": "#0E06AB"
+            }
+          ],
+          "sizes": [
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ],
+          "colorizableElements": [
+            {
+              "id": "mainColor",
+              "name": "Color",
+              "styleAttr": "fill",
+              "query": "#la_x7C_Main_Color_x7C_main",
               "colors": [
                 {
-                  "name": "White",
-                  "value": "#FFFFFF"
+                  "name": "Black",
+                  "value": "#000000"
+                },
+                {
+                  "name": "Green",
+                  "value": "#157F3F"
+                },
+                {
+                  "name": "Raspberry",
+                  "value": "#FE5B8D"
+                },
+                {
+                  "name": "Blue",
+                  "value": "#0E06AB"
+                }
+              ]
+            },
+            {
+              "id": "secondaryColor",
+              "name": "Secondary Color",
+              "styleAttr": "fill",
+              "query": "#la_x7C_Secondary_Color_x7C_second",
+              "colors": [
+                {
+                  "name": "Green",
+                  "value": "#157F3F"
                 },
                 {
                   "name": "Yellow",
-                  "value": "#FFF9C4"
+                  "value": "#FEFC5B"
                 },
                 {
-                  "name": "Pink",
-                  "value": "#F8BBD0"
+                  "name": "Raspberry",
+                  "value": "#FE5B8D"
                 },
                 {
-                  "name": "Cyan",
-                  "value": "#B2EBF2"
-                },
-                {
-                  "name": "Lime",
-                  "value": "#F0F4C3"
-                },
-                {
-                  "name": "Amber",
-                  "value": "#FFECB3"
-                },
-                {
-                  "name": "Brown",
-                  "value": "#D7CCC8"
-                },
-                {
-                  "name": "Blue Gray",
-                  "value": "#ECEFF1"
-                }
-              ],
-              "colorizableElements": [
-                {
-                  "id": "mainColor",
-                  "name": "Fill",
-                  "query": "#bg"
-                },
-                {
-                  "id": "borderColor",
-                  "name": "Border",
-                  "query": "#border",
-                  "colors": [
-                    {
-                      "name": "Red",
-                      "value": "#f44336"
-                    },
-                    {
-                      "name": "Purple",
-                      "value": "#9C27B0"
-                    },
-                    {
-                      "name": "Indigo",
-                      "value": "#3F51B5"
-                    },
-                    {
-                      "name": "Blue",
-                      "value": "#2196F3"
-                    },
-                    {
-                      "name": "Teal",
-                      "value": "#009688"
-                    },
-                    {
-                      "name": "Green",
-                      "value": "#4CAF50"
-                    },
-                    {
-                      "name": "Orange",
-                      "value": "#FF9800"
-                    },
-                    {
-                      "name": "Gray",
-                      "value": "#9E9E9E"
-                    }
-                  ]
+                  "name": "Blue",
+                  "value": "#0E06AB"
                 }
               ]
+            },
+            {
+              "id": "thirdColor",
+              "name": "Third Color",
+              "styleAttr": "fill",
+              "query": "#la_x7C_Third_Color_x7C_third"
             }
+          ]
+        },
+        {
+          "id": "25",
+          "categoryId": "2",
+          "name": "Tennis (Men)",
+          "description": "A perfect tennis uniform",
+          "thumb": "products/uniform/tennis/man_thumb.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Main",
+              "image": "products/uniform/tennis/tennis_man.svg",
+              "editableArea": [
+                24,
+                5,
+                567,
+                525
+              ]
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
+          ]
+        },
+        {
+          "id": "26",
+          "categoryId": "2",
+          "name": "Tennis (Women)",
+          "description": "A perfect tennis uniform",
+          "thumb": "products/uniform/tennis/woman_thumb.png",
+          "hideEditableAreaBorder": true,
+          "namesNumbersEnabled": true,
+          "locations": [
+            {
+              "name": "Main",
+              "image": "products/uniform/tennis/tennis_woman.svg",
+              "editableArea": [
+                75,
+                4,
+                514,
+                525
+              ]
+            }
+          ],
+          "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL"
           ]
         }
       ]
-    },
-    {
-        "id": "r4",
-        "name": "Face masks",
-        "thumb": "products/mask/thumb/mask_cat_thumb.png",
-        "products": [
-          {
-            "id": "61",
-            "categoryId": "r4",
-            "name": "Face mask",
-            "description": "Simple face mask",
-            "thumb": "products/mask/thumb/simple_mask_thumb.png",
-            "namesNumbersEnabled": false,
-            "hideEditableAreaBorder": true,
-            "minQuantity": 5,
-            "minDPU": 75,
-            "resizable": true,
-            "editableAreaSizes": [
-              {
-                "width": 5.87,
-                "height": 4.5
-              }
-            ],
-            "locations": [
-              {
-                "name": "Front",
-                "image": "products/mask/simple_mask.svg"
-              }
-            ],
-            "colors": [
-              {
-                "name": "White",
-                "value": "#FFF"
-              },
-              {
-                "name": "Black",
-                "value": "#000"
-              },
-              {
-                "name": "Steel Blue",
-                "value": "#4682B4"
-              },
-              {
-                "name": "Firebrick",
-                "value": "#B22222"
-              },
-              {
-                "name": "Maroon",
-                "value": "#B03060"
-              },
-              {
-                "name": "Navajo White 4",
-                "value": "#8B795E"
-              },
-              {
-                "name": "Dark Olive Green 4",
-                "value": "#6E8B3D"
-              },
-              {
-                "name": "Red",
-                "value": "#E3000F"
-              },
-              {
-                "name": "Forest Green",
-                "value": "#00923A"
-              },
-              {
-                "name": "Siena",
-                "value": "#EE7200"
-              }
-            ],
-            "sizes": [
-              "M"
-            ]
-          },
-          {
-            "id": "62",
-            "categoryId": "r4",
-            "name": "Face mask",
-            "description": "Face mask",
-            "thumb": "products/mask/thumb/face_mask_thumb.png",
-            "namesNumbersEnabled": false,
-            "hideEditableAreaBorder": true,
-            "minQuantity": 5,
-            "resizable": true,
-            "minDPU": 75,
-            "editableAreaSizes": [
-              {
-                "width": 6.2,
-                "height": 5.03
-              }
-            ],
-            "locations": [
-              {
-                "name": "Front",
-                "image": "products/mask/face_mask.svg"
-              }
-            ],
-            "colors": [
-              {
-                "name": "White",
-                "value": "#FFF"
-              },
-              {
-                "name": "Black",
-                "value": "#000"
-              },
-              {
-                "name": "Steel Blue",
-                "value": "#4682B4"
-              },
-              {
-                "name": "Firebrick",
-                "value": "#B22222"
-              },
-              {
-                "name": "Maroon",
-                "value": "#B03060"
-              },
-              {
-                "name": "Navajo White 4",
-                "value": "#8B795E"
-              },
-              {
-                "name": "Dark Olive Green 4",
-                "value": "#6E8B3D"
-              },
-              {
-                "name": "Red",
-                "value": "#E3000F"
-              },
-              {
-                "name": "Forest Green",
-                "value": "#00923A"
-              },
-              {
-                "name": "Siena",
-                "value": "#EE7200"
-              },
-              {
-                "name": "Dark Brown",
-                "value": "#271f11"
-              }
-            ],
-            "sizes": [
-              "M"
-            ]
-          },
-          {
-            "id": "63",
-            "categoryId": "r4",
-            "name": "Face mask with valve",
-            "description": "Face mask with valve",
-            "thumb": "products/mask/thumb/face_mask_valve_thumb.png",
-            "namesNumbersEnabled": false,
-            "hideEditableAreaBorder": true,
-            "minQuantity": 5,
-            "minDPU": 75,
-            "resizable": true,
-            "editableAreaSizes": [
-              {
-                "width": 6.2,
-                "height": 4.8
-              }
-            ],
-            "locations": [
-              {
-                "name": "Front",
-                "image": "products/mask/face_mask_valve.svg"
-              }
-            ],
-            "colors": [
-              {
-                "name": "White",
-                "value": "#FFF"
-              },
-              {
-                "name": "Black",
-                "value": "#000"
-              },
-              {
-                "name": "Steel Blue",
-                "value": "#4682B4"
-              },
-              {
-                "name": "Firebrick",
-                "value": "#B22222"
-              },
-              {
-                "name": "Maroon",
-                "value": "#B03060"
-              },
-              {
-                "name": "Navajo White 4",
-                "value": "#8B795E"
-              },
-              {
-                "name": "Dark Olive Green 4",
-                "value": "#6E8B3D"
-              },
-              {
-                "name": "Red",
-                "value": "#E3000F"
-              },
-              {
-                "name": "Forest Green",
-                "value": "#00923A"
-              },
-              {
-                "name": "Siena",
-                "value": "#EE7200"
-              },
-              {
-                "name": "Dark Brown",
-                "value": "#271f11"
-              }
-            ],
-            "sizes": [
-              "M"
-            ]
-          },
-          {
-            "id": "64",
-            "categoryId": "r4",
-            "name": "Face mask",
-            "description": "Simple face mask",
-            "thumb": "products/mask/thumb/simple_mask2_thumb.png",
-            "namesNumbersEnabled": false,
-            "hideEditableAreaBorder": true,
-            "minQuantity": 5,
-            "minDPU": 75,
-            "resizable": true,
-            "editableAreaSizes": [
-              {
-                "width": 6.2,
-                "height": 4.5
-              }
-            ],
-            "locations": [
-              {
-                "name": "Front",
-                "image": "products/mask/simple_mask2.svg"
-              }
-            ],
-            "colors": [
-              {
-                "name": "White",
-                "value": "#FFF"
-              },
-              {
-                "name": "Black",
-                "value": "#000"
-              },
-              {
-                "name": "Steel Blue",
-                "value": "#4682B4"
-              },
-              {
-                "name": "Firebrick",
-                "value": "#B22222"
-              },
-              {
-                "name": "Maroon",
-                "value": "#B03060"
-              },
-              {
-                "name": "Navajo White 4",
-                "value": "#8B795E"
-              },
-              {
-                "name": "Dark Olive Green 4",
-                "value": "#6E8B3D"
-              },
-              {
-                "name": "Red",
-                "value": "#E3000F"
-              },
-              {
-                "name": "Forest Green",
-                "value": "#00923A"
-              },
-              {
-                "name": "Siena",
-                "value": "#EE7200"
-              },
-              {
-                "name": "Dark Brown",
-                "value": "#271f11"
-              }
-            ],
-            "sizes": [
-              "M"
-            ]
-          },
-          {
-            "id": "65",
-            "categoryId": "r4",
-            "name": "Face mask with valves",
-            "description": "Face mask with valves",
-            "thumb": "products/mask/thumb/face_mask_valves_thumb.png",
-            "namesNumbersEnabled": false,
-            "hideEditableAreaBorder": true,
-            "minQuantity": 5,
-            "minDPU": 75,
-            "resizable": true,
-            "editableAreaSizes": [
-              {
-                "width": 6.2,
-                "height": 5
-              }
-            ],
-            "locations": [
-              {
-                "name": "Front",
-                "image": "products/mask/face_mask_valves.svg"
-              }
-            ],
-            "colors": [
-              {
-                "name": "White",
-                "value": "#FFF"
-              },
-              {
-                "name": "Black",
-                "value": "#000"
-              },
-              {
-                "name": "Steel Blue",
-                "value": "#4682B4"
-              },
-              {
-                "name": "Firebrick",
-                "value": "#B22222"
-              },
-              {
-                "name": "Maroon",
-                "value": "#B03060"
-              },
-              {
-                "name": "Navajo White 4",
-                "value": "#8B795E"
-              },
-              {
-                "name": "Dark Olive Green 4",
-                "value": "#6E8B3D"
-              },
-              {
-                "name": "Red",
-                "value": "#E3000F"
-              },
-              {
-                "name": "Forest Green",
-                "value": "#00923A"
-              },
-              {
-                "name": "Siena",
-                "value": "#EE7200"
-              },
-              {
-                "name": "Dark Brown",
-                "value": "#271f11"
-              }
-            ],
-            "sizes": [
-              "M"
-            ]
-          }
-        ]
-      }
+    }
   ]
 }

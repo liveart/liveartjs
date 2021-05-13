@@ -22,7 +22,7 @@
     "unit2": "ft",
     "unitConversionMult": 12,
     "showProductSelector": true,
-    "minDPU": 45,
+    "minDPU": 150,
     "showUploadedColorsDialog": true,
     "enableQuantity": true,
     "snapConfigs": {

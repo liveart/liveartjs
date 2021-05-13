@@ -19,6 +19,15 @@
       }
     },
     {
+      "type": "custom",
+      "renderFunction": "generateDesignPreview",
+      "fileName": "design_preview.png",
+      "id": "design_preview",
+      "options": {
+          "useEditableArea": false
+      }
+    },
+    {
       "type": "PNG",
       "fileName": "location_$name.png",
       "id": "design_png",

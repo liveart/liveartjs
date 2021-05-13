@@ -1,25 +1,60 @@
 <?php namespace Liveart;
 
 class Configs {
-    public static $aws_config = null;
-    public static function get_aws_config() {
-        if (self::$aws_config === null) {
-            self::$aws_config = require('aws-creds.php');
-        }
-        return self::$aws_config;
-    }
-
     //default svg dimensions
     public static $DEFAULT_SVG_WIDTH = 590;
     public static $DEFAULT_SVG_HEIGHT = 530;
 
-    /** Relative path from folder with design (design.json) to LAJS folder */
+    /** Relative path from folder with design (design.json) to LAJS folder; Used in saveTemplate.php */
     public static $DESIGN_RELATIVE_LAJS_FOLDER_PATH = "../../";
     // order.php default vars start
-    public static $LAJS_FOLDER_PATH = "../../";
-    public static $CONFIG_ORDER_PHP = "config/config.json";
+
+    /**
+     * return folder path where designs files are stored
+     */
+    public static function getFilesFolderPath() {
+        return self::isProductionEnv() ? "/var/www/html/".self::$DESIGNS_RELATIVE_PATH : "../../".self::$DESIGNS_RELATIVE_PATH;
+    }
+
+    /**
+     * check if the current environment is production
+     */
+    public static function isProductionEnv() {
+        return getenv('ENVIRONMENT') !== false && strtolower(getenv('ENVIRONMENT')) === "production";
+    }
+
+    /**
+     * return root LAJS100 folder path (needed for standalone LAJS100)
+     */
+    public static function getLAJSFolderPath() {
+        return "../../";
+    }
+
+    /**
+     * Generate Visuals only
+     * Setup `GENVIZ_PUBLIC_ADDRESS` to return files with absolute url
+     * Designed to use ONLY in ENVIRONMENT==="production" (isProductionEnv())
+     * GenViz 1.1.2 and earlier had a bit similar value `LACP_PUBLIC_ADDRESS`
+     */
+    public static function getGenVizPublicAddress() {
+        if (getenv('GENVIZ_PUBLIC_ADDRESS') !== false) {
+            return getenv('GENVIZ_PUBLIC_ADDRESS');
+        }
+        return '';
+    }
+
+    /**
+     * return path to default config
+     * it's either file inside docker container or file in LAJS100 project
+     */
+    public static function getDefaultOutputConfigPath() {
+        return self::isProductionEnv() ? "/var/www/html/config/output.json" : self::getLAJSFolderPath() . "services/config/output.json";
+    }
+
     public static $SOURCES_ORDER_PHP = "sources/";
     public static $TEMPORARY_FILES = "temp/";
+    // Log to `generateVisuals.log`; Require composer install (for Monolog)
+    public static $GEN_VIZ_LOGS = false;
     public static $TEMP_RELATIVE_LAJS_FOLDER_PATH = "../../../";
     public static $CROPPED_SVG_MASK = "_cropped";
     public static $PRINT_SVG_MASK = "_print";
@@ -34,8 +69,7 @@ class Configs {
 
 	/** Image upload configuration*/
     public static $UPLOAD_CONFIGS = array(
-		/** One of ["s3", "folder"]
-			 - If set to "s3": uploads image to s3 amazon web service. "aws-creds.php" file should be correctly configured
+		/** One of ["folder"]
 			 - If set to "folder": uploads image to folder on server. "folder" object under this configs should be correctly configured
 		*/
         'destination' => "folder",

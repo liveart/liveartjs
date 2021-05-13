@@ -22,7 +22,7 @@
     },
     {
       "name": "Ghostscript",
-      "expectedRange": ">=0.0.1",
+      "expectedRange": ">=9",
       "url": "https://www.ghostscript.com/download.html",
       "type": "warning",
       "errorText": "No PDF output for multiple location products will be available."

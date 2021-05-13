@@ -21,6 +21,7 @@ var liveartUI = {
     alertFadeOutTime: 5000,
     //value `@mainContainerWidth` from `variable.config.less`
     minDesktopViewWidth: 906,
+    defaultForm: "product-colors-form",
 
     closeActiveTab: function (leaveExpanded) {
         jQuery('#main-controls-container #liveart-main-menu .active').removeClass('active');
@@ -28,11 +29,7 @@ var liveartUI = {
         jQuery('#main-controls-container .liveart-tabs-content > .active').removeClass('active in');
         if (!leaveExpanded) jQuery('#liveart-main-container').removeClass('collapsed');
         if (!liveartUI.isCompact()) {
-            if (jQuery('#add-graphics > a').is(liveartUI.activeTab)) {
-                liveartUI.showGraphicsForm();
-            } else {
-                liveartUI.showForm("product-colors-form");
-            }
+            liveartUI.showForm(liveartUI.defaultForm);
         } else {
             liveartUI.activeTab = null;
         }
@@ -226,16 +223,7 @@ var liveartUI = {
         this.showForm("text");
     },
     //TODO: remove useless wrapper
-    //TODO: move extra code to menuData."add-graphics".precondition
     showGraphicsForm: function () {
-        //extra code - why it is here???
-        var selector = "add-graphics";
-        var menuItem = this.menuData[selector].selectors;
-        if (jQuery(menuItem.form).hasClass("large-tab")) {
-            jQuery(menuItem.form).removeClass("large-tab");
-            jQuery(menuItem.form).addClass("small-tab");
-        }
-        //end of extra code
         this.showForm("add-graphics");
     },
     //TODO: remove useless wrapper
@@ -270,6 +258,10 @@ var liveartUI = {
             selectors: {
                 menu: "#add-graphics",
                 form: "#add-graphics-form"
+            },
+            precondition: function () {
+                liveartUI.collapseGraphicForm();
+                return true;
             }
         },
         "upload-graphics": {
@@ -282,6 +274,12 @@ var liveartUI = {
             selectors: {
                 menu: "#change-colours",
                 form: "#product-colors-form"
+            }
+        },
+        "admin": {
+            selectors: {
+                menu: "#admin-container",
+                form: "#admin-mode-form"
             }
         }
     },
@@ -310,6 +308,21 @@ var liveartUI = {
                     menuItem.callback();
                 }
             }
+        }
+    },
+    isFormActive: function(selector) {
+        var keys = Object.keys(this.menuData);
+        if (keys.indexOf(selector) >= 0) {
+            return jQuery(this.menuData[selector].selectors.menu).hasClass("active");
+        }
+        return false;
+    },
+
+    collapseGraphicForm: function() {
+        let selector = this.menuData["add-graphics"].selectors.form;
+        if (jQuery(selector).hasClass("large-tab")) {
+            jQuery(selector).removeClass("large-tab");
+            jQuery(selector).addClass("small-tab");
         }
     },
 
@@ -753,7 +766,10 @@ jQuery(function () {
     }
 
     _addEventListener('scroll', onScroll, window);
-    //addEventListener('scroll', liveartUI.preloadLazyLoadImages);
+    jQuery('.tab-pane .liveart-dropdown-form-header > .liveart-header-btn').click(function () {
+        liveartUI.updateLazyLoadContainer();
+    });
+
     jQuery(window).resize(function () {
         if (!liveartUI.isCompact() && !liveartUI.activeTab) {
             liveartUI.showForm("product-colors-form");

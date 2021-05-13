@@ -8,9 +8,13 @@ class OutputConfig
     public $rulesArray;
     public $zip;
 
-    public function __construct($configPath)
+    public function __construct($configPath, $cfg_is_object = false)
     {
-        $this->parsedConfig = json_decode(file_get_contents($configPath));
+        if ($cfg_is_object) {
+            $this->parsedConfig = $configPath;
+        } else {
+            $this->parsedConfig = json_decode(file_get_contents($configPath));
+        }
         foreach ($this->parsedConfig->files as &$elem) {
             if ($elem->type === "PDF") {
                 $this->rulesArray[] = new PdfOutputOptionsObject($elem);

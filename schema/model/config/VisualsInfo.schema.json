@@ -4,42 +4,35 @@
   "title": "VisualsInfo",
   "description": "Info returned on order.php (when not redirected) or by generateVisuals.php",
   "type": "object",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "properties": {
     "$schema": {
       "type": "string",
       "description": "Reference to JSON Schema of the supported version"
     },
-    "visuals": {
+    "id": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "files": {
       "type": "object",
-      "properties": {
-        "zip": {
-          "type": "string"
-        },
-        "previews": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "minLength": 1
-              },
-              "files": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "minLength": 1
-                }
-              }
-            },
-            "additionalProperties": false
-          }
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "minLength": 1
         }
-      },
-      "additionalProperties": false
+      }
+    },
+    "designId": {
+      "type": "string"
+    },
+    "timestamp": {
+      "type": "string"
     }
   },
-  "required": ["design", "visuals"],
+  "required": ["files"],
   "additionalProperties": false
 }

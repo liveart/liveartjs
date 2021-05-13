@@ -28,7 +28,7 @@
 	$json = json_decode($rawJsonStr);
 
 	// pure hard-code, you'd probably store the products data in DB
-	$products = json_decode(file_get_contents(Configs::$LAJS_FOLDER_PATH . "/config/products.json"));
+	$products = json_decode(file_get_contents(Configs::getLAJSFolderPath() . "/config/products.json"));
 	// get the data
 
 	$price = 20; // some default price

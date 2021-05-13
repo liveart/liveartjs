@@ -11,7 +11,7 @@ require_once('configs.php');
 
 use Liveart\Configs as Configs;
 
-$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+$lajsFolder = Configs::getLAJSFolderPath();
 $templates_path = $lajsFolder . Configs::$TEMPLATES_LIST_RELATIVE_PATH;
 $productId = $_GET['product_id'] ? $_GET['product_id'] : "";
 $response["templatesCategoriesList"] = array();

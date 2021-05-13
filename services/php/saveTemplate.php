@@ -18,7 +18,7 @@ use Liveart\Utils as Utils;
 use Liveart\Configs as Configs;
 
 
-$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+$lajsFolder = Configs::getLAJSFolderPath();
 $templates_path = $lajsFolder . Configs::$TEMPLATES_LIST_RELATIVE_PATH;
 
 $templates = (object) array("templatesCategoriesList" => []); //for designs list

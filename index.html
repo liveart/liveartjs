@@ -55,12 +55,11 @@
     <script type="text/javascript" src="assets/js/browser.check.config.js" defer="defer"></script>
     <script type="text/javascript" src="assets/browserCheck/browser.update.js" defer="defer"></script>
 
-    <!-- LiveArt Designer Fonts -->
-    <link rel="stylesheet" href="fonts/fonts.css" type="text/css"/>
-
     <!-- TODO: remove .fullSize as it is not mandatory -->
     <!-- LiveArt Designer Adoptive Canvas (requires '.fullSize' for '#liveart-main-container') -->
     <script src="assets/js/resize.script.js"></script>
+
+    <!-- LiveArt Designer Fonts (is auto-added from `config.options.fontsCSSUrl` value during loading) -->
 </head>
 <body>
 <div id="liveart-isolate-container">
@@ -443,20 +442,14 @@
                                     <div class="text-form-row">
                                         <div id="text-align-group" class="btn-group" data-toggle="buttons"
                                              data-bind="radio: selectedLetteringVO().formatVO().textAlign">
-                                            <label id="text-align-left-btn" class="btn btn-default"
-                                                   data-bind="css: { disabled: !textAlignEnabled() }">
-                                                <input type="radio" name="rb-text-align-group" value="left"
-                                                       data-bind="enable: textAlignEnabled()">
+                                            <label id="text-align-left-btn" class="btn btn-default">
+                                                <input type="radio" name="rb-text-align-group" value="left">
                                             </label>
-                                            <label id="text-align-center-btn" class="btn btn-default"
-                                                   data-bind="css: { disabled: !textAlignEnabled() }">
-                                                <input type="radio" name="rb-text-align-group" value="center"
-                                                       data-bind="enable: textAlignEnabled()">
+                                            <label id="text-align-center-btn" class="btn btn-default">
+                                                <input type="radio" name="rb-text-align-group" value="center">
                                             </label>
-                                            <label id="text-align-right-btn" class="btn btn-default"
-                                                   data-bind="css: { disabled: !textAlignEnabled() }">
-                                                <input type="radio" name="rb-text-align-group" value="right"
-                                                       data-bind="enable: textAlignEnabled()">
+                                            <label id="text-align-right-btn" class="btn btn-default">
+                                                <input type="radio" name="rb-text-align-group" value="right">
                                             </label>
                                         </div>
                                         <button class="btn btn-primary col-xs-5" id="add-text-btn" type="button"
@@ -758,8 +751,8 @@
                                  data-bind="visible: $root.selectedObjectDPUExceeded" onclick="onDPUexceeded()">
                                 <b>Low Resolution Warning!</b> Click for info.
                             </div>
-
-                            <ul class="list-unstyled" data-bind="if: isColorizableGraphics">
+                            <div data-bind="if: isColorizableGraphics">
+                            <ul class="list-unstyled">
                                 <li>
                                     <a class="liveart-color-picker-btn">
                                         <span>Fill</span>
@@ -775,6 +768,7 @@
                                     </a>
                                 </li>
                             </ul>
+                            </div>
                             <div data-bind="if: isMulticolorGraphics">
                                 <ul class="list-unstyled"
                                     data-bind="foreach: { data: selectedGraphicsFormatVO().complexColor().colorizeList, afterAdd: selectedGraphicsFormatVO().complexColor().createColorPicker }">
@@ -1488,12 +1482,12 @@
                     <h3>Low Resolution Warning</h3>
                 </div>
                 <div class="modal-body">
-                    This image is of insufficient quality to be printed this large and still meet our suggested print
+                    <label>This image is of insufficient quality to be printed this large and still meet our suggested print
                     quality standards (
                     <tspan data-bind="text: minDPU"></tspan>
-                    dpi). <p>You may choose to use this image as is, but we recommend that you reduce the size of this
+                        dpi).</label><label>You may choose to use this image as is, but we recommend that you reduce the size of this
                     image in your design, (by clicking and dragging its lower right corner until this message
-                    disappears), or delete this image and upload another, higher resolution image.</p>
+                    disappears), or delete this image and upload another, higher resolution image.</label>
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-inverse" data-dismiss="modal">OK</a>
@@ -1528,7 +1522,8 @@
     <!-- Product switch confirmation modal end -->
 
     <!-- UI Helpers pop up start -->
-    <div class="modal fade ui-helpers-modal" role="dialog" data-bind="modal: $root.uiHelpersModal.visible">
+    <div class="modal fade ui-helpers-modal" role="dialog"
+         data-bind="modal: $root.uiHelpersModal.visible, css: {'alert-mode': $root.uiHelpersModal.alertMode}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1703,7 +1698,7 @@
                                          data-html="true">
                                         <a id="place-order-btn" data-dismiss="modal" class="btn btn-primary btn-block"
                                            onclick="onPlaceOrder()"
-                                           data-loading-text="Placing order...">Place Order</a>
+                                           data-loading-text="Placing order...">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>

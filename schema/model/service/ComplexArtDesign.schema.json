@@ -30,7 +30,8 @@
       }
     },
     "fontsCSSUrl": {
-      "type": "string"
+      "type": "string",
+      "description": "Deprecated option since vector fonts"
     },
     "namesNumbers": {
       "type": "array",

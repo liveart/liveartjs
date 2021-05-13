@@ -21,11 +21,11 @@ class SvgUtils
      * @param $designFolderPath
      * @param $LAJSFolderPath
      * @param $UNIT
-     * @param $fontsCSSUrl
+     * @param $unused
      * @param $sizes
      * @return array
      */
-    public static function processDesignLocation($loc, $designFolderPath, $LAJSFolderPath, $UNIT, $fontsCSSUrl, $sizes)
+    public static function processDesignLocation($loc, $designFolderPath, $LAJSFolderPath, $UNIT, $unused, $sizes)
     {
         $log = "";
         $readyToWriteSVG = array();
@@ -37,9 +37,6 @@ class SvgUtils
 
         //1. read svg content
         $svg = $loc->svg;
-        // adding <link> with fonts
-        // TODO: skip as currently unsopported feature
-        if (isset($fontsCSSUrl) && strlen($fontsCSSUrl) > 0) $svg = SvgUtils::addFontLink($svg, $fontsCSSUrl);
 
         //2. update links to external images
         $result = SvgUtils::processExternalImages($svg, $LAJSFolderPath, Configs::$SOURCES_ORDER_PHP, $designFolderPath);

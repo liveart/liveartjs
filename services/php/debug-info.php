@@ -23,7 +23,7 @@ use OutputConfig;
 $config = new OutputConfig('../config/output.json');
 
 $guid = $_GET['design_id'];
-$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+$lajsFolder = Configs::getLAJSFolderPath();
 $designFolderPath = $lajsFolder . Configs::$DESIGNS_RELATIVE_PATH . $guid . "/";
 
 $json = Utils::readSavedDesign($designFolderPath);

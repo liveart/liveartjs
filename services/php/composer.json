@@ -1,0 +1,6 @@
+{
+    "name": "lajs100/php-services",
+    "require": {
+        "monolog/monolog": "^1.24"
+    }
+}

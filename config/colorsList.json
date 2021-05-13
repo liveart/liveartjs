@@ -1,46 +1,386 @@
 ﻿{
     "$schema": "../schema/model/config/ColorsList.schema.json",
     "colors": [
-    { "name": "Black", "value": "#000000", "groups": ["group1"] },
-	  { "name": "Dim Gray", "value": "#696969", "groups": ["group1"] },
-    { "name": "Gray", "value": "#808080", "groups": ["group1"] },
-  	{ "name": "Silver", "value": "#C0C0C0", "groups": ["group1"] },
-  	{ "name": "White", "value": "#FFFFFF", "groups": ["group1"] },
-
-    { "name": "Dark Red", "value": "#8B0000", "groups": ["group2"] },
-    { "name": "Red", "value": "#FF0000", "groups": ["group2"] },
-    { "name": "Coral Red", "value": "#FF5252", "groups": ["group2"] },
-    { "name": "Salmon", "value": "#FF7B7B", "groups": ["group2"] },
-    { "name": "Your Pink", "value": "#FFBABA", "groups": ["group2"] },
-
-    { "name": "Dark Green", "value": "#006400", "groups": ["group3", "group5"] },
-	  { "name": "Forest Green", "value": "#228B22", "groups": ["group3", "group5"] },
-    { "name": "Lite Green", "value": "#00AC00", "groups": ["group3", "group5"] },
-    { "name": "Lime", "value": "#00FF00", "groups": ["group3", "group5"] },
-    { "name": "Screamin' Green", "value": "#52FF52", "groups": ["group3", "group5"] },
-
-    { "name": "Regal Blue", "value": "#003A6B", "groups": ["group4", "group5"] },
-    { "name": "Endeavour", "value": "#0058A1", "groups": ["group4", "group5"] },
-    { "name": "Mariner", "value": "#297BC0", "groups": ["group4", "group5"] },
-    { "name": "Havelock Blue", "value": "#539BD7", "groups": ["group4", "group5"] },
-    { "name": "Light Sky Blue", "value": "#85BDEC", "groups": ["group4", "group5"] },
-
-	  { "name": "Orange Red", "value": "#E65100" },
-    { "name": "Dark Orange", "value": "#F57C00" },
-    { "name": "Orange", "value": "#FF9800" },
-    { "name": "Sandy Orange", "value": "#FFB74D" },
-    { "name": "Navajo White", "value": "#FFE0B2" },
-
-    { "name": "Blue Indigo", "value": "#4A148C" },
-  	{ "name": "Dark Violet", "value": "#7B1FA2" },
-    { "name": "Dark Orchid", "value": "#9C27B0" },
-    { "name": "Violet Orchid", "value": "#BA68C8" },
-    { "name": "Plum", "value": "#E1BEE7" },
-
-    { "name": "Aqua Deep", "value": "#004D40" },
-    { "name": "Pine Green", "value": "#00796B" },
-    { "name": "Persian Green", "value": "#009688" },
-    { "name": "Fountain Green", "value": "#4DB6AC" },
-    { "name": "Aqua Island Light", "value": "#B2DFDB" }
+        {
+            "name": "001 Black",
+            "value": "#000000"
+        },
+        {
+            "name": "002 Dove Gray",
+            "value": "#616161"
+        },
+        {
+            "name": "003 Silver Chalice",
+            "value": "#9e9e9e"
+        },
+        {
+            "name": "004 Alto",
+            "value": "#e0e0e0"
+        },
+        {
+            "name": "005 White",
+            "value": "#ffffff"
+        },
+        {
+            "name": "006 English Walnut",
+            "value": "#3e2723"
+        },
+        {
+            "name": "007 Millbrook",
+            "value": "#5d4037"
+        },
+        {
+            "name": "008 Roman Coffee",
+            "value": "#795548"
+        },
+        {
+            "name": "009 Pharlap",
+            "value": "#a1887f"
+        },
+        {
+            "name": "010 Swirl",
+            "value": "#d7ccc8"
+        },
+        {
+            "name": "011 Outer Space",
+            "value": "#263238"
+        },
+        {
+            "name": "012 Fiord",
+            "value": "#455a64"
+        },
+        {
+            "name": "013 Lynch",
+            "value": "#607d8b"
+        },
+        {
+            "name": "014 Gull Gray",
+            "value": "#90a4ae"
+        },
+        {
+            "name": "015 Geyser",
+            "value": "#cfd8dc"
+        },
+        {
+            "name": "016 Thunderbird",
+            "value": "#b71c1c"
+        },
+        {
+            "name": "017 Persian Red",
+            "value": "#d32f2f"
+        },
+        {
+            "name": "018 Pomegranate",
+            "value": "#f44336"
+        },
+        {
+            "name": "019 Sunglo",
+            "value": "#e57373"
+        },
+        {
+            "name": "020 Pastel Pink",
+            "value": "#ffcdd2"
+        },
+        {
+            "name": "021 Rose Bud Cherry",
+            "value": "#880e4f"
+        },
+        {
+            "name": "022 Maroon Flush",
+            "value": "#c2185b"
+        },
+        {
+            "name": "023 Amaranth",
+            "value": "#e91e63"
+        },
+        {
+            "name": "024 Froly",
+            "value": "#f06292"
+        },
+        {
+            "name": "025 Chantilly",
+            "value": "#f8bbd0"
+        },
+        {
+            "name": "026 Indigo",
+            "value": "#4a148c"
+        },
+        {
+            "name": "027 Vivid Violet",
+            "value": "#7b1fa2"
+        },
+        {
+            "name": "028 Dark Orchid",
+            "value": "#9c27b0"
+        },
+        {
+            "name": "029 Amethyst",
+            "value": "#ba68c8"
+        },
+        {
+            "name": "030 French Lilac",
+            "value": "#e1bee7"
+        },
+        {
+            "name": "031 Persian Indigo",
+            "value": "#311b92"
+        },
+        {
+            "name": "032 Daisy Bush",
+            "value": "#512da8"
+        },
+        {
+            "name": "033 Purple Heart",
+            "value": "#673ab7"
+        },
+        {
+            "name": "034 Lilac Bush",
+            "value": "#9575cd"
+        },
+        {
+            "name": "035 Prelude",
+            "value": "#d1c4e9"
+        },
+        {
+            "name": "036 Midnight Blue",
+            "value": "#1a237e"
+        },
+        {
+            "name": "037 Sapphire",
+            "value": "#303f9f"
+        },
+        {
+            "name": "038 San Marino",
+            "value": "#3f51b5"
+        },
+        {
+            "name": "039 Moody Blue",
+            "value": "#7986cb"
+        },
+        {
+            "name": "040 Periwinkle Gray",
+            "value": "#c5cae9"
+        },
+        {
+            "name": "041 Tory Blue",
+            "value": "#0d47a1"
+        },
+        {
+            "name": "042 Denim",
+            "value": "#1976d2"
+        },
+        {
+            "name": "043 Dodger Blue",
+            "value": "#2196f3"
+        },
+        {
+            "name": "044 Malibu",
+            "value": "#64b5f6"
+        },
+        {
+            "name": "045 Sail",
+            "value": "#bbdefb"
+        },
+        {
+            "name": "046 Bahama Blue",
+            "value": "#01579b"
+        },
+        {
+            "name": "047 Lochmara",
+            "value": "#0288d1"
+        },
+        {
+            "name": "048 Cerulean",
+            "value": "#03a9f4"
+        },
+        {
+            "name": "049 Picton Blue",
+            "value": "#4fc3f7"
+        },
+        {
+            "name": "050 French Pass",
+            "value": "#b3e5fc"
+        },
+        {
+            "name": "051 Blue Stone",
+            "value": "#006064"
+        },
+        {
+            "name": "052 Bondi Blue",
+            "value": "#0097a7"
+        },
+        {
+            "name": "053 Robin's Egg Blue",
+            "value": "#00bcd4"
+        },
+        {
+            "name": "054 Turquoise Blue",
+            "value": "#4dd0e1"
+        },
+        {
+            "name": "055 Blizzard Blue",
+            "value": "#b2ebf2"
+        },
+        {
+            "name": "056 Aqua Deep",
+            "value": "#004d40"
+        },
+        {
+            "name": "057 Pine Green",
+            "value": "#00796b"
+        },
+        {
+            "name": "058 Persian Green",
+            "value": "#009688"
+        },
+        {
+            "name": "059 Fountain Blue",
+            "value": "#4db6ac"
+        },
+        {
+            "name": "060 Aqua Island",
+            "value": "#b2dfdb"
+        },
+        {
+            "name": "061 Parsley",
+            "value": "#1b5e20"
+        },
+        {
+            "name": "062 Japanese Laurel",
+            "value": "#388e3c"
+        },
+        {
+            "name": "063 Fruit Salad",
+            "value": "#4caf50"
+        },
+        {
+            "name": "064 De York",
+            "value": "#81c784"
+        },
+        {
+            "name": "065 Zanah",
+            "value": "#c8e6c9"
+        },
+        {
+            "name": "066 Dell",
+            "value": "#33691e"
+        },
+        {
+            "name": "067 Limeade",
+            "value": "#689f38"
+        },
+        {
+            "name": "068 Sushi",
+            "value": "#8bc34a"
+        },
+        {
+            "name": "069 Feijoa",
+            "value": "#aed581"
+        },
+        {
+            "name": "070 Chrome White",
+            "value": "#dcedc8"
+        },
+        {
+            "name": "071 Trendy Green",
+            "value": "#827717"
+        },
+        {
+            "name": "072 Lemon Ginger",
+            "value": "#afb42b"
+        },
+        {
+            "name": "073 Pear",
+            "value": "#cddc39"
+        },
+        {
+            "name": "074 Manz",
+            "value": "#dce775"
+        },
+        {
+            "name": "075 Tusk",
+            "value": "#f0f4c3"
+        },
+        {
+            "name": "076 Ecstasy",
+            "value": "#f57f17"
+        },
+        {
+            "name": "077 Lightning Yellow",
+            "value": "#fbc02d"
+        },
+        {
+            "name": "078 Gorse",
+            "value": "#ffeb3b"
+        },
+        {
+            "name": "079 Paris Daisy",
+            "value": "#fff176"
+        },
+        {
+            "name": "080 Lemon Chiffon",
+            "value": "#fff9c4"
+        },
+        {
+            "name": "081 Blaze Orange",
+            "value": "#ff6f00"
+        },
+        {
+            "name": "082 Vivid Orange Peel",
+            "value": "#ffa000"
+        },
+        {
+            "name": "083 Amber",
+            "value": "#ffc107"
+        },
+        {
+            "name": "084 Mustard",
+            "value": "#ffd54f"
+        },
+        {
+            "name": "085 Buttermilk",
+            "value": "#ffecb3"
+        },
+        {
+            "name": "086 Trinidad",
+            "value": "#e65100"
+        },
+        {
+            "name": "087 Gold Drop",
+            "value": "#f57c00"
+        },
+        {
+            "name": "088 Orange Peel",
+            "value": "#ff9800"
+        },
+        {
+            "name": "089 Texas Rose",
+            "value": "#ffb74d"
+        },
+        {
+            "name": "090 Frangipani",
+            "value": "#ffe0b2"
+        },
+        {
+            "name": "091 Tia Maria",
+            "value": "#bf360c"
+        },
+        {
+            "name": "092 Cinnabar",
+            "value": "#e64a19"
+        },
+        {
+            "name": "093 Orange",
+            "value": "#ff5722"
+        },
+        {
+            "name": "094 Salmon",
+            "value": "#ff8a65"
+        },
+        {
+            "name": "095 Romantic",
+            "value": "#ffccbc"
+        }
     ]
+
 }

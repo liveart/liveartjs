@@ -3,7 +3,7 @@ Browser check configuration.
 Minimal supported browser version configuring by *notify* property(i - Internet Explorer, c - Chrome, f - FireFox, s - Safari, o - Opera).
 **/
 var $buoop = {
-    notify: {i: 10, c: 28, f: 27, s: 8, o: 16},
+    notify: {i: 10, c: 40, f: 46, s: 9.1, o: 27},
     unsupported: false,
     mobile: false,
     api: 5,

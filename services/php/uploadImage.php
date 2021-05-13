@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ERROR | E_PARSE | E_WARNING);
+error_reporting(E_ERROR | E_PARSE);
 header("Access-Control-Allow-Origin: *");
 
 /**
@@ -9,7 +9,6 @@ header("Access-Control-Allow-Origin: *");
  */
 header("X-LA-Service-Version: 0.5.0");
 require_once('configs.php');
-require_once('./aws/aws-autoloader.php');
 
 use Liveart\Configs as Configs;
 
@@ -78,30 +77,10 @@ if (!empty($_SERVER['CONTENT_LENGTH']) && empty($_FILES) && empty($_POST)) {
     };
 
     $configs = Configs::$UPLOAD_CONFIGS;
-    $aws_config = Configs::get_aws_config();
-
     $name = date("Ymd-His") . "_" . uniqid() . "." . $ext;
 
     if ($content) {
-        if ($configs["destination"] === "s3") {
-            // Instantiate the client.
-            $s3 = new Aws\S3\S3MultiRegionClient(array(
-                'version' => "latest",
-                'credentials' => [
-                    'key' => $aws_config["key_name"],
-                    'secret' => $aws_config["key_secret"]
-                ]
-            ));
-
-            $result = $s3->putObject(array(
-                'Bucket' => $aws_config["bucket"],
-                'Key' => $name,
-                'Body' => $content,
-                'ACL' => 'public-read'
-            ));
-
-            $response["url"] = $result['ObjectURL'];
-        } else if ($configs["destination"] === "folder") {
+        if ($configs["destination"] === "folder") {
             $relative_folder = $configs["folder"]["relative_path"];
             $relative_path = $relative_folder . $name;
             $file_url = $configs["folder"]["url_prefix"] . $name;
@@ -110,8 +89,11 @@ if (!empty($_SERVER['CONTENT_LENGTH']) && empty($_FILES) && empty($_POST)) {
                 mkdir($relative_folder, 777, true);
             }
 
+
+            $originEnv = getenv('LACP_PUBLIC_ADDRESS') !== false ? getenv('LACP_PUBLIC_ADDRESS') . '/api/liveart/php/' : '';
+
             file_put_contents($relative_path, $content);
-            $response["url"] = $file_url;
+            $response["url"] = $originEnv . $file_url;
         }
     } else if (!isset($response["error"])) {
         $response = array('error' => array(

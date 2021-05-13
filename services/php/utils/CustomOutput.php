@@ -47,25 +47,42 @@ function generatePng($locations, $output, $data)
     }
 }
 
+/**
+ * Sample custom function
+ * Goal: 
+ *  - Use prepared SVG for each location
+ *  - Customize the file
+ *  - Clean-up the result
+ */
 function createTempFiles($locations, $output, $data)
 {
-    //create temporary files
+    //array with temporary file paths
     $tempFiles = array();
-    foreach ($locations as $idx=>$loc) {
-        //temporary SVG for each location
-        $tempFilePath = "$data[workDir]svgTemp-$idx.svg";
+    //iterate all locations
+    foreach ($locations as $idx => $loc) {
+        //temporary SVG file path for each location
+        $tempFilePath = "$data[workDir]/temp/svgTemp-$idx.svg";
         array_push($tempFiles, $tempFilePath);
-        //process temp svg file here
+        //process actual SVG file (prepared) - `$loc["svgFilePath"]`
+        //and save result to `$tempFilePath` path
     }
     //remove temp files
     Utils::removeFiles($tempFiles);
 }
 
+/**
+ * Sample custom function
+ * Used by LACP by default
+ * Create preview for the design (only first location)
+ * Custom options:
+ *  - width
+ */
 function generateDesignPreview($locations, $output, $data)
 {
     foreach ($locations as $loc) {
         //custom export PNG function (accept custom  config.options.width)
         CustomOutputUtils::exportPng($loc["svgFilePath"], $loc["exportFilePath"], $loc["options"]);
+        //stop on the first location
         break;
     }
 }

@@ -16,7 +16,7 @@ require_once('configs.php');
 use Liveart\Utils as Utils;
 use Liveart\Configs as Configs;
 
-$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+$lajsFolder = Configs::getLAJSFolderPath();
 $designs_path = $lajsFolder . Configs::$DESIGNS_RELATIVE_PATH . "designs";
 $designs = array(); //for designs list
 if (file_exists($designs_path)) {

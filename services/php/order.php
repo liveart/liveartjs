@@ -20,14 +20,14 @@ use Liveart\Utils as Utils;
 use Liveart\Configs as Configs;
 use OutputConfig;
 
-$config = new OutputConfig('../config/output.json');
+$config = new OutputConfig('../config/output.json', false);
 
 $guid = $_GET['design_id'];
-$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+$lajsFolder = Configs::getLAJSFolderPath();
 $designFolderPath = $lajsFolder . Configs::$DESIGNS_RELATIVE_PATH . $guid . "/";
 
 $json = Utils::readSavedDesign($designFolderPath);
-Utils::processDesign($guid, $config);
+Utils::processDesign($guid, $config, $json);
 $isPHPzipInstalled = extension_loaded('zip');
 
 if ($config->parsedConfig->zip === true && $isPHPzipInstalled) {

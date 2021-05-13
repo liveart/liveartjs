@@ -14,7 +14,7 @@
     },
     "fontsCSSUrl": {
       "type": "string",
-      "description": "URL to the location of the fonts CSS definitions that will be available for the user. Used for a stand-alone SVG preview (for proper text fonts rendering in browser).",
+      "description": "URL to the location of the fonts CSS definitions. Used for a fonts previews list render.",
       "examples": [
         "/fonts/fonts.css"
       ],
@@ -75,6 +75,11 @@
         true
       ],
       "default": true
+    },
+    "shareDemoMode": {
+      "type": "boolean",
+      "description": "Disables feature with notification to user that it's not supported in demo mode.",
+      "default": false
     },
     "enableCopyToBack": {
       "type": "boolean",

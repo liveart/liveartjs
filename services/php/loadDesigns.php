@@ -5,7 +5,7 @@ require_once('lib/init.php');
 
 require_once('configs.php');
 use Liveart\Configs as Configs;
-$lajsFolder = Configs::$LAJS_FOLDER_PATH;
+$lajsFolder = Configs::getLAJSFolderPath();
 
 $email = $_GET['email'];
 
