@@ -23,31 +23,48 @@ Used to configure export files.
 }
 ```
 
-#### `options` description:
+#### `options` description
+
+_(With default values)_
 
 Common:
 ```js
 {
-    useEditableArea: boolean = false; // crop image by editable area
+    useEditableArea: boolean = true; // crop image by editable area
     zip: boolean = true; // add file to ZIP archive (if enabled)
-    includeProduct: boolean = true; // whether or not to include product in the output (default: true)
+    includeProduct: boolean = true; // whether or not to include product in the output
 }
 ```
 
 PDF only:
 ```js
 {
-    merge: boolean = true; //whether to create a single PDF with all locations merged
-    useUnits: boolean = true; //use configured units for the output 
+    merge: boolean = true; // whether to create a single PDF with all locations merged
+    useUnits: boolean = true; // use configured units for the output; editable area is used for export
 }
 ```
 
 PNG only:
 ```js
 {
-    exportDpi: number = 72; //DPI
+    exportDpi: number; // DPI
 }
 ```
+
+    `exportDpi` usage notes:
+    - if `exportDpi` is not specified:
+        - export in SVG coordinate system, e.g. default full output is 590x530px
+    - if units are configured (editable area or resizable product):
+        - export dimensions as unit@dpi above
+    - if units are not configured:
+        - `exportDpi: 96` has no effect as becomes default
+        - scale SVG coordinate system respectively, e.g. 300dpi mean 3.12 scale (300/96)
+
+    PNG export notes:
+    - `useEditableArea: false` is useless for any resizable products (the same result)
+
+    PNG export known issues:
+    - avoid using `useEditableArea: false` with `exportDpi` for non-resizable products with configured units (actually nonsense output)
 
 #### `custom` type 
 
@@ -62,9 +79,9 @@ sample:
     type: "custom";
     id, fileName; //the same
     renderFunction: string; // PHP function name from the same scope as output.json parser.
-    options: { //any data for renderFunction is allowed
-        useEditableArea, exportDpi, useUnits  //recommended attributes
-        zip //ignored attribute
+    options: { // any data for renderFunction is allowed
+        useEditableArea, exportDpi, useUnits  // require custom implementation (or reuse) to work as described above
+        zip // ignored attribute
     }
 }
 ```

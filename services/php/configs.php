@@ -27,7 +27,7 @@ class Configs {
      * return root LAJS100 folder path (needed for standalone LAJS100)
      */
     public static function getLAJSFolderPath() {
-        return "../../";
+        return getenv('LAJS_FOLDER_PATH') ?: "../../";
     }
 
     /**
@@ -51,9 +51,19 @@ class Configs {
         return self::isProductionEnv() ? "/var/www/html/config/output.json" : self::getLAJSFolderPath() . "services/config/output.json";
     }
 
+    public static function isDebug() {
+        return getenv('DEBUG') && strtoupper(getenv('DEBUG')) === "TRUE" ? true : false;
+    }
+
+    public static function isDebugLogs() {
+        $logLevelDebug = getenv('LOGLEVEL') && strtoupper(getenv('LOGLEVEL')) === "DEBUG";
+        return $logLevelDebug || self::isDebug();
+    }
+
     public static $SOURCES_ORDER_PHP = "sources/";
     public static $TEMPORARY_FILES = "temp/";
     // Log to `generateVisuals.log`; Require composer install (for Monolog)
+    // WARNING: replaced in Grunt, update with caution
     public static $GEN_VIZ_LOGS = false;
     public static $TEMP_RELATIVE_LAJS_FOLDER_PATH = "../../../";
     public static $CROPPED_SVG_MASK = "_cropped";

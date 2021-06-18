@@ -67,6 +67,7 @@ class PngOutputOptionsObject extends OutputOptionsObject
 {
     public $type = "PNG";
     public $id = "";
+    public $useUnits;
     public $exportDpi;
 
     public function __construct($rule)
@@ -74,9 +75,11 @@ class PngOutputOptionsObject extends OutputOptionsObject
         parent::__construct($rule);
 
         if (isset($rule->options->exportDpi)) {
+            $this->useUnits = true;
             $this->exportDpi = $rule->options->exportDpi;
         } else {
-            $this->exportDpi = 72;
+            $this->useUnits = false;
+            $this->exportDpi = 96;
         }
 
         if (isset($rule->id)) {

@@ -2,6 +2,9 @@
 
 namespace Liveart;
 
+/**
+ * Mimic Monolog in case composer not initialized
+ */
 class LoggerStub {
 
 	private $name;
@@ -14,5 +17,7 @@ class LoggerStub {
 	function info() { }
 
 	function error() { }
+
+	function debug() { }
 
 }

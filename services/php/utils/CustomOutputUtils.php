@@ -1,5 +1,7 @@
 <?php
 
+use Liveart\Utils as Utils;
+
 class CustomOutputUtils
 {
     /**
@@ -24,6 +26,8 @@ class CustomOutputUtils
         if (isset($cmd)) {
             $command = "$command $cmd";
         }
+
+        Utils::getLogger()->debug("exportPng(): ".$command);
         exec($command);
     }
 

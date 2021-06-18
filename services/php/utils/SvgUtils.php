@@ -304,7 +304,9 @@ class SvgUtils
         $svgForPrintGroupNode = $svgForPrintRoot->appendChild($svgForPrintGroup);
 
         if (isset($svgForPrintGroupNode)) {
-            $svgForPrintGroupNode->setAttribute('transform', "translate(-$svgBox[0], -$svgBox[1])");
+            $posX = -$svgBox[0];
+            $posY = -$svgBox[1];
+            $svgForPrintGroupNode->setAttribute('transform', "translate($posX, $posY)");
 
             foreach ($svgForPrintChildren as $child) {
                 //skip defs and desc

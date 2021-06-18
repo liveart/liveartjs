@@ -9,7 +9,9 @@ require_once('CustomOutput.php');
 use Liveart\Configs as Configs;
 
 use Monolog\Logger as Logger;
+use Monolog\Handler\ErrorLogHandler;
 use Monolog\Handler\StreamHandler as StreamHandler;
+use Monolog\Formatter\LineFormatter as LineFormatter;
 
 use LiveArt\LoggerStub as LoggerStub;
 
@@ -21,18 +23,45 @@ class Utils
 {
 
     private static $logger = NULL;
-    
-    public static function getLogger() 
+
+    public static function createLogger($name)
     {
+        // Skip for release as static files (monolog is not installed)
         if (!Configs::$GEN_VIZ_LOGS) {
-            self::$logger = new LoggerStub();
+            return new LoggerStub();
         }
 
+        $logger = new Logger($name);
+
+        // Detect dev server and output logs (kinda hack)
+        if (php_sapi_name() == 'cli-server') {
+            // https://stackoverflow.com/a/21294065
+            $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::SAPI, Logger::WARNING));
+            // set DEBUG loglevel via env var
+            putenv("LOGLEVEL=DEBUG");
+        }
+
+        $output = " %channel%.%level_name%: %message%\n";
+        $formatter = new LineFormatter($output);
+
+        $handler = new StreamHandler(
+            'php://stdout',
+            (Configs::isDebugLogs() ? Logger::DEBUG : Logger::INFO)
+        );
+        $handler->setFormatter($formatter);
+        $logger->pushHandler($handler);
+
+        return $logger;
+    }
+    
+    /**
+     * Current class legacy function
+     */
+    public static function getLogger() 
+    {
         if (null === self::$logger) 
         {
-            self::$logger = new Logger('utilsLogger');
-            self::$logger->pushHandler(new StreamHandler('generateVisuals.log', Logger::INFO));
-            self::$logger->pushHandler(new StreamHandler('generateVisuals.log', Logger::ERROR));
+            self::$logger = self::createLogger('Utils');
         }
 
         return self::$logger;
@@ -54,15 +83,11 @@ class Utils
      *
      * @param string $guid - design id
      * @param \OutputConfig $outputConfig - output config object
-     * @return string $logStr
      */
     public static function processDesign($guid, $outputConfig, $json = NULL)
     {
         $LAJSFolderPath = Configs::getLAJSFolderPath();
         $designFolderPath = Configs::getFilesFolderPath() . $guid . "/";
-
-        // empty values
-        $logStr= "";
 
         $design_unit = isset($json->product->size->unit) ? $json->product->size->unit : 0;
 
@@ -82,19 +107,21 @@ class Utils
         // create folder for external images (if does not exist)
         $result = Utils::createFolder($designFolderPath . Configs::$TEMPORARY_FILES . Configs::$SOURCES_ORDER_PHP);
         //$logStr.= $result['log'];
+        // required for DEBUG=TRUE
+        Utils::cleanInkscapeBatch($designFolderPath, $scripFilename);
 
         //used for "custom" output only
         $processedFiles = array();
 
+        $errorMsg = NULL;
+
         // processing design locations
         foreach ($json->locations as $loc) {
-            $res = SvgUtils::processDesignLocation($loc, $designFolderPath, $LAJSFolderPath, $UNIT, NULL, $sizes);
-            //$logStr.= $res["log"];
+            SvgUtils::processDesignLocation($loc, $designFolderPath, $LAJSFolderPath, $UNIT, NULL, $sizes);
 
             $locname = Utils::getLocationName($loc->name);
 
-            
-            Utils::getLogger()->info("Processing location \"$locname\"");
+            self::getLogger()->debug("Processing location \"$locname\"");
 
             //Prepare convert to PDF/PNG start  TODO temporary solution
             $svgWidth = Configs::$DEFAULT_SVG_WIDTH;
@@ -105,7 +132,7 @@ class Utils
 
             foreach ($outputConfig->rulesArray as &$item) {
                 try {
-                    self::getLogger()->info('Processing rule: ' . $item->id);
+                    self::getLogger()->debug("Processing rule: $item->id (".get_class($item).")");
                     $usedSvgWidth = $svgWidth;
                     $usedSvgHeight = $svgHeight;
                     if ($item->useEditableArea === true) {
@@ -115,20 +142,29 @@ class Utils
                             $usedSvgHeight = $svgBox[3] - $svgBox[1];
                         }
                     }
-                                     $designPrefix = $item->includeProduct === false ? 'design_' . Configs::$NO_PRODUCT_SVG_MASK : 'design_';
+                    $designPrefix = $item->includeProduct === false ? 'design_' . Configs::$NO_PRODUCT_SVG_MASK : 'design_';
                     $fileName = $designPrefix . $locname . ".svg";
                     $croppedFileName = $designPrefix . $locname . Configs::$CROPPED_SVG_MASK . ".svg";
                     $croppedFilePath = $designFolderPath . Configs::$TEMPORARY_FILES . $croppedFileName;
                     $printFileName = $designPrefix . $locname . Configs::$PRINT_SVG_MASK . ".svg";
                     $printFilePath = $designFolderPath . Configs::$TEMPORARY_FILES . $printFileName;
                     $fileToConvert = $fileName;
-                                     // both for pdf & png
+                    
+                    // Determine source file to convert based on options
+                    // TODO: refactor below
+                    // TODO: cover PDF export with tests
+                    // both for pdf & png
                     if ($item->useEditableArea === true) {
                         $fileToConvert = file_exists($croppedFilePath) ? $croppedFileName : $fileName;
                     }
                     // ------------
-                                     // only for pdf
-                    if (isset($item->useUnits) && $item->useUnits === true) {
+                    // only for png
+                    if ($item->type === "PNG" && isset($item->useUnits) && $item->useUnits === true && file_exists($printFilePath)) {
+                        $fileToConvert = $printFileName;
+                    }
+                    // ------------
+                    // only for pdf
+                    if ($item->type === "PDF" && isset($item->useUnits) && $item->useUnits === true) {
                         if (file_exists($printFilePath)) {
                             $fileToConvert = $printFileName;
                         } else if (file_exists($croppedFilePath)) {
@@ -136,19 +172,21 @@ class Utils
                         }
                     }
                     // -------------
-                                     $fileToConvertPath = $designFolderPath . Configs::$TEMPORARY_FILES . $fileToConvert;
+                    self::getLogger()->debug('Processing source file: ' . $fileToConvert);
+                    $fileToConvertPath = $designFolderPath . Configs::$TEMPORARY_FILES . $fileToConvert;
                     $outFolderPath = $designFolderPath;
-                                     if (isset($item->merge) && $item->merge === true) {
+                    if (isset($item->merge) && $item->merge === true) {
                         $outFolderPath = $designFolderPath . Configs::$TEMPORARY_FILES;
                     }
-                                     //No need to convert custom output, only prepare SVG
+                    //No need to convert custom output, only prepare SVG
                     if($item->type !== "custom"){
                         Utils::addToInkscapeBatch($locname, $fileToConvertPath, $designFolderPath, $outFolderPath, $usedSvgWidth, $usedSvgHeight, $scripFilename, $item);
                     }
-                                     //Used for "custom" type - add the respective custom export SVG path
+                    //Used for "custom" type - add the respective custom export SVG path
                     $processedFiles[count($processedFiles) - 1][$item->id] = $fileToConvertPath;
                 } catch (Exception $e) {
                     self::getLogger()->error('Error when processing rule: ' . $item->id . ' ' . $e->getMessage());
+                    $errorMsg = ($errorMsg === NULL ? "" : ($errorMsg . ", ")) . $locname . " - rule " . $item->id;
                 }
             }
             unset($item);
@@ -157,17 +195,18 @@ class Utils
 
         Utils::addCommandToInkscapeBatch($designFolderPath, $scripFilename, "quit");
 
-        self::getLogger()->info("Added to inkscape batch: \"$designFolderPath\", \"$scripFilename\"");
+        self::getLogger()->debug("Added to Inkscape batch: \"$designFolderPath\", \"$scripFilename\"");
 
         Utils::executeInkscapeBatch($designFolderPath, $scripFilename);
 
         $batch_contents = file_get_contents($designFolderPath . $scripFilename);
 
-        self::getLogger()->info('Executed inkscape batch: ' . $batch_contents);
+        self::getLogger()->debug('Executed Inkscape batch: ' . $batch_contents);
 
-        Utils::removeFile($scripFilename, $designFolderPath);
-
-        self::getLogger()->info("Removed $designFolderPath$scripFilename");
+        if (!Configs::isDebug()) {
+            Utils::removeFile($scripFilename, $designFolderPath);
+            self::getLogger()->debug("Removed Inkscape batch: $designFolderPath$scripFilename");
+        }
 
         foreach ($outputConfig->rulesArray as $item) {
             if ($item->type === "PDF" && isset($item->merge) && $item->merge === true) {
@@ -180,7 +219,7 @@ class Utils
         foreach ($outputConfig->rulesArray as $item) {
             if ($item->type === "custom") {
                 try {
-                    self::getLogger()->info('Processing custom rule: ' . $item->id);
+                    self::getLogger()->debug('Processing custom rule: ' . $item->id);
                     //prepare an array with SVG's:
                     /*
                      * From structure:
@@ -218,21 +257,27 @@ class Utils
                     );
 
                     //render function call
-                    $res = call_user_func($item->renderFunction, $locations, $output, $data);
+                    call_user_func($item->renderFunction, $locations, $output, $data);
                 } catch (Exception $e) {
                     self::getLogger()->error('Error when processing custom rule: ' . $item->id . ' ' . $e->getMessage());
+                    $errorMsg = ($errorMsg === NULL ? "" : ($errorMsg . ", ")) . "Custom rule " . $item->id;
                 }
             }
         }
 
-         if (file_exists($designFolderPath . Configs::$TEMPORARY_FILES)) {
-             //remove temp dir
-             Utils::deleteDir($designFolderPath . Configs::$TEMPORARY_FILES);
-             self::getLogger()->info('Removed temp directory: "' . $designFolderPath . Configs::$TEMPORARY_FILES . '"');
-         }
+        if (file_exists($designFolderPath . Configs::$TEMPORARY_FILES) && !Configs::isDebug()) {
+            //remove temp dir
+            Utils::deleteDir($designFolderPath . Configs::$TEMPORARY_FILES);
+            self::getLogger()->debug('Removed temp directory: "' . $designFolderPath . Configs::$TEMPORARY_FILES . '"');
+        }
         
-        self::getLogger()->info('Process design completed');
-        return $logStr;
+        self::getLogger()->debug('Process design completed');
+
+        if (strlen($errorMsg) > 0) {
+            self::getLogger()->info("Processing of design #$guid finished with errors: $errorMsg");
+        } else {
+            self::getLogger()->info("Processing of design #$guid finished with no errors");
+        }
     }
 
     public static function exportCombinedPDF($json, $designFolderPath, $outputFilesPath, $filename)
@@ -377,6 +422,15 @@ class Utils
         foreach($files as $file) {
             unlink($file);
         }
+    }
+
+    public static function cleanInkscapeBatch($designFolderPath, $scripFilename)
+    {
+        $scripFilenameFull = $designFolderPath . $scripFilename;
+        // delete the file
+        if (file_exists($scripFilenameFull)) {
+            unlink($scripFilenameFull);
+        } 
     }
 
     public static function addCommandToInkscapeBatch($designFolderPath, $scripFilename, $command)

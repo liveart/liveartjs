@@ -1053,11 +1053,18 @@
                                 <li role="presentation" class="divider"
                                     data-bind="css: {'disabled-menu': disableObjectToolsAction}"></li>
                                 <li id="copy" role="presentation"
-                                    data-bind="css: {'disabled-menu': disableObjectToolsAction}"><a id="copy-btn"
-                                                                                                    data-bind="click: copy"><span
-                                        class="glyphicon glyphicon-copy" aria-hidden="true"></span>Copy</a></li>
-                                <li id="paste" role="presentation"><a id="paste-btn" data-bind="click: paste"><span
-                                        class="glyphicon glyphicon-paste" aria-hidden="true"></span>Paste</a></li>
+                                    data-bind="css: {'disabled-menu': disableCopy}">
+                                    <a id="copy-btn" data-bind="click: copy">
+                                        <span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+                                        Copy
+                                    </a>
+                                </li>
+                                <li id="paste" role="presentation">
+                                    <a id="paste-btn" data-bind="click: paste">
+                                        <span class="glyphicon glyphicon-paste" aria-hidden="true"></span>
+                                        Paste
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li id="copy-to-back" class="enabled" data-bind="visible: showCopyToBack">

@@ -4,6 +4,8 @@ require_once("Utils.php");
 require_once("SvgUtils.php");
 require_once("CustomOutputUtils.php");
 
+use Liveart\Configs as Configs;
+
 use Liveart\Utils as Utils;
 use Liveart\SvgUtils as SvgUtils;
 use Liveart\CustomOutputUtils as OutputUtils;
@@ -67,7 +69,9 @@ function createTempFiles($locations, $output, $data)
         //and save result to `$tempFilePath` path
     }
     //remove temp files
-    Utils::removeFiles($tempFiles);
+    if (!Configs::isDebug()) {
+        Utils::removeFiles($tempFiles);
+    }
 }
 
 /**
@@ -80,8 +84,8 @@ function createTempFiles($locations, $output, $data)
 function generateDesignPreview($locations, $output, $data)
 {
     foreach ($locations as $loc) {
-        //custom export PNG function (accept custom  config.options.width)
-        CustomOutputUtils::exportPng($loc["svgFilePath"], $loc["exportFilePath"], $loc["options"]);
+        //custom export PNG function (accept custom config.options.width and legacy options)
+        CustomOutputUtils::exportPng($loc["svgFilePath"], $loc["exportFilePath"], $output["options"]);
         //stop on the first location
         break;
     }

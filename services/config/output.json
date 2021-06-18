@@ -24,7 +24,8 @@
       "fileName": "design_preview.png",
       "id": "design_preview",
       "options": {
-          "useEditableArea": false
+          "useEditableArea": false,
+          "width": 400
       }
     },
     {
