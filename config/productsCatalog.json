@@ -615,17 +615,12 @@
               "name": "Bottle",
               "categoryId": "3",
               "thumb": "products/bottle/thumb/bottle.jpg",
+              "hideEditableAreaBorder": true,
               "locations": [
                 {
                   "name": "Front",
                   "image": "products/bottle/bottle.svg",
                   "editableArea": [
-                    227,
-                    237,
-                    360,
-                    333
-                  ],
-                  "clipRect": [
                     227,
                     237,
                     360,
@@ -934,17 +929,12 @@
           "hideEditableAreaBorder": true,
           "minQuantity": 5,
           "minDPU": 75,
-          "resizable": true,
-          "editableAreaSizes": [
-            {
-              "width": 6.2,
-              "height": 4.5
-            }
-          ],
           "locations": [
             {
               "name": "Front",
-              "image": "products/mask/simple_mask2.svg"
+              "image": "products/mask/simple_mask2.svg",
+              "editableArea": [70,40,545,415],
+              "editableAreaUnits": [4.5,3.5]
             }
           ],
           "colors": [
@@ -1007,17 +997,12 @@
           "hideEditableAreaBorder": true,
           "minQuantity": 5,
           "minDPU": 75,
-          "resizable": true,
-          "editableAreaSizes": [
-            {
-              "width": 6.2,
-              "height": 4.8
-            }
-          ],
           "locations": [
             {
               "name": "Front",
-              "image": "products/mask/face_mask_valve.svg"
+              "image": "products/mask/face_mask_valve.svg",
+              "editableArea": [20,30,600,460],
+              "editableAreaUnits": [5.5,4.1]
             }
           ],
           "colors": [
@@ -1079,18 +1064,13 @@
           "namesNumbersEnabled": false,
           "hideEditableAreaBorder": true,
           "minQuantity": 5,
-          "resizable": true,
           "minDPU": 75,
-          "editableAreaSizes": [
-            {
-              "width": 6.2,
-              "height": 5.03
-            }
-          ],
           "locations": [
             {
               "name": "Front",
-              "image": "products/mask/face_mask.svg"
+              "image": "products/mask/face_mask.svg",
+              "editableArea": [20,35,600,478],
+              "editableAreaUnits": [5.5,4.2]
             }
           ],
           "colors": [
@@ -1153,17 +1133,12 @@
           "hideEditableAreaBorder": true,
           "minQuantity": 5,
           "minDPU": 75,
-          "resizable": true,
-          "editableAreaSizes": [
-            {
-              "width": 5.87,
-              "height": 4.5
-            }
-          ],
           "locations": [
             {
               "name": "Front",
-              "image": "products/mask/simple_mask.svg"
+              "image": "products/mask/simple_mask.svg",
+              "editableArea": [10,55,565,402],
+              "editableAreaUnits": [5.6,3.5]
             }
           ],
           "colors": [
@@ -1222,17 +1197,12 @@
           "hideEditableAreaBorder": true,
           "minQuantity": 5,
           "minDPU": 75,
-          "resizable": true,
-          "editableAreaSizes": [
-            {
-              "width": 6.2,
-              "height": 5
-            }
-          ],
           "locations": [
             {
               "name": "Front",
-              "image": "products/mask/face_mask_valves.svg"
+              "image": "products/mask/face_mask_valves.svg",
+              "editableArea": [20,30,600,463],
+              "editableAreaUnits": [5.5,4.2]
             }
           ],
           "colors": [
